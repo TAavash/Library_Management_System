@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { FaUserAlt } from 'react-icons/fa'
 import { RiLockPasswordFill } from 'react-icons/ri';
+import PcpsLogo from '../assets/pcps_logo.jpg'
+import LoginImg from '../assets/registerImage.jpeg'
 
 const LoginPage = () => {
 
@@ -25,7 +27,7 @@ const LoginPage = () => {
     }
 
   return (
-    <div className='bg-cover min-h-screen bg-no-repeat bg-center flex items-center justify-center' style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/loginImage.JPG)` }}>
+    <div className='bg-cover min-h-screen bg-no-repeat bg-center flex items-center justify-center' style={{ backgroundImage: }}>
         <div className='bg-white/80 rounded-[30px] w-[80%] md:w-[60%] mx-auto flex flex-col gap-7 items-center justify-center font-semibold py-[50px] md:py-[90px] text-center'>
             <div className='border-b-2 border-white/0 md:border-slate-400'>
             <div className='mb-[10px] w-content'>
@@ -34,7 +36,7 @@ const LoginPage = () => {
                 </div>
                 <br/>
                 <div className='flex gap-3 items-center justify-center -mt-[30px]'> 
-                    <img src={`..\public\haikyu-movie.jpg`} width={150} alt=''/> 
+                    <img src={PcpsLogo} width={150} alt=''/> 
                     <div className='text-2xl text-red-600  font-bold'>
                     LIBRARY
                     </div>

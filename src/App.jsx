@@ -13,14 +13,15 @@ import Header from "./components/Header";
 const App = () => {
   return (
     <div className="min-w-full">
-      <div className="fixed"><Header /></div>
+      <LoginPage/>
+      {/* <div className="fixed"><Header /></div>
       <Navbar/>
       <div>
         <LibrarianDash />
       </div>
       <div className="z-20">
         <FlipCard />
-      </div>
+      </div> */}
     </div>
   );
 };
