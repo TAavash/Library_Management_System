@@ -34,7 +34,7 @@ const LoginPage = () => {
                 </div>
                 <br/>
                 <div className='flex gap-3 items-center justify-center -mt-[30px]'> 
-                    <img src={`${process.env.PUBLIC_URL}/pcps-logo.png`} width={150} /> 
+                    <img src={`..\public\haikyu-movie.jpg`} width={150} alt=''/> 
                     <div className='text-2xl text-red-600  font-bold'>
                     LIBRARY
                     </div>

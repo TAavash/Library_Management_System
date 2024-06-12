@@ -2,13 +2,25 @@ import React from "react";
 import LoginPage from "./pages/LoginPage";
 import Register from "./pages/Register";
 import Card from "./components/Cards";
+import FlipCard from "./components/FlipCard";
 import NavbarComp from "./components/NavbarComp";
+import Navbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
+import BookFlip from "./components/BookFlip";
+import LibrarianDash from "./pages/LibrarianDash";
+import Header from "./components/Header";
 
 const App = () => {
   return (
-    <div>
-      <Card />
+    <div className="min-w-full">
+      <div className="fixed"><Header /></div>
+      <Navbar/>
+      <div>
+        <LibrarianDash />
+      </div>
+      <div className="z-20">
+        <FlipCard />
+      </div>
     </div>
   );
 };
