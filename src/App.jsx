@@ -9,11 +9,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import BookFlip from "./components/BookFlip";
 import LibrarianDash from "./pages/LibrarianDash";
 import Header from "./components/Header";
+import { LibrarianDashboard } from "./pages/Librarian/LibrarianDashboard";
 
 const App = () => {
   return (
     <div className="min-w-full">
-      <LoginPage/>
+      <LibrarianDashboard/>
       {/* <div className="fixed"><Header /></div>
       <Navbar/>
       <div>
