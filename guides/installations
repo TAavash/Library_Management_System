@@ -4,12 +4,12 @@ All installations
 npx create-react-app FileName
 
 2. Tailwind
-i. Install
+i. Install (One at a time)
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 
 ii. Configure your template paths
-ii. tailwind.config.js
+ii. tailwind.config.js (Ctrl+C , Ctrl+A , Ctrl+V)
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -24,7 +24,7 @@ export default {
 }
 
 iii. Add the Tailwind directives to your CSS
-iii. index.css
+iii. index.css (Ctrl+C , Ctrl+A , Ctrl+V)
 
 @tailwind base;
 @tailwind components;
@@ -38,5 +38,3 @@ npm i react-bootstrap
 
 5. React Page-flip
 npm install react-pageflip
-
-6.

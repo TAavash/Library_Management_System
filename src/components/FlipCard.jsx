@@ -16,7 +16,7 @@ const FlipCard = () => {
           <div className="absolute inset-0 h-full w-full rounded-xl bg-black/80 px-12 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]">
             <div className="flex min-h-full flex-col items-center justify-center">
               <h1 className="text-3xl font-bold">Aavash Tamang</h1>
-              <p className="text-lg">Software Endineering</p>
+              <p className="text-lg">Software Engineer</p>
               <p className="text-base">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
                 officia quasi delectus porro eum illo, temporibus repellat.

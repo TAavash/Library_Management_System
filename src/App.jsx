@@ -8,18 +8,23 @@ import Navbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BookFlip from "./components/BookFlip";
 import LibrarianDash from "./pages/LibrarianDash";
+import LibrarianBooks from "./pages/LibrarianBooks";
+import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 
 const App = () => {
   return (
     <div className="min-w-full">
-      <LoginPage/>
-      {/* <div className="fixed"><Header /></div>
-      <Navbar/>
-      <div>
-        <LibrarianDash />
+      {/* <Sidebar/> */}
+      <div className="fixed z-20">
+        <Header />
       </div>
-      <div className="z-20">
+      <Navbar />
+      <div>
+        <LibrarianBooks />
+        {/* <LibrarianDash /> */}
+      </div>
+      {/* <div>
         <FlipCard />
       </div> */}
     </div>
