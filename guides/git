@@ -1,0 +1,101 @@
+A. Setting Up Git
+1. Configure Git with your name and email:
+
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+
+B. Starting a Repository
+2. Initialize a new Git repository:
+
+git init
+
+3. Clone an existing repository:
+
+git clone https://github.com/user/repository.git
+
+C. Working with Changes
+4. Check the status of your working directory:
+
+git status
+
+5. Add files to the staging area:
+
+git add filename
+# or to add all changes
+git add .
+
+6. Commit changes:
+
+git commit -m "Commit message"
+
+7. Commit all staged changes with a detailed message:
+
+git commit
+
+D. Branching and Merging
+8. List all branches:
+
+git branch
+
+9. Create a new branch:
+
+git branch new-branch
+
+10. Switch to a branch:
+
+git checkout new-branch
+
+11. Create and switch to a new branch:
+
+git checkout -b new-branch
+
+12. Merge a branch into the current branch:
+
+git merge branch-name
+
+E. Pushing and Pulling
+13. Push changes to a remote repository:
+
+git push origin branch-name
+
+14. Pull changes from a remote repository:
+
+git pull origin branch-name
+
+F. Viewing History
+15. View commit history:
+
+git log
+
+16. View a concise commit history:
+
+git log --oneline
+
+G. Stashing Changes
+17. Stash changes:
+git stash
+
+18. Apply stashed changes:
+
+git stash apply
+
+19. List stashed changes:
+
+git stash list
+
+H. Undoing Changes
+20. Unstage a file (keep changes):
+
+git reset filename
+
+21. Revert to a specific commit (keep changes):
+
+git reset --soft commit-hash
+
+22. Revert to a specific commit (discard changes):
+
+git reset --hard commit-hash
+
+23. Remove untracked files:
+
+git clean -f
