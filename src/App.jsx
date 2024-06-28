@@ -11,22 +11,20 @@ import LibrarianDash from "./pages/LibrarianDash";
 import LibrarianBooks from "./pages/LibrarianBooks";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
-
+import LightDarkToggle from "./components/LightDarkToggle";
 const App = () => {
   return (
     <div className="min-w-full">
-      {/* <Sidebar/> */}
-      <div className="fixed z-20">
+      {/* <div className="fixed z-20">
         <Header />
       </div>
       <Navbar />
       <div>
         <LibrarianBooks />
-        {/* <LibrarianDash /> */}
-      </div>
-      {/* <div>
-        <FlipCard />
       </div> */}
+      <div className="flex justify-center items-center h-screen bg-gray-100 dark:bg-gray-900">
+      <LightDarkToggle />
+    </div>
     </div>
   );
 };

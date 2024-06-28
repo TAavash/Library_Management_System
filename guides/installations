@@ -38,3 +38,21 @@ npm i react-bootstrap
 
 5. React Page-flip
 npm install react-pageflip
+
+6. Tailwind scrollbar
+i. Add the package to your project
+# npm
+npm install --save-dev tailwind-scrollbar
+# yarn
+yarn add -D tailwind-scrollbar
+# pnpm
+pnpm add -D tailwind-scrollbar
+
+ii. Add it to the plugins array of your Tailwind config
+module.exports = {
+    // ...
+    plugins: [
+        // ...
+        require('tailwind-scrollbar'),
+    ],
+};
