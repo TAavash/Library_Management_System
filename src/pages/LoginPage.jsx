@@ -3,11 +3,14 @@ import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import PcpsLogo from "../assets/pcpslogo.png";
 import LoginImg from "../assets/loginImage.jpg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState();
-
+  const navigate = useNavigate();
+  const handleRegister = () => {
+    navigate(`/register`);
+  };
   const [isValidEmail, setIsValidEmail] = useState(true);
 
   const validateEmail = (email) => {
@@ -17,6 +20,9 @@ const LoginPage = () => {
       const emailRegex = /^[^\s@]+@patancollege\.edu\.np$/;
       return emailRegex.test(email);
     }
+  };
+  const handleOpenLibrary = () => {
+    navigate(`/librarian-books`);
   };
 
   const handleEmailChange = (e) => {
@@ -76,25 +82,28 @@ const LoginPage = () => {
                   <RiLockPasswordFill />
                 </div>
               </div>
-              <NavLink to="/librarian-books">
-                <button className="w-full mx-auto bg-[#eda830] py-[6px] -mt-[4px]">
-                  Sign In
-                </button>
-              </NavLink>
+
+              <button
+                onClick={handleOpenLibrary}
+                className="w-full mx-auto bg-[#eda830] py-[6px] -mt-[4px]"
+              >
+                Sign In
+              </button>
             </div>
           </form>
-          <div className="mt-[5px] text-end md:mb-[20px]">
-            <a href="#" className="text-[14px] underline">
-              Forgot Password ?
-            </a>
+          <div className="mt-[5px] text-end md:mb-[20px] text-[14px] underline">
+            Forgot Password ?
           </div>
         </div>
 
-        <div className="">
+        <div className="flex gap-1">
           Tap to{" "}
-          <NavLink to="/register" className="text-red-600 font-bold italic">
+          <div
+            onClick={handleRegister}
+            className="text-red-600 font-bold italic"
+          >
             create an account
-          </NavLink>
+          </div>
         </div>
       </div>
     </div>

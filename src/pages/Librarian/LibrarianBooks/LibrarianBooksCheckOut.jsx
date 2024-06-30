@@ -1,26 +1,45 @@
 import React from "react";
 import { FaBook } from "react-icons/fa";
 import { IoSearch, IoSettingsSharp } from "react-icons/io5";
-import FlipCard from "../components/FlipCard";
-import Navbar from "../components/Navbar";
-import NavNew from "../components/NavNew";
+import FlipCard from "../../../components/FlipCard";
+import NavNew from "../../../components/NavNew";
+import { useNavigate } from "react-router-dom";
 
-const LibrarianBooks = () => {
+const LibrarianBooksCheckOut = () => {
+  const navigate = useNavigate();
+  const handleOpenLibrary = () => {
+    navigate(`/librarian-books`);
+  };
+  const handleCheckIn = () => {
+    navigate(`/librarian-books-check-in`);
+  };
+  const handleCheckOut = () => {
+    navigate(`/librarian-books-check-out`);
+  };
+  const handleReservations = () => {
+    navigate(`/librarian-books-reservation`);
+  };
   return (
     <div>
       <NavNew />
       <div className="min-h-screen h-auto bg-gray-200 py-[10px]">
         <div className="flex justify-evenly gap-[20px] mx-[3%]">
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 active:bg-black shadow-slate-500 shadow-md mt-[200px]">
+          <button
+            onClick={handleOpenLibrary}
+            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 active:bg-black shadow-slate-500 shadow-md mt-[200px]"
+          >
             All Books
           </button>
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]">
+          <button
+            onClick={handleCheckIn}
+            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]"
+          >
             Check-In
           </button>
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]">
+          <button onClick={handleCheckOut} className="w-[150px] h-[120px] rounded-2xl bg-[#A3A3A3] hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]">
             Check-Out
           </button>
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]">
+          <button onClick={handleReservations} className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]">
             Reservations
           </button>
         </div>
@@ -29,8 +48,8 @@ const LibrarianBooks = () => {
             <div className="h-[1000px] w-[300px] rounded-l-2xl bg-[#14273D]">
               <div className="flex flex-col gap-[10px] justify-center items-center h-[20%] p-[20px] border-b-4 border-[#A3A3A3]">
                 <FaBook className=" fill-[#A3A3A3]  h-[40%] w-[40%]" />
-                <div className="text-white flex-col justify-center text-center text-5xl">
-                  Books
+                <div className="text-white flex-col justify-center text-center text-3xl">
+                  Check-Out
                 </div>
               </div>
               <div className="text-[#737373] flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-[50px]">
@@ -38,19 +57,13 @@ const LibrarianBooks = () => {
                   All
                 </button>
                 <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  Stock
+                  Member
                 </button>
                 <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  Categories
+                  Books
                 </button>
                 <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  Electronic Location
-                </button>
-                <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  Requested
-                </button>
-                <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  E-Books
+                  Upcoming Deadlines
                 </button>
               </div>
             </div>
@@ -109,4 +122,4 @@ const LibrarianBooks = () => {
   );
 };
 
-export default LibrarianBooks;
+export default LibrarianBooksCheckOut;

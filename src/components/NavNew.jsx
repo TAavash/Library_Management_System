@@ -4,12 +4,22 @@ import SearchBar from "../components/Search";
 import Avatar from "../components/Avatar";
 import { VscBellDot } from "react-icons/vsc";
 import { IoIosHelpCircleOutline } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const NavNew = () => {
+  const navigate = useNavigate();
+  const handleLibraryDash = () => {
+    navigate(`/librarian-dashboard`);
+  };
   return (
     <div className="w-screen fixed z-10 bg-white justify-evenly">
       <div className="flex justify-between items-center lg:mr-10">
-        <img className="h-9 md:h-14" src={Pcps} alt="" />
+        <img
+          onClick={handleLibraryDash}
+          className="h-9 md:h-14 cursor-pointer"
+          src={Pcps}
+          alt=""
+        />
         <div className="flex mx-auto justify-evenly content-stretch">
           <button className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black">
             Home
