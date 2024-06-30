@@ -10,7 +10,7 @@ const ToggleButton = () => {
   return (
     <button
       className={`w-16 h-8 flex items-center rounded-full p-1 ${
-        isToggled ? 'bg-green-500' : 'bg-gray-300'
+        isToggled ? 'bg-greenc 01-500' : 'bg-gray-300'
       }`}
       onClick={handleToggle}
     >

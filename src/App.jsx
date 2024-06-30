@@ -16,6 +16,9 @@ import Routes from './Routes/Routes'
 const App = () => {
   return (
     <div>
+      <div className="min-w-full">
+      
+    </div>
       <Routes />
     </div>
   )
