@@ -26,7 +26,7 @@ const LibrarianBooksReservations = () => {
         <div className="flex justify-evenly gap-[20px] mx-[3%]">
           <button
             onClick={handleOpenLibrary}
-            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 active:bg-black shadow-slate-500 shadow-md mt-[200px]"
+            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]"
           >
             All Books
           </button>
@@ -61,9 +61,6 @@ const LibrarianBooksReservations = () => {
                 </button>
                 <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
                   Books
-                </button>
-                <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  Upcoming Dates
                 </button>
               </div>
             </div>
