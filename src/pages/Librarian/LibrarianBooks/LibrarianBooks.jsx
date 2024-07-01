@@ -24,28 +24,33 @@ const LibrarianBooks = () => {
   };
 
   const renderContent = () => {
-    switch (active) {
-      case "stock":
-        return <Stock />;
-      case "categories":
-        return <Categories />;
-      case "electronic-location":
-        return <ElectronicLocation />;
-      case "requested":
-        return <Requested />;
-      case "e-books":
-        return <EBooks />;
-      default:
-        return (
-          <div className="flex-col h-[84%] p-[30px] gap-[30px] bg-blue-600 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
-              {Array.from({ length: 12 }).map((_, index) => (
-                <FlipCard key={index} />
-              ))}
-            </div>
+    if (active === "stock") {
+      return <Stock />;
+    } else if (active === "categories") {
+      return <Categories />;
+    } else if (active === "electronic-location") {
+      return <ElectronicLocation />;
+    } else if (active === "requested") {
+      return <Requested />;
+    } else if (active === "e-books") {
+      return <EBooks />;
+    } else {
+      return (
+        <div className="flex-col h-[84%] p-[30px] gap-[30px] bg-blue-600 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
+            {Array.from({ length: 12 }).map((_, index) => (
+              <FlipCard key={index} />
+            ))}
           </div>
-        );
+        </div>
+      );
     }
+  };
+
+  const getButtonClass = (label) => {
+    return `w-[150px] h-[120px] rounded-2xl shadow-slate-500 shadow-md mt-[200px] ${
+      label === "All Books" ? 'bg-[#A3A3A3]' : 'bg-white'
+    } hover:bg-red-600`;
   };
 
   return (
@@ -53,13 +58,18 @@ const LibrarianBooks = () => {
       <NavNew />
       <div className="min-h-screen h-auto bg-gray-200 py-[10px]">
         <div className="flex justify-evenly gap-[20px] mx-[3%]">
-          {["/librarian-books", "/librarian-books-check-in", "/librarian-books-check-out", "/librarian-books-reservation"].map((path, index) => (
+          {[
+            { path: "/librarian-books", label: "All Books" },
+            { path: "/librarian-books-check-in", label: "Check-In" },
+            { path: "/librarian-books-check-out", label: "Check-Out" },
+            { path: "/librarian-books-reservation", label: "Reservations" }
+          ].map(({ path, label }, index) => (
             <button
               key={index}
               onClick={() => handleNavigation(path)}
-              className={`w-[150px] h-[120px] rounded-2xl ${index === 1 ? 'bg-[#A3A3A3]' : 'bg-white'} hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]`}
+              className={getButtonClass(label)}
             >
-              {["All Books", "Check-In", "Check-Out", "Reservations"][index]}
+              {label}
             </button>
           ))}
         </div>
@@ -71,15 +81,22 @@ const LibrarianBooks = () => {
                 <div className="text-white text-3xl">Books</div>
               </div>
               <div className="text-[#737373] flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-[50px]">
-                {["all", "stock", "categories", "electronic-location", "requested", "e-books"].map((category, index) => (
+                {[
+                  { category: "all", label: "All" },
+                  { category: "stock", label: "Stock" },
+                  { category: "categories", label: "Categories" },
+                  { category: "electronic-location", label: "Electronic Location" },
+                  { category: "requested", label: "Requested" },
+                  { category: "e-books", label: "E-Books" }
+                ].map(({ category, label }, index) => (
                   <button
                     key={index}
-                    className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                    className={`h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px] ${
+                      active === category ? "text-red-600" : ""
+                    }`}
                     onClick={() => handleActiveChange(category)}
                   >
-                    <div className={active === category ? "text-red-600" : ""}>
-                      {category.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}
-                    </div>
+                    {label}
                   </button>
                 ))}
               </div>
