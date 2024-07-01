@@ -7,7 +7,11 @@ import LibrarianBooks from "../pages/Librarian/LibrarianBooks/LibrarianBooks";
 import LibrarianBooksCheckIn from "../pages/Librarian/LibrarianBooks/LibrarianBooksCheckIn";
 import LibrarianBooksCheckOut from "../pages/Librarian/LibrarianBooks/LibrarianBooksCheckOut";
 import LibrarianBooksResearvation from "../pages/Librarian/LibrarianBooks/LibrarianBooksReservations";
-import Stock from "../pages/Librarian/LibrarianBooks/SidebarComp/All Books/Stock";
+import Help from "../pages/Help";
+import Notification from "../pages/Notification";
+import Settings from "../pages/Settings";
+import LibrarianFines from "../pages/Librarian/LibrarianFines/LibrarianFines";
+import LibrarianOthers from "../pages/Librarian/LibrarianOthers/LibrarianOthers";
 
 export default function RoutesNav() {
   return (
@@ -28,6 +32,26 @@ export default function RoutesNav() {
         <Route
           path="/librarian-books-reservation"
           element={<LibrarianBooksResearvation />}
+        />
+        <Route
+          path="/help"
+          element={<Help />}
+        />
+        <Route
+          path="/notifications"
+          element={<Notification />}
+        />
+        <Route
+          path="/settings"
+          element={<Settings />}
+        />
+        <Route
+          path="/librarian-fines"
+          element={<LibrarianFines />}
+        />
+        <Route
+          path="/librarian-others"
+          element={<LibrarianOthers />}
         />
       </Routes>
     </>
