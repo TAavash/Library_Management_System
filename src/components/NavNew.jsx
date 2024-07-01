@@ -41,8 +41,8 @@ const NavNew = () => {
           </button>
         </div>
         <div className="w-[500px] flex items-center gap-4">
-          <IoIosHelpCircleOutline className="h-5 w-5 " />
-          <VscBellDot className="h-5 w-5 hover:fill-red-600" />
+          <IoIosHelpCircleOutline className="text-4xl " />
+          <VscBellDot className="text-4xl hover:fill-red-600" />
           <div className="pt-[20px]">
             <SearchBar />
           </div>

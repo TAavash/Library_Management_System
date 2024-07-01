@@ -7,6 +7,7 @@ import LibrarianBooks from "../pages/Librarian/LibrarianBooks/LibrarianBooks";
 import LibrarianBooksCheckIn from "../pages/Librarian/LibrarianBooks/LibrarianBooksCheckIn";
 import LibrarianBooksCheckOut from "../pages/Librarian/LibrarianBooks/LibrarianBooksCheckOut";
 import LibrarianBooksResearvation from "../pages/Librarian/LibrarianBooks/LibrarianBooksReservations";
+import Stock from "../pages/Librarian/LibrarianBooks/SidebarComp/All Books/Stock";
 
 export default function RoutesNav() {
   return (

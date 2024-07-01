@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaBook } from "react-icons/fa";
 import { IoSearch, IoSettingsSharp } from "react-icons/io5";
 import FlipCard from "../../../components/FlipCard";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavNew from "../../../components/NavNew";
+import All from "./SidebarComp/All Books/All";
+import Stock from "./SidebarComp/All Books/Stock";
+import Categories from "./SidebarComp/All Books/Categories";
+import ElectronicLocation from "./SidebarComp/All Books/ElectronicLocation";
+import Requested from "./SidebarComp/All Books/Requested";
+import EBooks from "./SidebarComp/All Books/EBooks";
 
 const LibrarianBooks = () => {
   const navigate = useNavigate();
@@ -13,6 +19,38 @@ const LibrarianBooks = () => {
   const handleCheckIn = () => {
     navigate(`/librarian-books-check-in`);
   };
+  const handleCheckOut = () => {
+    navigate(`/librarian-books-check-out`);
+  };
+  const handleReservations = () => {
+    navigate(`/librarian-books-reservation`);
+  };
+
+  const [active, setActive] = useState("");
+
+  const location = useLocation();
+
+  const handleAllActive = () => {
+    setActive("all");
+  };
+  const handleStockActive = () => {
+    setActive("stock");
+  };
+  const handleCategoriesActive = () => {
+    setActive("categories");
+  };
+  const handleElectronicLocationActive = () => {
+    setActive("electronic-location");
+  };
+  const handleRequestedActive = () => {
+    setActive("requested");
+  };
+  const handleEBooksActive = () => {
+    setActive("e-books");
+  };
+
+  console.log(location);
+
   return (
     <div>
       <NavNew />
@@ -20,20 +58,20 @@ const LibrarianBooks = () => {
         <div className="flex justify-evenly gap-[20px] mx-[3%]">
           <button
             onClick={handleOpenLibrary}
-            className="w-[150px] h-[120px] rounded-2xl bg-[#A3A3A3] hover:bg-red-600 active:bg-black shadow-slate-500 shadow-md mt-[200px]"
+            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 active:bg-black shadow-slate-500 shadow-md mt-[200px]"
           >
             All Books
           </button>
           <button
             onClick={handleCheckIn}
-            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]"
+            className="w-[150px] h-[120px] rounded-2xl bg-[#A3A3A3] hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]"
           >
             Check-In
           </button>
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]">
+          <button onClick={handleCheckOut} className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]">
             Check-Out
           </button>
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]">
+          <button onClick={handleReservations} className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]">
             Reservations
           </button>
         </div>
@@ -47,23 +85,60 @@ const LibrarianBooks = () => {
                 </div>
               </div>
               <div className="text-[#737373] flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-[50px]">
-                <button className="h-[40px] hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  All
+                <button className="h-[40px] hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleAllActive}
+                >
+                  {active === "all" ? (
+                    <div className="text-red-600">All</div>
+                  ) : (
+                    <div>All</div>
+                  )}
                 </button>
-                <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  Stock
+                <button
+                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleStockActive}
+                >
+                  {active === "stock" ? (
+                    <div className="text-red-600">Stock</div>
+                  ) : (
+                    <div>Stock</div>
+                  )}
                 </button>
-                <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  Categories
+                <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleCategoriesActive}
+                >
+                  {active === "categories" ? (
+                    <div className="text-red-600">Categories</div>
+                  ) : (
+                    <div>Categories</div>
+                  )}
                 </button>
-                <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  Electronic Location
+                <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleElectronicLocationActive}
+                >
+                  {active === "electronic-location" ? (
+                    <div className="text-red-600">Electronic Location</div>
+                  ) : (
+                    <div>Electronic Location</div>
+                  )}
                 </button>
-                <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  Requested
+                <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleRequestedActive}
+                >
+                  {active === "requested" ? (
+                    <div className="text-red-600">Requested</div>
+                  ) : (
+                    <div>Requested</div>
+                  )}
                 </button>
-                <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  E-Books
+                <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleEBooksActive}
+                >
+                  {active === "e-books" ? (
+                    <div className="text-red-600">E-Books</div>
+                  ) : (
+                    <div>E-Books</div>
+                  )}
                 </button>
               </div>
             </div>
@@ -97,22 +172,27 @@ const LibrarianBooks = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex-col h-[84%] p-[30px] gap-[30px] bg-blue-600 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
-                <div className=" grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
+
+              {active === "stock" ? (
+                <Stock />
+              ) : (
+                <div className="flex-col h-[84%] p-[30px] gap-[30px] bg-blue-600 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
+                  <div className=" grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
+                    <FlipCard />
+                    <FlipCard />
+                    <FlipCard />
+                    <FlipCard />
+                    <FlipCard />
+                    <FlipCard />
+                    <FlipCard />
+                    <FlipCard />
+                    <FlipCard />
+                    <FlipCard />
+                    <FlipCard />
+                    <FlipCard />
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
           <div>slide</div>
