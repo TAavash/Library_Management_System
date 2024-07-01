@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaBook } from "react-icons/fa";
 import { IoSearch, IoSettingsSharp } from "react-icons/io5";
-import FlipCard from "../../../components/FlipCard";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavNew from "../../../components/NavNew";
-import { useNavigate } from "react-router-dom";
+import All from "./SidebarComp/Check-Out/All";
+import Books from "./SidebarComp/Check-Out/Books";
+import Member from "./SidebarComp/Check-Out/Member";
+import UpcomingDeadlines from "./SidebarComp/Check-Out/UpcomingDeadlines";
 
 const LibrarianBooksCheckOut = () => {
   const navigate = useNavigate();
@@ -19,6 +22,39 @@ const LibrarianBooksCheckOut = () => {
   const handleReservations = () => {
     navigate(`/librarian-books-reservation`);
   };
+
+  const [active, setActive] = useState("");
+
+  const location = useLocation();
+
+  const handleAllActive = () => {
+    setActive("all");
+  };
+  const handleBooksActive = () => {
+    setActive("books");
+  };
+  const handleMemberActive = () => {
+    setActive("member");
+  };
+  const handleUpcomingDeadlinesActive = () => {
+    setActive("upcoming-deadlines");
+  };
+
+  console.log(location);
+
+  const renderActiveComponent = () => {
+    switch (active) {
+      case "books":
+        return <Books />;
+      case "member":
+        return <Member />;
+      case "upcoming-deadlines":
+        return <UpcomingDeadlines />;
+      default:
+        return <All />;
+    }
+  };
+
   return (
     <div>
       <NavNew />
@@ -36,10 +72,16 @@ const LibrarianBooksCheckOut = () => {
           >
             Check-In
           </button>
-          <button onClick={handleCheckOut} className="w-[150px] h-[120px] rounded-2xl bg-[#A3A3A3] hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]">
+          <button
+            onClick={handleCheckOut}
+            className="w-[150px] h-[120px] rounded-2xl bg-[#A3A3A3] hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]"
+          >
             Check-Out
           </button>
-          <button onClick={handleReservations} className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]">
+          <button
+            onClick={handleReservations}
+            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]"
+          >
             Reservations
           </button>
         </div>
@@ -53,66 +95,50 @@ const LibrarianBooksCheckOut = () => {
                 </div>
               </div>
               <div className="text-[#737373] flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-[50px]">
-                <button className="h-[40px] hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  All
+                <button
+                  className="h-[40px] hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleAllActive}
+                >
+                  {active === "all" ? (
+                    <div className="text-red-600">All</div>
+                  ) : (
+                    <div>All</div>
+                  )}
                 </button>
-                <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  Member
+                <button
+                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleMemberActive}
+                >
+                  {active === "member" ? (
+                    <div className="text-red-600">Member</div>
+                  ) : (
+                    <div>Member</div>
+                  )}
                 </button>
-                <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  Books
+                <button
+                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleBooksActive}
+                >
+                  {active === "books" ? (
+                    <div className="text-red-600">Books</div>
+                  ) : (
+                    <div>Books</div>
+                  )}
                 </button>
-                <button className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
-                  Upcoming Deadlines
+                <button
+                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleUpcomingDeadlinesActive}
+                >
+                  {active === "upcoming-deadlines" ? (
+                    <div className="text-red-600">Upcoming Deadlines</div>
+                  ) : (
+                    <div>Upcoming Deadlines</div>
+                  )}
                 </button>
               </div>
             </div>
             <div className="w-full h-full rounded-2xl">
-              <div className="w-[100%] h-[16%] bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
-                <div className="w-full h-full flex justify-evenly p-[10px] gap-[5px]">
-                  <div className="w-[50%] h-full flex-col">
-                    <div className="w-full h-[70%] text-start text-3xl">
-                      All Books
-                    </div>
-                    <div className="w-full h-[30%] text-start text-[-2xl] text-[#525252]">
-                      Manage all the books
-                    </div>
-                  </div>
-                  <div className="w-[30%] h-full flex p-[2px] justify-evenly">
-                    <div className="w-full h-[30px] rounded-2xl bg-white border flex items-center p-[5px]">
-                      <div className="text-[15px] w-[80%] text-[#525252]">
-                        Search
-                      </div>
-                      <div className="w-[20%]">
-                        <IoSearch className="w-[20px] h-[20px] justify-end fill-[#A3A3A3]" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="w-[20%] h-full flex p-[2px]">
-                    <div className="w-[40px] h-[30px] rounded-2xl bg-white border flex items-center justify-start p-[10px]">
-                      <div className="w-[20%]">
-                        <IoSettingsSharp className="w-[20px] h-[20px] fill-[#A3A3A3]" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex-col h-[84%] p-[30px] gap-[30px] bg-blue-600 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
-                <div className=" grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
-                </div>
-              </div>
+              {renderActiveComponent()}
             </div>
           </div>
           <div>slide</div>
