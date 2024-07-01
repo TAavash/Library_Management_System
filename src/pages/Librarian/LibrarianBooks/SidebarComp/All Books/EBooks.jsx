@@ -8,7 +8,6 @@ const EBooks = () => {
         <FlipCard />
         <FlipCard />
         <FlipCard />
-        <FlipCard />
       </div>
     </div>
   );

@@ -9,6 +9,9 @@ const Requested = () => {
         <FlipCard />
         <FlipCard />
         <FlipCard />
+        <FlipCard />
+        <FlipCard />
+        <FlipCard />
       </div>
     </div>
   );
