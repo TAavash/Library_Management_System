@@ -15,6 +15,9 @@ const NavNew = () => {
   const handleLibraryBooks = () => {
     navigate(`/librarian-books`);
   };
+  const handleMessage = () => {
+    navigate(`/message`);
+  };
   const handleSettings = () => {
     navigate(`/settings`);
   };
@@ -49,7 +52,7 @@ const NavNew = () => {
           <button className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black">
             Patrons
           </button>
-          <button className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black">
+          <button onClick={handleMessage} className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black">
             Message
           </button>
           <button onClick={handleLibrarianFines} className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black">
