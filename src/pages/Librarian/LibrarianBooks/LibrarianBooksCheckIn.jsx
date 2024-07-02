@@ -62,31 +62,31 @@ const LibrarianBooksCheckIn = () => {
         <div className="flex justify-evenly gap-[20px] mx-[3%]">
           <button
             onClick={handleOpenLibrary}
-            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]"
+            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
           >
             All Books
           </button>
           <button
             onClick={handleCheckIn}
-            className="w-[150px] h-[120px] rounded-2xl bg-[#A3A3A3] hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]"
+            className="w-[150px] h-[120px] rounded-2xl bg-[#A3A3A3] hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
           >
             Check-In
           </button>
           <button
             onClick={handleCheckOut}
-            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]"
+            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
           >
             Check-Out
           </button>
           <button
             onClick={handleReservations}
-            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[200px]"
+            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
           >
             Reservations
           </button>
         </div>
         <div className="p-[20px]">
-          <div className="flex h-[1000px] w-[100%] my-[100px] rounded-2xl bg-white shadow-slate-500 shadow-md ">
+          <div className="flex h-[1000px] w-[100%] mt-[100px] rounded-2xl bg-white shadow-slate-500 shadow-md ">
             <div className="h-[1000px] w-[300px] rounded-l-2xl bg-[#14273D]">
               <div className="flex flex-col gap-[10px] justify-center items-center h-[20%] p-[20px] border-b-4 border-[#A3A3A3]">
                 <FaBook className=" fill-[#A3A3A3]  h-[40%] w-[40%]" />
