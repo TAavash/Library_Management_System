@@ -10,12 +10,13 @@ import BookFlip from "./components/BookFlip";
 import LibrarianDash from "./pages/LibrarianDash";
 import Header from "./components/Header";
 import { LibrarianDashboard } from "./pages/Librarian/LibrarianDashboard";
-import { MemberDetail } from "./pages/MemberDetail";
+import { MemberDetail } from "./pages/Librarian/MemberDetail";
+
 
 const App = () => {
   return (
     <div className="min-w-full">
-      <MemberDetail/>
+      <MemberDetail />
       {/* <div className="fixed"><Header /></div>
       <Navbar/>
       <div>
