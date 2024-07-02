@@ -1,21 +1,20 @@
 import React from 'react'
-import FlipCard from "../../../../../components/FlipCard";
 import { IoSearch, IoSettingsSharp } from "react-icons/io5";
 
-const Member = () => {
+const Overdue = () => {
   return (
     <div className="w-full h-full ">
       <div className="w-[100%] h-[16%] bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
                 <div className="w-full h-full flex justify-evenly p-[10px] gap-[5px]">
-                  <div className="w-[80%] h-full flex-col">
+                  <div className="w-[50%] h-full flex-col">
                     <div className="w-full h-[70%] text-start text-3xl">
-                      Reservation Members
+                      Overdues
                     </div>
                     <div className="w-full h-[30%] text-start text-[-2xl] text-[#525252]">
-                      Manage all the members
+                      Manage all overdues
                     </div>
                   </div>
-                  <div className="w-[20%] h-full flex p-[2px] justify-evenly">
+                  <div className="w-[30%] h-full flex p-[2px] justify-evenly">
                     <div className="w-full h-[30px] rounded-2xl bg-white border flex items-center p-[5px]">
                       <div className="text-[15px] w-[80%] text-[#525252]">
                         Search
@@ -34,23 +33,12 @@ const Member = () => {
                   </div>
                 </div>
               </div> 
-    <div className="flex-col h-[84%] p-[30px] gap-[30px] bg-red-600 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
+    <div className="flex-col h-[84%] p-[30px] gap-[30px] bg-blue-600 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
     <div className=" grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
+      Overdue
     </div>
   </div></div>
   )
 }
 
-export default Member
+export default Overdue

@@ -60,13 +60,13 @@ const NavNew = () => {
           </button>
         </div>
         <div className="w-[600px] flex items-center gap-4">
-          <IoSettingsSharp onClick={handleSettings} className="text-2xl hover:fill-red-600" />
-          <IoIosHelpCircleOutline onClick={handleHelp} className="text-2xl hover:fill-red-600" />
-          <VscBellDot onClick={handleNotification} className="text-2xl hover:fill-red-600" />
+          <IoSettingsSharp onClick={handleSettings} className="text-2xl hover:fill-red-600 cursor-pointer" />
+          <IoIosHelpCircleOutline onClick={handleHelp} className="text-2xl hover:fill-red-600 cursor-pointer" />
+          <VscBellDot onClick={handleNotification} className="text-2xl hover:fill-red-600 cursor-pointer" />
           <div className="pt-[20px]">
             <SearchBar />
           </div>
-          <div className="">
+          <div className=" cursor-pointer">
             <Avatar />
           </div>
         </div>
