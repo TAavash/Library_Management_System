@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar'
 import { FiSearch } from "react-icons/fi";
 import { IoIosAddCircle } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
+import NavNew from '../../components/NavNew';
 
 
 export const LibrarianDashboard = () => {
@@ -66,10 +67,8 @@ export const LibrarianDashboard = () => {
 
   return (
 
-    <div className='bg-gray-200 flex flex-col gap-10 w-full p-2'>
-      <LibrarianHeader />
-
-      <Navbar />
+    <div >
+      <NavNew />
 
       <div className="flex justify-evenly ">
         <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 active:bg-black shadow-slate-500 shadow-md mt-[100px] text-center"
