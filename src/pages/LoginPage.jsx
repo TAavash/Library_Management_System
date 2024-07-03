@@ -21,8 +21,8 @@ const LoginPage = () => {
       return emailRegex.test(email);
     }
   };
-  const handleOpenLibrary = () => {
-    navigate(`/librarian-books`);
+  const handleLibrarianDash = () => {
+    navigate(`/librarian-dashboard`);
   };
 
   const handleEmailChange = (e) => {
@@ -84,7 +84,7 @@ const LoginPage = () => {
               </div>
 
               <button
-                onClick={handleOpenLibrary}
+                onClick={handleLibrarianDash}
                 className="w-full mx-auto bg-[#eda830] py-[6px] -mt-[4px]"
               >
                 Sign In

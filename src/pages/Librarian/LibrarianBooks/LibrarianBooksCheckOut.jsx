@@ -23,7 +23,7 @@ const LibrarianBooksCheckOut = () => {
     navigate(`/librarian-books-reservation`);
   };
 
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("all");
 
   const location = useLocation();
 

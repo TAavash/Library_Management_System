@@ -24,7 +24,7 @@ const LibrarianBooks = () => {
     navigate(`/librarian-books-reservation`);
   };
 
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("all");
 
   const location = useLocation();
 
@@ -51,15 +51,15 @@ const LibrarianBooks = () => {
 
   const renderActiveComponent = () => {
     switch (active) {
-      case 'stock':
+      case "stock":
         return <Stock />;
-      case 'categories':
+      case "categories":
         return <Categories />;
-      case 'electronic-location':
+      case "electronic-location":
         return <ElectronicLocation />;
-      case 'requested':
+      case "requested":
         return <Requested />;
-      case 'e-books':
+      case "e-books":
         return <EBooks />;
       default:
         return <All />;

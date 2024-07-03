@@ -8,7 +8,7 @@ import Overdue from "../LibrarianFines/SidebarComp/Overdue";
 import Payment from "../LibrarianFines/SidebarComp/Payment";
 
 const LibrarianFines = () => {
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("all");
 
   const location = useLocation();
 
@@ -58,25 +58,41 @@ const LibrarianFines = () => {
                   onClick={handleAllActive}
                   className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
-                  All Fines
+                  {active === "all" ? (
+                    <div className="text-red-600">All Fines</div>
+                  ) : (
+                    <div>All Fines</div>
+                  )}
                 </button>
                 <button
                   onClick={handleOverdueActive}
                   className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
-                  Overdue
+                  {active === "overdue" ? (
+                    <div className="text-red-600">Overdue</div>
+                  ) : (
+                    <div>Overdue</div>
+                  )}
                 </button>
                 <button
                   onClick={handleDamagedActive}
                   className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
-                  Damaged
+                  {active === "damaged" ? (
+                    <div className="text-red-600">Damaged</div>
+                  ) : (
+                    <div>Damaged</div>
+                  )}
                 </button>
                 <button
                   onClick={handlePaymentActive}
                   className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
-                  Payment
+                  {active === "payment" ? (
+                    <div className="text-red-600">Payment</div>
+                  ) : (
+                    <div>Payment</div>
+                  )}
                 </button>
               </div>
             </div>

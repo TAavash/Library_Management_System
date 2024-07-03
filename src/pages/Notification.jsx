@@ -1,7 +1,6 @@
 import React from "react";
 import { FaBell } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
-import FlipCard from "../components/FlipCard";
 import NavNew from "../components/NavNew";
 
 const Notification = () => {
@@ -53,9 +52,7 @@ const Notification = () => {
               </div>
               <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-white rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
                 <div className=" grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
-                  <FlipCard />
-                  <FlipCard />
-                  <FlipCard />
+                  Notification
                 </div>
               </div>
             </div>

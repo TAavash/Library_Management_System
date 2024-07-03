@@ -8,7 +8,7 @@ import Calendar from "../LibrarianOthers/SidebarComp/Calendar";
 import History from "../LibrarianOthers/SidebarComp/History";
 
 const LibrarianOthers = () => {
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("report");
 
   const location = useLocation();
 
@@ -58,25 +58,41 @@ const LibrarianOthers = () => {
                   onClick={handleReportActive}
                   className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
-                  Report & Analytics
+                  {active === "report" ? (
+                    <div className="text-red-600">Report & Analytics</div>
+                  ) : (
+                    <div>Report & Analytics</div>
+                  )}
                 </button>
                 <button
                   onClick={handleReviewActive}
                   className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
-                  Review & Ratings
+                  {active === "review" ? (
+                    <div className="text-red-600">Review & Ratings</div>
+                  ) : (
+                    <div>Review & Ratings</div>
+                  )}
                 </button>
                 <button
                   onClick={handleCalendarActive}
                   className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
-                  Calendar
+                  {active === "calendar" ? (
+                    <div className="text-red-600">Calendar</div>
+                  ) : (
+                    <div>Calendar</div>
+                  )}
                 </button>
                 <button
                   onClick={handleHistoryActive}
                   className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
-                  History
+                  {active === "history" ? (
+                    <div className="text-red-600">History</div>
+                  ) : (
+                    <div>History</div>
+                  )}
                 </button>
               </div>
             </div>
