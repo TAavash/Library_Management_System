@@ -42,7 +42,7 @@ const Register = () => {
               <div className="flex flex-col md:flex-row gap-3 md:-gap-[10px] xl:gap-14">
                 <div className="relative w-fit mx-auto flex items-center">
                   <input
-                    type="number"
+                    type="text"
                     className="max-w-[200px] xl:max-w-[300px] rounded-[10px] h-[50px] pl-[50px] md:pl-[70px]"
                     placeholder="Phone Number"
                   />

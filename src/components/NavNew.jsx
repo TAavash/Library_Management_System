@@ -85,16 +85,16 @@ const NavNew = () => {
           <GiHamburgerMenu />
         </div>
         <div className=" flex items-center gap-4">
-          <IoSettingsSharp
-            onClick={handleSettings}
+          <VscBellDot
+            onClick={handleNotification}
             className="text-2xl hover:fill-red-600 cursor-pointer"
           />
           <IoIosHelpCircleOutline
             onClick={handleHelp}
             className="text-2xl hover:fill-red-600 cursor-pointer"
           />
-          <VscBellDot
-            onClick={handleNotification}
+          <IoSettingsSharp
+            onClick={handleSettings}
             className="text-2xl hover:fill-red-600 cursor-pointer"
           />
           <div className="md:hidden">
