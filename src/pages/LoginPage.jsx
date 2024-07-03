@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import PcpsLogo from "../assets/pcpslogo.png";
-import LoginImg from "../assets/loginImage.jpg";
 import { NavLink, useNavigate } from "react-router-dom";
+import RegImg from "../assets/library.jpg";
 
 const LoginPage = () => {
   const [email, setEmail] = useState();
@@ -34,9 +34,9 @@ const LoginPage = () => {
   return (
     <div
       className="bg-cover min-h-screen bg-no-repeat bg-center flex items-center justify-center"
-      style={{ backgroundImage: `url(${LoginImg})` }}
+      style={{ backgroundImage: `url(${RegImg})` }}
     >
-      <div className="bg-white/80 rounded-[30px] w-[80%] md:w-[60%] mx-auto flex flex-col gap-7 items-center justify-center font-semibold py-[50px] md:py-[90px] text-center">
+      <div className="bg-white/70 rounded-[30px] w-[80%] md:w-[60%] mx-auto flex flex-col gap-7 items-center justify-center font-semibold py-[50px] md:py-[90px] text-center">
         <div className="border-b-2 border-white/0 md:border-slate-400">
           <div className="mb-[10px] w-content">
             <div className="text-xl md:text-2xl">Welcome to</div>
@@ -85,7 +85,7 @@ const LoginPage = () => {
 
               <button
                 onClick={handleLibrarianDash}
-                className="w-full mx-auto bg-[#eda830] py-[6px] -mt-[4px]"
+                className="w-full mx-auto bg-black text-white py-[6px] -mt-[4px]"
               >
                 Sign In
               </button>
@@ -100,7 +100,7 @@ const LoginPage = () => {
           Tap to{" "}
           <div
             onClick={handleRegister}
-            className="text-red-600 font-bold italic"
+            className="text-red-600 font-bold italic cursor-pointer"
           >
             create an account
           </div>
