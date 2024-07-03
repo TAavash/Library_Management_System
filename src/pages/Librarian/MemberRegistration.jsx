@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import Profile from '../../assets/gojo.jpg'
 import { IoArrowBackCircle } from "react-icons/io5";
-import 'flatpickr/dist/themes/material_blue.css';
-import Flatpickr from 'react-flatpickr';
-import { FiCalendar, FiPlus } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
 export default function MemberRegistration() {
@@ -14,8 +11,6 @@ export default function MemberRegistration() {
         navigate('/');
     };
 
-    const [cDate, setDate] = useState(new Date());
-    const [eDate, setEDate] = useState(new Date());
     return (
         <div className='flex w-full p-3 gap-2'>
             <div className="w-2/3  flex flex-col">
@@ -43,20 +38,7 @@ export default function MemberRegistration() {
                         </div>
                         <div className="flex flex-col mt-3 gap-2">
                             <label htmlFor="">Date Of Birth</label>
-                            <div className=' relative w-2/3 pl-3 py-1 text-base border-2 focus:outline-none rounded-md'>
-                                <Flatpickr
-                                    id="date"
-                                    className=" w-full cursor-pointer border-gray-300 focus:outline-none"
-                                    options={{ dateFormat: 'F j, Y' }}
-                                    value={cDate}
-                                    onChange={([date]) => setDate(date)}
-                                    placeholder="Select Date"
-                                />
-                                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                    <FiCalendar className="h-5 w-5 text-gray-400" />
-                                </div>
-
-                            </div>
+                            <input type="date" placeholder='Select Date' className='border-2 w-2/3 pl-3 py-1 rounded-md' />
 
 
                         </div>
@@ -84,20 +66,7 @@ export default function MemberRegistration() {
 
                         <div className="flex flex-col mt-3 gap-2">
                             <label htmlFor="">Year Of Enrollment</label>
-                            <div className=' relative w-2/3 pl-3 py-1 text-base border-2 focus:outline-none rounded-md'>
-                                <Flatpickr
-                                    id="enrollment_date"
-                                    className=" w-full cursor-pointer border-gray-300 focus:outline-none"
-                                    options={{ dateFormat: 'F j, Y' }}
-                                    value={eDate}
-                                    onChange={([date]) => setEDate(date)}
-                                    placeholder="Select Date"
-                                />
-                                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                    <FiCalendar className="h-5 w-5 text-gray-400" />
-                                </div>
-
-                            </div>
+                            <input type="date" placeholder='Select Date' className='border-2 w-2/3 pl-3 py-1 rounded-md' />
 
 
                         </div>

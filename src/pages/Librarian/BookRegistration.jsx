@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import BookCover from '../../assets/th (1).jpeg'
 import { IoArrowBackCircle } from "react-icons/io5";
-import 'flatpickr/dist/themes/material_blue.css';
-import Flatpickr from 'react-flatpickr';
-import { FiCalendar, FiPlus } from 'react-icons/fi';
+
 import { useNavigate } from 'react-router-dom';
 
 export default function BookRegistration() {
@@ -14,7 +12,7 @@ export default function BookRegistration() {
         navigate('/');
     };
 
-    const [publicationDate, setPublicationDate] = useState(new Date());
+
 
     return (
         <div className='flex w-full p-3 gap-2'>
@@ -22,7 +20,7 @@ export default function BookRegistration() {
                 <div className="flex justify-around">
                     <div className=" ">
                         <IoArrowBackCircle className="h-14 w-14 cursor-pointer  "
-                        onClick={handleBackIconClick} />
+                            onClick={handleBackIconClick} />
                     </div>
                     <div className="flex flex-col">
                         <h2>Add Book</h2>
@@ -78,20 +76,7 @@ export default function BookRegistration() {
                         <hr />
                         <div className="flex flex-col mt-3 gap-2">
                             <label htmlFor="">Publication Date</label>
-                            <div className=' relative w-2/3 pl-3 py-1 text-base border-2 focus:outline-none rounded-md'>
-                                <Flatpickr
-                                    id="publication_date"
-                                    className=" w-full cursor-pointer border-gray-300 focus:outline-none"
-                                    options={{ dateFormat: 'F j, Y' }}
-                                    value={publicationDate}
-                                    onChange={([date]) => setPublicationDate(date)}
-                                    placeholder="Select Date"
-                                />
-                                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                    <FiCalendar className="h-5 w-5 text-gray-400" />
-                                </div>
-
-                            </div>
+                            <input type="date" placeholder='Select date' className='border-2 w-2/3 pl-3 py-1 rounded-md' />
 
 
                         </div>
