@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Routes, useNavigate, BrowserRouter } from 'react-router-dom';
 import LoginPage from "./pages/LoginPage";
 import Register from "./pages/Register";
 import Card from "./components/Cards";
@@ -11,21 +12,20 @@ import LibrarianDash from "./pages/LibrarianDash";
 import Header from "./components/Header";
 import { LibrarianDashboard } from "./pages/Librarian/LibrarianDashboard";
 import { MemberDetail } from "./pages/Librarian/MemberDetail";
+import BookRegistration from "./pages/Librarian/BookRegistration";
+import MemberRegistration from "./pages/Librarian/MemberRegistration";
 
 
 const App = () => {
   return (
-    <div className="min-w-full">
-      <MemberDetail />
-      {/* <div className="fixed"><Header /></div>
-      <Navbar/>
-      <div>
-        <LibrarianDash />
-      </div>
-      <div className="z-20">
-        <FlipCard />
-      </div> */}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LibrarianDashboard />} />
+        <Route path="/MemberDetail" element={<MemberDetail />} />
+        <Route path="/BookRegistration" element={<BookRegistration />} />
+        <Route path="/MemberRegistration" element={<MemberRegistration />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

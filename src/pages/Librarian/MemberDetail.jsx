@@ -5,6 +5,7 @@ import BookCover from '../../assets/th.jpeg'
 import BookCover2 from '../../assets/th (1).jpeg'
 import BookCover3 from '../../assets/OIP.jpeg'
 import { FaStar } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
 
 const books = [
     {
@@ -35,6 +36,12 @@ const books = [
 
 export const MemberDetail = () => {
 
+    const navigate = useNavigate();
+
+    const handleBackIconClick = () => {
+        navigate('/');
+    };
+
     const [selectedBook, setSelectedBook] = useState(null);
 
     const handleBookClick = (book) => {
@@ -46,7 +53,8 @@ export const MemberDetail = () => {
             <div className="w-2/3  flex flex-col">
                 <div className="flex justify-around">
                     <div className=" ">
-                        <IoArrowBackCircle className="h-14 w-14 cursor-pointer  " />
+                        <IoArrowBackCircle className="h-14 w-14 cursor-pointer  "
+                        onClick={handleBackIconClick} />
                     </div>
                     <h2>Sudarshan Bam</h2>
                 </div>

@@ -19,7 +19,7 @@ const librarianHeader = () => {
 
                 <div className='flex items-center border rounded-xl overflow-hidden gap-1'>
                     <FiSearch className="h-5 w-5 ml-1" />
-                    <input type="text" placeholder='Search' className='p-1 w-64 border-hidden rounded-r-xl' />
+                    <input type="text" placeholder='Search' className='p-1 w-64 border-hidden rounded-r-xl focus:outline-none' />
                 </div>
 
                 <div className="flex gap-1 border border-slate-600 rounded-r-full rounded-l-full h-10 items-center">
