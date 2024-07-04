@@ -13,7 +13,7 @@ const Sidebar = () => {
       <div className='flex flex-col items-start space-y-6'>
         <div className='flex items-center text-2xl space-x-2 cursor-pointer'
         onClick={()=>{
-            navigate('/')
+            navigate('/hero')
         }}>
           <CiHome />
           <span>Home</span>

@@ -13,6 +13,12 @@ import Settings from "../pages/Settings";
 import Message from "../pages/Message";
 import LibrarianFines from "../pages/Librarian/LibrarianFines/LibrarianFines";
 import LibrarianOthers from "../pages/Librarian/LibrarianOthers/LibrarianOthers";
+import User from "../pages/Userdash";
+import Discover from "../pages/User/Discover";
+import Ebooks from "../pages/User/Ebooks";
+import Added from "../pages/User/Added";
+import Wishlist from "../pages/User/Wishlist";
+import Hero from "../pages/User/Hero";
 
 export default function RoutesNav() {
   return (
@@ -34,30 +40,18 @@ export default function RoutesNav() {
           path="/librarian-books-reservation"
           element={<LibrarianBooksResearvation />}
         />
-        <Route
-          path="/help"
-          element={<Help />}
-        />
-        <Route
-          path="/notifications"
-          element={<Notification />}
-        />
-        <Route
-          path="/settings"
-          element={<Settings />}
-        />
-        <Route
-          path="/message"
-          element={<Message />}
-        />
-        <Route
-          path="/librarian-fines"
-          element={<LibrarianFines />}
-        />
-        <Route
-          path="/librarian-others"
-          element={<LibrarianOthers />}
-        />
+        <Route path="/help" element={<Help />} />
+        <Route path="/notifications" element={<Notification />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/message" element={<Message />} />
+        <Route path="/librarian-fines" element={<LibrarianFines />} />
+        <Route path="/librarian-others" element={<LibrarianOthers />} />
+        <Route path="/user" element={<User />} />
+        {/* <Route path="/hero" element={<Hero />} />
+        <Route path="/discover" element={<Discover />} />
+        <Route path="/added" element={<Added />} />
+        <Route path="/e-books" element={<Ebooks />} />
+        <Route path="/wishlist" element={<Wishlist />} /> */}
       </Routes>
     </>
   );
