@@ -74,7 +74,7 @@ export default function LibraryRequestPage() {
                             </div>
                             <div className="text-[#737373] flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-[50px]">
                                 <button
-                                    className="h-auto hover:text-white  rounded-xl text-2xl p-[2px] px-[3px]"
+                                    className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                                     onClick={handleAccountActive}
                                 >
                                     {active === "User Account Request" ? (
