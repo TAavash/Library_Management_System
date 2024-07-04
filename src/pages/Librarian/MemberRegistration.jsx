@@ -81,7 +81,17 @@ export default function MemberRegistration() {
                         </div>
                         <div className="flex flex-col mt-3 gap-2">
                             <label htmlFor="">Password</label>
-                            <input type="text" placeholder='Password' className='border-2 w-2/3 pl-3 py-1 rounded-md' />
+                            <input type="password" placeholder='Password' className='border-2 w-2/3 pl-3 py-1 rounded-md' />
+                        </div>
+                        <div className="flex flex-col mt-3 gap-2">
+                            <label htmlFor="">Role</label>
+                            <select id="" class=" w-2/3 pl-3 py-1 text-base border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md">
+                                <option value="">Select Role</option>
+                                <option value="">Student</option>
+                                <option value="">Faculty Members</option>
+                                <option value="">Library Assistant</option>
+                                <option value="">Program Coordinator</option>
+                            </select>
                         </div>
                         <button type="submit" className='border rounded-xl bg-black text-white mt-6 text-center h-10 w-1/2'>
 

@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import BookFlip from "./components/BookFlip";
 import LibrarianDash from "./pages/LibrarianDash";
 import Header from "./components/Header";
-import { LibrarianDashboard } from "./pages/Librarian/LibrarianDashboard";
+import LibrarianDashboard  from "./pages/Librarian/LibrarianDashboard";
 import { MemberDetail } from "./pages/Librarian/MemberDetail";
 import BookRegistration from "./pages/Librarian/BookRegistration";
 import MemberRegistration from "./pages/Librarian/MemberRegistration";
