@@ -8,17 +8,14 @@ const LibrarianDash = () => {
       <NavNew />
       <div className="min-h-screen h-auto bg-gray-200 py-[10px]">
         <div className="flex justify-evenly gap-[20px] mx-[3%]">
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]">
-            Books
+          <button className="w-[200px] h-[120px] rounded-2xl bg-red-400 shadow-slate-500 shadow-md mt-[100px]">
+            Total Books : 3000
           </button>
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]">
-            User
+          <button className="w-[200px] h-[120px] rounded-2xl bg-green-400 shadow-slate-500 shadow-md mt-[100px]">
+            Total Users : 3000
           </button>
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]">
-            Fines
-          </button>
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]">
-            Report
+          <button className="w-[200px] h-[120px] rounded-2xl bg-yellow-400 shadow-slate-500 shadow-md mt-[100px]">
+            Fines Collected : 1M$
           </button>
         </div>
         <div className="p-[20px] ">
@@ -34,14 +31,14 @@ const LibrarianDash = () => {
                 <div className="w-full h-full flex p-[10px]">
                   <div className="w-full h-auto flex justify-center items-center">
                     <div className="w-full text-start text-2xl">
-                      Books Issued / Returned
+                      Today's Task
                     </div>
                   </div>
                 </div>
               </div>
               <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-white rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
                 <div className=" flex flex-col gap-[30px] my-2">
-                  <div>Books Issued / Returned</div>
+                  <div>Manage: Books Issued / Returned</div>
                 </div>
               </div>
             </div>

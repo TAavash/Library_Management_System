@@ -62,25 +62,25 @@ const LibrarianBooksCheckOut = () => {
         <div className="flex justify-evenly gap-[20px] mx-[3%]">
           <button
             onClick={handleOpenLibrary}
-            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
+            className="w-[150px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md mt-[100px]"
           >
             All Books
           </button>
           <button
             onClick={handleCheckIn}
-            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
+            className="w-[150px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md mt-[100px]"
           >
             Check-In
           </button>
           <button
             onClick={handleCheckOut}
-            className="w-[150px] h-[120px] rounded-2xl bg-[#A3A3A3] hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
+            className="w-[150px] h-[120px] rounded-2xl bg-[#14273D] text-white shadow-slate-500 shadow-md mt-[100px]"
           >
             Check-Out
           </button>
           <button
             onClick={handleReservations}
-            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
+            className="w-[150px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md mt-[100px]"
           >
             Reservations
           </button>

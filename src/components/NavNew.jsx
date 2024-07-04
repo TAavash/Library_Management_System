@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import Pcps from "../assets/pcps_logo.jpg";
 import SearchBar from "../components/Search";
 import Avatar from "../components/Avatar";
+import Dropdown from "../components/Dropdown";
 import { VscBellDot } from "react-icons/vsc";
 import { IoSettingsSharp } from "react-icons/io5";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
-import NavMobile from "./NavMobile";
+// import NavMobile from "./NavMobile";
 
 const NavNew = () => {
   const navigate = useNavigate();
@@ -16,6 +17,9 @@ const NavNew = () => {
   };
   const handleLibraryBooks = () => {
     navigate(`/librarian-books`);
+  };
+  const handlePatrons = () => {
+    navigate(`/patrons`);
   };
   const handleMessage = () => {
     navigate(`/message`);
@@ -49,34 +53,34 @@ const NavNew = () => {
         <div className="hidden md:flex mx-auto justify-evenly content-stretch">
           <button
             onClick={handleLibraryDash}
-            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black"
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-gray-400 text-black"
           >
             Home
           </button>
           <button
             onClick={handleLibraryBooks}
-            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black"
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-gray-400 text-black"
           >
             Books
           </button>
-          <button className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black">
+          <button onClick={handlePatrons} className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-gray-400 text-black">
             Patrons
           </button>
           <button
             onClick={handleMessage}
-            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black"
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-gray-400 text-black"
           >
             Message
           </button>
           <button
             onClick={handleLibrarianFines}
-            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black"
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-gray-400 text-black"
           >
             Fines
           </button>
           <button
             onClick={handleLibrarianOthers}
-            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black"
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-gray-400 text-black"
           >
             Others
           </button>
@@ -120,7 +124,7 @@ const NavNew = () => {
             <SearchBar />
           </div>
           <div className=" cursor-pointer">
-            <Avatar />
+            <Dropdown />
           </div>
         </div>
       </div>
