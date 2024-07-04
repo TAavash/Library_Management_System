@@ -14,6 +14,7 @@ import LibrarianDashboard  from "./pages/Librarian/LibrarianDashboard";
 import { MemberDetail } from "./pages/Librarian/MemberDetail";
 import BookRegistration from "./pages/Librarian/BookRegistration";
 import MemberRegistration from "./pages/Librarian/MemberRegistration";
+import LibraryRequestPage from "./pages/Librarian/Patrons/Request/LibraryRequestPage";
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/MemberDetail" element={<MemberDetail />} />
         <Route path="/BookRegistration" element={<BookRegistration />} />
         <Route path="/MemberRegistration" element={<MemberRegistration />} />
+        <Route path="/LibraryRequestPage" element={<LibraryRequestPage />} />
       </Routes>
     </BrowserRouter>
   );

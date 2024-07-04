@@ -22,6 +22,10 @@ export default function LibrarianDashboard() {
     navigate('/MemberDetail');
   };
 
+  const handleRequestClick = () => {
+    navigate('/LibraryRequestPage')
+  };
+
   const tableData = [{
     id: 3542342,
     fullname: "sudarshan",
@@ -89,17 +93,18 @@ export default function LibrarianDashboard() {
       <div className="min-h-screen h-auto bg-gray-200 py-[10px]">
         <div className="flex justify-evenly gap-[20px] mx-[3%]">
           <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
-          onClick={handleAddBookClick}>
+            onClick={handleAddBookClick}>
             Users
           </button>
           <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
-          onClick={handleAddIconClick}>
+            onClick={handleAddIconClick}>
             Add Member
           </button>
           <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]">
             Membership
           </button>
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]">
+          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
+          onClick={handleRequestClick}>
             Request
           </button>
         </div>
@@ -162,33 +167,33 @@ export default function LibrarianDashboard() {
               </div>
               <div className=' flex flex-col w-full h-[80%]  bg-white'>
 
-          <div className='flex justify-center m-2'>
-            <div className="flex w-[500px] items-center gap-1 border rounded ">
-              <FiSearch className="h-5 w-5 ml-1" />
-              <input type="text" placeholder='Search' className='p-1 w-[500px]  border-hidden rounded-r-xl focus:outline-none' />
-            </div>
-          </div>
-          <div className=" overflow-scroll ">
-            <table className='w-full border border-collapse bg-white'>
-              <tr>
-                <th className=' p-3 '>ID</th>
-                <th className=' p-3'>Name</th>
-                <th className=' p-3'>Status</th>
-                <th className=' p-3'>Joined Date</th>
-              </tr>
-              {tableData.map((person) => {
-                return (
-                  <tr key={person.id} onClick={handleRowClick} className="cursor-pointer hover:bg-gray-100">
-                    <td className='p-3'>{person.id}</td>
-                    <td className='p-3'>{person.fullname}</td>
-                    <td className='p-3'>{person.status}</td>
-                    <td className='p-3'>{person.joinDate}</td>
-                  </tr>)
-              })}
+                <div className='flex justify-center m-2'>
+                  <div className="flex w-[500px] items-center gap-1 border rounded ">
+                    <FiSearch className="h-5 w-5 ml-1" />
+                    <input type="text" placeholder='Search' className='p-1 w-[500px]  border-hidden rounded-r-xl focus:outline-none' />
+                  </div>
+                </div>
+                <div className=" overflow-scroll ">
+                  <table className='w-full border border-collapse bg-white'>
+                    <tr>
+                      <th className=' p-3 '>ID</th>
+                      <th className=' p-3'>Name</th>
+                      <th className=' p-3'>Status</th>
+                      <th className=' p-3'>Joined Date</th>
+                    </tr>
+                    {tableData.map((person) => {
+                      return (
+                        <tr key={person.id} onClick={handleRowClick} className="cursor-pointer hover:bg-gray-100">
+                          <td className='p-3'>{person.id}</td>
+                          <td className='p-3'>{person.fullname}</td>
+                          <td className='p-3'>{person.status}</td>
+                          <td className='p-3'>{person.joinDate}</td>
+                        </tr>)
+                    })}
 
-            </table>
-          </div>
-        </div>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -197,30 +202,3 @@ export default function LibrarianDashboard() {
   )
 }
 
-
-
-// import React from 'react'
-// import LibrarianHeader from '../../components/librarianHeader'
-// import Navbar from '../../components/Navbar'
-
-// import { useNavigate } from 'react-router-dom';
-// import NavNew from '../../components/NavNew';
-
-
-// export const LibrarianDashboard = () => {
-
-
-
-//   return (
-
-//     <div>
-//       <NavNew />
-//       <div className="min-h-screen h-auto bg-gray-200 py-[10px]">
-//         
-        
-//       </div>
-//     </div>
-
-
-//   )
-// }
