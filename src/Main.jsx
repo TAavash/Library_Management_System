@@ -8,7 +8,7 @@ import Ebooks from './pages/User/Ebooks'
 import Added from './pages/User/Added'
 import Wishlist from './pages/User/Wishlist'
 
-const App = () => {
+const Main = () => {
   return (
     <Router>
     <div className='bg-[#828282] min-h-screen min-w-screen flex'>
@@ -31,4 +31,4 @@ const App = () => {
   )
 }
 
-export default App
+export default Main
