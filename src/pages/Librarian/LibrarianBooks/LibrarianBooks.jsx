@@ -142,7 +142,7 @@ const LibrarianBooks = () => {
                 {renderActiveComponent()}
               </div>
               {selectedCard && (
-                <div className="w-1/3 flex flex-col bg-[#011222] text-white p-2 mt-3 mx-7 rounded-xl justify-center items-center slide-in`">
+                <div className={`w-1/3 flex flex-col bg-[#011222] text-white p-2 mt-3 mx-7 rounded-xl justify-center items-center slide-in`}>
                   {selectedCard}
                 </div>
               )}

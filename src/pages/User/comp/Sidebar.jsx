@@ -13,14 +13,14 @@ const Sidebar = () => {
       <div className='flex flex-col items-start space-y-6'>
         <div className='flex items-center text-2xl space-x-2 cursor-pointer'
         onClick={()=>{
-            navigate('/hero')
+            navigate('/user/home')
         }}>
           <CiHome />
           <span>Home</span>
         </div>
         <div className='flex items-center text-2xl space-x-2 cursor-pointer'
         onClick={()=>{
-            navigate('/discover')
+            navigate('/user/discover')
         }}
         >
           <IoBookOutline />
@@ -28,7 +28,7 @@ const Sidebar = () => {
         </div>
         <div
         onClick={()=>{
-            navigate('/wishlist')
+            navigate('/user/wishlist')
         }}
         className='flex items-center text-2xl space-x-2 cursor-pointer'>
           <IoBookmarkOutline />
@@ -36,7 +36,7 @@ const Sidebar = () => {
         </div>
         <div
         onClick={()=>{
-            navigate('/added')
+            navigate('/user/added')
         }}
         className='flex items-center text-2xl space-x-2 cursor-pointer'>
           <MdAddTask />
@@ -44,7 +44,7 @@ const Sidebar = () => {
         </div>
         <div
         onClick={()=>{
-            navigate('/e-books')
+            navigate('/user/e-books')
         }}
         className='flex items-center text-2xl space-x-2 cursor-pointer'>
           <IoDocumentOutline />
