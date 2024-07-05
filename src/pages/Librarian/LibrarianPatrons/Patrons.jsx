@@ -3,7 +3,9 @@ import { IoMail } from "react-icons/io5";
 import { FaBell } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 import NavNew from "../../../components/NavNew";
-import Dropdown  from "../../../components/Dropdown";
+import Dropdown from "../../../components/Dropdown";
+import Cards from "../../../components/Cards";
+import EbookCards from "../../../components/EbookCards";
 
 const Patrons = () => {
   return (
@@ -83,7 +85,9 @@ const Patrons = () => {
               </div>
               <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-white rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
                 <div className=" grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
-                  <Dropdown/>
+                  <Dropdown />
+                  <Cards />
+                  <EbookCards />
                 </div>
               </div>
             </div>
