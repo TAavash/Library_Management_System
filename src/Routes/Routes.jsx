@@ -14,7 +14,6 @@ import Message from "../pages/Message";
 import LibrarianFines from "../pages/Librarian/LibrarianFines/LibrarianFines";
 import LibrarianOthers from "../pages/Librarian/LibrarianOthers/LibrarianOthers";
 import Patrons from "../pages/Librarian/LibrarianPatrons/Patrons";
-import LandingPage from "../pages/Users/LandingPage";
 
 export default function RoutesNav() {
   return (
@@ -63,10 +62,6 @@ export default function RoutesNav() {
         <Route
           path="/patrons"
           element={<Patrons />}
-        />
-        <Route
-          path="/landing-page"
-          element={<LandingPage />}
         />
       </Routes>
     </>

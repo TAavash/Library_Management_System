@@ -125,7 +125,6 @@ const LibrarianBooksReservations = () => {
               {renderActiveComponent()}
             </div>
           </div>
-          <div>slide</div>
         </div>
       </div>
     </div>

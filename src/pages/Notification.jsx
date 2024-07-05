@@ -9,7 +9,7 @@ const Notification = () => {
       <NavNew />
       <div className="min-h-screen h-auto bg-gray-200 py-[10px]">
         <div className="p-[20px]">
-          <div className="flex h-[800px] w-[100%] my-[100px] rounded-2xl bg-white shadow-slate-500 shadow-md ">
+          <div className="flex h-[800px] w-[100%] mt-[100px] rounded-2xl bg-white shadow-slate-500 shadow-md ">
             <div className="h-[800px] w-[300px] rounded-l-2xl bg-[#14273D]">
               <div className="flex flex-col gap-[10px] justify-center items-center h-[20%] p-[20px] border-b-4 border-[#A3A3A3]">
                 <FaBell className=" fill-[#A3A3A3]  text-4xl" />
