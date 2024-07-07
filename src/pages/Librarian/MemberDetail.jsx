@@ -54,7 +54,7 @@ export const MemberDetail = () => {
                 <div className="flex justify-around">
                     <div className=" ">
                         <IoArrowBackCircle className="h-14 w-14 cursor-pointer  "
-                        onClick={handleBackIconClick} />
+                            onClick={handleBackIconClick} />
                     </div>
                     <h2>Sudarshan Bam</h2>
                 </div>
@@ -75,13 +75,13 @@ export const MemberDetail = () => {
                 </div>
                 <h3 className='mt-14 ml-36'>Books Taken</h3>
 
-                <div class="container mx-auto bg-slate-100 p-2">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class=" ml-36 rounded-lg shadow-md bg-slate-100 p-3"> 
+                    <div class="flex justify-evenly">
 
                         {books.map((book, index) => (
                             <div
                                 key={index}
-                                className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
+                                className="bg-white rounded-lg shadow-md w-56 overflow-hidden cursor-pointer"
                                 onClick={() => handleBookClick(book)}
                             >
                                 <img src={book.cover} alt={book.title} className="w-full object-cover" />
