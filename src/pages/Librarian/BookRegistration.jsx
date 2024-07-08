@@ -13,6 +13,19 @@ export default function BookRegistration() {
         navigate('/');
     };
 
+    const [authors, setAuthors] = useState([{ id: 1, name: '' }]);
+
+    const addAuthorField = () => {
+        setAuthors([...authors, { id: authors.length + 1, name: '' }]);
+    };
+
+    const handleInputChange = (id, value) => {
+        const updatedAuthors = authors.map(author =>
+            author.id === id ? { ...author, name: value } : author
+        );
+        setAuthors(updatedAuthors);
+    };
+
 
 
     return (
@@ -71,9 +84,21 @@ export default function BookRegistration() {
                         <hr />
                         <div className="flex flex-col mt-3 gap-2">
                             <label htmlFor="">Author</label>
-                            <div className='flex gap-3 items-center'>
-                                <input type="text" placeholder='Griffin' className='border-2 w-2/3 pl-3 py-1 rounded-md' />
-                                <IoPersonAdd className='h-6 w-6 cursor-pointer' />
+                            <div>
+                                {authors.map((author, index) => (
+                                    <div key={author.id} className='flex gap-3 items-center mb-3'>
+                                        <input
+                                            type="text"
+                                            placeholder={`Author${index + 1}`} 
+                                            className='border-2 w-2/3 pl-3 py-1 rounded-md'
+                                            value={author.name}
+                                            onChange={(e) => handleInputChange(author.id, e.target.value)}
+                                        />
+                                        {index === authors.length - 1 && (
+                                            <IoPersonAdd className='h-6 w-6 cursor-pointer' onClick={addAuthorField} />
+                                        )}
+                                    </div>
+                                ))}
                             </div>
 
                         </div>
