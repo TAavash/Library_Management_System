@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import BookCover from '../../assets/th (1).jpeg'
 import { IoArrowBackCircle } from "react-icons/io5";
+import { IoPersonAdd } from "react-icons/io5";
 
 import { useNavigate } from 'react-router-dom';
 
@@ -70,7 +71,11 @@ export default function BookRegistration() {
                         <hr />
                         <div className="flex flex-col mt-3 gap-2">
                             <label htmlFor="">Author</label>
-                            <input type="text" placeholder='Griffin' className='border-2 w-2/3 pl-3 py-1 rounded-md' />
+                            <div className='flex gap-3 items-center'>
+                                <input type="text" placeholder='Griffin' className='border-2 w-2/3 pl-3 py-1 rounded-md' />
+                                <IoPersonAdd className='h-6 w-6 cursor-pointer' />
+                            </div>
+
                         </div>
                         <h3 className='text-slate-400 mt-6'>PUBLICATION</h3>
                         <hr />

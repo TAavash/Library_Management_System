@@ -15,7 +15,11 @@ import { MemberDetail } from "./pages/Librarian/MemberDetail";
 import BookRegistration from "./pages/Librarian/BookRegistration";
 import MemberRegistration from "./pages/Librarian/MemberRegistration";
 import LibraryRequestPage from "./pages/Librarian/Patrons/Request/LibraryRequestPage";
-
+import { AllUsers } from "./pages/Librarian/Patrons/Users/AllUsers";
+import { FacultyMembers } from "./pages/Librarian/Patrons/Users/FacultyMembers";
+import { LibraryAssistant } from "./pages/Librarian/Patrons/Users/LibraryAssistant";
+import { Students } from "./pages/Librarian/Patrons/Users/Students";
+import  ProgramCoordinators  from "./pages/Librarian/Patrons/Users/ProgramCoordinators";
 
 const App = () => {
   return (
@@ -26,6 +30,11 @@ const App = () => {
         <Route path="/BookRegistration" element={<BookRegistration />} />
         <Route path="/MemberRegistration" element={<MemberRegistration />} />
         <Route path="/LibraryRequestPage" element={<LibraryRequestPage />} />
+        <Route path="/AllUsers" element={<AllUsers />} />
+        <Route path="/FacultyMembers" element={<FacultyMembers />} />
+        <Route path="/LibraryAssistant" element={<LibraryAssistant />} />
+        <Route path="/Students" element={<Students />} />
+        <Route path="/ProgramCoordinators" element={<ProgramCoordinators />} />
       </Routes>
     </BrowserRouter>
   );

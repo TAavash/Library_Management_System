@@ -48,9 +48,15 @@ export const MemberDetail = () => {
         setSelectedBook(book);
     };
 
+    const [key, setKey] = useState(0);
+
+    React.useEffect(() => {
+        setKey((prevKey) => prevKey + 1);
+    }, [selectedBook]);
+
     return (
         <div className='flex w-full p-3 gap-2'>
-            <div className="w-2/3  flex flex-col">
+            <div className="w-[70%]  flex flex-col">
                 <div className="flex justify-around">
                     <div className=" ">
                         <IoArrowBackCircle className="h-14 w-14 cursor-pointer  "
@@ -75,24 +81,27 @@ export const MemberDetail = () => {
                 </div>
                 <h3 className='mt-14 ml-36'>Books Taken</h3>
 
-                <div class=" ml-36 rounded-lg shadow-md bg-slate-100 p-3"> 
-                    <div class="flex justify-evenly">
-
+                <div class=" ml-36 rounded-lg shadow-md bg-slate-100 p-3">
+                    <div className="flex justify-evenly">
                         {books.map((book, index) => (
                             <div
                                 key={index}
-                                className="bg-white rounded-lg shadow-md w-56 overflow-hidden cursor-pointer"
-                                onClick={() => handleBookClick(book)}
+                                className="relative bg-white rounded-lg shadow-md w-56 overflow-hidden group"
+
                             >
                                 <img src={book.cover} alt={book.title} className="w-full object-cover" />
                                 <div className="p-4">
                                     <h3 className="text-lg font-bold">{book.title}</h3>
                                     <p className="text-sm text-gray-600">{book.author}</p>
                                 </div>
+                                <div className="absolute bottom-0 left-0 w-full h-12 bg-yellow-500 flex items-center justify-center cursor-pointer transform translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
+                                    onClick={() => handleBookClick(book)}>
+                                    <button className="text-white font-bold">View Details</button>
+                                </div>
                             </div>
                         ))}
-
                     </div>
+
                 </div>
                 <h3 className='mt-14 ml-36'>Fine</h3>
                 <div className="flex gap-3 ml-32 mt-2">
@@ -100,11 +109,11 @@ export const MemberDetail = () => {
                     <button className='border rounded-md bg-black text-center text-white h-10 mx-2 w-32 '>Payment</button>
                 </div>
             </div>
-            <div className="w-1/3 flex flex-col justify-center items-center p-3 bg-slate-200">
+            <div className="w-[30%] flex flex-col justify-center items-center p-3 bg-slate-200">
                 <img src={Profile} alt="profile" className='h-52 w-52 rounded-xl p-1 object-cover' />
                 <h5>Add Profile</h5>
                 {selectedBook && (
-                    <div className={`flex flex-col bg-customColor text-white p-2 mt-3 w-full rounded-xl justify-center items-center slide-in`}>
+                    <div key={key} className={`flex flex-col bg-customColor text-white p-2 mt-3 w-full rounded-xl justify-center items-center slide-in`}>
                         <h4 className="text-center">Details</h4>
                         <div className="flex flex-col items-center p-4 text-center">
                             <img src={selectedBook.cover} alt="Book Cover" className="w-[90%] rounded-md" />
