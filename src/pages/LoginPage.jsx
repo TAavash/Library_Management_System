@@ -24,6 +24,9 @@ const LoginPage = () => {
   const handleLibrarianDash = () => {
     navigate(`/librarian-dashboard`);
   };
+  const handleUserDash = () => {
+    navigate(`/users`);
+  };
 
   const handleEmailChange = (e) => {
     const currentEmail = e.target.value;
@@ -91,7 +94,7 @@ const LoginPage = () => {
               </button>
             </div>
           </form>
-          <div className="mt-[5px] text-end md:mb-[20px] text-[14px] underline">
+          <div onClick={handleUserDash} className="mt-[5px] text-end md:mb-[20px] text-[14px] underline cursor-pointer">
             Forgot Password ?
           </div>
         </div>

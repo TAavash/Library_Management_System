@@ -56,13 +56,6 @@ const Dropdown = () => {
               My Profile
             </div>
             <div
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-              id="options-menu-item-1"
-            >
-              About
-            </div>
-            <div
               className="flex justify-between block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-2"

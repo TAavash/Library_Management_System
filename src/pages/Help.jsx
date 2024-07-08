@@ -32,9 +32,42 @@ const Help = () => {
               </div>
               <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-white rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
                 <div className=" flex flex-col gap-[30px] my-2">
-                  <div>
-                    <div>Q1. How are you?</div>
-                    <div>Ans. I am fine.</div>
+                  <div className="gap-3 flex flex-col">
+                    <div className="font-bold">Q1. What is the Library Management System app?</div>
+                    <div>
+                      Ans.The Library Management System app is a digital tool
+                      designed to help libraries manage their collections,
+                      users, and transactions efficiently. It includes features
+                      for cataloging books, tracking loans and returns, managing
+                      user accounts, and generating reports.
+                    </div>
+                    <div className="font-bold">Q2. How do I get started with the app?</div>
+                    <div>
+                      Ans. To get started, download the app from the app store
+                      or access it via your web browser. Create an account, log
+                      in, and follow the setup wizard to configure your
+                      library's settings and add your collection.
+                    </div>
+                    <div className="font-bold">Q3. How do I create a new user account?</div>
+                    <div>
+                      Ans. Go to the "User Management" section in the app, click
+                      on "Add User," and fill in the required information such
+                      as name, email, and user role. Save the details to create
+                      the account.
+                    </div>
+                    <div className="font-bold">Q4. What should I do if I forget my password?</div>
+                    <div>
+                      Ans. Click on the "Forgot Password" link on the login
+                      page, enter your registered email address, and follow the
+                      instructions sent to your email to reset your password.
+                    </div>
+                    <div className="font-bold">Q5. How do I add a new book to the catalog?</div>
+                    <div>
+                      Ans. Navigate to the "Catalog Management" section, click
+                      on "Add Book," and fill in the book's details such as
+                      title, author, ISBN, genre, and publication year. Save the
+                      entry to add the book to the catalog.
+                    </div>
                   </div>
                 </div>
               </div>
