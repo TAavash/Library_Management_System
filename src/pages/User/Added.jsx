@@ -5,7 +5,7 @@ import Sidebar from "./comp/Sidebar";
 const Added = () => {
   return (
     <div>
-        <div className="bg-[#828282] min-h-screen min-w-screen flex">
+        <div className="bg-[#828282] min-h-screen min-w-screen flex pr-[20px]">
           <Sidebar />
           <div className="flex-grow">
             <div className="flex flex-col gap-[20px]">
@@ -15,7 +15,6 @@ const Added = () => {
               </div>
             </div>
           </div>
-          <Sidebar />
         </div>
     </div>
   )

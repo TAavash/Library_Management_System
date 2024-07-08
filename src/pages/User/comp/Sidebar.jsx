@@ -8,7 +8,7 @@ const Sidebar = () => {
 
     const navigate = useNavigate()
   return (
-    <div className='h-screen flex flex-col items-center bg-white rounded-2xl m-5 p-5'>
+    <div className='h-screen w-[250px] flex flex-col items-center bg-white rounded-2xl m-2 p-3'>
       <div><img src='/logo.png' className='w-[200px] mb-8' alt='Logo'/></div>
       <div className='flex flex-col items-start space-y-6'>
         <div className='flex items-center text-2xl space-x-2 cursor-pointer'
@@ -40,7 +40,7 @@ const Sidebar = () => {
         }}
         className='flex items-center text-2xl space-x-2 cursor-pointer'>
           <MdAddTask />
-          <span>Added</span>
+          <span>Reserved</span>
         </div>
         <div
         onClick={()=>{

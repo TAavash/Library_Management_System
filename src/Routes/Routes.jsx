@@ -24,7 +24,7 @@ import UserRoute from "./UserRoute";
 export default function RoutesNav() {
   return (
     <>
-    <UserRoute/>
+      <UserRoute />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
