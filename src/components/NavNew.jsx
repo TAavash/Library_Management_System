@@ -54,34 +54,34 @@ const NavNew = () => {
         <div className="hidden md:flex mx-auto justify-evenly content-stretch">
           <button
             onClick={handleLibraryDash}
-            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-gray-400 text-black"
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:text-red-400 text-black"
           >
             Home
           </button>
           <button
             onClick={handleLibraryBooks}
-            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-gray-400 text-black"
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:text-red-400 text-black"
           >
             Books
           </button>
-          <button onClick={handlePatrons} className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-gray-400 text-black">
+          <button onClick={handlePatrons} className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:text-red-400 text-black">
             Patrons
           </button>
           <button
             onClick={handleMessage}
-            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-gray-400 text-black"
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:text-red-400 text-black"
           >
             Message
           </button>
           <button
             onClick={handleLibrarianFines}
-            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-gray-400 text-black"
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:text-red-400 text-black"
           >
             Fines
           </button>
           <button
             onClick={handleLibrarianOthers}
-            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-gray-400 text-black"
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:text-red-400 text-black"
           >
             Others
           </button>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaBook } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
 import { IoSearch, IoSettingsSharp } from "react-icons/io5";
 import { useLocation, useNavigate } from "react-router-dom";
 import NavNew from "../../../components/NavNew";
@@ -24,36 +25,55 @@ const LibrarianBooksCheckOut = () => {
   };
 
   const [active, setActive] = useState("all");
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  const handleCrossIcon = () => {
+    setSelectedCard(null);
+  };
 
   const location = useLocation();
 
   const handleAllActive = () => {
     setActive("all");
+    setSelectedCard(null);
   };
   const handleBooksActive = () => {
     setActive("books");
+    setSelectedCard(null);
   };
   const handleMemberActive = () => {
     setActive("member");
+    setSelectedCard(null);
   };
   const handleUpcomingDeadlinesActive = () => {
     setActive("upcoming-deadlines");
+    setSelectedCard(null);
   };
 
   console.log(location);
 
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+  };
+
   const renderActiveComponent = () => {
     switch (active) {
       case "books":
-        return <Books />;
+        return <Books onCardClick={handleCardClick} />;
       case "member":
-        return <Member />;
+        return <Member onCardClick={handleCardClick} />;
       case "upcoming-deadlines":
-        return <UpcomingDeadlines />;
+        return <UpcomingDeadlines onCardClick={handleCardClick} />;
       default:
-        return <All />;
+        return <All onCardClick={handleCardClick} />;
     }
   };
+
+  const [key, setKey] = useState(0);
+
+  React.useEffect(() => {
+    setKey((prevKey) => prevKey + 1);
+  }, [selectedCard]);
 
   return (
     <div>
@@ -68,13 +88,13 @@ const LibrarianBooksCheckOut = () => {
           </button>
           <button
             onClick={handleCheckIn}
-            className="w-[150px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md mt-[100px]"
+            className="w-[150px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white shadow-slate-500 shadow-md mt-[100px]"
           >
             Check-In
           </button>
           <button
             onClick={handleCheckOut}
-            className="w-[150px] h-[120px] rounded-2xl bg-[#14273D] text-white shadow-slate-500 shadow-md mt-[100px]"
+            className="w-[150px] h-[120px] rounded-2xl bg-[#14273d] text-white  shadow-slate-500 shadow-md mt-[100px]"
           >
             Check-Out
           </button>
@@ -137,8 +157,22 @@ const LibrarianBooksCheckOut = () => {
                 </button>
               </div>
             </div>
-            <div className="w-full h-full rounded-2xl">
-              {renderActiveComponent()}
+            <div className="flex w-full h-full bg-[#F5F5F5]">
+              <div
+                className={`h-full rounded-2xl ${selectedCard ? "w-2/3" : "w-full"
+                  }`}
+              >
+                {renderActiveComponent()}
+              </div>
+              {selectedCard && (
+                <div key={key} className=" relative w-1/3 flex flex-col bg-[#011222] text-white p-2 mt-3 mx-7 rounded-xl justify-center items-center slide-in">
+                  {selectedCard}
+                  <div className="absolute top-[1%] right-[5%] ">
+                    <RxCross2 className="h-8 w-8 cursor-pointer "
+                      onClick={handleCrossIcon} />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
