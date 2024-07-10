@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { FaBell } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 import { FiSearch } from "react-icons/fi";
@@ -18,27 +18,27 @@ const tableData = [{
   joinDate: "May 20, 2024"
 }];
 
-export default function ProgramCoordinators () {
+export default function ProgramCoordinators() {
 
   const navigate = useNavigate();
 
-    const handleRowClick = (person) => {
-        navigate('/MemberDetail');
-        console.log(person);
-    };
+  const handleRowClick = (person) => {
+    navigate('/MemberDetail');
+    console.log(person);
+  };
 
-    const [searchQuery, setSearchQuery] = useState('');
-    const [filteredData, setFilteredData] = useState(tableData);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredData, setFilteredData] = useState(tableData);
 
-    const handleSearch = (event) => {
-      const query = event.target.value;
-      setSearchQuery(query);
-  
-      const filtered = tableData.filter((person) =>
-        person.fullname.toLowerCase().includes(query.toLowerCase())
-      );
-      setFilteredData(filtered);
-    };
+  const handleSearch = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    const filtered = tableData.filter((person) =>
+      person.fullname.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredData(filtered);
+  };
 
 
   return (
@@ -47,10 +47,10 @@ export default function ProgramCoordinators () {
         <div className="w-full h-full flex justify-evenly p-[10px] gap-[5px]">
           <div className="w-[50%] h-full flex-col">
             <div className="w-full h-[70%] text-start text-3xl">
-              Faculty Members
+              Program Coordinators
             </div>
             <div className="w-full h-[30%] text-start text-[-2xl] text-[#525252]">
-              Manage Faculty Members list.
+              Manage Program Coordinators list.
             </div>
           </div>
           <div className="w-[180px] h-full flex p-[2px] justify-evenly">
