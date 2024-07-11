@@ -1,0 +1,68 @@
+All installations
+
+1. React
+   npx create-react-app FileName
+
+2. Tailwind
+   i. Install (One at a time)
+   npm install -D tailwindcss postcss autoprefixer
+   npx tailwindcss init -p
+
+ii. Configure your template paths
+ii. tailwind.config.js (Ctrl+C , Ctrl+A , Ctrl+V)
+
+/** @type {import('tailwindcss').Config} \*/
+export default {
+content: [
+"./index.html",
+"./src/**/\*.{js,ts,jsx,tsx}",
+],
+theme: {
+extend: {},
+},
+plugins: [],
+}
+
+iii. Add the Tailwind directives to your CSS
+iii. index.css (Ctrl+C , Ctrl+A , Ctrl+V)
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+3. React icons
+   npm install react-icons --save
+
+4. React Bootstrap
+   npm i react-bootstrap
+
+5. React Page-flip
+   npm install react-pageflip
+
+6. Tailwind scrollbar
+   i. Add the package to your project
+
+# npm
+
+npm install --save-dev tailwind-scrollbar
+
+# yarn
+
+yarn add -D tailwind-scrollbar
+
+# pnpm
+
+pnpm add -D tailwind-scrollbar
+
+ii. Add it to the plugins array of your Tailwind config
+module.exports = {
+// ...
+plugins: [
+// ...
+require('tailwind-scrollbar'),
+],
+};
+
+7. Router
+   i. react-router-dom
+   npm i

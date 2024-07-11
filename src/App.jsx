@@ -21,6 +21,7 @@ import { LibraryAssistant } from "./pages/Librarian/Patrons/Users/LibraryAssista
 import { Students } from "./pages/Librarian/Patrons/Users/Students";
 import  ProgramCoordinators  from "./pages/Librarian/Patrons/Users/ProgramCoordinators";
 
+import Routes from "./Routes/Routes";
 const App = () => {
   return (
     <BrowserRouter>
@@ -37,6 +38,9 @@ const App = () => {
         <Route path="/ProgramCoordinators" element={<ProgramCoordinators />} />
       </Routes>
     </BrowserRouter>
+    <div>
+      <Routes />
+    </div>
   );
 };
 

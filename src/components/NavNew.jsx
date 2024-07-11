@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import Pcps from "../assets/pcps_logo.jpg";
 import SearchBar from "../components/Search";
 import Avatar from "../components/Avatar";
+import Dropdown from "../components/Dropdown";
 import { VscBellDot } from "react-icons/vsc";
 import { IoSettingsSharp } from "react-icons/io5";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
+import Hamburger from "./Hamburger";
 // import NavMobile from "./NavMobile";
 
 const NavNew = () => {
@@ -42,7 +44,7 @@ const NavNew = () => {
   const [mobileNaavbarOpen, setMobileNaavbarOpen] = useState(false);
   return (
     <div className="w-screen fixed z-10 bg-white ">
-      <div className="flex justify-between items-center lg:mr-10">
+      <div className="flex justify-between items-center lg:mr-10 ">
         <img
           onClick={handleLibraryDash}
           className="h-9 md:h-14 cursor-pointer"
@@ -85,9 +87,9 @@ const NavNew = () => {
           </button>
         </div>
         <div className="md:hidden" onClick={() => setMobileNaavbarOpen(true)}>
-          <GiHamburgerMenu />
+          <Hamburger />
         </div>
-        <div className=" flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-4">
           <VscBellDot
             onClick={handleNotification}
             className="text-2xl hover:fill-red-600 cursor-pointer"
@@ -123,7 +125,7 @@ const NavNew = () => {
             <SearchBar />
           </div>
           <div className=" cursor-pointer">
-            <Avatar />
+            <Dropdown />
           </div>
         </div>
       </div>
