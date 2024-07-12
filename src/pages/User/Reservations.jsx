@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import logo from "../../assets/pcpslogo.png";
-import bookcover1 from "../../assets/bookCover.jpg";
+import bookcover1 from "../../assets/images.jpeg";
 import { GrFilter } from "react-icons/gr";
 import {
   FaBookDead,
@@ -18,8 +18,7 @@ import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/banner.png";
 import SearchBar from "../../pages/User/comp/SearchBar"
 
-
-const Discover = () => {
+const Reservations = () => {
   const navigate = useNavigate();
 
   const books = [
@@ -153,4 +152,4 @@ const Discover = () => {
   );
 };
 
-export default Discover;
+export default Reservations;

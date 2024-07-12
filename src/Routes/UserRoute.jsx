@@ -1,12 +1,11 @@
 
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Hero from '../pages/User/Hero';
-import Wishlist from '../pages/User/Wishlist';
-import Added from '../pages/User/Added';
+import Reservations from '../pages/User/Reservations';
 import Ebooks from '../pages/User/Ebooks';
 import Discover from '../pages/User/Discover';
 import Userdash from '../pages/User/Userdash';
+import BookDetail from "../pages/User/BookDetail"
 
 export default function UserRoute() {
   return (
@@ -14,9 +13,9 @@ export default function UserRoute() {
               <Routes>
                 <Route path="/user/home" element={<Userdash />} />
                 <Route path="/user/discover" element={<Discover />} />
-                <Route path="/user/added" element={<Added />} />
+                <Route path="/user/reservations" element={<Reservations />} />
                 <Route path="/user/e-books" element={<Ebooks />} />
-                <Route path="/user/wishlist" element={<Wishlist />} />
+                <Route path="/user/book-detail" element={<BookDetail />} />
               </Routes>
             
       

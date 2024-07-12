@@ -48,12 +48,6 @@ export default function RoutesNav() {
         <Route path="/message" element={<Message />} />
         <Route path="/librarian-fines" element={<LibrarianFines />} />
         <Route path="/librarian-others" element={<LibrarianOthers />} />
-        {/* <Route path="/user" element={<User />} />
-        <Route path="/" element={<Hero />} />
-        <Route path="/discover" element={<Discover />} />
-        <Route path="/added" element={<Added />} />
-        <Route path="/e-books" element={<Ebooks />} />
-        <Route path="/wishlist" element={<Wishlist />} /> */}
       </Routes>
     </>
   );
