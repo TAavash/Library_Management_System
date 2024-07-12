@@ -14,7 +14,6 @@ import Message from "../pages/Message";
 import LibrarianFines from "../pages/Librarian/LibrarianFines/LibrarianFines";
 import LibrarianOthers from "../pages/Librarian/LibrarianOthers/LibrarianOthers";
 import Patrons from "../pages/Librarian/LibrarianPatrons/Patrons";
-import User from "../pages/User/User1";
 
 export default function RoutesNav() {
   return (
@@ -36,38 +35,13 @@ export default function RoutesNav() {
           path="/librarian-books-reservation"
           element={<LibrarianBooksResearvation />}
         />
-        <Route
-          path="/help"
-          element={<Help />}
-        />
-        <Route
-          path="/notifications"
-          element={<Notification />}
-        />
-        <Route
-          path="/settings"
-          element={<Settings />}
-        />
-        <Route
-          path="/message"
-          element={<Message />}
-        />
-        <Route
-          path="/librarian-fines"
-          element={<LibrarianFines />}
-        />
-        <Route
-          path="/librarian-others"
-          element={<LibrarianOthers />}
-        />
-        <Route
-          path="/patrons"
-          element={<Patrons />}
-        />
-        <Route
-          path="/users"
-          element={<User />}
-        />
+        <Route path="/help" element={<Help />} />
+        <Route path="/notifications" element={<Notification />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/message" element={<Message />} />
+        <Route path="/librarian-fines" element={<LibrarianFines />} />
+        <Route path="/librarian-others" element={<LibrarianOthers />} />
+        <Route path="/patrons" element={<Patrons />} />
       </Routes>
     </>
   );
