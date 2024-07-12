@@ -8,9 +8,10 @@ import { IoBookSharp } from "react-icons/io5";
 import { MdBookmarkAdded, MdLocalLibrary } from "react-icons/md";
 import { HiDocumentText } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
-import backgroundImage from "../../assets/banner.png";
+import Bannerimage from "../../assets/finaldashbanner.png";
 import SearchBar from "../../pages/User/comp/SearchBar";
 import UserFilpCard from "../../pages/User/comp/UserFlipCard";
+import TailwindCalendar from "../../pages/User/comp/TailwindCalendar.tsx"
 
 function Userdash() {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ function Userdash() {
         </div>
       </header>
 
-      <div
+      {/* <div
         className="p-4 bg-cover bg-center relative"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
@@ -61,7 +62,8 @@ function Userdash() {
             Borrow the beauty, keep the knowledge!
           </p>
         </div>
-      </div>
+      </div> */}
+      <img src={Bannerimage}/>
       <div className="mt-4 flex space-x-4">
         <div
           className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
