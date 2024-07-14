@@ -116,41 +116,41 @@ const LibrarianBooksCheckOut = () => {
               </div>
               <div className="text-[#737373] flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-[50px]">
                 <button
-                  className="h-[40px] hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-[40px] hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                   onClick={handleAllActive}
                 >
                   {active === "all" ? (
-                    <div className="text-red-600">All</div>
+                    <div className="text-white">All</div>
                   ) : (
                     <div>All</div>
                   )}
                 </button>
                 <button
-                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                   onClick={handleMemberActive}
                 >
                   {active === "member" ? (
-                    <div className="text-red-600">Member</div>
+                    <div className="text-white">Member</div>
                   ) : (
                     <div>Member</div>
                   )}
                 </button>
                 <button
-                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                   onClick={handleBooksActive}
                 >
                   {active === "books" ? (
-                    <div className="text-red-600">Books</div>
+                    <div className="text-white">Books</div>
                   ) : (
                     <div>Books</div>
                   )}
                 </button>
                 <button
-                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                   onClick={handleUpcomingDeadlinesActive}
                 >
                   {active === "upcoming-deadlines" ? (
-                    <div className="text-red-600">Upcoming Deadlines</div>
+                    <div className="text-white">Upcoming Deadlines</div>
                   ) : (
                     <div>Upcoming Deadlines</div>
                   )}
