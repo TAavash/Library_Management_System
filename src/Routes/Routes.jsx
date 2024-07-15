@@ -13,8 +13,17 @@ import Settings from "../pages/Settings";
 import Message from "../pages/Message";
 import LibrarianFines from "../pages/Librarian/LibrarianFines/LibrarianFines";
 import LibrarianOthers from "../pages/Librarian/LibrarianOthers/LibrarianOthers";
-import Patrons from "../pages/Librarian/LibrarianPatrons/Patrons";
-import User from "../pages/User/User1";
+import Patrons from "../pages/Librarian/LibrarianDashboard";
+import LibrarianDashboard from "../pages/Librarian/LibrarianDashboard";
+import { MemberDetail } from "../pages/Librarian/MemberDetail";
+import BookRegistration from "../pages/Librarian/BookRegistration";
+import MemberRegistration from "../pages/Librarian/MemberRegistration";
+import LibraryRequestPage from "../pages/Librarian/Patrons/Request/LibraryRequestPage";
+import { AllUsers } from "../pages/Librarian/Patrons/Users/AllUsers";
+import { FacultyMembers } from "../pages/Librarian/Patrons/Users/FacultyMembers";
+import { LibraryAssistant } from "../pages/Librarian/Patrons/Users/LibraryAssistant";
+import { Students } from "../pages/Librarian/Patrons/Users/Students";
+import ProgramCoordinators from "../pages/Librarian/Patrons/Users/ProgramCoordinators";
 
 export default function RoutesNav() {
   return (
@@ -36,38 +45,23 @@ export default function RoutesNav() {
           path="/librarian-books-reservation"
           element={<LibrarianBooksResearvation />}
         />
-        <Route
-          path="/help"
-          element={<Help />}
-        />
-        <Route
-          path="/notifications"
-          element={<Notification />}
-        />
-        <Route
-          path="/settings"
-          element={<Settings />}
-        />
-        <Route
-          path="/message"
-          element={<Message />}
-        />
-        <Route
-          path="/librarian-fines"
-          element={<LibrarianFines />}
-        />
-        <Route
-          path="/librarian-others"
-          element={<LibrarianOthers />}
-        />
-        <Route
-          path="/patrons"
-          element={<Patrons />}
-        />
-        <Route
-          path="/users"
-          element={<User />}
-        />
+        <Route path="/help" element={<Help />} />
+        <Route path="/notifications" element={<Notification />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/message" element={<Message />} />
+        <Route path="/librarian-fines" element={<LibrarianFines />} />
+        <Route path="/librarian-others" element={<LibrarianOthers />} />
+        <Route path="/patrons" element={<LibrarianDashboard />} />
+        <Route path="/LibraryDash" element={<LibrarianDashboard />} />
+        <Route path="/MemberDetail" element={<MemberDetail />} />
+        <Route path="/BookRegistration" element={<BookRegistration />} />
+        <Route path="/MemberRegistration" element={<MemberRegistration />} />
+        <Route path="/LibraryRequestPage" element={<LibraryRequestPage />} />
+        <Route path="/AllUsers" element={<AllUsers />} />
+        <Route path="/FacultyMembers" element={<FacultyMembers />} />
+        <Route path="/LibraryAssistant" element={<LibraryAssistant />} />
+        <Route path="/Students" element={<Students />} />
+        <Route path="/ProgramCoordinators" element={<ProgramCoordinators />} />
       </Routes>
     </>
   );
