@@ -2,7 +2,7 @@ import React from 'react'
 import FlipCard from "../../../../../components/FlipCard";
 import { IoSearch, IoSettingsSharp } from "react-icons/io5";
 
-const ElectronicLocation = () => {
+const ElectronicLocation = ({onCardClick}) => {
   return (
     <div className="w-full h-full ">
       <div className="w-[100%] h-[20%] bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
@@ -35,20 +35,44 @@ const ElectronicLocation = () => {
                 </div>
               </div> 
     <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-yellow-600 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
-    <div className=" grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-      <FlipCard />
-    </div>
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
+          <div onClick={() => onCardClick(<FlipCard />)}>
+            <FlipCard />
+          </div>
+          <div onClick={() => onCardClick(<FlipCard />)}>
+            <FlipCard />
+          </div>
+          <div onClick={() => onCardClick(<FlipCard />)}>
+            <FlipCard />
+          </div>
+          <div onClick={() => onCardClick(<FlipCard />)}>
+            <FlipCard />
+          </div>
+          <div onClick={() => onCardClick(<FlipCard />)}>
+            <FlipCard />
+          </div>
+          <div onClick={() => onCardClick(<FlipCard />)}>
+            <FlipCard />
+          </div>
+          <div onClick={() => onCardClick(<FlipCard />)}>
+            <FlipCard />
+          </div>
+          <div onClick={() => onCardClick(<FlipCard />)}>
+            <FlipCard />
+          </div>
+          <div onClick={() => onCardClick(<FlipCard />)}>
+            <FlipCard />
+          </div>
+          <div onClick={() => onCardClick(<FlipCard />)}>
+            <FlipCard />
+          </div>
+          <div onClick={() => onCardClick(<FlipCard />)}>
+            <FlipCard />
+          </div>
+          <div onClick={() => onCardClick(<FlipCard />)}>
+            <FlipCard />
+          </div>
+        </div>
   </div></div>
   )
 }

@@ -47,7 +47,12 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
+<<<<<<< HEAD
     "tailwindcss": "^3.4.4",
     "tailwind-scrollbar": "^3.1.0"
+=======
+    "tailwind-scrollbar": "^3.1.0",
+    "tailwindcss": "^3.4.4"
+>>>>>>> 357e6701203f925dd1232ba9d0ca1bed22f0833c
   }
 }

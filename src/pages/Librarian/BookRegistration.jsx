@@ -10,7 +10,7 @@ export default function BookRegistration() {
     const navigate = useNavigate();
 
     const handleBackIconClick = () => {
-        navigate('/');
+        navigate('/LibraryDash');
     };
 
     const [authors, setAuthors] = useState([{ id: 1, name: '' }]);
@@ -37,7 +37,7 @@ export default function BookRegistration() {
                             onClick={handleBackIconClick} />
                     </div>
                     <div className="flex flex-col">
-                        <h2>Add Book</h2>
+                        <h2 className='text-3xl font-bold'>Add Book</h2>
                         <p className='text-slate-500'>Book Registration Form</p>
                     </div>
                 </div>

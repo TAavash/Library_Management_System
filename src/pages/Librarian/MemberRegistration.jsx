@@ -8,7 +8,7 @@ export default function MemberRegistration() {
     const navigate = useNavigate();
 
     const handleBackIconClick = () => {
-        navigate('/');
+        navigate('/LibraryDash');
     };
 
     return (
@@ -20,7 +20,7 @@ export default function MemberRegistration() {
                             onClick={handleBackIconClick} />
                     </div>
                     <div className="flex flex-col">
-                        <h2>Create Membership</h2>
+                        <h2 className='text-3xl font-bold'>Create Membership</h2>
                         <p className='text-slate-500'>Registration Form</p>
                     </div>
                 </div>

@@ -39,7 +39,7 @@ export const MemberDetail = () => {
     const navigate = useNavigate();
 
     const handleBackIconClick = () => {
-        navigate('/');
+        navigate('/LibraryDash');
     };
 
     const [selectedBook, setSelectedBook] = useState(null);
@@ -62,7 +62,7 @@ export const MemberDetail = () => {
                         <IoArrowBackCircle className="h-14 w-14 cursor-pointer  "
                             onClick={handleBackIconClick} />
                     </div>
-                    <h2>Sudarshan Bam</h2>
+                    <h2 className='text-3xl font-bold'>Sudarshan Bam</h2>
                 </div>
                 <div className="grid grid-cols-2 gap-4 mt-5 ml-48">
                     <div className="flex flex-col">
@@ -86,7 +86,7 @@ export const MemberDetail = () => {
                         {books.map((book, index) => (
                             <div
                                 key={index}
-                                className="relative bg-white rounded-lg shadow-md w-56 overflow-hidden group"
+                                className="group relative bg-white rounded-lg shadow-md w-56 overflow-hidden group"
 
                             >
                                 <img src={book.cover} alt={book.title} className="w-full object-cover" />
@@ -94,10 +94,15 @@ export const MemberDetail = () => {
                                     <h3 className="text-lg font-bold">{book.title}</h3>
                                     <p className="text-sm text-gray-600">{book.author}</p>
                                 </div>
-                                <div className="absolute bottom-0 left-0 w-full h-12 bg-yellow-500 flex items-center justify-center cursor-pointer transform translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
-                                    onClick={() => handleBookClick(book)}>
+
+                                <div
+                                    className="absolute bottom-0 left-0 w-full h-12 bg-yellow-500 flex items-center justify-center cursor-pointer transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
+                                    onClick={() => handleBookClick(book)}
+                                >
                                     <button className="text-white font-bold">View Details</button>
                                 </div>
+
+
                             </div>
                         ))}
                     </div>

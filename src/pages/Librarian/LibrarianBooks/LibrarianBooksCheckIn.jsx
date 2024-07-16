@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaBook } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
 import { IoSearch, IoSettingsSharp } from "react-icons/io5";
 import { useLocation, useNavigate } from "react-router-dom";
 import NavNew from "../../../components/NavNew";
@@ -24,36 +25,55 @@ const LibrarianBooksCheckIn = () => {
   };
 
   const [active, setActive] = useState("all");
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  const handleCrossIcon = () => {
+    setSelectedCard(null);
+  };
 
   const location = useLocation();
 
   const handleAllActive = () => {
     setActive("all");
+    setSelectedCard(null);
   };
   const handleBooksActive = () => {
     setActive("books");
+    setSelectedCard(null);
   };
   const handleMemberActive = () => {
     setActive("member");
+    setSelectedCard(null);
   };
   const handleUpcomingDatesActive = () => {
     setActive("upcoming-dates");
+    setSelectedCard(null);
   };
 
   console.log(location);
 
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+  };
+
   const renderActiveComponent = () => {
     switch (active) {
       case "books":
-        return <Books />;
+        return <Books onCardClick={handleCardClick} />;
       case "member":
-        return <Member />;
+        return <Member onCardClick={handleCardClick} />;
       case "upcoming-dates":
-        return <UpcomingDates />;
+        return <UpcomingDates onCardClick={handleCardClick} />;
       default:
-        return <All />;
+        return <All onCardClick={handleCardClick} />;
     }
   };
+
+  const [key, setKey] = useState(0);
+
+  React.useEffect(() => {
+    setKey((prevKey) => prevKey + 1);
+  }, [selectedCard]);
 
   return (
     <div>
@@ -96,49 +116,63 @@ const LibrarianBooksCheckIn = () => {
               </div>
               <div className="text-[#737373] flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-[50px]">
                 <button
-                  className="h-[40px] hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-[40px] hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                   onClick={handleAllActive}
                 >
                   {active === "all" ? (
-                    <div className="text-red-600">All</div>
+                    <div className="text-white">All</div>
                   ) : (
                     <div>All</div>
                   )}
                 </button>
                 <button
-                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                   onClick={handleMemberActive}
                 >
                   {active === "member" ? (
-                    <div className="text-red-600">Member</div>
+                    <div className="text-white">Member</div>
                   ) : (
                     <div>Member</div>
                   )}
                 </button>
                 <button
-                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                   onClick={handleBooksActive}
                 >
                   {active === "books" ? (
-                    <div className="text-red-600">Books</div>
+                    <div className="text-white">Books</div>
                   ) : (
                     <div>Books</div>
                   )}
                 </button>
                 <button
-                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                   onClick={handleUpcomingDatesActive}
                 >
                   {active === "upcoming-dates" ? (
-                    <div className="text-red-600">Upcoming Dates</div>
+                    <div className="text-white">Upcoming Dates</div>
                   ) : (
                     <div>Upcoming Dates</div>
                   )}
                 </button>
               </div>
             </div>
-            <div className="w-full h-full rounded-2xl">
-              {renderActiveComponent()}
+            <div className="flex w-full h-full bg-[#F5F5F5]">
+              <div
+                className={`h-full rounded-2xl ${selectedCard ? "w-2/3" : "w-full"
+                  }`}
+              >
+                {renderActiveComponent()}
+              </div>
+              {selectedCard && (
+                <div key={key} className=" relative w-1/3 flex flex-col bg-[#011222] text-white p-2 mt-3 mx-7 rounded-xl justify-center items-center slide-in">
+                  {selectedCard}
+                  <div className="absolute top-[1%] right-[5%] ">
+                    <RxCross2 className="h-8 w-8 cursor-pointer "
+                      onClick={handleCrossIcon} />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

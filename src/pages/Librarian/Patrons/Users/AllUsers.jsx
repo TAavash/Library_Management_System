@@ -134,14 +134,14 @@ const AllUsers = () => {
         <div className=" overflow-scroll ">
           <table className='w-full border border-collapse bg-white'>
             <tr>
-              <th className=' p-3 '>ID</th>
-              <th className=' p-3'>Name</th>
-              <th className=' p-3'>Status</th>
-              <th className=' p-3'>Joined Date</th>
+              <th className=' py-3 px-5 text-start'>ID</th>
+              <th className=' p-3 text-start'>Name</th>
+              <th className=' p-3 text-start'>Status</th>
+              <th className=' p-3 text-start'>Joined Date</th>
             </tr>
             {filteredData.map((person) => (
-              <tr key={person.id} onClick={() => handleRowClick(person)} className="cursor-pointer hover:bg-gray-100">
-                <td className='p-3'>{person.id}</td>
+              <tr key={person.id} onClick={() => handleRowClick(person)} className="cursor-pointer hover:bg-gray-200">
+                <td className='py-3 px-5'>{person.id}</td>
                 <td className='p-3'>{person.fullname}</td>
                 <td className='p-3'>{person.status}</td>
                 <td className='p-3'>{person.joinDate}</td>
