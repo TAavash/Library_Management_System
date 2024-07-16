@@ -54,9 +54,7 @@ const Message = () => {
       messsage: "I am having trouble with changing password.",
       messageDate: "May 20, 2024",
     },
-<<<<<<< HEAD
     
-=======
     {
       id: 3542342,
       email: "sudarshan@gmail.com",
@@ -112,7 +110,6 @@ const Message = () => {
       messageDate: "May 20, 2024",
     },
 
->>>>>>> 357e6701203f925dd1232ba9d0ca1bed22f0833c
   ];
   return (
     <div>
@@ -165,21 +162,12 @@ const Message = () => {
               </div>
               <div className="flex-col h-[80%] gap-[30px] bg-white rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
                 <div>
-<<<<<<< HEAD
-                  <table className="h-full w-full border border-collapse bg-white">
-                    <tr className=" sticky">
-                      <th className="w-24 p-2">ID</th>
-                      <th className="w-24 p-2">Email</th>
-                      <th className="w-24 p-2">Message</th>
-                      <th className="w-32 p-2">Messaged Date</th>
-=======
                   <table className="h-full w-full bg-white">
                     <tr className=" sticky ">
                       <th className="p-3 text-start">ID</th>
                       <th className="p-3 text-start ">Email</th>
                       <th className="p-3 text-start">Message</th>
                       <th className=" p-3 text-start">Messaged Date</th>
->>>>>>> 357e6701203f925dd1232ba9d0ca1bed22f0833c
                     </tr>
                     {tableData.map((person) => {
                       return (

@@ -13,21 +13,15 @@
 .slide-in {
   animation: slideInFromRight 0.5s ease-out forwards;
 }
-<<<<<<< HEAD
-.group:hover .absolute {
-=======
+/* .group:hover .absolute { */
 
 /* .group:hover .absolute {
->>>>>>> 357e6701203f925dd1232ba9d0ca1bed22f0833c
   transform: translateX(0);
 }
 .absolute {
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
-<<<<<<< HEAD
 }
-=======
 } */
 
 
->>>>>>> 357e6701203f925dd1232ba9d0ca1bed22f0833c

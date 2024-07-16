@@ -6,6 +6,7 @@ import NavNew from "../components/NavNew";
 const Settings = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
+    localStorage.removeItem("token");
     navigate(`/`);
   };
   const handleSignin = () => {
@@ -50,8 +51,16 @@ const Settings = () => {
               </div>
               <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-white rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
                 <div className=" flex gap-[30px] my-2">
-                  <button onClick={handleSignin} className="h-fit w-[100px] rounded-md text-white bg-green-600 hover:bg-slate-800 active:bg-black text-2xl p-[2px] px-[3px]">Signin</button>
-                  <button onClick={handleLogout} className="h-fit w-[100px] rounded-md text-white bg-red-600 hover:bg-slate-800 active:bg-black text-2xl p-[2px] px-[3px]">
+                  <button
+                    onClick={handleSignin}
+                    className="h-fit w-[100px] rounded-md text-white bg-green-600 hover:bg-slate-800 active:bg-black text-2xl p-[2px] px-[3px]"
+                  >
+                    Signin
+                  </button>
+                  <button
+                    onClick={handleLogout}
+                    className="h-fit w-[100px] rounded-md text-white bg-red-600 hover:bg-slate-800 active:bg-black text-2xl p-[2px] px-[3px]"
+                  >
                     Logout
                   </button>
                 </div>

@@ -13,21 +13,17 @@ import Settings from "../pages/Settings";
 import Message from "../pages/Message";
 import LibrarianFines from "../pages/Librarian/LibrarianFines/LibrarianFines";
 import LibrarianOthers from "../pages/Librarian/LibrarianOthers/LibrarianOthers";
-<<<<<<< HEAD
-import Patrons from "../pages/Librarian/LibrarianPatrons/Patrons";
-=======
 import Patrons from "../pages/Librarian/LibrarianDashboard";
 import LibrarianDashboard from "../pages/Librarian/LibrarianDashboard";
 import { MemberDetail } from "../pages/Librarian/MemberDetail";
 import BookRegistration from "../pages/Librarian/BookRegistration";
 import MemberRegistration from "../pages/Librarian/MemberRegistration";
 import LibraryRequestPage from "../pages/Librarian/Patrons/Request/LibraryRequestPage";
-import { AllUsers } from "../pages/Librarian/Patrons/Users/AllUsers";
+import AllUsers from "../pages/Librarian/Patrons/Users/AllUsers";
 import { FacultyMembers } from "../pages/Librarian/Patrons/Users/FacultyMembers";
 import { LibraryAssistant } from "../pages/Librarian/Patrons/Users/LibraryAssistant";
 import { Students } from "../pages/Librarian/Patrons/Users/Students";
 import ProgramCoordinators from "../pages/Librarian/Patrons/Users/ProgramCoordinators";
->>>>>>> 357e6701203f925dd1232ba9d0ca1bed22f0833c
 
 export default function RoutesNav() {
   return (
@@ -55,9 +51,7 @@ export default function RoutesNav() {
         <Route path="/message" element={<Message />} />
         <Route path="/librarian-fines" element={<LibrarianFines />} />
         <Route path="/librarian-others" element={<LibrarianOthers />} />
-<<<<<<< HEAD
         <Route path="/patrons" element={<Patrons />} />
-=======
         <Route path="/patrons" element={<LibrarianDashboard />} />
         <Route path="/LibraryDash" element={<LibrarianDashboard />} />
         <Route path="/MemberDetail" element={<MemberDetail />} />
@@ -69,7 +63,6 @@ export default function RoutesNav() {
         <Route path="/LibraryAssistant" element={<LibraryAssistant />} />
         <Route path="/Students" element={<Students />} />
         <Route path="/ProgramCoordinators" element={<ProgramCoordinators />} />
->>>>>>> 357e6701203f925dd1232ba9d0ca1bed22f0833c
       </Routes>
     </>
   );
