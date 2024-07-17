@@ -24,6 +24,7 @@ import { FacultyMembers } from "../pages/Librarian/Patrons/Users/FacultyMembers"
 import { LibraryAssistant } from "../pages/Librarian/Patrons/Users/LibraryAssistant";
 import { Students } from "../pages/Librarian/Patrons/Users/Students";
 import ProgramCoordinators from "../pages/Librarian/Patrons/Users/ProgramCoordinators";
+import Membership from "../pages/Librarian/Membership";
 
 export default function RoutesNav() {
   return (
@@ -62,6 +63,7 @@ export default function RoutesNav() {
         <Route path="/LibraryAssistant" element={<LibraryAssistant />} />
         <Route path="/Students" element={<Students />} />
         <Route path="/ProgramCoordinators" element={<ProgramCoordinators />} />
+        <Route path="/MembershipPage" element={<Membership />} />
       </Routes>
     </>
   );

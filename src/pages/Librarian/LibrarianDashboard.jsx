@@ -20,10 +20,14 @@ export default function LibrarianDashboard() {
     navigate('/BookRegistration');
   };
 
-  
+
 
   const handleRequestClick = () => {
     navigate('/LibraryRequestPage')
+  };
+
+  const handleMembershipClick = () => {
+    navigate('/MembershipPage')
   };
 
   const [active, setActive] = useState("allusers");
@@ -63,7 +67,7 @@ export default function LibrarianDashboard() {
 
   console.log(location);
 
-  
+
   return (
     <div>
       <NavNew />
@@ -77,7 +81,8 @@ export default function LibrarianDashboard() {
             onClick={handleAddIconClick}>
             Add Member
           </button>
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]">
+          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
+            onClick={handleMembershipClick}>
             Membership
           </button>
           <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
@@ -89,7 +94,7 @@ export default function LibrarianDashboard() {
           <div className="flex h-[800px] w-[100%] my-[100px] rounded-2xl bg-white shadow-slate-500 shadow-md ">
             <div className="h-[800px] w-[300px] rounded-l-2xl bg-[#14273D]">
               <div className="flex flex-col gap-[10px] justify-center items-center h-[20%] p-[20px] border-b-4 border-[#A3A3A3]">
-                <FaUser  className=" fill-[#f2e9e9]  text-5xl" />
+                <FaUser className=" fill-[#f2e9e9]  text-5xl" />
                 <div className="text-white flex-col justify-center text-center text-3xl">
                   Users
                 </div>

@@ -93,7 +93,7 @@ export default function MemberRegistration() {
                                 <option value="">Program Coordinator</option>
                             </select>
                         </div>
-                        <button type="submit" className='border rounded-xl bg-black text-white mt-6 text-center h-10 w-1/2'>
+                        <button type="submit" className='border rounded-xl bg-black text-white mt-6 text-center h-10 w-2/3'>
 
                             Submit
                         </button>
