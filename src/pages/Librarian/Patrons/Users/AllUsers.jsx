@@ -68,7 +68,7 @@ const tableData = [{
 }];
 
 
-export const AllUsers = () => {
+const AllUsers = () => {
 
   const navigate = useNavigate();
 
@@ -154,3 +154,5 @@ export const AllUsers = () => {
     </div>
   )
 }
+
+export default AllUsers

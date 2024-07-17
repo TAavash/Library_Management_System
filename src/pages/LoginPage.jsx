@@ -7,6 +7,7 @@ import RegImg from "../assets/library.jpg";
 
 const LoginPage = () => {
   const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   const navigate = useNavigate();
   const handleRegister = () => {
     navigate(`/register`);
@@ -24,14 +25,29 @@ const LoginPage = () => {
   const handleLibrarianDash = () => {
     navigate(`/librarian-dashboard`);
   };
-  const handleUserDash = () => {
-    navigate(`/users`);
-  };
 
   const handleEmailChange = (e) => {
     const currentEmail = e.target.value;
     setEmail(currentEmail);
-    setIsValidEmail(validateEmail(currentEmail));
+    // setIsValidEmail(validateEmail(currentEmail));
+  };
+
+  const handleLogin = async () => {
+    const response = await fetch("http://127.0.0.1:8000/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: email, password: password }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      localStorage.setItem("token", data.token);
+      navigate(`/librarian-dashboard`);
+    } else {
+      navigate(`/`);
+    }
   };
 
   return (
@@ -79,6 +95,9 @@ const LoginPage = () => {
                   className={`peer min-w-[200px] md:min-w-[300px] rounded-[10px] h-[50px] pl-[50px] md:pl-[70px] ${
                     !isValidEmail ? "-mt-[10px]" : ""
                   }`}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                   placeholder="Password"
                 />
                 <div className="absolute top-1/2 text-xl md:text-2xl transform -translate-y-1/2 ml-[10px] text-gray-500">
@@ -86,15 +105,15 @@ const LoginPage = () => {
                 </div>
               </div>
 
-              <button
-                onClick={handleLibrarianDash}
+              <div
+                onClick={handleLogin}
                 className="w-full mx-auto bg-black text-white py-[6px] -mt-[4px]"
               >
                 Sign In
-              </button>
+              </div>
             </div>
           </form>
-          <div onClick={handleUserDash} className="mt-[5px] text-end md:mb-[20px] text-[14px] underline cursor-pointer">
+          <div className="mt-[5px] text-end md:mb-[20px] text-[14px] underline cursor-pointer">
             Forgot Password ?
           </div>
         </div>

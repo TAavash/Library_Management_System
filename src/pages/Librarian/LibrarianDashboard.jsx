@@ -1,29 +1,31 @@
 import React, { useState } from "react";
 import { FaUser } from "react-icons/fa6";
-import NavNew from '../../components/NavNew';
+import NavNew from "../../components/NavNew";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AllUsers } from "./Patrons/Users/AllUsers";
+import  AllUsers  from "./Patrons/Users/AllUsers";
 import { FacultyMembers } from "./Patrons/Users/FacultyMembers";
 import { LibraryAssistant } from "./Patrons/Users/LibraryAssistant";
 import ProgramCoordinators from "./Patrons/Users/ProgramCoordinators";
 import { Students } from "./Patrons/Users/Students";
 
 export default function LibrarianDashboard() {
-
   const navigate = useNavigate();
 
   const handleAddIconClick = () => {
-    navigate('/MemberRegistration');
+    navigate("/MemberRegistration");
   };
 
   const handleAddBookClick = () => {
-    navigate('/BookRegistration');
+    navigate("/BookRegistration");
   };
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ba1dea2cec843eb60d77b08e293f6ad0a7c9c8f7
   const handleRequestClick = () => {
-    navigate('/LibraryRequestPage')
+    navigate("/LibraryRequestPage");
   };
 
   const handleMembershipClick = () => {
@@ -67,26 +69,35 @@ export default function LibrarianDashboard() {
 
   console.log(location);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ba1dea2cec843eb60d77b08e293f6ad0a7c9c8f7
   return (
     <div>
       <NavNew />
       <div className="min-h-screen h-auto bg-gray-200 py-[10px]">
         <div className="flex justify-evenly gap-[20px] mx-[3%]">
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
-            onClick={handleAddBookClick}>
+          <button
+            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
+            onClick={handleAddBookClick}
+          >
             Users
           </button>
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
-            onClick={handleAddIconClick}>
+          <button
+            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
+            onClick={handleAddIconClick}
+          >
             Add Member
           </button>
           <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
             onClick={handleMembershipClick}>
             Membership
           </button>
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
-            onClick={handleRequestClick}>
+          <button
+            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
+            onClick={handleRequestClick}
+          >
             Request
           </button>
         </div>
@@ -100,59 +111,150 @@ export default function LibrarianDashboard() {
                 </div>
               </div>
               <div className="text-[#737373] flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-[50px]">
-                <button className="h-auto hover:text-white  rounded-xl text-2xl p-[2px] px-[3px]"
-                  onClick={handleAllActive}>
+                <button
+                  className="h-auto hover:text-white  rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleAllActive}
+                >
                   {active === "allusers" ? (
                     <div className="text-white">All</div>
                   ) : (
                     <div>All</div>
                   )}
                 </button>
-                <button className="h-auto hover:text-white  rounded-xl text-2xl p-[2px] px-[3px]"
-                  onClick={handleStudentActive}>
+                <button
+                  className="h-auto hover:text-white  rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleStudentActive}
+                >
                   {active === "students" ? (
                     <div className="text-white">Students</div>
                   ) : (
                     <div>Students</div>
                   )}
                 </button>
-                <button className="h-auto hover:text-white  rounded-xl text-2xl p-[2px] px-[3px]"
-                  onClick={handleFacultyActive}>
+                <button
+                  className="h-auto hover:text-white  rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleFacultyActive}
+                >
                   {active === "facultymembers" ? (
                     <div className="text-white">Faculty Members</div>
                   ) : (
                     <div>Faculty Members</div>
                   )}
-
                 </button>
-                <button className="h-auto hover:text-white  rounded-xl text-2xl p-[2px] px-[3px]"
-                  onClick={handleCoordinatorActive}>
+                <button
+                  className="h-auto hover:text-white  rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleCoordinatorActive}
+                >
                   {active === "programcoordinators" ? (
                     <div className="text-white">Program Coordinators</div>
                   ) : (
                     <div>Program Coordinators</div>
                   )}
-
                 </button>
-                <button className="h-auto hover:text-white  rounded-xl text-2xl p-[2px] px-[3px]"
-                  onClick={handleAssistantActive}>
+                <button
+                  className="h-auto hover:text-white  rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleAssistantActive}
+                >
                   {active === "libraryassistant" ? (
                     <div className="text-white">Library Assistants</div>
                   ) : (
                     <div>Library Assistants</div>
                   )}
-
                 </button>
               </div>
             </div>
             <div className="w-full h-full rounded-2xl">
               {renderActiveComponent()}
             </div>
-
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
+// import React from 'react'
+// import LibrarianHeader from '../../components/librarianHeader'
+// import Navbar from '../../components/Navbar'
+
+// const LibrarianDashboard = () => {
+
+//   const tableData = [{
+//     id: 3542342,
+//     fullname: "sudarshan",
+//     status: "active",
+//     joinDate: "May 20, 2024"
+//   }, {
+//     id: 3542342,
+//     fullname: "sudarshan",
+//     status: "active",
+//     joinDate: "May 20, 2024"
+//   }, {
+//     id: 3542342,
+//     fullname: "sudarshan",
+//     status: "active",
+//     joinDate: "May 20, 2024"
+//   }, {
+//     id: 3542342,
+//     fullname: "sudarshan",
+//     status: "active",
+//     joinDate: "May 20, 2024"
+//   }, {
+//     id: 3542342,
+//     fullname: "sudarshan",
+//     status: "active",
+//     joinDate: "May 20, 2024"
+//   }, {
+//     id: 3542342,
+//     fullname: "sudarshan",
+//     status: "active",
+//     joinDate: "May 20, 2024"
+//   }]
+//   return (
+//     <div className='bg-gray-200 flex flex-col gap-10 w-full p-2'>
+//       <LibrarianHeader />
+
+//       <Navbar />
+
+//       <div className="flex justify-evenly ">
+//         <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 active:bg-black shadow-slate-500 shadow-md mt-[100px]">
+//           All Books
+//         </button>
+//         <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]">
+//           Check-In
+//         </button>
+//         <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]">
+//           Check-Out
+//         </button>
+//         <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]">
+//           Reservations
+//         </button>
+//       </div>
+
+//       <div className='mx-[170px]'>
+//         <table className='border border-collapse bg-white'>
+//           <tr className=''>
+//             <th className='w-24 p-2'>ID</th>
+//             <th className='w-24 p-2'>Name</th>
+//             <th className='w-24 p-2'>Status</th>
+//             <th className='w-32 p-2'>Joined Date</th>
+//           </tr>
+//           {tableData.map((person) => {
+//             return (
+//               <tr key={person.id}>
+//                 <td className='p-3'>{person.id}</td>
+//                 <td className='p-3'>{person.fullname}</td>
+//                 <td className='p-3'>{person.status}</td>
+//                 <td className='p-3'>{person.joinDate}</td>
+//               </tr>)
+//           })}
+
+//         </table>
+//       </div>
+
+//     </div>
+
+//   )
+// }
+
+// export default LibrarianDashboard

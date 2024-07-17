@@ -19,7 +19,7 @@ import { MemberDetail } from "../pages/Librarian/MemberDetail";
 import BookRegistration from "../pages/Librarian/BookRegistration";
 import MemberRegistration from "../pages/Librarian/MemberRegistration";
 import LibraryRequestPage from "../pages/Librarian/Patrons/Request/LibraryRequestPage";
-import { AllUsers } from "../pages/Librarian/Patrons/Users/AllUsers";
+import AllUsers from "../pages/Librarian/Patrons/Users/AllUsers";
 import { FacultyMembers } from "../pages/Librarian/Patrons/Users/FacultyMembers";
 import { LibraryAssistant } from "../pages/Librarian/Patrons/Users/LibraryAssistant";
 import { Students } from "../pages/Librarian/Patrons/Users/Students";
@@ -52,6 +52,7 @@ export default function RoutesNav() {
         <Route path="/message" element={<Message />} />
         <Route path="/librarian-fines" element={<LibrarianFines />} />
         <Route path="/librarian-others" element={<LibrarianOthers />} />
+        <Route path="/patrons" element={<Patrons />} />
         <Route path="/patrons" element={<LibrarianDashboard />} />
         <Route path="/LibraryDash" element={<LibrarianDashboard />} />
         <Route path="/MemberDetail" element={<MemberDetail />} />
