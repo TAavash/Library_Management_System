@@ -19,11 +19,6 @@ export default function LibrarianDashboard() {
     navigate("/BookRegistration");
   };
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> ba1dea2cec843eb60d77b08e293f6ad0a7c9c8f7
   const handleRequestClick = () => {
     navigate("/LibraryRequestPage");
   };
@@ -69,10 +64,6 @@ export default function LibrarianDashboard() {
 
   console.log(location);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> ba1dea2cec843eb60d77b08e293f6ad0a7c9c8f7
   return (
     <div>
       <NavNew />
