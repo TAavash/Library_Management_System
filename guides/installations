@@ -66,3 +66,7 @@ require('tailwind-scrollbar'),
 7. Router
    i. react-router-dom
    npm i
+
+8. Toastcontainer
+
+npm install react-toastify
