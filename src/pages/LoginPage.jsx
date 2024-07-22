@@ -43,7 +43,9 @@ const LoginPage = () => {
           navigate(`/librarian-dashboard`);
         }, 2000); // Delay navigation to show success message
       } else {
-        toast.error(data.message || "Login failed. Please check your credentials.");
+        toast.error(
+          data.message || "Login failed. Please check your credentials."
+        );
       }
     } catch (error) {
       setIsLoading(false);
