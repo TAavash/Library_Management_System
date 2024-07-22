@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import Pcps from "../assets/pcps_logo.jpg";
 import SearchBar from "../components/Search";
-import Avatar from "../components/Avatar";
-import Dropdown from "../components/Dropdown";
+import Avatar from "./Avatar";
 import { VscBellDot } from "react-icons/vsc";
 import { IoSettingsSharp } from "react-icons/io5";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
 import Hamburger from "./Hamburger";
-// import NavMobile from "./NavMobile";
 
 const NavNew = () => {
   const navigate = useNavigate();
@@ -125,7 +122,7 @@ const NavNew = () => {
             <SearchBar />
           </div>
           <div className=" cursor-pointer">
-            <Dropdown />
+            <Avatar />
           </div>
         </div>
       </div>

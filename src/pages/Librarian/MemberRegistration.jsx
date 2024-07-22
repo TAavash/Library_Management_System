@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Profile from "../../assets/gojo.jpg"; // Default profile image
+import Profile from "../../assets/User.jpg"; // Default profile image
 import { IoArrowBackCircle } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -40,10 +40,32 @@ export default function MemberRegistration() {
     }
   };
 
+  const validateFields = () => {
+    const requiredFields = [
+      "username",
+      "password",
+      "first_name",
+      "dob",
+      "gender",
+      "address",
+      "email",
+      "mobile",
+    ];
+
+    for (const field of requiredFields) {
+      if (!profile[field]) {
+        toast.error(`Please fill in the ${field.replace('_', ' ')} field.`);
+        return false;
+      }
+    }
+
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // if (!validateFields()) return; // Only proceed if validation passes
+    if (!validateFields()) return;
 
     try {
       const response = await fetch("http://127.0.0.1:8000/api/member/", {
@@ -51,26 +73,14 @@ export default function MemberRegistration() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          username: profile.username,
-          password: profile.password,
-          first_name: profile.first_name,
-          last_name: profile.last_name,
-          dob: profile.dob,
-          gender: profile.gender,
-          address: profile.address,
-          email: profile.email,
-          mobile: profile.mobile,
-        }),
+        body: JSON.stringify(profile),
       });
       const data = await response.json();
       if (response.ok) {
         toast.success("Register successful!");
         setTimeout(() => navigate(`/LibraryRequestPage`), 2000); // Redirect after 2 seconds
       } else {
-        toast.error(
-          data.message || "Register failed. Please check your credentials."
-        );
+        toast.error(data.message || "Register failed. Please check your credentials.");
         console.log(data.message);
       }
     } catch (error) {
@@ -229,9 +239,10 @@ export default function MemberRegistration() {
             onChange={handleImageUpload}
             className="mt-2"
           />
-          <h5 className="cursor-pointer mt-2">Add Profile</h5>
+          <h5 className="cursor-pointer mt-2">Upload Profile</h5>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
