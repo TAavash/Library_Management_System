@@ -54,7 +54,7 @@ export default function MemberRegistration() {
 
     for (const field of requiredFields) {
       if (!profile[field]) {
-        toast.error(`Please fill in the ${field.replace('_', ' ')} field.`);
+        toast.error(`Please fill in the ${field.replace("_", " ")} field.`);
         return false;
       }
     }
@@ -80,7 +80,9 @@ export default function MemberRegistration() {
         toast.success("Register successful!");
         setTimeout(() => navigate(`/LibraryRequestPage`), 2000); // Redirect after 2 seconds
       } else {
-        toast.error(data.message || "Register failed. Please check your credentials.");
+        toast.error(
+          data.message || "Register failed. Please check your credentials."
+        );
         console.log(data.message);
       }
     } catch (error) {

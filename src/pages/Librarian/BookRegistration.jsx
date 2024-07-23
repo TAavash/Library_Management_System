@@ -9,9 +9,23 @@ export default function BookRegistration() {
 
     const navigate = useNavigate();
 
+      const [bookCover, setBookCover] = useState(BookCover);
+    
+
     const handleBackIconClick = () => {
-        navigate('/LibraryDash');
+        navigate('/librarian-books');
     };
+
+    const handleImageUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            setBookCover(e.target.result);
+          };
+          reader.readAsDataURL(file);
+        }
+      };
 
     const [authors, setAuthors] = useState([{ id: 1, name: '' }]);
 
@@ -170,15 +184,22 @@ export default function BookRegistration() {
 
 
             </div>
-            <div className=" relative w-1/3 flex flex-col items-center p-3 mt-10">
-                <div className='fixed text-center'>
-
-                    <img src={BookCover} alt="profile" className=' w-52 rounded-xl p-1 object-cover' />
-                    <h5 className='cursor-pointer mt-2'>Add Cover</h5>
-
-                </div>
-
-            </div>
+            <div className="relative w-1/3 flex flex-col items-center p-3 mt-10">
+        <div className="fixed text-center">
+          <img
+            src={bookCover}
+            alt="profile"
+            className="w-52 h-52 rounded-xl p-1 object-cover"
+          />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="mt-2"
+          />
+          <h5 className="cursor-pointer mt-2">Upload Profile</h5>
+        </div>
+      </div>
 
         </div>
     )

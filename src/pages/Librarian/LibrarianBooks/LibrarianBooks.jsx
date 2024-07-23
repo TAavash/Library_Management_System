@@ -24,6 +24,9 @@ const LibrarianBooks = () => {
   const handleReservations = () => {
     navigate(`/librarian-books-reservation`);
   };
+  const handleAddBooks = () => {
+    navigate(`/BookRegistration`);
+  };
 
   const [active, setActive] = useState("all");
   const [selectedCard, setSelectedCard] = useState(null);
@@ -36,6 +39,10 @@ const LibrarianBooks = () => {
 
   const handleAllActive = () => {
     setActive("all");
+    setSelectedCard(null);
+  };
+  const handleAddBookActive = () => {
+    setActive("add");
     setSelectedCard(null);
   };
   const handleStockActive = () => {
@@ -137,6 +144,16 @@ const LibrarianBooks = () => {
                     <div className="text-white">All</div>
                   ) : (
                     <div>All</div>
+                  )}
+                </button>
+                <button
+                  className="h-[40px] hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  onClick={handleAddBooks}
+                >
+                  {active === "add" ? (
+                    <div className="text-white">Add Books</div>
+                  ) : (
+                    <div>Add Books</div>
                   )}
                 </button>
                 <button
