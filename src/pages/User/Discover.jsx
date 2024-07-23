@@ -16,8 +16,9 @@ import { MdBookmarkAdded, MdLocalLibrary } from "react-icons/md";
 import { HiDocumentText } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import Bannerimage from "../../assets/finaldashbanner.png";
-import SearchBar from "../../pages/User/comp/SearchBar"
-
+import SearchBar from "../../pages/User/comp/SearchBar";
+import UserFilpCard from "../../pages/User/comp/UserFlipCard";
+import Usernav from "../User/comp/Usernav";
 
 const Discover = () => {
   const navigate = useNavigate();
@@ -50,13 +51,12 @@ const Discover = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      <header className="flex justify-between items-center p-4 bg-white shadow">
-        <div className="flex items-center">
-          <img src={logo} alt="PCPS Logo" className="w-25 h-12 mr-4" />
-        </div>
+    <div>
+      <header className="fixed w-full z-50">
+        <Usernav />
       </header>
-      {/* <div
+      <main className="pt-[100px]">
+        {/* <div
         className="p-4 bg-cover bg-center relative"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
@@ -68,52 +68,49 @@ const Discover = () => {
           </p>
         </div>
       </div> */}
-      <img src={Bannerimage}/>
-      <div className="mt-4 flex space-x-4">
-        <div
-          className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
-          onClick={() => navigate("/user/home")}
-        >
-          <MdLocalLibrary className="text-4xl mx-auto mb-2" />
-          <p>Dashboard</p>
+        <img src={Bannerimage} />
+        <div className="mt-4 flex space-x-4">
+          <div
+            className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
+            onClick={() => navigate("/user/home")}
+          >
+            <MdLocalLibrary className="text-4xl mx-auto mb-2" />
+            <p>Dashboard</p>
+          </div>
+          <div
+            className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
+            onClick={() => navigate("/user/discover")}
+          >
+            <IoBookSharp className="text-4xl mx-auto mb-2" />
+            <p>Discover</p>
+          </div>
+          <div
+            className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
+            onClick={() => navigate("/user/reservations")}
+          >
+            <MdBookmarkAdded className="text-4xl mx-auto mb-2" />
+            <p>Reservation</p>
+          </div>
+          <div
+            className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
+            onClick={() => navigate("/user/e-books")}
+          >
+            <HiDocumentText className="text-4xl mx-auto mb-2" />
+            <p>E-books</p>
+          </div>
         </div>
-        <div
-          className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
-          onClick={() => navigate("/user/discover")}
-        >
-          <IoBookSharp className="text-4xl mx-auto mb-2" />
-          <p>Discover</p>
-        </div>
-        <div
-          className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
-          onClick={() => navigate("/user/reservations")}
-        >
-          <MdBookmarkAdded className="text-4xl mx-auto mb-2" />
-          <p>Reservation</p>
-        </div>
-        <div
-          className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
-          onClick={() => navigate("/user/e-books")}
-        >
-          <HiDocumentText className="text-4xl mx-auto mb-2" />
-          <p>E-books</p>
-        </div>
-      </div>
 
-      <div className="mx-4 my-8">
-        <SearchBar />
-      </div>
-
-      <div className="mx-4">
-        <div className="min-h-screen bg-white p-8">
+        <div className="mx-4 my-8">
+          <SearchBar />
+        </div>
+        <div className="mx-4">
           <div className="flex items-center justify-between mb-8">
             <div>
               <h2 className="text-3xl font-bold text-brown-700">
                 CAN BE INTERESTING
               </h2>
               <p className="text-gray-600">
-                Check this list of books, picked up by the website and choose
-                something new!
+                Check this list of books and choose something new!
               </p>
             </div>
             <button
@@ -123,24 +120,14 @@ const Discover = () => {
               View All
             </button>
           </div>
-
           <div className="grid grid-cols-4 gap-4">
             {books.map((book, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4  min-w-[150px] transition-transform transform hover:scale-105 cursor-pointer"
-                onClick={() => navigate(book.link)}
+                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 min-w-[150px] transition-transform transform hover:scale-105 cursor-pointer"
+                // onClick={() => navigate(book.link)}
               >
-                <div className="relative">
-                  <img
-                    src={book.cover}
-                    alt={book.title}
-                    className="w-32 h-40 object-cover mb-4 rounded-lg"
-                  />
-                  <div className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md">
-                    <MdBookmarkAdded className="text-gray-500" />
-                  </div>
-                </div>
+                <UserFilpCard />
                 <h3 className="text-xl font-semibold text-center">
                   {book.title}
                 </h3>
@@ -148,9 +135,8 @@ const Discover = () => {
               </div>
             ))}
           </div>
-          
         </div>
-      </div>
+      </main>
     </div>
   );
 };

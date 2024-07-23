@@ -6,6 +6,7 @@ import Ebooks from '../pages/User/Ebooks';
 import Discover from '../pages/User/Discover';
 import Userdash from '../pages/User/Userdash';
 import BookDetail from "../pages/User/BookDetail"
+import MyLearning from '../pages/User/MyLearning';
 
 export default function UserRoute() {
   return (
@@ -16,6 +17,7 @@ export default function UserRoute() {
                 <Route path="/user/reservations" element={<Reservations />} />
                 <Route path="/user/e-books" element={<Ebooks />} />
                 <Route path="/user/book-detail" element={<BookDetail />} />
+                <Route path="/user/my-learning" element={<MyLearning />}/>
               </Routes>
             
       
