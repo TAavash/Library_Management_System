@@ -4,6 +4,7 @@ import Background from "../../assets/profilebg.png";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { BiSolidMessageAltAdd } from "react-icons/bi";
 import { MdUnsubscribe } from "react-icons/md";
+import { MdOutlineModeEditOutline } from "react-icons/md";
 
 const UserProfile = () => {
   return (
@@ -31,11 +32,14 @@ const UserProfile = () => {
           </div>
 
           {/* Profile Information */}
-          <div className="flex justify-around ">
+          <div className="flex justify-around">
             <div className="flex-col">
-              <h3 className="text-xl font-semibold mb-4">
-                Profile Information
-              </h3>
+              <div className="flex items-center mb-4">
+                <h3 className="text-xl font-semibold mr-2">Profile Information</h3>
+                <button>
+                  <MdOutlineModeEditOutline className="text-xl text-gray-600 hover:text-gray-800" />
+                </button>
+              </div>
               <div className="flex flex-col gap-2">
                 <div className="text-gray-700 text-sm">
                   <strong>First Name:</strong> Abhinab
@@ -83,15 +87,15 @@ const UserProfile = () => {
             {/* Cards Section */}
             <div className="flex-none w-1/3 flex flex-col gap-4">
               <div className="bg-blue-100 p-4 rounded-lg shadow-md flex flex-col items-center">
-                <BiSolidMessageAltAdd className="text-4xl mb-2" />
-                <h4 className="text-lg font-semibold mb-1">Request Books</h4>
+              <BiSolidMessageAltAdd className="text-3xl mb-3 text-blue-500" />
+              <h4 className="text-lg font-semibold mb-1">Request Books</h4>
                 <p className="text-gray-700 text-xs text-center">
                   Request for the books you want to borrow.
                 </p>
               </div>
               <div className="bg-green-100 p-4 rounded-lg shadow-md flex flex-col items-center">
-                <MdUnsubscribe className="text-4xl mb-2" />
-                <h4 className="text-lg font-semibold mb-1">
+              <MdUnsubscribe className="text-3xl mb-3 text-green-500" />
+              <h4 className="text-lg font-semibold mb-1">
                   Subscribe to Our Newsletter
                 </h4>
                 <p className="text-gray-700 text-xs text-center">
