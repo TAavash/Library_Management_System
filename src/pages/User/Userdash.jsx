@@ -1,16 +1,9 @@
-import React, { useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import React from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 import logo from "../../assets/pcpslogo.png";
-import bookcover1 from "../../assets/bookCover.jpg";
-import { GrFilter } from "react-icons/gr";
-import {
-  FaBookDead,
-  FaRocket,
-  FaMagic,
-  FaSearchDollar,
-  FaHeart,
-} from "react-icons/fa";
-import { FaBookOpen } from "react-icons/fa6";
+import bookcover from "../../assets/images.jpeg";
+import bookcover1 from "../../assets/36236124._SX300_.jpg";
 import { IoBookSharp } from "react-icons/io5";
 import { MdBookmarkAdded, MdLocalLibrary } from "react-icons/md";
 import { HiDocumentText } from "react-icons/hi";
@@ -20,7 +13,7 @@ import SearchBar from "../../pages/User/comp/SearchBar";
 import UserFilpCard from "../../pages/User/comp/UserFlipCard";
 import Usernav from "../User/comp/Usernav";
 
-const Discover = () => {
+function Userdash() {
   const navigate = useNavigate();
 
   const books = [
@@ -55,20 +48,10 @@ const Discover = () => {
       <header className="fixed w-full z-50">
         <Usernav />
       </header>
+
       <main className="pt-[100px]">
-        {/* <div
-        className="p-4 bg-cover bg-center relative"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      >
-        <div className="text-white p-4 rounded-lg">
-          <p className="text-lg font-serif">
-            Welcome Abhinab,
-            <br />
-            Borrow the beauty, keep the knowledge!
-          </p>
-        </div>
-      </div> */}
-        <img src={Bannerimage} />
+        <img src={Bannerimage} alt="Banner" className="w-full" />
+
         <div className="mt-4 flex space-x-4">
           <div
             className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
@@ -100,18 +83,65 @@ const Discover = () => {
           </div>
         </div>
 
-        <div className="mx-4 my-8">
-          <SearchBar />
+        <div className="flex">
+          <div id="calendar" className="m-5">
+            <Calendar />
+          </div>
+
+          <div className="flex-grow m-5">
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-bold">Upcoming Deadline</h2>
+              <button className="bg-blue-500 text-white px-4 py-2 rounded">
+                View All
+              </button>
+            </div>
+            <div className="flex space-x-4 mt-4">
+              <div className="book-item flex items-center">
+                <img
+                  src={bookcover}
+                  alt="Kafka on the Shore"
+                  className="w-[100px]"
+                />
+                <div className="ml-4">
+                  <p>
+                    Book:{" "}
+                    <a href="#" className="text-blue-500">
+                      Kafka on the Shore
+                    </a>
+                  </p>
+                  <p>R/D: 5/22/2024</p>
+                  <p>E/D: 6/22/2024</p>
+                </div>
+              </div>
+              <div className="book-item flex items-center">
+                <img
+                  src={bookcover}
+                  alt="Kafka on the Shore"
+                  className="w-[100px]"
+                />
+                <div className="ml-4">
+                  <p>
+                    Book:{" "}
+                    <a href="#" className="text-blue-500">
+                      Kafka on the Shore
+                    </a>
+                  </p>
+                  <p>R/D: 5/22/2024</p>
+                  <p>E/D: 6/22/2024</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="mx-4">
+
+        <div id="my-books" className="m-5">
+          <div className="flex flex-col gap-[50px] mb-[10px]">
+            <h2 className="text-3xl font-bold text-brown-700">My Books</h2>
+            <SearchBar />
+          </div>
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="text-3xl font-bold text-brown-700">
-                CAN BE INTERESTING
-              </h2>
-              <p className="text-gray-600">
-                Check this list of books and choose something new!
-              </p>
+              <h2 className="text-xl font-bold">Currently Reading</h2>
             </div>
             <button
               className="px-4 py-2 bg-blue-600 text-white rounded-lg"
@@ -124,10 +154,18 @@ const Discover = () => {
             {books.map((book, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 min-w-[150px] transition-transform transform hover:scale-105 cursor-pointer"
-                // onClick={() => navigate(book.link)}
+                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4  min-w-[150px] transition-transform transform hover:scale-105 cursor-pointer"
+                onClick={() => navigate('/my-learning')}
               >
-                <UserFilpCard />
+                <div className="relative">
+                  <img
+                    src={book.cover}
+                    alt={book.title}
+                    className="w-32 h-40 object-cover mb-4 rounded-lg"
+                  />
+                  <div className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md">
+                  </div>
+                </div>
                 <h3 className="text-xl font-semibold text-center">
                   {book.title}
                 </h3>
@@ -139,6 +177,6 @@ const Discover = () => {
       </main>
     </div>
   );
-};
+}
 
-export default Discover;
+export default Userdash;

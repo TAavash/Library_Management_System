@@ -25,10 +25,18 @@ import { LibraryAssistant } from "../pages/Librarian/Patrons/Users/LibraryAssist
 import { Students } from "../pages/Librarian/Patrons/Users/Students";
 import ProgramCoordinators from "../pages/Librarian/Patrons/Users/ProgramCoordinators";
 import Membership from "../pages/Librarian/Membership";
+// import User from "../pages/Userdash";
+// import Discover from "../pages/User/Discover";
+// import Ebooks from "../pages/User/Ebooks";
+// import Added from "../pages/User/Added";
+// import Wishlist from "../pages/User/Wishlist";
+// import Hero from "../pages/User/Hero";
+import UserRoute from "./UserRoute";
 
 export default function RoutesNav() {
   return (
     <>
+      <UserRoute />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />

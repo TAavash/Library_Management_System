@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import logo from "../../assets/pcpslogo.png";
-import bookcover1 from "../../assets/bookCover.jpg";
+import bookcover1 from "../../assets/images.jpeg";
 import { GrFilter } from "react-icons/gr";
 import {
   FaBookDead,
@@ -20,7 +20,7 @@ import SearchBar from "../../pages/User/comp/SearchBar";
 import UserFilpCard from "../../pages/User/comp/UserFlipCard";
 import Usernav from "../User/comp/Usernav";
 
-const Discover = () => {
+const Reservations = () => {
   const navigate = useNavigate();
 
   const books = [
@@ -103,15 +103,17 @@ const Discover = () => {
         <div className="mx-4 my-8">
           <SearchBar />
         </div>
+
         <div className="mx-4">
           <div className="flex items-center justify-between mb-8">
             <div>
               <h2 className="text-3xl font-bold text-brown-700">
-                CAN BE INTERESTING
+                MY RESERVATIONS
               </h2>
-              <p className="text-gray-600">
-                Check this list of books and choose something new!
-              </p>
+              {/* <p className="text-gray-600">
+                Check this list of books, picked up by the website and choose
+                something new!
+              </p> */}
             </div>
             <button
               className="px-4 py-2 bg-blue-600 text-white rounded-lg"
@@ -120,14 +122,24 @@ const Discover = () => {
               View All
             </button>
           </div>
+
           <div className="grid grid-cols-4 gap-4">
             {books.map((book, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 min-w-[150px] transition-transform transform hover:scale-105 cursor-pointer"
-                // onClick={() => navigate(book.link)}
+                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4  min-w-[150px] transition-transform transform hover:scale-105 cursor-pointer"
+                onClick={() => navigate(book.link)}
               >
-                <UserFilpCard />
+                <div className="relative">
+                  <img
+                    src={book.cover}
+                    alt={book.title}
+                    className="w-32 h-40 object-cover mb-4 rounded-lg"
+                  />
+                  <div className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md">
+                    <MdBookmarkAdded className="text-gray-500" />
+                  </div>
+                </div>
                 <h3 className="text-xl font-semibold text-center">
                   {book.title}
                 </h3>
@@ -141,4 +153,4 @@ const Discover = () => {
   );
 };
 
-export default Discover;
+export default Reservations;
