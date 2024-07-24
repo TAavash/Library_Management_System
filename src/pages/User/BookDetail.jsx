@@ -6,17 +6,17 @@ import logo from "../../assets/pcpslogo.png";
 
 const BookDetail = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100">
+    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 flex-col items-center">
         <div className="flex items-center">
           <img src={logo} alt="PCPS Logo" className="w-25 h-12 mr-4" />
         </div>
-      <div className="max-w-5xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-12">
+      <div className="mt-10">
         <div className="flex flex-col md:flex-row">
           <div className="md:w-1/3 flex justify-center items-center">
             <img
               src={bookcover1}
               alt="Book Cover"
-              className="w-full h-auto rounded-lg shadow-md"
+              className="w-80 h-auto rounded-lg shadow-md"
             />
           </div>
           <div className="md:w-2/3 md:ml-8 mt-6 md:mt-0">
