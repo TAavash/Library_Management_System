@@ -32,6 +32,8 @@ import Membership from "../pages/Librarian/Membership";
 // import Wishlist from "../pages/User/Wishlist";
 // import Hero from "../pages/User/Hero";
 import UserRoute from "./UserRoute";
+import ForgetPassword from "../pages/ForgetPassword";
+import Otp from "../pages/Otp";
 
 export default function RoutesNav() {
   return (
@@ -40,6 +42,8 @@ export default function RoutesNav() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgetPassword" element={<ForgetPassword />} />
+        <Route path="/otp" element={<Otp />} />
         <Route path="/librarian-dashboard" element={<LibrarianDash />} />
         <Route path="/librarian-books" element={<LibrarianBooks />} />
         <Route

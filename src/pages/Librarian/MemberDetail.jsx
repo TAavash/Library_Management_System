@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { IoArrowBackCircle } from "react-icons/io5";
 import { FaStar } from "react-icons/fa6";
+import { RxCross2 } from "react-icons/rx";
 import { useNavigate } from 'react-router-dom';
 
 import ProfileImage from '../../assets/gojo.jpg';
@@ -40,13 +41,14 @@ export const MemberDetail = () => {
     const [selectedBook, setSelectedBook] = useState(null);
     const [isDefaultVisible, setIsDefaultVisible] = useState(true);
     const [key, setKey] = useState(0);
+    const [isEditable, setIsEditable] = useState(false);
 
     const handleBackIconClick = () => {
         navigate('/LibraryDash');
     };
 
     const handleDivClick = () => {
-        setIsDefaultVisible(false);
+        setIsDefaultVisible(true);
     };
 
     const handleBookClick = (book) => {
@@ -57,6 +59,15 @@ export const MemberDetail = () => {
     useEffect(() => {
         setKey((prevKey) => prevKey + 1);
     }, [selectedBook]);
+
+    const handleEditClick = () => {
+        setIsEditable(true);
+    };
+
+    const handleSaveClick = () => {
+        setIsEditable(false);
+        // Add your save logic here
+    };
 
     return (
         <div className='flex w-full p-3 gap-2'>
@@ -87,8 +98,7 @@ export const MemberDetail = () => {
                         {books.map((book, index) => (
                             <div
                                 key={index}
-                                className="group relative bg-white rounded-lg shadow-md w-56 overflow-hidden"
-                                onClick={() => handleBookClick(book)}
+                                className="group relative bg-white rounded-lg shadow-md w-56 overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl"
                             >
                                 <img src={book.cover} alt={book.title} className="w-full object-cover" />
                                 <div className="p-4">
@@ -96,7 +106,8 @@ export const MemberDetail = () => {
                                     <p className="text-sm text-gray-600">{book.author}</p>
                                 </div>
                                 <div className="absolute bottom-0 left-0 w-full h-12 bg-yellow-500 flex items-center justify-center cursor-pointer transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out">
-                                    <button className="text-white font-bold">View Details</button>
+                                    <button className="text-white font-bold"
+                                        onClick={() => handleBookClick(book)}>View Details</button>
                                 </div>
                             </div>
                         ))}
@@ -113,32 +124,59 @@ export const MemberDetail = () => {
                 <h5>Add Profile</h5>
                 {isDefaultVisible ? (
                     <div
-                        className="flex flex-col bg-blue-400 text-white p-2 mt-3 w-full rounded-xl justify-center items-center"
-                        onClick={handleDivClick}
+                        className="flex flex-col bg-customColor text-white py-3 px-3 mt-3 w-full rounded-xl justify-center items-center slide-in"
                     >
                         <h4 className="text-center">Details</h4>
-                        <div className="flex flex-col items-center p-4 text-center">
-                            <div className="flex flex-col mt-3">
-                                <label htmlFor="Check Out date">Check Out Date</label>
-                                <label htmlFor="coDate">852</label>
+                        <div className="flex flex-col items-center w-full">
+                            <div className="flex flex-col mt-3 gap-2 w-full">
+                                <label htmlFor="firstName">First Name</label>
+                                <input type="text" id="firstName" placeholder='Sudarshan' className='border-2 pl-3 py-1 rounded-md text-black' readOnly={!isEditable} />
                             </div>
-                            <div className="flex flex-col mt-3">
-                                <label htmlFor="Overdue">Overdue</label>
-                                <label htmlFor="oDay">753</label>
+                            <div className="flex flex-col mt-3 gap-2 w-full">
+                                <label htmlFor="lastName">Last Name</label>
+                                <input type="text" id="lastName" placeholder='Bam' className='border-2 pl-3 py-1 rounded-md text-black' readOnly={!isEditable} />
                             </div>
-                            <div className="flex flex-col mt-3">
-                                <label htmlFor="Renewal Date">Renewal Date</label>
-                                <label htmlFor="rDate">951</label>
+                            <div className="flex flex-col mt-3 gap-2 w-full">
+                                <label htmlFor="dob">Date Of Birth</label>
+                                <input type="date" id="dob" placeholder='Select Date' className='border-2 pl-3 py-1 rounded-md text-black' readOnly={!isEditable} />
+                            </div>
+                            <div className="flex flex-col mt-3 gap-2 w-full">
+                                <label htmlFor="address">Address</label>
+                                <input type="text" id="address" placeholder='Kupandole' className='border-2 pl-3 py-1 rounded-md text-black' readOnly={!isEditable} />
+                            </div>
+                            <div className="flex flex-col mt-3 gap-2 w-full">
+                                <label htmlFor="contact">Contact</label>
+                                <input type="text" id="contact" placeholder='0000000000' className='border-2 pl-3 py-1 rounded-md text-black' readOnly={!isEditable} />
+                            </div>
+                            <div className="flex flex-col mt-3 gap-2 w-full">
+                                <label htmlFor="email">Email</label>
+                                <input type="text" id="email" placeholder='email@gmail.com' className='border-2 pl-3 py-1 rounded-md text-black' readOnly={!isEditable} />
+                            </div>
+                            <div className="flex flex-col mt-3 gap-2 w-full">
+                                <label htmlFor="rollNumber">Roll Number</label>
+                                <input type="text" id="rollNumber" placeholder='0000000000' className='border-2 pl-3 py-1 rounded-md text-black' readOnly={!isEditable} />
+                            </div>
+                            <div className="flex flex-col m-3 gap-2 w-full">
+                                <label htmlFor="role">Role</label>
+                                <select id="role" className='pl-3 py-1 text-black border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md' disabled={!isEditable}>
+                                    <option value="">Select Role</option>
+                                    <option value="student">Student</option>
+                                    <option value="faculty">Faculty Members</option>
+                                    <option value="assistant">Library Assistant</option>
+                                    <option value="coordinator">Program Coordinator</option>
+                                </select>
+                            </div>
+                            <div className="flex w-full gap-4">
+                                <button className="border rounded-xl bg-black text-center h-10 w-1/2" onClick={handleEditClick}>Edit</button>
+                                <button className="border rounded-xl bg-black text-center h-10 w-1/2" onClick={handleSaveClick}>Save</button>
                             </div>
                         </div>
-                        <button className="border rounded-xl bg-black text-center h-10 w-1/2">Edit</button>
-                        <button className="border rounded-xl bg-black text-center h-10 w-1/2 my-3">Save</button>
                     </div>
                 ) : (
                     selectedBook && (
-                        <div key={key} className="flex flex-col bg-customColor text-white p-2 mt-3 w-full rounded-xl justify-center items-center slide-in">
+                        <div key={key} className="flex flex-col relative bg-customColor text-white p-2 my-3 w-full rounded-xl justify-center items-center slide-in">
                             <h4 className="text-center text-xl">Details</h4>
-                            <div className="flex flex-col items-center p-4 text-center">
+                            <div className="flex flex-col items-center p-3 text-center gap">
                                 <img src={selectedBook.cover} alt="Book Cover" className="w-[90%] rounded-md" />
                                 <div className="flex flex-col mt-2">
                                     <label htmlFor="Book Name" className="text-lg font-bold">{selectedBook.title}</label>
@@ -161,10 +199,14 @@ export const MemberDetail = () => {
                                     <label htmlFor="Renewal Date">Renewal Date</label>
                                     <label htmlFor="rDate">{selectedBook.renewalDate}</label>
                                 </div>
+                                <button className="border rounded-xl bg-black text-center h-10 w-1/2 my-3">Renew</button>
+                                <button className="border rounded-xl bg-black text-center h-10 w-1/2">Check In</button>
                             </div>
-                            <button className="border rounded-xl bg-black text-center h-10 w-1/2">Renew</button>
-                            <button className="border rounded-xl bg-black text-center h-10 w-1/2 my-3">Check In</button>
+                            <div className="absolute top-[10px] right-[5px] ">
+                                <RxCross2 className='h-7 w-7 cursor-pointer' onClick={handleDivClick} />
+                            </div>
                         </div>
+
                     )
                 )}
             </div>

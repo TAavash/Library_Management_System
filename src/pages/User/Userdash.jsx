@@ -1,7 +1,6 @@
 import React from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import logo from "../../assets/pcpslogo.png";
 import bookcover from "../../assets/images.jpeg";
 import bookcover1 from "../../assets/36236124._SX300_.jpg";
 import { IoBookSharp } from "react-icons/io5";
@@ -10,7 +9,6 @@ import { HiDocumentText } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import Bannerimage from "../../assets/finaldashbanner.png";
 import SearchBar from "../../pages/User/comp/SearchBar";
-import UserFilpCard from "../../pages/User/comp/UserFlipCard";
 import Usernav from "../User/comp/Usernav";
 
 function Userdash() {
@@ -84,7 +82,7 @@ function Userdash() {
         </div>
 
         <div className="flex">
-          <div id="calendar" className="m-5">
+          <div className="m-5 shadow-gray-400 shadow-md transition-transform transform hover:scale-105 hover:shadow-lg ">
             <Calendar />
           </div>
 
