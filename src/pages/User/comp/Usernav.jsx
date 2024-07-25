@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Logo from "../../../assets/pcpslogo.png";
 import { RiSettings3Fill } from "react-icons/ri";
 import { MdNotifications } from "react-icons/md";
+import { TiArrowBack } from "react-icons/ti";
 import { useNavigate } from "react-router-dom";
 
 const Usernav = () => {
@@ -18,6 +19,12 @@ const Usernav = () => {
         <img src={Logo} className="h-[60px]" alt="logo" />
 
         <div className="flex items-center space-x-6">
+          <button
+            className="text-black hover:text-red-500 text-xl"
+            onClick={() => navigate(-1)}
+          >
+            <TiArrowBack />
+          </button>
           <button
             className="text-black hover:text-red-500 text-xl"
             onClick={togglePanel}

@@ -96,7 +96,7 @@ const Ebooks = () => {
       <div className="mx-4">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-2xl font-bold text-brown-700">
+            <h2 className="text-xl font-bold text-brown-700">
               Most Popular Courses
             </h2>
           </div>
