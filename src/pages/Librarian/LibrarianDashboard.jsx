@@ -70,23 +70,23 @@ export default function LibrarianDashboard() {
       <div className="min-h-screen h-auto bg-gray-200 py-[10px]">
         <div className="flex justify-evenly gap-[20px] mx-[3%]">
           <button
-            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
+            className="w-[150px] h-[120px] rounded-2xl bg-[#14273D] text-white shadow-slate-500 shadow-md mt-[100px]"
             onClick={handleAddBookClick}
           >
             Users
           </button>
           <button
-            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
+            className="w-[150px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md mt-[100px]"
             onClick={handleAddIconClick}
           >
             Add Member
           </button>
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
+          <button className="w-[150px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md mt-[100px]"
             onClick={handleMembershipClick}>
             Membership
           </button>
           <button
-            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
+            className="w-[150px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md mt-[100px]"
             onClick={handleRequestClick}
           >
             Request

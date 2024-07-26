@@ -141,7 +141,7 @@ const LibrarianBooksReservations = () => {
                 </button>
               </div>
             </div>
-            <div className="flex w-full h-full bg-[#F5F5F5]">
+            <div className="flex w-full h-full bg-[#F5F5F5] rounded-r-2xl">
               <div
                 className={`h-full rounded-2xl ${selectedCard ? "w-2/3" : "w-full"
                   }`}
