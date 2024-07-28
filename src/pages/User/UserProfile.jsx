@@ -1,9 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Profile from "../../assets/profilepicture.jpeg";
 import Background from "../../assets/profilebg.png";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const UserProfile = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    navigate(`/`);
+  };
   return (
     <div className="relative">
       {/* Background Image */}
@@ -31,31 +37,45 @@ const UserProfile = () => {
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-gray-100 p-3 rounded-lg shadow-md">
-              <h3 className="text-base font-semibold text-gray-800 mb-1">First Name</h3>
+              <h3 className="text-base font-semibold text-gray-800 mb-1">
+                First Name
+              </h3>
               <p className="text-gray-700 text-sm">Abhinab</p>
             </div>
             <div className="bg-gray-100 p-3 rounded-lg shadow-md">
-              <h3 className="text-base font-semibold text-gray-800 mb-1">Last Name</h3>
+              <h3 className="text-base font-semibold text-gray-800 mb-1">
+                Last Name
+              </h3>
               <p className="text-gray-700 text-sm">Prajapati</p>
             </div>
             <div className="bg-gray-100 p-3 rounded-lg shadow-md">
-              <h3 className="text-base font-semibold text-gray-800 mb-1">Gender</h3>
+              <h3 className="text-base font-semibold text-gray-800 mb-1">
+                Gender
+              </h3>
               <p className="text-gray-700 text-sm">Male</p>
             </div>
             <div className="bg-gray-100 p-3 rounded-lg shadow-md">
-              <h3 className="text-base font-semibold text-gray-800 mb-1">Address</h3>
+              <h3 className="text-base font-semibold text-gray-800 mb-1">
+                Address
+              </h3>
               <p className="text-gray-700 text-sm">Patan</p>
             </div>
             <div className="bg-gray-100 p-3 rounded-lg shadow-md">
-              <h3 className="text-base font-semibold text-gray-800 mb-1">Email</h3>
+              <h3 className="text-base font-semibold text-gray-800 mb-1">
+                Email
+              </h3>
               <p className="text-gray-700 text-sm">abhinabsuii@mail.com</p>
             </div>
             <div className="bg-gray-100 p-3 rounded-lg shadow-md">
-              <h3 className="text-base font-semibold text-gray-800 mb-1">Mobile</h3>
+              <h3 className="text-base font-semibold text-gray-800 mb-1">
+                Mobile
+              </h3>
               <p className="text-gray-700 text-sm">977-9812121212</p>
             </div>
             <div className="bg-gray-100 p-3 rounded-lg shadow-md">
-              <h3 className="text-base font-semibold text-gray-800 mb-1">Library Card Number</h3>
+              <h3 className="text-base font-semibold text-gray-800 mb-1">
+                Library Card Number
+              </h3>
               <p className="text-gray-700 text-sm">2214618</p>
             </div>
           </div>
@@ -69,6 +89,14 @@ const UserProfile = () => {
             <a href="#" className="text-pink-600 hover:text-pink-800 text-xl">
               <FaInstagram />
             </a>
+          </div>
+          <div className="flex justify-center items-center">
+            <button
+              onClick={handleLogout}
+              className="h-fit w-[100px] rounded-md text-red-600 border-2 border-red-600 hover:bg-slate-300 active:bg-black text-2xl p-[2px] px-[3px]"
+            >
+              Logout
+            </button>
           </div>
         </div>
       </div>

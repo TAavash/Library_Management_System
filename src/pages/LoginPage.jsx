@@ -5,6 +5,7 @@ import PcpsLogo from "../assets/pcpslogo.png";
 import { useNavigate } from "react-router-dom";
 import RegImg from "../assets/library.jpg";
 import { ToastContainer, toast } from "react-toastify";
+import { login } from "../utils/Api";
 import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = () => {
@@ -23,33 +24,26 @@ const LoginPage = () => {
     navigate(`/register`);
   };
 
-  const handleForgetPass = () => {
-    navigate(`/forgetPassword`)
-  }
-
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
-      const data = await response.json();
       setIsLoading(false);
-      if (response.ok) {
+      let data = await login(username, password);
+      console.log(data);
+      if (data) {
         toast.success("Login successful!");
-        localStorage.setItem("token", data.token);
-        setTimeout(() => {
-          navigate(`/librarian-dashboard`);
-        }, 2000); // Delay navigation to show success message
+        if (data.role_name === "Librarian") {
+          setTimeout(() => {
+            navigate(`/librarian-dashboard`);
+          }, 1000); // Delay navigation to show success message
+        } else {
+          setTimeout(() => {
+            navigate(`/user/home`);
+          }, 1000); // Delay navigation to show success message
+        }
       } else {
-        toast.error(
-          data.message || "Login failed. Please check your credentials."
-        );
+        toast.error("Login failed. Please check your credentials.");
       }
     } catch (error) {
       setIsLoading(false);
@@ -129,8 +123,7 @@ const LoginPage = () => {
               </button>
             </div>
           </form>
-          <div className="mt-[5px] text-end md:mb-[20px] text-[14px] underline cursor-pointer"
-            onClick={handleForgetPass}>
+          <div className="mt-[5px] text-end md:mb-[20px] text-[14px] underline cursor-pointer">
             Forgot Password ?
           </div>
         </div>
