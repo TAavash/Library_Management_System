@@ -10,7 +10,7 @@ import { HiDocumentText } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import Bannerimage from "../../assets/finaldashbanner.png";
 import SearchBar from "../../pages/User/comp/SearchBar";
-import UserFilpCard from "../../pages/User/comp/UserFlipCard";
+import UserFlipCard from "../../pages/User/comp/UserFlipCard";
 import Usernav from "../User/comp/Usernav";
 
 function Userdash() {
@@ -40,6 +40,21 @@ function Userdash() {
       title: "The Great Gatsby",
       author: "F. Scott Fitzgerald",
       link: bookcover1,
+    },
+  ];
+
+  const upcomingBooks = [
+    {
+      cover: bookcover,
+      title: "Kafka on the Shore",
+      rdate: "5/22/2024",
+      edate: "6/22/2024",
+    },
+    {
+      cover: bookcover,
+      title: "Kafka on the Shore",
+      rdate: "5/22/2024",
+      edate: "6/22/2024",
     },
   ];
 
@@ -83,6 +98,7 @@ function Userdash() {
           </div>
         </div>
 
+        {/* Upcoming Deadline Section Start */}
         <div className="flex">
           <div id="calendar" className="m-5">
             <Calendar />
@@ -91,48 +107,29 @@ function Userdash() {
           <div className="flex-grow m-5">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-bold">Upcoming Deadline</h2>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded">
+              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
                 View All
               </button>
             </div>
             <div className="flex space-x-4 mt-4">
-              <div className="book-item flex items-center">
-                <img
-                  src={bookcover}
-                  alt="Kafka on the Shore"
-                  className="w-[100px]"
-                />
-                <div className="ml-4">
-                  <p>
-                    Book:{" "}
-                    <a href="#" className="text-blue-500">
-                      Kafka on the Shore
-                    </a>
-                  </p>
-                  <p>R/D: 5/22/2024</p>
-                  <p>E/D: 6/22/2024</p>
+              {upcomingBooks.map((book, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-center p-4 border border-gray-300 rounded-lg transition-transform transform hover:scale-105 cursor-pointer"
+                  onClick={() => navigate("/book-detail")}
+                >
+                  <img
+                    src={book.cover}
+                    alt={book.title}
+                    className="w-[100px] object-cover rounded-lg"
+                  />
+                  <p className="font-bold mt-2">{book.title}</p>
                 </div>
-              </div>
-              <div className="book-item flex items-center">
-                <img
-                  src={bookcover}
-                  alt="Kafka on the Shore"
-                  className="w-[100px]"
-                />
-                <div className="ml-4">
-                  <p>
-                    Book:{" "}
-                    <a href="#" className="text-blue-500">
-                      Kafka on the Shore
-                    </a>
-                  </p>
-                  <p>R/D: 5/22/2024</p>
-                  <p>E/D: 6/22/2024</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
+        {/* Upcoming Deadline Section End */}
 
         <div id="my-books" className="m-5">
           <div className="flex flex-col gap-[50px] mb-[10px]">
@@ -155,7 +152,7 @@ function Userdash() {
               <div
                 key={index}
                 className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4  min-w-[150px] transition-transform transform hover:scale-105 cursor-pointer"
-                onClick={() => navigate('/my-learning')}
+                onClick={() => navigate("/my-learning")}
               >
                 <div className="relative">
                   <img
@@ -163,8 +160,7 @@ function Userdash() {
                     alt={book.title}
                     className="w-32 h-40 object-cover mb-4 rounded-lg"
                   />
-                  <div className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md">
-                  </div>
+                  <div className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md"></div>
                 </div>
                 <h3 className="text-xl font-semibold text-center">
                   {book.title}
