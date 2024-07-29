@@ -4,6 +4,7 @@ import PcpsLogo from "../assets/pcpslogo.png";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { userregister } from "../utils/Api";
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -33,8 +34,10 @@ const Register = () => {
     if (!email) newErrors.email = "Email is required.";
     if (!username) newErrors.username = "Username is required.";
     if (!password) newErrors.password = "Password is required.";
-    if (email && !/\S+@\S+\.\S+/.test(email)) newErrors.email = "Email is invalid.";
-    if (contact && !/^\d{10}$/.test(contact)) newErrors.contact = "Contact number must be 10 digits.";
+    if (email && !/\S+@\S+\.\S+/.test(email))
+      newErrors.email = "Email is invalid.";
+    if (contact && !/^\d{10}$/.test(contact))
+      newErrors.contact = "Contact number must be 10 digits.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -44,29 +47,22 @@ const Register = () => {
     if (!validateFields()) return; // Only proceed if validation passes
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/user/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-          first_name: firstName,
-          last_name: lastName,
-          dob: dob,
-          gender: gender,
-          address: address,
-          email: email,
-          mobile: contact,
-        }),
-      });
-      const data = await response.json();
-      if (response.ok) {
+      let register = await userregister(
+        username,
+        password,
+        firstName,
+        lastName,
+        dob,
+        gender,
+        address,
+        email,
+        contact
+      );
+      if (register) {
         toast.success("Register successful!");
         setTimeout(() => navigate(`/`), 2000); // Redirect after 2 seconds
       } else {
-        toast.error(data.message || "Register failed. Please check your credentials.");
+        toast.error("Register failed. Please check your credentials.");
       }
     } catch (error) {
       console.error("An error occurred:", error); // Log the error for debugging
@@ -96,13 +92,17 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="Sudarshan"
-                  className={`border-2 pl-3 py-1 rounded-md w-full ${errors.firstName ? "border-red-500" : ""}`}
+                  className={`border-2 pl-3 py-1 rounded-md w-full ${
+                    errors.firstName ? "border-red-500" : ""
+                  }`}
                   id="firstName"
                   name="firstName"
                   onChange={(e) => setFirstName(e.target.value)}
                   value={firstName}
                 />
-                {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
+                {errors.firstName && (
+                  <p className="text-red-500 text-sm">{errors.firstName}</p>
+                )}
               </div>
 
               <div className="flex flex-col mt-3 gap-2">
@@ -110,13 +110,17 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="Bam"
-                  className={`border-2 pl-3 py-1 rounded-md w-full ${errors.lastName ? "border-red-500" : ""}`}
+                  className={`border-2 pl-3 py-1 rounded-md w-full ${
+                    errors.lastName ? "border-red-500" : ""
+                  }`}
                   id="lastName"
                   name="lastName"
                   onChange={(e) => setLastName(e.target.value)}
                   value={lastName}
                 />
-                {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
+                {errors.lastName && (
+                  <p className="text-red-500 text-sm">{errors.lastName}</p>
+                )}
               </div>
 
               <div className="flex flex-col mt-3 gap-2 col-span-1 md:col-span-2">
@@ -124,13 +128,17 @@ const Register = () => {
                 <input
                   type="date"
                   placeholder="email@gmail.com"
-                  className={`border-2 pl-3 py-1 rounded-md w-full ${errors.dob ? "border-red-500" : ""}`}
+                  className={`border-2 pl-3 py-1 rounded-md w-full ${
+                    errors.dob ? "border-red-500" : ""
+                  }`}
                   id="dob"
                   name="dob"
                   onChange={(e) => setDOB(e.target.value)}
                   value={dob}
                 />
-                {errors.dob && <p className="text-red-500 text-sm">{errors.dob}</p>}
+                {errors.dob && (
+                  <p className="text-red-500 text-sm">{errors.dob}</p>
+                )}
               </div>
 
               <div className="flex flex-col mt-3 gap-2 col-span-1 md:col-span-2">
@@ -140,7 +148,9 @@ const Register = () => {
                   name="gender"
                   onChange={(e) => setGender(e.target.value)}
                   value={gender}
-                  className={`w-full pl-3 py-1 text-base border-2 rounded-md ${errors.gender ? "border-red-500" : ""}`}
+                  className={`w-full pl-3 py-1 text-base border-2 rounded-md ${
+                    errors.gender ? "border-red-500" : ""
+                  }`}
                 >
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -153,13 +163,17 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="Kupandole"
-                  className={`border-2 pl-3 py-1 rounded-md w-full ${errors.address ? "border-red-500" : ""}`}
+                  className={`border-2 pl-3 py-1 rounded-md w-full ${
+                    errors.address ? "border-red-500" : ""
+                  }`}
                   id="address"
                   name="address"
                   onChange={(e) => setAddress(e.target.value)}
                   value={address}
                 />
-                {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
+                {errors.address && (
+                  <p className="text-red-500 text-sm">{errors.address}</p>
+                )}
               </div>
 
               <div className="flex flex-col mt-3 gap-2">
@@ -167,13 +181,17 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="0000000000"
-                  className={`border-2 pl-3 py-1 rounded-md w-full ${errors.contact ? "border-red-500" : ""}`}
+                  className={`border-2 pl-3 py-1 rounded-md w-full ${
+                    errors.contact ? "border-red-500" : ""
+                  }`}
                   id="contact"
                   name="contact"
                   onChange={(e) => setContact(e.target.value)}
                   value={contact}
                 />
-                {errors.contact && <p className="text-red-500 text-sm">{errors.contact}</p>}
+                {errors.contact && (
+                  <p className="text-red-500 text-sm">{errors.contact}</p>
+                )}
               </div>
 
               <div className="flex flex-col mt-3 gap-2 col-span-1 md:col-span-2">
@@ -181,13 +199,17 @@ const Register = () => {
                 <input
                   type="email"
                   placeholder="email@gmail.com"
-                  className={`border-2 pl-3 py-1 rounded-md w-full ${errors.email ? "border-red-500" : ""}`}
+                  className={`border-2 pl-3 py-1 rounded-md w-full ${
+                    errors.email ? "border-red-500" : ""
+                  }`}
                   id="email"
                   name="email"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                 />
-                {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                {errors.email && (
+                  <p className="text-red-500 text-sm">{errors.email}</p>
+                )}
               </div>
 
               <div className="flex flex-col mt-3 gap-2 col-span-1 md:col-span-2">
@@ -195,13 +217,17 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="@qwerty"
-                  className={`border-2 pl-3 py-1 rounded-md w-full ${errors.username ? "border-red-500" : ""}`}
+                  className={`border-2 pl-3 py-1 rounded-md w-full ${
+                    errors.username ? "border-red-500" : ""
+                  }`}
                   id="username"
                   name="username"
                   onChange={(e) => setUsername(e.target.value)}
                   value={username}
                 />
-                {errors.username && <p className="text-red-500 text-sm">{errors.username}</p>}
+                {errors.username && (
+                  <p className="text-red-500 text-sm">{errors.username}</p>
+                )}
               </div>
 
               <div className="flex flex-col mt-3 gap-2 col-span-1 md:col-span-2">
@@ -209,13 +235,17 @@ const Register = () => {
                 <input
                   type="password"
                   placeholder="Password"
-                  className={`border-2 pl-3 py-1 rounded-md w-full ${errors.password ? "border-red-500" : ""}`}
+                  className={`border-2 pl-3 py-1 rounded-md w-full ${
+                    errors.password ? "border-red-500" : ""
+                  }`}
                   id="password"
                   name="password"
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                 />
-                {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+                {errors.password && (
+                  <p className="text-red-500 text-sm">{errors.password}</p>
+                )}
               </div>
 
               <div className="col-span-1 md:col-span-2 flex justify-center gap-2">

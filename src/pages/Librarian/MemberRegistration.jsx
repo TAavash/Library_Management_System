@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Profile from "../../assets/User.jpg"; // Default profile image
 import { IoArrowBackCircle } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { memberRegister } from "../../utils/Api";
+
 export default function MemberRegistration() {
+  const [roleList, setRoleList] = useState([]);
+
   const [profile, setProfile] = useState({
     username: "",
     password: "",
@@ -16,6 +20,7 @@ export default function MemberRegistration() {
     address: "",
     email: "",
     mobile: "",
+    role_id: "",
   });
 
   const handleInputChange = (e) => {
@@ -62,28 +67,60 @@ export default function MemberRegistration() {
     return true;
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/role/list", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        if (response.ok) {
+          setRoleList(data.roles);
+        } else {
+          console.log(data.message);
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  roleList.map((role) => {
+    if (role.role_name === profile.role_id) {
+      profile.role_id = role.role_idS;
+    }
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validateFields()) return;
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/member/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(profile),
-      });
-      const data = await response.json();
-      if (response.ok) {
+      let register = memberRegister(
+        profile.username,
+        profile.password,
+        profile.first_name,
+        profile.last_name,
+        profile.dob,
+        profile.gender,
+        profile.address,
+        profile.email,
+        profile.mobile,
+        profile.role_id
+      );
+      console.log(profile);
+
+      if (register) {
         toast.success("Register successful!");
         setTimeout(() => navigate(`/LibraryRequestPage`), 2000); // Redirect after 2 seconds
       } else {
-        toast.error(
-          data.message || "Register failed. Please check your credentials."
-        );
-        console.log(data.message);
+        toast.error("Register failed. Please check your credentials.");
       }
     } catch (error) {
       console.error("An error occurred:", error); // Log the error for debugging
@@ -211,12 +248,20 @@ export default function MemberRegistration() {
             </div>
             <div className="flex flex-col mt-3 gap-2">
               <label>Role</label>
-              <select className="w-2/3 pl-3 py-1 text-base border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md">
-                <option value="">Select Role</option>
-                <option value="Student">Student</option>
-                <option value="Faculty Members">Faculty Members</option>
-                <option value="Library Assistant">Library Assistant</option>
-                <option value="Program Coordinator">Program Coordinator</option>
+              <select
+                name="role_id"
+                value={profile.role_id}
+                onChange={handleInputChange}
+                className="w-2/3 pl-3 py-1 text-base border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md"
+              >
+                <option value="" disabled>
+                  Select role
+                </option>
+                {roleList.map((role) => (
+                  <option key={role.role_idS} value={role.role_idS}>
+                    {role.role_name}
+                  </option>
+                ))}
               </select>
             </div>
             <button

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Profile from "../../assets/profilepicture.jpeg";
 import Background from "../../assets/profilebg.png";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
@@ -7,6 +8,11 @@ import { MdUnsubscribe } from "react-icons/md";
 import { MdOutlineModeEditOutline } from "react-icons/md";
 
 const UserProfile = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    navigate(`/`);
+  };
   return (
     <div className="relative">
       {/* Background Image */}
