@@ -80,7 +80,7 @@ export default function MemberRegistration() {
         if (response.ok) {
           setRoleList(data.roles);
         } else {
-          console.log(data.message);
+        console.log(data.message);
         }
       } catch (error) {
         console.error("An error occurred:", error);
@@ -94,6 +94,7 @@ export default function MemberRegistration() {
     if (role.role_name === profile.role_id) {
       profile.role_id = role.role_idS;
     }
+    return null;
   });
 
   const handleSubmit = async (e) => {
