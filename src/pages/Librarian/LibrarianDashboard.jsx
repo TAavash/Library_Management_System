@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaUser } from "react-icons/fa6";
 import NavNew from "../../components/NavNew";
 import { useLocation, useNavigate } from "react-router-dom";
-import  AllUsers  from "./Patrons/Users/AllUsers";
+import AllUsers from "./Patrons/Users/AllUsers";
 import { FacultyMembers } from "./Patrons/Users/FacultyMembers";
 import { LibraryAssistant } from "./Patrons/Users/LibraryAssistant";
 import ProgramCoordinators from "./Patrons/Users/ProgramCoordinators";
@@ -15,8 +15,8 @@ export default function LibrarianDashboard() {
     navigate("/MemberRegistration");
   };
 
-  const handleAddBookClick = () => {
-    navigate("/BookRegistration");
+  const handleUserClick = () => {
+    navigate('/LibraryDash');
   };
 
   const handleRequestClick = () => {
@@ -71,7 +71,7 @@ export default function LibrarianDashboard() {
         <div className="flex justify-evenly gap-[20px] mx-[3%]">
           <button
             className="w-[150px] h-[120px] rounded-2xl bg-[#14273D] text-white shadow-slate-500 shadow-md mt-[100px]"
-            onClick={handleAddBookClick}
+            onClick={handleUserClick}
           >
             Users
           </button>
