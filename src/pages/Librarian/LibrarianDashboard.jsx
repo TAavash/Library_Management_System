@@ -62,7 +62,7 @@ export default function LibrarianDashboard() {
     }
   };
 
-  console.log(location);
+  // console.log(location);
 
   return (
     <div>

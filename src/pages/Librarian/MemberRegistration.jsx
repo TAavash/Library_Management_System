@@ -114,7 +114,6 @@ export default function MemberRegistration() {
         profile.mobile,
         profile.role_id
       );
-      console.log(profile);
 
       if (register) {
         toast.success("Register successful!");
