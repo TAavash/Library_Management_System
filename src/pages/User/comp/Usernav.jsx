@@ -1,16 +1,22 @@
+// src/components/Usernav.js
 import React, { useState } from "react";
 import Logo from "../../../assets/pcpslogo.png";
 import { RiSettings3Fill } from "react-icons/ri";
 import { MdNotifications } from "react-icons/md";
-import { TiArrowBack } from "react-icons/ti";
 import { useNavigate } from "react-router-dom";
+import UserNotification from "./UserNotification";
 
 const Usernav = () => {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
 
-  const togglePanel = () => {
-    setIsOpen(!isOpen);
+  const toggleSettingsPanel = () => {
+    setIsSettingsOpen(!isSettingsOpen);
+  };
+
+  const toggleNotificationPanel = () => {
+    setIsNotificationsOpen(!isNotificationsOpen);
   };
 
   return (
@@ -19,32 +25,30 @@ const Usernav = () => {
         <img src={Logo} className="h-[60px]" alt="logo" />
 
         <div className="flex items-center space-x-6">
+          
           <button
             className="text-black hover:text-red-500 text-xl"
-            onClick={() => navigate(-1)}
-          >
-            <TiArrowBack />
-          </button>
-          <button
-            className="text-black hover:text-red-500 text-xl"
-            onClick={togglePanel}
+            onClick={toggleSettingsPanel}
           >
             <RiSettings3Fill />
           </button>
-          <button className="text-black hover:text-red-500 text-xl">
+          <button
+            className="text-black hover:text-red-500 text-xl"
+            onClick={toggleNotificationPanel}
+          >
             <MdNotifications />
           </button>
         </div>
       </div>
       <div
         className={`fixed top-0 right-0 w-80 h-full bg-white shadow-lg transform transition-transform ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+          isSettingsOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="p-4 relative">
           <button
             className="absolute top-2 right-2 p-1 rounded-full text-gray-500 hover:text-black"
-            onClick={togglePanel}
+            onClick={toggleSettingsPanel}
           >
             <svg
               className="w-6 h-6"
@@ -83,6 +87,13 @@ const Usernav = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div
+        className={`fixed top-0 right-0 w-80 h-full bg-white shadow-lg transform transition-transform ${
+          isNotificationsOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <UserNotification toggleNotificationPanel={toggleNotificationPanel} />
       </div>
     </nav>
   );
