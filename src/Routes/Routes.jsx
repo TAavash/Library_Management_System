@@ -31,14 +31,20 @@ import Membership from "../pages/Librarian/Membership";
 // import Added from "../pages/User/Added";
 // import Wishlist from "../pages/User/Wishlist";
 // import Hero from "../pages/User/Hero";
-import UserRoute from "./UserRoute";
+import Reservations from '../pages/User/Reservations';
+import Ebooks from '../pages/User/Ebooks';
+import Discover from '../pages/User/Discover';
+import Userdash from '../pages/User/Userdash';
+import BookDetail from "../pages/User/BookDetail"
+import MyLearning from '../pages/User/MyLearning';
+import UserProfile from '../pages/User/UserProfile';
+// import UserRoute from "./UserRoute";
 import ForgetPassword from "../pages/ForgetPassword";
 import Otp from "../pages/Otp";
 
 export default function RoutesNav() {
   return (
     <>
-      <UserRoute />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -77,6 +83,13 @@ export default function RoutesNav() {
         <Route path="/Students" element={<Students />} />
         <Route path="/ProgramCoordinators" element={<ProgramCoordinators />} />
         <Route path="/MembershipPage" element={<Membership />} />
+        <Route path="/user/home" element={<Userdash />} />
+        <Route path="/user/discover" element={<Discover />} />
+        <Route path="/user/reservations" element={<Reservations />} />
+        <Route path="/user/e-books" element={<Ebooks />} />
+        <Route path="/user/book-detail" element={<BookDetail />} />
+        <Route path="/user/my-learning" element={<MyLearning />} />
+        <Route path="/user/profile" element={<UserProfile />} />
       </Routes>
     </>
   );

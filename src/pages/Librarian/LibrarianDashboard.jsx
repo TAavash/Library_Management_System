@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FaUser } from "react-icons/fa6";
 import NavNew from "../../components/NavNew";
-import { useLocation, useNavigate } from "react-router-dom";
-import AllUsers from "./Patrons/Users/AllUsers";
+import { useNavigate } from "react-router-dom";
+import  AllUsers  from "./Patrons/Users/AllUsers";
 import { FacultyMembers } from "./Patrons/Users/FacultyMembers";
 import { LibraryAssistant } from "./Patrons/Users/LibraryAssistant";
 import ProgramCoordinators from "./Patrons/Users/ProgramCoordinators";
@@ -29,7 +29,7 @@ export default function LibrarianDashboard() {
 
   const [active, setActive] = useState("allusers");
 
-  const location = useLocation();
+  // const location = useLocation();
 
   const handleAllActive = () => {
     setActive("allusers");
@@ -62,7 +62,7 @@ export default function LibrarianDashboard() {
     }
   };
 
-  console.log(location);
+  // console.log(location);
 
   return (
     <div>

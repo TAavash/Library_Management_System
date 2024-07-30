@@ -60,7 +60,7 @@ const Register = () => {
       );
       if (register) {
         toast.success("Register successful!");
-        setTimeout(() => navigate(`/`), 2000); // Redirect after 2 seconds
+        setTimeout(() => navigate(`/`), 1000); // Redirect after 1 seconds
       } else {
         toast.error("Register failed. Please check your credentials.");
       }
@@ -110,17 +110,13 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="Bam"
-                  className={`border-2 pl-3 py-1 rounded-md w-full ${
-                    errors.lastName ? "border-red-500" : ""
-                  }`}
+                  className={`border-2 pl-3 py-1 rounded-md w-full `}
                   id="lastName"
                   name="lastName"
                   onChange={(e) => setLastName(e.target.value)}
                   value={lastName}
                 />
-                {errors.lastName && (
-                  <p className="text-red-500 text-sm">{errors.lastName}</p>
-                )}
+                
               </div>
 
               <div className="flex flex-col mt-3 gap-2 col-span-1 md:col-span-2">
@@ -267,7 +263,7 @@ const Register = () => {
           </form>
         </div>
       </div>
-      <ToastContainer /> {/* Add this line to display toasts */}
+      <ToastContainer /> 
     </div>
   );
 };

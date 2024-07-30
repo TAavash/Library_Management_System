@@ -28,28 +28,38 @@ const LoginPage = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      setIsLoading(false);
-      let data = await login(username, password);
-      console.log(data);
-      if (data) {
-        toast.success("Login successful!");
-        if (data.role_name === "Librarian") {
-          setTimeout(() => {
-            navigate(`/librarian-dashboard`);
-          }, 1000); // Delay navigation to show success message
-        } else {
-          setTimeout(() => {
-            navigate(`/user/home`);
-          }, 1000); // Delay navigation to show success message
+      const response = await login(username, password);
+      if (response) {
+        if (response.data.role_name === "Student") {
+          toast.success("Login successful!");
+          setTimeout(() => navigate(`/user/home`), 1000);
+        }
+        else if (response.data.role_name === 'Faculty Member') {
+          toast.success("Login successful!");
+          setTimeout(() => navigate(`/user/home`), 1000);
+        }
+        else if (response.data.role_name === 'Program Coordinator') {
+          toast.success("Login successful!");
+          setTimeout(() => navigate(`/librarian-dashboard`), 1000);
+        }
+        else if (response.data.role_name === 'Library Assistant') {
+          toast.success("Login successful!");
+          setTimeout(() => navigate(`/librarian-dashboard`), 1000);
+        }
+        else if (response.data.role_name === 'Librarian') {
+          toast.success("Login successful!");
+          setTimeout(() => navigate(`/librarian-dashboard`), 1000);
         }
       } else {
-        toast.error("Login failed. Please check your credentials.");
+        toast.error(response.data.message || "Login failed. Please check your credentials.");
       }
     } catch (error) {
+      toast.error("Login failed. Please check your credentials.");
+    } finally {
       setIsLoading(false);
-      toast.error("An error occurred. Please try again later.");
     }
   };
+
 
   return (
     <div

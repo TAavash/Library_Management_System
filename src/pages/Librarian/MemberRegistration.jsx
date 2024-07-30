@@ -45,28 +45,6 @@ export default function MemberRegistration() {
     }
   };
 
-  const validateFields = () => {
-    const requiredFields = [
-      "username",
-      "password",
-      "first_name",
-      "dob",
-      "gender",
-      "address",
-      "email",
-      "mobile",
-    ];
-
-    for (const field of requiredFields) {
-      if (!profile[field]) {
-        toast.error(`Please fill in the ${field.replace("_", " ")} field.`);
-        return false;
-      }
-    }
-
-    return true;
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -80,29 +58,23 @@ export default function MemberRegistration() {
         if (response.ok) {
           setRoleList(data.roles);
         } else {
-          console.log(data.message);
+          console.error("Error:", data.message);
+          toast.error("Failed to fetch roles. Please try again later.");
         }
       } catch (error) {
         console.error("An error occurred:", error);
+        toast.error("An error occurred while fetching roles. Please try again later.");
       }
     };
 
     fetchData();
   }, []);
 
-  roleList.map((role) => {
-    if (role.role_name === profile.role_id) {
-      profile.role_id = role.role_idS;
-    }
-  });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateFields()) return;
-
     try {
-      let register = memberRegister(
+      let register = await memberRegister(
         profile.username,
         profile.password,
         profile.first_name,
@@ -114,13 +86,12 @@ export default function MemberRegistration() {
         profile.mobile,
         profile.role_id
       );
-      console.log(profile);
 
       if (register) {
         toast.success("Register successful!");
         setTimeout(() => navigate(`/LibraryRequestPage`), 2000); // Redirect after 2 seconds
       } else {
-        toast.error("Register failed. Please check your credentials.");
+        toast.error("Register failed. Username or email already exists.");
       }
     } catch (error) {
       console.error("An error occurred:", error); // Log the error for debugging
@@ -154,6 +125,7 @@ export default function MemberRegistration() {
                 onChange={handleInputChange}
                 placeholder="Sudarshan"
                 className="border-2 w-2/3 pl-3 py-1 rounded-md"
+                required
               />
             </div>
             <div className="flex flex-col mt-3 gap-2">
@@ -175,6 +147,7 @@ export default function MemberRegistration() {
                 value={profile.dob}
                 onChange={handleInputChange}
                 className="border-2 w-2/3 pl-3 py-1 rounded-md"
+                required
               />
             </div>
             <div className="flex flex-col mt-3 gap-2">
@@ -184,6 +157,7 @@ export default function MemberRegistration() {
                 className="w-2/3 pl-3 py-1 text-base border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md"
                 value={profile.gender}
                 onChange={handleInputChange}
+                required
               >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
@@ -200,6 +174,7 @@ export default function MemberRegistration() {
                 onChange={handleInputChange}
                 placeholder="Kupandole"
                 className="border-2 w-2/3 pl-3 py-1 rounded-md"
+                required
               />
             </div>
             <div className="flex flex-col mt-3 gap-2">
@@ -211,17 +186,20 @@ export default function MemberRegistration() {
                 onChange={handleInputChange}
                 placeholder="0000000000"
                 className="border-2 w-2/3 pl-3 py-1 rounded-md"
+                required
               />
             </div>
             <div className="flex flex-col mt-3 gap-2">
               <label>Email</label>
               <input
-                type="text"
+                type="email"
                 name="email"
                 value={profile.email}
                 onChange={handleInputChange}
-                placeholder="email@gmail.com"
+                placeholder="email@patancollege.edu.np"
+                pattern="[a-zA-Z0-9._%+-]+@patancollege\.edu\.np"
                 className="border-2 w-2/3 pl-3 py-1 rounded-md"
+                required
               />
             </div>
             <div className="flex flex-col mt-3 gap-2">
@@ -233,6 +211,7 @@ export default function MemberRegistration() {
                 onChange={handleInputChange}
                 placeholder="@qwerty"
                 className="border-2 w-2/3 pl-3 py-1 rounded-md"
+                required
               />
             </div>
             <div className="flex flex-col mt-3 gap-2">
@@ -244,6 +223,7 @@ export default function MemberRegistration() {
                 onChange={handleInputChange}
                 placeholder="Password"
                 className="border-2 w-2/3 pl-3 py-1 rounded-md"
+                required
               />
             </div>
             <div className="flex flex-col mt-3 gap-2">
@@ -253,6 +233,7 @@ export default function MemberRegistration() {
                 value={profile.role_id}
                 onChange={handleInputChange}
                 className="w-2/3 pl-3 py-1 text-base border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md"
+                required
               >
                 <option value="" disabled>
                   Select role
