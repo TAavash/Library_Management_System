@@ -6,6 +6,8 @@ import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { BiSolidMessageAltAdd } from "react-icons/bi";
 import { MdUnsubscribe } from "react-icons/md";
 import { MdOutlineModeEditOutline } from "react-icons/md";
+import { CiLogout } from "react-icons/ci";
+
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -34,6 +36,17 @@ const UserProfile = () => {
             <div className="text-white">
               <h2 className="text-2xl font-semibold">Abhinab Prajapati</h2>
               <p className="text-lg">Student</p>
+              <div className="flex justify-start items-center">
+              
+              <button
+                  onClick={handleLogout}
+                  className="flex gap-1 items-center h-fit w-[75px] rounded-md text-black bg-white hover:bg-slate-300 active:bg-black text-sm font-medium p-[2px] px-[3px]"
+                >
+                  <CiLogout />
+                  Logout
+                </button>
+              </div>
+              
             </div>
           </div>
 
@@ -41,7 +54,9 @@ const UserProfile = () => {
           <div className="flex justify-around">
             <div className="flex-col">
               <div className="flex items-center mb-4">
-                <h3 className="text-xl font-semibold mr-2">Profile Information</h3>
+                <h3 className="text-xl font-semibold mr-2">
+                  Profile Information
+                </h3>
                 <button>
                   <MdOutlineModeEditOutline className="text-xl text-gray-600 hover:text-gray-800" />
                 </button>
@@ -93,15 +108,15 @@ const UserProfile = () => {
             {/* Cards Section */}
             <div className="flex-none w-1/3 flex flex-col gap-4">
               <div className="bg-blue-100 p-4 rounded-lg shadow-md flex flex-col items-center">
-              <BiSolidMessageAltAdd className="text-3xl mb-3 text-blue-500" />
-              <h4 className="text-lg font-semibold mb-1">Request Books</h4>
+                <BiSolidMessageAltAdd className="text-3xl mb-3 text-blue-500" />
+                <h4 className="text-lg font-semibold mb-1">Request Books</h4>
                 <p className="text-gray-700 text-xs text-center">
                   Request for the books you want to borrow.
                 </p>
               </div>
               <div className="bg-green-100 p-4 rounded-lg shadow-md flex flex-col items-center">
-              <MdUnsubscribe className="text-3xl mb-3 text-green-500" />
-              <h4 className="text-lg font-semibold mb-1">
+                <MdUnsubscribe className="text-3xl mb-3 text-green-500" />
+                <h4 className="text-lg font-semibold mb-1">
                   Subscribe to Our Newsletter
                 </h4>
                 <p className="text-gray-700 text-xs text-center">

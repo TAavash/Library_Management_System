@@ -9,6 +9,8 @@ import BookDetail from "../pages/User/BookDetail"
 import MyLearning from '../pages/User/MyLearning';
 import UserProfile from '../pages/User/UserProfile';
 import UserNotification from '../../src/pages/User/comp/UserNotification'
+import UpcomingDeadline from "../../src/pages/User/comp/UpcomingDeadline";
+
 
 export default function UserRoute() {
   return (
@@ -22,7 +24,7 @@ export default function UserRoute() {
                 <Route path="/user/my-learning" element={<MyLearning />}/>
                 <Route path="/user/profile" element={<UserProfile />} />
                 <Route path="/user/notification" element={<UserNotification />} />
-
+                <Route path="/upcoming-deadline" element={<UpcomingDeadline />} />
               </Routes>
             
       
