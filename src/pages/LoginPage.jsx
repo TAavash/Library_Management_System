@@ -32,23 +32,23 @@ const LoginPage = () => {
       if (response) {
         if (response.data.role_name === "Student") {
           toast.success("Login successful!");
-          navigate(`/user/home`);
+          setTimeout(() => navigate(`/user/home`), 1000);
         }
         else if (response.data.role_name === 'Faculty Member') {
           toast.success("Login successful!");
-          navigate(`/user/home`);
+          setTimeout(() => navigate(`/user/home`), 1000);
         }
         else if (response.data.role_name === 'Program Coordinator') {
           toast.success("Login successful!");
-          navigate(`/librarian-dashboard`);
+          setTimeout(() => navigate(`/librarian-dashboard`), 1000);
         }
         else if (response.data.role_name === 'Library Assistant') {
           toast.success("Login successful!");
-          navigate(`/librarian-dashboard`);
+          setTimeout(() => navigate(`/librarian-dashboard`), 1000);
         }
         else if (response.data.role_name === 'Librarian') {
           toast.success("Login successful!");
-          navigate(`/librarian-dashboard`);
+          setTimeout(() => navigate(`/librarian-dashboard`), 1000);
         }
       } else {
         toast.error(response.data.message || "Login failed. Please check your credentials.");
