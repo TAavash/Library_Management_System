@@ -1,16 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import logo from "../../assets/pcpslogo.png";
-import bookcover from "../../assets/images.jpeg";
-import bookcover1 from "../../assets/36236124._SX300_.jpg";
 import { IoBookSharp } from "react-icons/io5";
 import { MdBookmarkAdded, MdLocalLibrary } from "react-icons/md";
 import { HiDocumentText } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
 import Bannerimage from "../../assets/finaldashbanner.png";
+import bookcover from "../../assets/images.jpeg";
+import bookcover1 from "../../assets/36236124._SX300_.jpg";
 import SearchBar from "../../pages/User/comp/SearchBar";
-import UserFlipCard from "../../pages/User/comp/UserFlipCard";
 import Usernav from "../User/comp/Usernav";
 
 function Userdash() {
@@ -115,15 +113,21 @@ function Userdash() {
               {upcomingBooks.map((book, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center p-4 border border-gray-300 rounded-lg transition-transform transform hover:scale-105 cursor-pointer"
-                  onClick={() => navigate("/book-detail")}
+                  className="flex p-4 border border-gray-300 rounded-lg transition-transform transform hover:scale-105 cursor-pointer"
+                  onClick={() =>
+                    navigate("/upcoming-deadline", { state: { book } })
+                  }
                 >
                   <img
                     src={book.cover}
                     alt={book.title}
                     className="w-[100px] object-cover rounded-lg"
                   />
-                  <p className="font-bold mt-2">{book.title}</p>
+                  <div className="ml-4">
+                    <p className="font-bold text-lg">{book.title}</p>
+                    <p className="text-gray-500">Borrowed Date: {book.rdate}</p>
+                    <p className="text-gray-500">Expire Date: {book.edate}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -151,7 +155,7 @@ function Userdash() {
             {books.map((book, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4  min-w-[150px] transition-transform transform hover:scale-105 cursor-pointer"
+                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 min-w-[150px] transition-transform transform hover:scale-105 cursor-pointer"
                 onClick={() => navigate("/my-learning")}
               >
                 <div className="relative">
