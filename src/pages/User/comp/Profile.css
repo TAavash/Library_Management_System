@@ -1,0 +1,40 @@
+/* Keyframe animation for gradient background */
+@keyframes gradient-x {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Animated gradient background */
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-x 10s ease infinite;
+  }
+  
+  /* Style for the sticky navigation */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  
+  .sticky-nav a {
+    color: #1d4ed8;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .sticky-nav a:hover {
+    color: #2563eb;
+  }
+  

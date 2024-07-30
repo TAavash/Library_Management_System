@@ -3,129 +3,141 @@ import { useNavigate } from "react-router-dom";
 import Profile from "../../assets/profilepicture.jpeg";
 import Background from "../../assets/profilebg.png";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
-import { BiSolidMessageAltAdd } from "react-icons/bi";
-import { MdUnsubscribe } from "react-icons/md";
-import { MdOutlineModeEditOutline } from "react-icons/md";
 import { CiLogout } from "react-icons/ci";
-
+import { motion } from "framer-motion";
+import { MdOutlineModeEditOutline } from 'react-icons/md';
+import { HiArrowLeft } from "react-icons/hi";
+import Profilecss from "../User/comp/Profile.css";
 
 const UserProfile = () => {
   const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.removeItem("access_token");
     navigate(`/`);
   };
+
+  const handleBack = () => {
+    navigate(-1); // Goes back to the previous page
+  };
+
   return (
-    <div className="relative">
-      {/* Background Image */}
+    <div className="relative min-h-screen bg-gray-100">
+      {/* Back Button */}
+      <div className="absolute top-4 left-4 z-20">
+        <button onClick={handleBack} className="flex items-center text-white hover:text-red-800 bg-transparent border-none">
+          <HiArrowLeft className="text-xl mr-2" /> 
+        </button>
+      </div>
+
+      {/* Header Section */}
       <div
-        className="h-[300px] bg-cover bg-center"
+        className="relative h-[500px] bg-cover bg-center"
         style={{ backgroundImage: `url(${Background})` }}
-      ></div>
-
-      {/* Container with Profile and Info */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 bg-white shadow-gray-600 shadow-xl rounded-lg p-6 pb-3 w-full max-w-4xl flex gap-8">
-        {/* Profile Section */}
-        <div className="flex-1">
-          <div className="bg-slate-600 p-4 flex items-center rounded-lg mb-6">
-            <img
-              src={Profile}
-              className="w-24 h-24 object-cover rounded-full border-4 border-white mr-4"
-              alt="profile"
-            />
-            <div className="text-white">
-              <h2 className="text-2xl font-semibold">Abhinab Prajapati</h2>
-              <p className="text-lg">Student</p>
-              <div className="flex justify-start items-center">
-              
-              <button
-                  onClick={handleLogout}
-                  className="flex gap-1 items-center h-fit w-[75px] rounded-md text-black bg-white hover:bg-slate-300 active:bg-black text-sm font-medium p-[2px] px-[3px]"
-                >
-                  <CiLogout />
-                  Logout
-                </button>
-              </div>
-              
-            </div>
-          </div>
-
-          {/* Profile Information */}
-          <div className="flex justify-around">
-            <div className="flex-col">
-              <div className="flex items-center mb-4">
-                <h3 className="text-xl font-semibold mr-2">
-                  Profile Information
-                </h3>
-                <button>
-                  <MdOutlineModeEditOutline className="text-xl text-gray-600 hover:text-gray-800" />
-                </button>
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="text-gray-700 text-sm">
-                  <strong>First Name:</strong> Abhinab
-                </div>
-                <div className="text-gray-700 text-sm">
-                  <strong>Last Name:</strong> Prajapati
-                </div>
-                <div className="text-gray-700 text-sm">
-                  <strong>Gender:</strong> Male
-                </div>
-                <div className="text-gray-700 text-sm">
-                  <strong>Address:</strong> Patan
-                </div>
-                <div className="text-gray-700 text-sm">
-                  <strong>Email:</strong> abhinabsuii@mail.com
-                </div>
-                <div className="text-gray-700 text-sm">
-                  <strong>Mobile:</strong> 977-9812121212
-                </div>
-                <div className="text-gray-700 text-sm">
-                  <strong>Library Card Number:</strong> 2214618
-                </div>
-              </div>
-              <div className="flex gap-3 justify-center mt-4">
-                <a
-                  href="#"
-                  className="text-blue-600 hover:text-blue-800 text-xl"
-                >
-                  <FaFacebook />
-                </a>
-                <a
-                  href="#"
-                  className="text-blue-400 hover:text-blue-600 text-xl"
-                >
-                  <FaTwitter />
-                </a>
-                <a
-                  href="#"
-                  className="text-pink-600 hover:text-pink-800 text-xl"
-                >
-                  <FaInstagram />
-                </a>
-              </div>
-            </div>
-            {/* Cards Section */}
-            <div className="flex-none w-1/3 flex flex-col gap-4">
-              <div className="bg-blue-100 p-4 rounded-lg shadow-md flex flex-col items-center">
-                <BiSolidMessageAltAdd className="text-3xl mb-3 text-blue-500" />
-                <h4 className="text-lg font-semibold mb-1">Request Books</h4>
-                <p className="text-gray-700 text-xs text-center">
-                  Request for the books you want to borrow.
-                </p>
-              </div>
-              <div className="bg-green-100 p-4 rounded-lg shadow-md flex flex-col items-center">
-                <MdUnsubscribe className="text-3xl mb-3 text-green-500" />
-                <h4 className="text-lg font-semibold mb-1">
-                  Subscribe to Our Newsletter
-                </h4>
-                <p className="text-gray-700 text-xs text-center">
-                  Stay updated with the latest news and updates.
-                </p>
-              </div>
-            </div>
-          </div>
+      >
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <motion.img
+            whileHover={{ scale: 1.1 }}
+            src={Profile}
+            className="w-40 h-40 object-cover rounded-full border-4 border-white shadow-lg"
+            alt="profile"
+          />
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl font-bold text-white mt-4"
+          >
+            Fredy Mercury
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-xl text-white mt-2"
+          >
+            Student, Second Year
+          </motion.p>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            onClick={handleLogout}
+            className="flex items-center mt-4 text-red-600 bg-white px-4 py-2 rounded-full shadow-md"
+          >
+            <CiLogout className="mr-1" /> Logout
+          </motion.button>
         </div>
+      </div>
+
+      {/* Sticky Navigation */}
+      <div className="sticky top-0 bg-white shadow-md z-10">
+        <nav className="max-w-4xl mx-auto p-4 flex justify-around">
+          <a href="#posts" className="text-blue-600 hover:text-blue-800">Posts</a>
+          <a href="#photos" className="text-blue-600 hover:text-blue-800">Photos</a>
+          <a href="#info" className="text-blue-600 hover:text-blue-800">Personal Info</a>
+        </nav>
+      </div>
+
+      {/* Content Sections */}
+      <div id="posts" className="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-lg">
+        <h3 className="text-2xl font-bold mb-4">Posts</h3>
+        <p className="text-gray-700">
+          Here are some of the recent posts made by Fredy.
+        </p>
+      </div>
+      <div id="photos" className="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-lg">
+        <h3 className="text-2xl font-bold mb-4">Photos</h3>
+        <p className="text-gray-700">
+          Check out some of the photos shared by Fredy.
+        </p>
+      </div>
+      <div id="info" className="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-lg">
+        <div className="flex justify-between items-center">
+          <h3 className="text-2xl font-bold mb-4">Personal Info</h3>
+          <button>
+            <MdOutlineModeEditOutline className="text-xl text-gray-600 hover:text-gray-800" />
+          </button>
+        </div>
+        <div className="flex flex-col gap-2 text-gray-700">
+          {[
+            { label: "First Name", value: "Fredy" },
+            { label: "Last Name", value: "Mercury" },
+            { label: "Gender", value: "Male" },
+            { label: "Address", value: "Patan" },
+            { label: "Email", value: "fredymercury@mail.com" },
+            { label: "Mobile", value: "977-9812121212" },
+            { label: "Library Card Number", value: "2214618" },
+          ].map((info, index) => (
+            <div key={index} className="text-sm">
+              <strong>{info.label}:</strong> {info.value}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Social Media Links */}
+      <div className="flex justify-center gap-6 mt-8">
+        <motion.a
+          whileHover={{ scale: 1.2 }}
+          href="#"
+          className="text-blue-600 hover:text-blue-800 text-3xl"
+        >
+          <FaFacebook />
+        </motion.a>
+        <motion.a
+          whileHover={{ scale: 1.2 }}
+          href="#"
+          className="text-blue-400 hover:text-blue-600 text-3xl"
+        >
+          <FaTwitter />
+        </motion.a>
+        <motion.a
+          whileHover={{ scale: 1.2 }}
+          href="#"
+          className="text-pink-600 hover:text-pink-800 text-3xl"
+        >
+          <FaInstagram />
+        </motion.a>
       </div>
     </div>
   );
