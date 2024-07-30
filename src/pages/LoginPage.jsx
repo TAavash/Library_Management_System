@@ -34,6 +34,18 @@ const LoginPage = () => {
           toast.success("Login successful!");
           navigate(`/user/home`);
         }
+        else if (response.data.role_name === 'Faculty Member') {
+          toast.success("Login successful!");
+          navigate(`/user/home`);
+        }
+        else if (response.data.role_name === 'Program Coordinator') {
+          toast.success("Login successful!");
+          navigate(`/librarian-dashboard`);
+        }
+        else if (response.data.role_name === 'Library Assistant') {
+          toast.success("Login successful!");
+          navigate(`/librarian-dashboard`);
+        }
         else if (response.data.role_name === 'Librarian') {
           toast.success("Login successful!");
           navigate(`/librarian-dashboard`);
