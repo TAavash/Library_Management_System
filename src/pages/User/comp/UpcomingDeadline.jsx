@@ -16,36 +16,36 @@ function UpcomingDeadline() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-6 max-w-2xl w-full mx-4 transform transition duration-500 hover:scale-105">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-blue-200">
+      <div className="bg-white shadow-xl rounded-lg p-8 max-w-lg w-full mx-4 transform transition duration-500 hover:scale-105">
         <div className="flex flex-col items-center">
-          <div className="relative w-48 h-60 mb-4">
+          <div className="relative w-40 h-56 mb-6">
             <img
               src={book.cover}
               alt={book.title}
-              className="object-cover w-full h-full rounded-lg shadow-md"
+              className="object-cover w-full h-full rounded-lg shadow-lg transition-transform duration-300 hover:scale-105"
             />
           </div>
-          <h2 className="text-3xl font-bold mb-2 text-center text-gray-800">{book.title}</h2>
-          <p className="text-gray-600 mb-4 text-center">{book.description || "No description available"}</p>
+          <h2 className="text-4xl font-extrabold mb-3 text-center text-gray-800">{book.title}</h2>
+          <p className="text-gray-700 mb-5 text-center text-lg">{book.description || "No description available"}</p>
         </div>
-        <div className=" p-4 rounded-lg  mb-4">
-          <p className="text-gray-700 mb-2">
+        <div className="p-4 mb-6">
+          <p className="text-gray-800 mb-2 text-lg">
             <span className="font-semibold">Borrowed Date:</span> {book.rdate}
           </p>
-          <p className="text-gray-700 mb-2">
+          <p className="text-gray-800 mb-4 text-lg">
             <span className="font-semibold">Expire Date:</span> {book.edate}
           </p>
         </div>
-        <div className="flex justify-start space-x-4 mt-4">
+        <div className="flex justify-center space-x-4">
           <button
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-transform duration-300 transform hover:scale-105"
             onClick={handleRenew}
           >
             Renew Book
           </button>
           <button
-            className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition"
+            className="px-6 py-3 bg-gray-600 text-white rounded-lg shadow-md hover:bg-gray-700 transition-transform duration-300 transform hover:scale-105"
             onClick={() => navigate(-1)}
           >
             Back
