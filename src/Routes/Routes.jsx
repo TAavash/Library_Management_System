@@ -38,6 +38,9 @@ import Userdash from '../pages/User/Userdash';
 import BookDetail from "../pages/User/BookDetail"
 import MyLearning from '../pages/User/MyLearning';
 import UserProfile from '../pages/User/UserProfile';
+
+import UserNotification from '../../src/pages/User/comp/UserNotification'
+import UpcomingDeadline from "../../src/pages/User/comp/UpcomingDeadline";
 // import UserRoute from "./UserRoute";
 import ForgetPassword from "../pages/ForgetPassword";
 import Otp from "../pages/Otp";
@@ -90,6 +93,8 @@ export default function RoutesNav() {
         <Route path="/user/book-detail" element={<BookDetail />} />
         <Route path="/user/my-learning" element={<MyLearning />} />
         <Route path="/user/profile" element={<UserProfile />} />
+        <Route path="/user/notification" element={<UserNotification />} />
+        <Route path="/upcoming-deadline" element={<UpcomingDeadline />} />
       </Routes>
     </>
   );
