@@ -73,3 +73,9 @@ export const login = async (username, password) => {
 export const logout = () => {
   localStorage.removeItem("access_token");
 };
+
+export const userList = async () => {
+  const response = await axiosInstance.get('/user/all')
+  return response.data.users
+
+}
