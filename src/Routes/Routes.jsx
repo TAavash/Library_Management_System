@@ -38,6 +38,7 @@ import Userdash from '../pages/User/Userdash';
 import BookDetail from "../pages/User/BookDetail"
 import MyLearning from '../pages/User/MyLearning';
 import UserProfile from '../pages/User/UserProfile';
+import LibrarianProfile from '../pages/Librarian/LibrarianProfile';
 // import UserRoute from "./UserRoute";
 import ForgetPassword from "../pages/ForgetPassword";
 import Otp from "../pages/Otp";
@@ -47,7 +48,7 @@ export default function RoutesNav() {
     <>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register/" element={<Register />} />
         <Route path="/forgetPassword" element={<ForgetPassword />} />
         <Route path="/otp" element={<Otp />} />
         <Route path="/librarian-dashboard" element={<LibrarianDash />} />
@@ -75,7 +76,10 @@ export default function RoutesNav() {
         <Route path="/LibraryDash" element={<LibrarianDashboard />} />
         <Route path="/MemberDetail" element={<MemberDetail />} />
         <Route path="/BookRegistration" element={<BookRegistration />} />
+
         <Route path="/MemberRegistration" element={<MemberRegistration />} />
+        <Route path="/MemberRegistration/:user_idS" element={<MemberRegistration />} />
+
         <Route path="/LibraryRequestPage" element={<LibraryRequestPage />} />
         <Route path="/AllUsers" element={<AllUsers />} />
         <Route path="/FacultyMembers" element={<FacultyMembers />} />
@@ -90,6 +94,7 @@ export default function RoutesNav() {
         <Route path="/user/book-detail" element={<BookDetail />} />
         <Route path="/user/my-learning" element={<MyLearning />} />
         <Route path="/user/profile" element={<UserProfile />} />
+        <Route path="/libraian/profile" element={<LibrarianProfile />} />
       </Routes>
     </>
   );
