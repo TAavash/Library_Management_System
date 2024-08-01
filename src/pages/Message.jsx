@@ -5,12 +5,118 @@ import { IoSettingsSharp } from "react-icons/io5";
 import NavNew from "../components/NavNew";
 
 const Message = () => {
+  const tableData = [
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+    {
+      id: 3542342,
+      email: "sudarshan@gmail.com",
+      messsage: "I am having trouble with changing password.",
+      messageDate: "May 20, 2024",
+    },
+
+  ];
   return (
     <div>
       <NavNew />
       <div className="min-h-screen h-auto bg-gray-200 py-[10px]">
         <div className="p-[20px]">
-          <div className="flex h-[800px] w-[100%] my-[100px] rounded-2xl bg-white shadow-slate-500 shadow-md ">
+          <div className="flex h-[800px] w-[100%] mt-[100px] rounded-2xl bg-white shadow-slate-500 shadow-md ">
             <div className="h-[800px] w-[300px] rounded-l-2xl bg-[#14273D]">
               <div className="flex flex-col gap-[10px] justify-center items-center h-[20%] p-[20px] border-b-4 border-[#A3A3A3]">
                 <IoMail className=" fill-[#A3A3A3]  text-4xl" />
@@ -54,9 +160,26 @@ const Message = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-white rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
-                <div className=" grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
-                  Message
+              <div className="flex-col h-[80%] gap-[30px] bg-white rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
+                <div>
+                  <table className="h-full w-full bg-white">
+                    <tr className=" sticky ">
+                      <th className="p-3 text-start">ID</th>
+                      <th className="p-3 text-start ">Email</th>
+                      <th className="p-3 text-start">Message</th>
+                      <th className=" p-3 text-start">Messaged Date</th>
+                    </tr>
+                    {tableData.map((person) => {
+                      return (
+                        <tr key={person.id}>
+                          <td className="p-3">{person.id}</td>
+                          <td className="p-3">{person.email}</td>
+                          <td className="p-3">{person.messsage}</td>
+                          <td className="p-3">{person.messageDate}</td>
+                        </tr>
+                      );
+                    })}
+                  </table>
                 </div>
               </div>
             </div>
@@ -67,5 +190,4 @@ const Message = () => {
   );
 };
 
-
-export default Message
+export default Message;

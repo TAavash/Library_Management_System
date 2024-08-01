@@ -1,38 +1,65 @@
 import React, { useState } from "react";
-import { FaUserAlt } from "react-icons/fa";
+import { FaUserAlt, FaEye, FaEyeSlash } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import PcpsLogo from "../assets/pcpslogo.png";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import RegImg from "../assets/library.jpg";
+import { ToastContainer, toast } from "react-toastify";
+import { login } from "../utils/Api";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
   const handleRegister = () => {
     navigate(`/register`);
   };
-  const [isValidEmail, setIsValidEmail] = useState(true);
 
-  const validateEmail = (email) => {
-    if (email == null) {
-      return false;
-    } else {
-      const emailRegex = /^[^\s@]+@patancollege\.edu\.np$/;
-      return emailRegex.test(email);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const response = await login(username, password);
+      if (response) {
+        if (response.data.role_name === "Student") {
+          toast.success("Login successful!");
+          setTimeout(() => navigate(`/user/home`), 1000);
+        }
+        else if (response.data.role_name === 'Faculty Member') {
+          toast.success("Login successful!");
+          setTimeout(() => navigate(`/user/home`), 1000);
+        }
+        else if (response.data.role_name === 'Program Coordinator') {
+          toast.success("Login successful!");
+          setTimeout(() => navigate(`/librarian-dashboard`), 1000);
+        }
+        else if (response.data.role_name === 'Library Assistant') {
+          toast.success("Login successful!");
+          setTimeout(() => navigate(`/librarian-dashboard`), 1000);
+        }
+        else if (response.data.role_name === 'Librarian') {
+          toast.success("Login successful!");
+          setTimeout(() => navigate(`/librarian-dashboard`), 1000);
+        }
+      } else {
+        toast.error(response.data.message || "Login failed. Please check your credentials.");
+      }
+    } catch (error) {
+      toast.error("Login failed. Please check your credentials.");
+    } finally {
+      setIsLoading(false);
     }
   };
-  const handleLibrarianDash = () => {
-    navigate(`/librarian-dashboard`);
-  };
-  const handleStudentDash = () => {
-    navigate(`/user/home`);
-  };
 
-  const handleEmailChange = (e) => {
-    const currentEmail = e.target.value;
-    setEmail(currentEmail);
-    setIsValidEmail(validateEmail(currentEmail));
-  };
 
   return (
     <div
@@ -46,59 +73,70 @@ const LoginPage = () => {
             <br />
             <div className="flex gap-3 items-center justify-center -mt-[30px]">
               <img src={PcpsLogo} width={150} alt="" />
-              <div className="text-2xl text-red-600  font-bold">LIBRARY</div>
+              <div className="text-2xl text-red-600 font-bold">LIBRARY</div>
             </div>
           </div>
           <div className="text-sm md:text-l mb-[10px] mt-[15px]">
-            Log in to get the Books that interests you.
+            Log in to get the Books that interest you.
           </div>
           <form
-            action=""
             className="flex flex-col items-center justify-center mt-[30px]"
+            onSubmit={handleLogin}
           >
             <div className="flex flex-col gap-5">
               <div className="relative">
                 <input
-                  type="email"
+                  type="text"
+                  name="username"
                   className="peer min-w-[200px] md:min-w-[300px] rounded-[10px] h-[50px] pl-[50px] md:pl-[70px]"
-                  placeholder="Email"
-                  onChange={handleEmailChange}
+                  placeholder="Username"
+                  onChange={(e) => setUsername(e.target.value)}
+                  value={username}
                 />
                 <div className="absolute top-1/2 text-xl md:text-2xl transform -translate-y-1/2 ml-[10px] text-gray-500">
                   <FaUserAlt />
                 </div>
               </div>
-              {!isValidEmail && (
-                <p className="text-[11px] text-start text-red-600 -mt-[18px] mb-0">
-                  Please provide a valid email address
-                </p>
-              )}
-              <div className="relative">
+              <div className="relative flex items-center">
                 <input
-                  type="password"
-                  className={`peer min-w-[200px] md:min-w-[300px] rounded-[10px] h-[50px] pl-[50px] md:pl-[70px] ${
-                    !isValidEmail ? "-mt-[10px]" : ""
-                  }`}
+                  name="password"
+                  type={passwordVisible ? "text" : "password"}
+                  className="peer min-w-[200px] md:min-w-[300px] rounded-[10px] h-[50px] pl-[50px] md:pl-[70px]"
                   placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
                 />
+                <button
+                  type="button"
+                  className="absolute right-3"
+                  onClick={togglePasswordVisibility}
+                  aria-label={
+                    passwordVisible ? "Hide password" : "Show password"
+                  }
+                >
+                  {passwordVisible ? (
+                    <FaEyeSlash className="fill-gray-500" />
+                  ) : (
+                    <FaEye className="fill-gray-500" />
+                  )}
+                </button>
                 <div className="absolute top-1/2 text-xl md:text-2xl transform -translate-y-1/2 ml-[10px] text-gray-500">
                   <RiLockPasswordFill />
                 </div>
               </div>
-
               <button
-                onClick={handleLibrarianDash}
+                type="submit"
                 className="w-full mx-auto bg-black text-white py-[6px] -mt-[4px]"
+                disabled={isLoading}
               >
-                Sign In
+                {isLoading ? "Signing In..." : "Sign In"}
               </button>
             </div>
           </form>
-          <div onClick={handleStudentDash} className="mt-[5px] text-end md:mb-[20px] text-[14px] underline">
+          <div className="mt-[5px] text-end md:mb-[20px] text-[14px] underline cursor-pointer">
             Forgot Password ?
           </div>
         </div>
-
         <div className="flex gap-1">
           Tap to{" "}
           <div
@@ -109,6 +147,7 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

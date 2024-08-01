@@ -6,6 +6,7 @@ import NavNew from "../components/NavNew";
 const Settings = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
+    localStorage.removeItem("access_token");
     navigate(`/`);
   };
   const handleSignin = () => {
@@ -17,7 +18,7 @@ const Settings = () => {
       <NavNew />
       <div className="min-h-screen h-auto bg-gray-200 py-[10px]">
         <div className="p-[20px]">
-          <div className="flex h-[800px] w-[100%] my-[100px] rounded-2xl bg-white shadow-slate-500 shadow-md ">
+          <div className="flex h-[800px] w-[100%] mt-[100px] rounded-2xl bg-white shadow-slate-500 shadow-md ">
             <div className="h-[800px] w-[300px] rounded-l-2xl bg-[#14273D]">
               <div className="flex flex-col gap-[10px] justify-center items-center h-[20%] p-[20px] border-b-4 border-[#A3A3A3]">
                 <IoSettingsSharp className=" fill-[#A3A3A3]  text-4xl" />
@@ -50,8 +51,16 @@ const Settings = () => {
               </div>
               <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-white rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
                 <div className=" flex gap-[30px] my-2">
-                  <button onClick={handleSignin} className="h-fit w-[100px] rounded-md text-white bg-green-600 hover:bg-slate-800 active:bg-black text-2xl p-[2px] px-[3px]">Signin</button>
-                  <button onClick={handleLogout} className="h-fit w-[100px] rounded-md text-white bg-red-600 hover:bg-slate-800 active:bg-black text-2xl p-[2px] px-[3px]">
+                  <button
+                    onClick={handleSignin}
+                    className="h-fit w-[100px] rounded-md text-white bg-green-600 hover:bg-slate-800 active:bg-black text-2xl p-[2px] px-[3px]"
+                  >
+                    Signin
+                  </button>
+                  <button
+                    onClick={handleLogout}
+                    className="h-fit w-[100px] rounded-md text-white bg-red-600 hover:bg-slate-800 active:bg-black text-2xl p-[2px] px-[3px]"
+                  >
                     Logout
                   </button>
                 </div>

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import Pcps from "../assets/pcps_logo.jpg";
 import SearchBar from "../components/Search";
-import Avatar from "../components/Avatar";
+import Avatar from "./Avatar";
 import { VscBellDot } from "react-icons/vsc";
 import { IoSettingsSharp } from "react-icons/io5";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
-import NavMobile from "./NavMobile";
+import Hamburger from "./Hamburger";
 
 const NavNew = () => {
   const navigate = useNavigate();
@@ -16,6 +15,9 @@ const NavNew = () => {
   };
   const handleLibraryBooks = () => {
     navigate(`/librarian-books`);
+  };
+  const handlePatrons = () => {
+    navigate(`/patrons`);
   };
   const handleMessage = () => {
     navigate(`/message`);
@@ -39,7 +41,7 @@ const NavNew = () => {
   const [mobileNaavbarOpen, setMobileNaavbarOpen] = useState(false);
   return (
     <div className="w-screen fixed z-10 bg-white ">
-      <div className="flex justify-between items-center lg:mr-10">
+      <div className="flex justify-between items-center lg:mr-10 ">
         <img
           onClick={handleLibraryDash}
           className="h-9 md:h-14 cursor-pointer"
@@ -49,42 +51,42 @@ const NavNew = () => {
         <div className="hidden md:flex mx-auto justify-evenly content-stretch">
           <button
             onClick={handleLibraryDash}
-            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black"
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:text-red-400 text-black"
           >
             Home
           </button>
           <button
             onClick={handleLibraryBooks}
-            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black"
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:text-red-400 text-black"
           >
             Books
           </button>
-          <button className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black">
+          <button onClick={handlePatrons} className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:text-red-400 text-black">
             Patrons
           </button>
           <button
             onClick={handleMessage}
-            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black"
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:text-red-400 text-black"
           >
             Message
           </button>
           <button
             onClick={handleLibrarianFines}
-            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black"
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:text-red-400 text-black"
           >
             Fines
           </button>
           <button
             onClick={handleLibrarianOthers}
-            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:bg-red-700 text-black"
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:text-red-400 text-black"
           >
             Others
           </button>
         </div>
         <div className="md:hidden" onClick={() => setMobileNaavbarOpen(true)}>
-          <GiHamburgerMenu />
+          <Hamburger />
         </div>
-        <div className=" flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-4">
           <VscBellDot
             onClick={handleNotification}
             className="text-2xl hover:fill-red-600 cursor-pointer"
