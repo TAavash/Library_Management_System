@@ -31,9 +31,10 @@
     background-color: #cccccc;
 }
 
+/* Remove hover effect */
 .react-calendar__navigation button:hover {
-    background-color: #c82333;
-    border-radius: 50px;
+    background-color: #dc3545; /* Retain the original background color */
+    border-radius: 0; /* Retain the original border radius */
 }
 
 .react-calendar__navigation button:focus {
@@ -122,4 +123,3 @@
     font-size: 1em;
     font-weight: bold;
 }
-
