@@ -1,47 +1,45 @@
 import React, { useState } from "react";
 import { IoMail } from "react-icons/io5";
-import { FaBell } from "react-icons/fa";
-import { IoSettingsSharp } from "react-icons/io5";
-import { FiSearch } from "react-icons/fi";
+// import { FaBell } from "react-icons/fa";
+// import { IoSettingsSharp } from "react-icons/io5";
+// import { FiSearch } from "react-icons/fi";
 import { useLocation, useNavigate } from "react-router-dom";
-import NavNew from '../../../../components/NavNew';
-import BookRenewalRequest from './BookRenewalRequest';
-import UserAccountRequest from './UserAccountRequest';
+import NavNew from "../../../../components/NavNew";
+import BookRenewalRequest from "./BookRenewalRequest";
+import UserAccountRequest from "./UserAccountRequest";
 
 export default function LibraryRequestPage() {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-
-    const handleAddIconClick = () => {
-        navigate('/MemberRegistration');
-    };
+  const handleAddIconClick = () => {
+    navigate("/MemberRegistration/");
+  };
 
     const handleUserClick = () => {
         navigate('/LibraryDash');
     };
 
-    const [active, setActive] = useState("User Account Request");
+  const [active, setActive] = useState("User Account Request");
 
-    const location = useLocation();
+  const location = useLocation();
 
-    const handleAccountActive = () => {
-        setActive("User Account Request");
-    };
-    const handleRenewalActive = () => {
-        setActive("Book Renewal Request");
-    };
+  const handleAccountActive = () => {
+    setActive("User Account Request");
+  };
+  const handleRenewalActive = () => {
+    setActive("Book Renewal Request");
+  };
 
-    console.log(location);
+  console.log(location);
 
-    const renderActiveComponent = () => {
-        switch (active) {
-            case "Book Renewal Request":
-                return <BookRenewalRequest />;
-            default:
-                return <UserAccountRequest />;
-        }
-    };
-
+  const renderActiveComponent = () => {
+    switch (active) {
+      case "Book Renewal Request":
+        return <BookRenewalRequest />;
+      default:
+        return <UserAccountRequest />;
+    }
+  };
 
     return (
         <div>
