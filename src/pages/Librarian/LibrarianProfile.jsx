@@ -1,36 +1,44 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import abhinab from '../../assets/drake.jpeg';
+import NavNew from '../../components/NavNew';
 
 const LibrarianProfile = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-400 to-purple-600 flex flex-col items-center">
-      <div className="w-full max-w-4xl bg-white shadow-md rounded-lg overflow-hidden mt-10">
-        <div className="bg-gradient-to-r from-blue-400 to-purple-600 h-32 w-full"></div>
-        <div className="flex justify-center -mt-16">
-          <img
-            className="w-32 h-32 rounded-full border-4 border-white"
-            src="path_to_profile_picture" 
-            alt="User Profile"
-          />
-        </div>
-        <div className="text-center mt-5">
-          <h2 className="text-3xl font-semibold text-gray-800">Admin Name</h2>
-          <p className="text-xl text-gray-600">Admin Role</p>
-          <p className="text-lg text-gray-500">Location</p>
-          <div className="flex justify-center mt-4">
-            <span className="bg-blue-600 text-white text-sm px-4 py-2 rounded-full">Library Management System</span>
-            <span className="bg-gray-600 text-white text-sm px-4 py-2 rounded-full ml-2">Another Organization</span>
+    <div className="min-h-screen flex flex-col items-center bg-gray-100 w-screen">
+      <NavNew />
+      <div className="flex-grow w-full bg-white shadow-lg rounded-lg mt-10 overflow-hidden flex flex-col">
+        <div className="relative">
+          <div className="h-40 bg-blue-500 w-full"></div>
+          <div className="absolute top-20 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white mb-4 relative">
+              <img
+                className="w-full h-full object-cover"
+                src={abhinab}
+                alt="User Profile"
+              />
+              
+            </div>
+           
           </div>
         </div>
-        <div className="mt-6 px-6 py-4 border-t border-gray-200">
-          <h3 className="text-xl font-semibold text-gray-800">Profile Information</h3>
-          <p className="text-gray-600 mt-2">Contact Information: contact@example.com</p>
-          <p className="text-gray-600 mt-2">Email: admin@example.com</p>
-          <p className="text-gray-600 mt-2">Phone Number: (123) 456-7890</p>
-          <p className="text-gray-600 mt-2">Address: 123 Library St, City, Country</p>
-        </div>
-        <div className="mt-6 px-6 py-4 border-t border-gray-200">
-          <h3 className="text-xl font-semibold text-gray-800">Recent Activities</h3>
-          <p className="text-gray-600 mt-2">Recent activities related to the library management system...</p>
+        <div className="mt-10 px-8 py-6 text-center">
+          <h2 className="text-2xl font-bold text-gray-800">Ram Yadav</h2>
+          <p className="text-lg text-gray-600">Librarian</p>
+        </div>      
+        <div className="flex-col border-t px-8 py-6">
+          <h3 className="text-2xl font-semibold text-gray-800 mb-4">Profile Information</h3>
+          <div className="flex flex-col space-y-4">
+            <p className="text-gray-600"><span className="font-bold">First Name:</span> Ram</p>
+            <p className="text-gray-600"><span className="font-bold">Last Name:</span> Yadav</p>
+            <p className="text-gray-600"><span className="font-bold">DOB:</span> 2004-02-10</p>
+            <p className="text-gray-600"><span className="font-bold">Gender:</span> Male</p>
+            <p className="text-gray-600"><span className="font-bold">Address:</span> 123 Library St, City, Country</p>
+            <p className="text-gray-600"><span className="font-bold">Email:</span> admin@example.com</p>
+            <p className="text-gray-600"><span className="font-bold">Phone Number:</span> (123) 456-7890</p>
+          </div>
         </div>
       </div>
     </div>
