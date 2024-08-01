@@ -39,13 +39,13 @@ function UpcomingDeadline() {
         </div>
         <div className="flex justify-center space-x-4">
           <button
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-transform duration-300 transform hover:scale-105"
+            className="px-6 py-3 bg-blue-600 text-white rounded-full shadow-md hover:bg-blue-700 transition-transform duration-300 transform hover:scale-105"
             onClick={handleRenew}
           >
             Renew Book
           </button>
           <button
-            className="px-6 py-3 bg-gray-600 text-white rounded-lg shadow-md hover:bg-gray-700 transition-transform duration-300 transform hover:scale-105"
+            className="px-6 py-3 bg-gray-600 text-white rounded-full shadow-md hover:bg-gray-700 transition-transform duration-300 transform hover:scale-105"
             onClick={() => navigate(-1)}
           >
             Back

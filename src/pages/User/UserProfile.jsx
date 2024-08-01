@@ -69,17 +69,17 @@ const UserProfile = () => {
         </div>
       </div>
 
-      {/* Sticky Navigation */}
+      {/* Sticky Navigation
       <div className="sticky top-0 bg-white shadow-md z-10">
         <nav className="max-w-4xl mx-auto p-4 flex justify-around">
           <a href="#posts" className="text-blue-600 hover:text-blue-800">Posts</a>
           <a href="#photos" className="text-blue-600 hover:text-blue-800">Photos</a>
           <a href="#info" className="text-blue-600 hover:text-blue-800">Personal Info</a>
         </nav>
-      </div>
+      </div> */}
 
       {/* Content Sections */}
-      <div id="posts" className="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-lg">
+      {/* <div id="posts" className="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-lg">
         <h3 className="text-2xl font-bold mb-4">Posts</h3>
         <p className="text-gray-700">
           Here are some of the recent posts made by Fredy.
@@ -90,7 +90,7 @@ const UserProfile = () => {
         <p className="text-gray-700">
           Check out some of the photos shared by Fredy.
         </p>
-      </div>
+      </div> */}
       <div id="info" className="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-lg">
         <div className="flex justify-between items-center">
           <h3 className="text-2xl font-bold mb-4">Personal Info</h3>
