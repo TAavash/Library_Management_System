@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import  AllUsers  from "./Patrons/Users/AllUsers";
 import { FacultyMembers } from "./Patrons/Users/FacultyMembers";
 import { LibraryAssistant } from "./Patrons/Users/LibraryAssistant";
-import ProgramCoordinators from "./Patrons/Users/ProgramCoordinators";
+import {ProgramCoordinators} from "./Patrons/Users/ProgramCoordinators";
 import { Students } from "./Patrons/Users/Students";
 
 export default function LibrarianDashboard() {

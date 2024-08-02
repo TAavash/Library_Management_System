@@ -81,8 +81,63 @@ export const userList = async () => {
 };
 
 export const getAllMember = async () => {
-  const response = await axiosInstance.get("/user/all");
-  return response.data.users;
+  try {
+    const response = await axiosInstance.get("/member/all");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching member data:", error);
+    throw error;
+  }
+};
+
+export const getAllStudents = async () => {
+  try {
+    const response = await axiosInstance.get("/member/students");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching member data:", error);
+    throw error;
+  }
+};
+
+export const getAllFacultyMembers = async () => {
+  try {
+    const response = await axiosInstance.get("/member/faculty_members");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching member data:", error);
+    throw error;
+  }
+};
+
+export const getAllProgramCoordinators = async () => {
+  try {
+    const response = await axiosInstance.get("/member/program_coordinators");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching member data:", error);
+    throw error;
+  }
+};
+
+export const getLibraryAssistants = async () => {
+  try {
+    const response = await axiosInstance.get("/member/library_assistants");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching member data:", error);
+    throw error;
+  }
+};
+
+export const getMemberById = async (user_id) => {
+  try {
+    const response = await axiosInstance.get(`/member/${user_id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
 };
 
 export const getUserById = async (user_idS) => {
