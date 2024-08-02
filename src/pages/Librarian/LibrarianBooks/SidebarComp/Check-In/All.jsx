@@ -1,77 +1,134 @@
 import React from 'react'
-import FlipCard from "../../../../../components/FlipCard";
-import { IoSearch, IoSettingsSharp } from "react-icons/io5";
+import { FiSearch } from "react-icons/fi";
+import BookCover from '../../../../../assets/th (1).jpeg';
 
-const All = ({ onCardClick }) => {
+
+const checkIn = [
+  {
+    title: "Kafka on the Shore",
+    author: "Murakami",
+    cover: BookCover,
+    checkOutDate: "2 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "Rich Dad Poor Dad",
+    author: "Robert T. Kiyosaki",
+    cover: BookCover,
+    checkOutDate: "3 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "How to Talk to Anyone",
+    author: "Leil Lowndes",
+    cover: BookCover,
+    checkOutDate: "4 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "Kafka on the Shore",
+    author: "Murakami",
+    cover: BookCover,
+    checkOutDate: "2 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "Rich Dad Poor Dad",
+    author: "Robert T. Kiyosaki",
+    cover: BookCover,
+    checkOutDate: "3 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "How to Talk to Anyone",
+    author: "Leil Lowndes",
+    cover: BookCover,
+    checkOutDate: "4 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "Kafka on the Shore",
+    author: "Murakami",
+    cover: BookCover,
+    checkOutDate: "2 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "Rich Dad Poor Dad",
+    author: "Robert T. Kiyosaki",
+    cover: BookCover,
+    checkOutDate: "3 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "How to Talk to Anyone",
+    author: "Leil Lowndes",
+    cover: BookCover,
+    checkOutDate: "4 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  }
+];
+
+const All = () => {
   return (
     <div className="w-full h-full ">
-      <div className="w-[100%] h-[20%] bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
-        <div className="w-full h-full flex justify-evenly p-[10px] gap-[5px]">
-          <div className="w-[50%] h-full flex-col">
-            <div className="w-full h-[70%] text-start text-3xl">
-              All Check-In
-            </div>
-            <div className="w-full h-[30%] text-start text-[-2xl] text-[#525252]">
-              Manage all the check-in
-            </div>
+      <div className="w-[100%] h-[20%] flex justify-between bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
+        <div className=" h-full flex-col">
+          <div className="w-full h-[70%] text-3xl">
+            All Check-In
           </div>
-          <div className="w-[30%] h-full flex p-[2px] justify-evenly">
-            <div className="w-full h-[30px] rounded-2xl bg-white border flex items-center p-[5px]">
-              <div className="text-[15px] w-[80%] text-[#525252]">
-                Search
-              </div>
-              <div className="w-[20%]">
-                <IoSearch className="w-[20px] h-[20px] justify-end fill-[#A3A3A3]" />
-              </div>
-            </div>
-          </div>
-          <div className="w-[20%] h-full flex p-[2px]">
-            <div className="w-[40px] h-[30px] rounded-2xl bg-white border flex items-center justify-start p-[10px]">
-              <div className="w-[20%]">
-                <IoSettingsSharp className="w-[20px] h-[20px] fill-[#A3A3A3]" />
-              </div>
-            </div>
+          <div className="w-full h-[30%] text-[-2xl] text-[#525252]">
+            Manage all the check-in
           </div>
         </div>
+
+        <div className='flex justify-center m-2'>
+          <div className="flex w-[500px] items-center gap-1">
+            <FiSearch className="h-5 w-5 ml-1" />
+            <input type="text" placeholder='Search' className='p-1 w-[500px]  border-hidden focus:outline-none'
+            />
+          </div>
+        </div>
+
       </div>
-      <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-blue-600 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
+      <div className="flex-col h-[80%] bg-white p-[30px] gap-[30px] rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
+
+
+          {checkIn.map((check, index) => (
+            <div
+              key={index}
+              className="group relative bg-white rounded-lg shadow-md w-56 overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl"
+            >
+              <div className="p-3">
+                <h3 className="text-lg font-bold"> {check.name}</h3>
+                <p className="text-sm text-gray-600">{check.role}</p>
+              </div>
+              <img src={check.cover} alt={check.title} className="w-full h-72 object-cover" />
+              <div className="p-4">
+                <h3 className="text-lg font-bold">{check.title}</h3>
+                <p className="text-sm text-gray-600">{check.author}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div></div>
   )

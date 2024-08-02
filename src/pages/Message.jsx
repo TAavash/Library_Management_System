@@ -54,7 +54,7 @@ const Message = () => {
       messsage: "I am having trouble with changing password.",
       messageDate: "May 20, 2024",
     },
-    
+
     {
       id: 3542342,
       email: "sudarshan@gmail.com",
@@ -125,7 +125,7 @@ const Message = () => {
                 </div>
               </div>
               <div className="text-[#737373] flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-[50px]">
-                <button className="h-[40px] hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
+                <button className="h-[40px] text-white rounded-xl text-2xl p-[2px] px-[3px]">
                   Inbox
                 </button>
               </div>

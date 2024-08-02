@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Pcps from "../assets/pcps_logo.jpg";
-import SearchBar from "../components/Search";
 import Avatar from "./Avatar";
 import { VscBellDot } from "react-icons/vsc";
 import { IoSettingsSharp } from "react-icons/io5";
@@ -117,9 +116,6 @@ const NavNew = () => {
                 />
               </svg>
             </span>
-          </div>
-          <div className="pt-[20px] hidden md:block">
-            <SearchBar />
           </div>
           <div className=" cursor-pointer">
             <Avatar />

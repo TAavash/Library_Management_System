@@ -14,9 +14,9 @@ const Avatar = () => {
     <div className="relative inline-block text-right">
       <div
         onClick={handleToggle}
-        className="cursor-pointer inline-flex w-fit rounded-md shadow-sm"
+        className="cursor-pointer inline-flex w-fit rounded-md shadow-sm "
       >
-        <span className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <span className="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           <div className="flex gap-2 border-2 border-slate-600 rounded-r-full rounded-l-full p-[2px]">
             <img
               className="h-10 w-10 rounded-full"
@@ -56,7 +56,7 @@ const Avatar = () => {
               My Profile
             </div>
             <div
-              className="flex justify-between block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              className="flex justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-2"
             >

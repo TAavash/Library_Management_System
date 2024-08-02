@@ -35,7 +35,7 @@ import Reservations from '../pages/User/Reservations';
 import Ebooks from '../pages/User/Ebooks';
 import Discover from '../pages/User/Discover';
 import Userdash from '../pages/User/Userdash';
-import BookDetail from "../pages/User/BookDetail"
+import BookDetail from "../pages/User/BookDetail";
 import MyLearning from '../pages/User/MyLearning';
 import UserProfile from '../pages/User/UserProfile';
 

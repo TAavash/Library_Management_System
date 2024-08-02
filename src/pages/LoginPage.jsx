@@ -24,6 +24,10 @@ const LoginPage = () => {
     navigate(`/register`);
   };
 
+  const handleForgetPass = () => {
+    navigate(`/forgetPassword`);
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -133,7 +137,8 @@ const LoginPage = () => {
               </button>
             </div>
           </form>
-          <div className="mt-[5px] text-end md:mb-[20px] text-[14px] underline cursor-pointer">
+          <div className="mt-[5px] text-end md:mb-[20px] text-[14px] underline cursor-pointer"
+          onClick={handleForgetPass}>
             Forgot Password ?
           </div>
         </div>

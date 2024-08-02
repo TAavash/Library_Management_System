@@ -56,40 +56,40 @@ const LibrarianFines = () => {
               <div className="text-[#737373] flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-[50px]">
                 <button
                   onClick={handleAllActive}
-                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
                   {active === "all" ? (
-                    <div className="text-red-600">All Fines</div>
+                    <div className="text-white">All Fines</div>
                   ) : (
                     <div>All Fines</div>
                   )}
                 </button>
                 <button
                   onClick={handleOverdueActive}
-                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
                   {active === "overdue" ? (
-                    <div className="text-red-600">Overdue</div>
+                    <div className="text-white">Overdue</div>
                   ) : (
                     <div>Overdue</div>
                   )}
                 </button>
                 <button
                   onClick={handleDamagedActive}
-                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
                   {active === "damaged" ? (
-                    <div className="text-red-600">Damaged</div>
+                    <div className="text-white">Damaged</div>
                   ) : (
                     <div>Damaged</div>
                   )}
                 </button>
                 <button
                   onClick={handlePaymentActive}
-                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
                   {active === "payment" ? (
-                    <div className="text-red-600">Payment</div>
+                    <div className="text-white">Payment</div>
                   ) : (
                     <div>Payment</div>
                   )}
