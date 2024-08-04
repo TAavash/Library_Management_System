@@ -1,40 +1,145 @@
-/* Keyframe animation for gradient background */
-@keyframes gradient-x {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-  
-  /* Animated gradient background */
-  .animate-gradient-x {
-    background-size: 200% 200%;
-    animation: gradient-x 10s ease infinite;
-  }
-  
-  /* Style for the sticky navigation */
-  .sticky-nav {
-    position: sticky;
-    top: 0;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-  }
-  
-  .sticky-nav a {
-    color: #1d4ed8;
-    padding: 8px 16px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
-  
-  .sticky-nav a:hover {
-    color: #2563eb;
-  }
-  
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Arial, sans-serif';
+  background-color: #f8f8f8;
+}
+
+.header {
+  width: 100%;
+  background-color: #202D75;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.my-data-button {
+  background-color: #ffffff;
+  color: #202D75;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.content {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.profile-section, .professional-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-card, .professional-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.profile-card .profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
+.upload-photo-button {
+  background-color: #202D75;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.details .detail-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.details .detail-item .label {
+  font-weight: bold;
+  flex: 1;
+}
+
+.details .detail-item .value {
+  flex: 2;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.details .detail-item .edit-button {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.professional-card h2 {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.professional-card p {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.professional-card .expertise .tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.professional-card .expertise .tags .tag {
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.professional-card .experience, .professional-card .ratings {
+  margin-top: 10px;
+}
+
+.professional-card .experience .value, .professional-card .ratings .value {
+  font-weight: bold;
+  color: #202D75;
+}
+
+.professional-card .ratings .reviews {
+  font-size: 0.9em;
+  color: #999;
+}
+
+.profile-banner {
+  background-image: url('../../../assets/profilebg.png'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 40px;
+  border-radius: 8px;
+  text-align: center;
+  height: 250px;
+}

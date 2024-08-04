@@ -45,6 +45,7 @@ import UpcomingDeadline from "../../src/pages/User/comp/UpcomingDeadline";
 // import UserRoute from "./UserRoute";
 import ForgetPassword from "../pages/ForgetPassword";
 import Otp from "../pages/Otp";
+import Password from "../../src/pages/User/Password";
 
 export default function RoutesNav() {
   return (
@@ -99,6 +100,7 @@ export default function RoutesNav() {
         <Route path="/user/profile" element={<UserProfile />} />
         <Route path="/user/notification" element={<UserNotification />} />
         <Route path="/upcoming-deadline" element={<UpcomingDeadline />} />
+        <Route path="/user/password" element={<Password />} />
         <Route path="/libraian/profile" element={<LibrarianProfile />} />
       </Routes>
     </>

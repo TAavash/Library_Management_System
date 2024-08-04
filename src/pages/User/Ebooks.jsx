@@ -19,6 +19,7 @@ import Bannerimage from "../../assets/finaldashbanner.png";
 import SearchBar from "../../pages/User/comp/SearchBar";
 import ToggleButton from "../../pages/User/comp/ToggleButton";
 import Usernav from "../User/comp/Usernav";
+import Topics from "./Topics";
 
 
 const Ebooks = () => {
@@ -90,7 +91,7 @@ const Ebooks = () => {
       </div>
       <ToggleButton />
       <div className="mx-4 my-8">
-        <SearchBar />
+        <Topics/>
       </div>
 
       <div className="mx-4">

@@ -5,9 +5,18 @@ import { RiSettings3Fill } from "react-icons/ri";
 import { MdNotifications } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import UserNotification from "./UserNotification";
+import { CgProfile } from "react-icons/cg";
+import { MdSecurity } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
+import { MdHelp } from "react-icons/md";
 
 const Usernav = () => {
   const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    navigate(`/`);
+  };
+
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
 
@@ -25,7 +34,13 @@ const Usernav = () => {
         <img src={Logo} className="h-[60px]" alt="logo" />
 
         <div className="flex items-center space-x-6">
-          
+        <button
+            className="text-black hover:text-red-500 text-xl"
+            onClick={toggleNotificationPanel}
+          >
+            <MdHelp
+            />
+          </button>
           <button
             className="text-black hover:text-red-500 text-xl"
             onClick={toggleSettingsPanel}
@@ -79,10 +94,29 @@ const Usernav = () => {
             </div>
             <div className="flex justify-center mt-4">
               <button
-                className="p-2 border-2 border-black rounded w-full"
+                className="flex items-center justify-center p-2 border-2 border-black rounded w-full"
                 onClick={() => navigate("/user/profile")}
               >
+                <CgProfile className="mr-2" />
                 View Profile
+              </button>
+            </div>
+            <div className="flex justify-center mt-4">
+              <button
+                className="flex items-center justify-center p-2 border-2 border-black rounded w-full"
+                onClick={() => navigate("/user/password")}
+              >
+                <MdSecurity className="mr-2" />
+                Password & Security
+              </button>
+            </div>
+            <div className="flex justify-center mt-4">
+              <button
+                className="flex items-center justify-center p-2 border-2 border-black rounded w-full"
+                onClick={handleLogout}
+              >
+                <MdLogout className="mr-2" />
+                Logout
               </button>
             </div>
           </div>

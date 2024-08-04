@@ -99,7 +99,7 @@ function Userdash() {
 
         {/* Upcoming Deadline Section Start */}
         <div className="flex">
-          <div className="m-5 shadow-gray-400 shadow-md transition-transform transform hover:scale-105 hover:shadow-lg ">
+          <div className="m-5 shadow-gray-400 shadow-md  hover:shadow-lg ">
             <Calendar />
           </div>
 
