@@ -1,7 +1,17 @@
 import React from "react";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
 import { IoSettingsSharp } from "react-icons/io5";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
-const Calendar = () => {
+// Ensure that myEventsList is defined or imported correctly
+const myEventsList = [
+  // Your events here
+];
+
+const MyCalendar = (props) => {
+  const localizer = momentLocalizer(moment);
+
   return (
     <div className="w-full h-full ">
       <div className="w-[100%] h-[20%] bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
@@ -21,12 +31,18 @@ const Calendar = () => {
           </div>
         </div>
       </div>
-      <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-green-600 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
+      <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-white rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
         <div className=" grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2"></div>
-        Calendar
+        <Calendar
+          localizer={localizer}
+          events={myEventsList}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: 500 }}
+        />
       </div>
     </div>
   );
 };
 
-export default Calendar;
+export default MyCalendar;
