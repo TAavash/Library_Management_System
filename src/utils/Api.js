@@ -60,6 +60,23 @@ export const memberRegister = async (
   }
 };
 
+export const sendcontact = async (
+  subject,
+  message,
+  member_idS,
+) => {
+  try {
+    const response = await axiosInstance.post("/contact", {
+      subject,
+      message,
+      member_idS,
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const login = async (username, password) => {
   const response = await axiosInstance.post("/login", {
     username,
@@ -156,6 +173,16 @@ export const updateStatus = async (user_idS) => {
     return response.data;
   } catch (error) {
     console.error("Error updating user status :", error);
+    throw error;
+  }
+};
+
+export const getAllContact = async () => {
+  try {
+    const response = await axiosInstance.get("/contact/all");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching contact data:", error);
     throw error;
   }
 };

@@ -1,116 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoMail } from "react-icons/io5";
 import { FaBell } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 import NavNew from "../components/NavNew";
+import { getAllContact } from "../utils/Api";
 
 const Message = () => {
-  const tableData = [
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
-    {
-      id: 3542342,
-      email: "sudarshan@gmail.com",
-      messsage: "I am having trouble with changing password.",
-      messageDate: "May 20, 2024",
-    },
+  const [messages, setMessages] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getAllContact();
+        console.log("Fetched response:", response);
+
+        let list = response.contacts; // Adjust this line based on your actual API response structure
+        if (Array.isArray(list)) {
+          setMessages(list); // Set the original list of contacts
+          setFilteredData(list); // Also set it as the initial filtered data
+        } else {
+          console.error("Expected an array but got:", JSON.stringify(list));
+        }
+      } catch (error) {
+        console.error("Error fetching contacts:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleSearch = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    const filtered = messages.filter((message) =>
+      `${message.subject} ${message.message} ${message.email}`
+        .toLowerCase()
+        .includes(query.toLowerCase())
+    );
+    setFilteredData(filtered);
+  };
+
   return (
     <div>
       <NavNew />
@@ -119,7 +51,7 @@ const Message = () => {
           <div className="flex h-[800px] w-[100%] mt-[100px] rounded-2xl bg-white shadow-slate-500 shadow-md ">
             <div className="h-[800px] w-[300px] rounded-l-2xl bg-[#14273D]">
               <div className="flex flex-col gap-[10px] justify-center items-center h-[20%] p-[20px] border-b-4 border-[#A3A3A3]">
-                <IoMail className=" fill-[#A3A3A3]  text-4xl" />
+                <IoMail className="fill-[#A3A3A3] text-4xl" />
                 <div className="text-white flex-col justify-center text-center text-3xl">
                   Message
                 </div>
@@ -162,23 +94,37 @@ const Message = () => {
               </div>
               <div className="flex-col h-[80%] gap-[30px] bg-white rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
                 <div>
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={handleSearch}
+                    placeholder="Search messages..."
+                    className="p-2 border-b-2 border-gray-300 mb-4"
+                  />
                   <table className="h-full w-full bg-white">
-                    <tr className=" sticky ">
-                      <th className="p-3 text-start">ID</th>
-                      <th className="p-3 text-start ">Email</th>
-                      <th className="p-3 text-start">Message</th>
-                      <th className=" p-3 text-start">Messaged Date</th>
-                    </tr>
-                    {tableData.map((person) => {
-                      return (
-                        <tr key={person.id}>
-                          <td className="p-3">{person.id}</td>
-                          <td className="p-3">{person.email}</td>
-                          <td className="p-3">{person.messsage}</td>
-                          <td className="p-3">{person.messageDate}</td>
+                    <thead>
+                      <tr className="sticky top-0 bg-white">
+                        <th className="p-3 text-start">User ID</th>
+                        <th className="p-3 text-start">Email</th>
+                        <th className="p-3 text-start">Subject</th>
+                        <th className="p-3 text-start">Message</th>
+                        <th className="p-3 text-start">Messaged Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredData.map((contact) => (
+                        <tr
+                          key={contact.contact_idS}
+                          className="cursor-pointer hover:bg-gray-200"
+                        >
+                          <td className="p-3">{contact.member_idS}</td>
+                          <td className="p-3">{contact.email}</td>
+                          <td className="p-3">{contact.subject}</td>
+                          <td className="p-3">{contact.message}</td>
+                          <td className="p-3">{contact.created_at}</td>
                         </tr>
-                      );
-                    })}
+                      ))}
+                    </tbody>
                   </table>
                 </div>
               </div>

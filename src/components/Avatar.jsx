@@ -24,7 +24,7 @@ const Avatar = () => {
         <span className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           <div className="flex gap-2 border-2 border-slate-600 rounded-r-full rounded-l-full p-[2px]">
             <img
-              className="h-10 w-10 rounded-full"
+              className="h-8 w-8 rounded-full"
               src={ProfilePic}
               alt="gojo"
             />
