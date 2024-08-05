@@ -13,7 +13,8 @@ import { MdHelp } from "react-icons/md";
 const Usernav = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem("access_token");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
     navigate(`/`);
   };
 
@@ -34,12 +35,11 @@ const Usernav = () => {
         <img src={Logo} className="h-[60px]" alt="logo" />
 
         <div className="flex items-center space-x-6">
-        <button
+          <button
             className="text-black hover:text-red-500 text-xl"
-            onClick={toggleNotificationPanel}
+            onClick={() => navigate("/user/userhelp")}
           >
-            <MdHelp
-            />
+            <MdHelp />
           </button>
           <button
             className="text-black hover:text-red-500 text-xl"
@@ -99,12 +99,6 @@ const Usernav = () => {
               >
                 <CgProfile className="mr-2" />
                 View Profile
-              </button>
-              <button
-                className="p-2 border-2 border-black rounded w-full"
-                onClick={handleLogout}
-              >
-                Logout
               </button>
             </div>
             <div className="flex justify-center mt-4">

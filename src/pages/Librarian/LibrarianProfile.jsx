@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { MdModeEditOutline } from "react-icons/md";
 import { AiOutlineMail, AiOutlinePhone, AiOutlineLock } from "react-icons/ai";
-import abhinab from "../../assets/abhinab.jpg";
+import abhinab from "../../assets/drake.jpeg";
 import NavNew from "../../components/NavNew";
 import { ToastContainer, toast } from "react-toastify";
 import { getMemberById } from "../../utils/Api";

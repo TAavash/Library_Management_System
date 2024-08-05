@@ -38,6 +38,7 @@ import Userdash from '../pages/User/Userdash';
 import BookDetail from "../pages/User/BookDetail"
 import MyLearning from '../pages/User/MyLearning';
 import UserProfile from '../pages/User/UserProfile';
+import UserHelp from '../pages/User/UserHelp';
 import LibrarianProfile from '../pages/Librarian/LibrarianProfile';
 
 import UserNotification from '../../src/pages/User/comp/UserNotification'
@@ -101,6 +102,7 @@ export default function RoutesNav() {
         <Route path="/user/notification" element={<UserNotification />} />
         <Route path="/upcoming-deadline" element={<UpcomingDeadline />} />
         <Route path="/user/password" element={<Password />} />
+        <Route path="/user/userhelp" element={<UserHelp />} />
         <Route path="/libraian/profile" element={<LibrarianProfile />} />
       </Routes>
     </>
