@@ -2,10 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IoSettingsSharp } from "react-icons/io5";
 import NavNew from "../components/NavNew";
-import Logout from "../components/Logout";
 
 const Settings = () => {
   const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
+    navigate(`/`);
+  };
   const handleSignin = () => {
     navigate(`/register`);
   };
@@ -54,7 +58,12 @@ const Settings = () => {
                   >
                     Signin
                   </button>
-                  <Logout />
+                  <button
+                    onClick={handleLogout}
+                    className="h-fit w-[100px] rounded-md text-white bg-red-600 hover:bg-slate-800 active:bg-black text-2xl p-[2px] px-[3px]"
+                  >
+                    Logout
+                  </button>
                 </div>
               </div>
             </div>
