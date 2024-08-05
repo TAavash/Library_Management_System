@@ -78,7 +78,6 @@ export default function BookRegistration() {
         book.barcode_number,
         book.isbn_number
       );
-      console.log(response);
 
       if (response.status === 200) {
         toast.success("Register successful!");
@@ -87,7 +86,6 @@ export default function BookRegistration() {
         toast.error(
           response.data.message || "Register failed. Please check your credentials."
         );
-        console.log(response.data.message);
       }
     } catch (error) {
       console.error("An error occurred:", error); // Log the error for debugging
