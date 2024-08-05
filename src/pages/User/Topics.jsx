@@ -3,6 +3,7 @@ import one from '../../assets/language_learning.jpeg';
 import two from '../../assets/math_and_logic.jpeg';
 import three from '../../assets/physical_science_and_engineering.jpeg';
 import four from '../../assets/health.jpeg';
+import five from '../../assets/social_sciences.jpeg';
 import six from '../../assets/arts_and_humanities.jpeg';
 
 const topics = [
@@ -10,7 +11,7 @@ const topics = [
   { image: two, title: 'Math and Logic' },
   { image: three, title: 'Physical Science and Engineering' },
   { image: four, title: 'Health' },
-  { image: six, title: 'Social Sciences' },
+  { image: five, title: 'Social Sciences' },
   { image: six, title: 'Arts and Humanities' },
 ];
 
