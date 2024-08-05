@@ -79,3 +79,7 @@ npm install react-calendar
 
 npm i react-big-calendar
 npm install react-big-calendar moment react-icons
+
+11. Wizard
+
+npm install react-form-wizard-component

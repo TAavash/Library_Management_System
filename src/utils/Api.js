@@ -38,7 +38,8 @@ export const memberRegister = async (
   address,
   email,
   mobile,
-  role_idS
+  role_idS,
+  profile_pic,
 ) => {
   try {
     const response = await axiosInstance.post("/member", {
@@ -52,6 +53,7 @@ export const memberRegister = async (
       email,
       mobile,
       role_idS,
+      profile_pic,
     });
     return response;
   } catch (error) {
