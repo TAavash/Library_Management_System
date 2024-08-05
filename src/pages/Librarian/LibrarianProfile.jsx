@@ -1,46 +1,64 @@
 import React, { useState, useEffect } from "react";
 import { MdModeEditOutline } from "react-icons/md";
-import {
-  AiOutlineMail,
-  AiOutlinePhone,
-  AiOutlineHome,
-  AiOutlineGlobal,
-  AiOutlineLock,
-} from "react-icons/ai";
-import abhinab from "../../assets/drake.jpeg";
+import { AiOutlineMail, AiOutlinePhone, AiOutlineLock } from "react-icons/ai";
+import abhinab from "../../assets/abhinab.jpg";
 import NavNew from "../../components/NavNew";
+import { ToastContainer, toast } from "react-toastify";
+import { getMemberById } from "../../utils/Api";
 
 const LibrarianProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [profileInfo, setProfileInfo] = useState({
-    firstName: "",
-    lastName: "",
+    username: "",
+    password: "",
+    first_name: "",
+    last_name: "",
     dob: "",
     gender: "",
     address: "",
     email: "",
-    phoneNumber: "",
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
+    mobile: "",
+    // role_id: "",
+    role_name: "",
   });
 
+  const user_id = localStorage.getItem("user_id");
+
   useEffect(() => {
-    const fetchData = async () => {
-      const data = {
-        firstName: "Ram",
-        lastName: "Yadav",
-        dob: "2004-02-10",
-        gender: "Male",
-        address: "123 Library St, City, Country",
-        email: "admin@example.com",
-        phoneNumber: "(123) 456-7890",
-      };
-      setProfileInfo(data);
+    const fetchMemberData = async () => {
+      try {
+        const memberData = await getMemberById(user_id);
+        let data = memberData.data;
+        if (memberData) {
+          setProfileInfo({
+            username: data.username || "",
+            password: data.password || "",
+            first_name: data.first_name || "",
+            last_name: data.last_name || "",
+            dob: data.dob || "",
+            gender: data.gender || "",
+            address: data.address || "",
+            email: data.email || "",
+            mobile: data.mobile || "",
+            // role_id: data.role_id || "",
+            role_name: data.role_name || "",
+          });
+        } else {
+          console.error("No user data found");
+          toast.error("No user data found. Please try again later.");
+        }
+      } catch (error) {
+        console.error("An error occurred while fetching user data:", error);
+        toast.error(
+          "An error occurred while fetching user data. Please try again later."
+        );
+      }
     };
 
-    fetchData();
-  }, []);
+    if (user_id) {
+      fetchMemberData();
+    }
+  }, [user_id]);
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
@@ -70,11 +88,15 @@ const LibrarianProfile = () => {
         <h2 className="text-3xl font-bold text-gray-800 mb-6">User Profile</h2>
         <div className="flex items-center mb-6">
           <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white relative">
-            <img className="w-full h-full object-cover" src={abhinab} alt="User Profile" />
+            <img
+              className="w-full h-full object-cover"
+              src={abhinab}
+              alt="User Profile"
+            />
           </div>
           <div className="ml-6 flex flex-col justify-center">
-            <h3 className="text-xl font-semibold text-gray-800">{`${profileInfo.firstName} ${profileInfo.lastName}`}</h3>
-            <p className="text-gray-600">Librarian</p>
+            <h3 className="text-xl font-semibold text-gray-800">{`${profileInfo.first_name} ${profileInfo.last_name}`}</h3>
+            <p className="text-gray-600">{`${profileInfo.role_name}`}</p>
           </div>
           <div className="ml-auto flex flex-col items-center space-y-2">
             <button className="w-40 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm font-semibold">
@@ -89,28 +111,34 @@ const LibrarianProfile = () => {
         <div className="flex flex-col space-y-4">
           <div className="flex space-x-4">
             <div className="w-1/2">
-              <label className="text-gray-600 font-semibold" htmlFor="firstName">
+              <label
+                className="text-gray-600 font-semibold"
+                htmlFor="first_name"
+              >
                 First Name
               </label>
               <input
-                id="firstName"
+                id="first_name"
                 type="text"
-                name="firstName"
-                value={profileInfo.firstName}
+                name="first_name"
+                value={profileInfo.first_name}
                 onChange={handleInputChange}
                 className="w-full p-2 border rounded"
                 disabled={!isEditing}
               />
             </div>
             <div className="w-1/2">
-              <label className="text-gray-600 font-semibold" htmlFor="lastName">
+              <label
+                className="text-gray-600 font-semibold"
+                htmlFor="last_name"
+              >
                 Last Name
               </label>
               <input
-                id="lastName"
+                id="last_name"
                 type="text"
-                name="lastName"
-                value={profileInfo.lastName}
+                name="last_name"
+                value={profileInfo.last_name}
                 onChange={handleInputChange}
                 className="w-full p-2 border rounded"
                 disabled={!isEditing}
@@ -168,16 +196,16 @@ const LibrarianProfile = () => {
               </div>
             </div>
             <div className="w-1/2">
-              <label className="text-gray-600 font-semibold" htmlFor="phoneNumber">
+              <label className="text-gray-600 font-semibold" htmlFor="mobile">
                 Phone Number
               </label>
               <div className="flex items-center border rounded p-2">
                 <AiOutlinePhone className="text-gray-500 mr-2" />
                 <input
-                  id="phoneNumber"
+                  id="mobile"
                   type="text"
-                  name="phoneNumber"
-                  value={profileInfo.phoneNumber}
+                  name="mobile"
+                  value={profileInfo.mobile}
                   onChange={handleInputChange}
                   className="w-full focus:outline-none"
                   disabled={!isEditing}
@@ -203,52 +231,32 @@ const LibrarianProfile = () => {
           </div>
           <div className="flex space-x-4">
             <div className="w-1/2">
-              <label className="text-gray-600 font-semibold" htmlFor="currentPassword">
+              <label className="text-gray-600 font-semibold" htmlFor="gender">
+                Username
+              </label>
+              <input
+                id="username"
+                type="text"
+                name="username"
+                value={profileInfo.username}
+                onChange={handleInputChange}
+                className="w-full p-2 border rounded"
+                disabled={!isEditing}
+              />
+            </div>
+          </div>
+          <div className="flex space-x-4">
+            <div className="w-1/2">
+              <label className="text-gray-600 font-semibold" htmlFor="password">
                 Current Password
               </label>
               <div className="flex items-center border rounded p-2">
                 <AiOutlineLock className="text-gray-500 mr-2" />
                 <input
-                  id="currentPassword"
+                  id="password"
                   type="password"
-                  name="currentPassword"
-                  value={profileInfo.currentPassword}
-                  onChange={handleInputChange}
-                  className="w-full focus:outline-none"
-                  disabled={!isEditing}
-                />
-              </div>
-            </div>
-            <div className="w-1/2">
-              <label className="text-gray-600 font-semibold" htmlFor="newPassword">
-                New Password
-              </label>
-              <div className="flex items-center border rounded p-2">
-                <AiOutlineLock className="text-gray-500 mr-2" />
-                <input
-                  id="newPassword"
-                  type="password"
-                  name="newPassword"
-                  value={profileInfo.newPassword}
-                  onChange={handleInputChange}
-                  className="w-full focus:outline-none"
-                  disabled={!isEditing}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="flex space-x-4">
-            <div className="w-full">
-              <label className="text-gray-600 font-semibold" htmlFor="confirmPassword">
-                Confirm New Password
-              </label>
-              <div className="flex items-center border rounded p-2">
-                <AiOutlineLock className="text-gray-500 mr-2" />
-                <input
-                  id="confirmPassword"
-                  type="password"
-                  name="confirmPassword"
-                  value={profileInfo.confirmPassword}
+                  name="password"
+                  value={profileInfo.password}
                   onChange={handleInputChange}
                   className="w-full focus:outline-none"
                   disabled={!isEditing}
@@ -282,6 +290,7 @@ const LibrarianProfile = () => {
           )}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

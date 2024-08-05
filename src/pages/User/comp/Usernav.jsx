@@ -92,13 +92,19 @@ const Usernav = () => {
               <button className="w-8 h-8 rounded-full bg-orange-500"></button>
               <button className="w-8 h-8 rounded-full bg-red-500"></button>
             </div>
-            <div className="flex justify-center mt-4">
+            <div className="flex flex-col gap-5 justify-center mt-4">
               <button
                 className="flex items-center justify-center p-2 border-2 border-black rounded w-full"
                 onClick={() => navigate("/user/profile")}
               >
                 <CgProfile className="mr-2" />
                 View Profile
+              </button>
+              <button
+                className="p-2 border-2 border-black rounded w-full"
+                onClick={handleLogout}
+              >
+                Logout
               </button>
             </div>
             <div className="flex justify-center mt-4">

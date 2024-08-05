@@ -23,7 +23,7 @@ import AllUsers from "../pages/Librarian/Patrons/Users/AllUsers";
 import { FacultyMembers } from "../pages/Librarian/Patrons/Users/FacultyMembers";
 import { LibraryAssistant } from "../pages/Librarian/Patrons/Users/LibraryAssistant";
 import { Students } from "../pages/Librarian/Patrons/Users/Students";
-import ProgramCoordinators from "../pages/Librarian/Patrons/Users/ProgramCoordinators";
+import {ProgramCoordinators} from "../pages/Librarian/Patrons/Users/ProgramCoordinators";
 import Membership from "../pages/Librarian/Membership";
 // import User from "../pages/Userdash";
 // import Discover from "../pages/User/Discover";
