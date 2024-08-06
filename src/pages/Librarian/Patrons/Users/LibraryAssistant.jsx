@@ -39,7 +39,7 @@ export const LibraryAssistant = () => {
   const navigate = useNavigate();
 
   const handleRowClick = (person) => {
-    navigate("/MemberDetail");
+    navigate("/MemberDetail", { state: { member_id: person.member_idS } });
     console.log(person);
   };
 
