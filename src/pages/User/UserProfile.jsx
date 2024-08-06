@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./comp/Profile.css";
 import abhi from "../../assets/abhi.JPG";
-import { AiOutlineMail, AiOutlinePhone, AiOutlineLock, } from "react-icons/ai";
+import { AiOutlineMail, AiOutlinePhone } from "react-icons/ai";
 import { MdModeEditOutline } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -53,6 +53,7 @@ const UserProfile = () => {
   const handleSaveClick = async () => {
     const saveData = async () => {
       console.log("Saving data...", profileInfo);
+      toast.success("Profile updated successfully!");
     };
 
     await saveData();
@@ -60,27 +61,31 @@ const UserProfile = () => {
   };
 
   return (
-    <div>
-      <div className="flex-grow w-full bg-white shadow-lg rounded-lg mt-10 overflow-hidden flex flex-col p-8">
-        <div className="header profile-banner flex items-center justify-between mb-6"></div>
+    <div className="container mx-auto px-4">
+      <div className="w-full bg-white shadow-lg rounded-lg mt-10 overflow-hidden flex flex-col p-8">
+        <div className="header profile-banner mb-6">
+          {/* Profile Banner Section */}
+        </div>
 
-        <div className="flex items-center mb-6">
-          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white relative">
+        <div className="flex flex-col lg:flex-row items-center mb-6">
+          <div className="w-32 h-32 lg:w-40 lg:h-40 rounded-full overflow-hidden border-4 border-white relative">
             <img
               className="w-full h-full object-cover"
               src={abhi}
               alt="Profile"
             />
           </div>
-          <div className="ml-6 flex flex-col justify-center">
-            <h3 className="text-xl font-semibold text-gray-800">{`${profileInfo.firstName} ${profileInfo.lastName}`}</h3>
+          <div className="mt-4 lg:mt-0 lg:ml-6 flex flex-col items-center lg:items-start">
+            <h3 className="text-xl lg:text-2xl font-semibold text-gray-800">
+              {`${profileInfo.firstName} ${profileInfo.lastName}`}
+            </h3>
             <p className="text-gray-600">Student</p>
           </div>
-          <div className="ml-auto flex flex-col items-center space-y-2">
-            <button className="w-40 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm font-semibold">
+          <div className="mt-4 lg:mt-0 lg:ml-auto flex flex-col items-center space-y-2 lg:space-y-0 lg:space-x-2 lg:flex-row">
+            <button className="w-full lg:w-auto px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm font-semibold">
               Upload New Photo
             </button>
-            <button className="w-40 px-4 py-2 border border-gray-500 text-gray-500 rounded-lg hover:bg-gray-200 focus:outline-none text-sm font-semibold">
+            <button className="w-full lg:w-auto px-4 py-2 border border-gray-500 text-gray-500 rounded-lg hover:bg-gray-200 focus:outline-none text-sm font-semibold">
               Delete
             </button>
           </div>
@@ -88,12 +93,9 @@ const UserProfile = () => {
 
         {/* User Information Container */}
         <div className="profile-section flex flex-col space-y-4">
-          <div className="flex space-x-4">
-            <div className="w-1/2">
-              <label
-                className="text-gray-600 font-semibold"
-                htmlFor="firstName"
-              >
+          <div className="flex flex-col lg:flex-row lg:space-x-4">
+            <div className="w-full lg:w-1/2">
+              <label className="text-gray-600 font-semibold" htmlFor="firstName">
                 First Name
               </label>
               <input
@@ -106,7 +108,7 @@ const UserProfile = () => {
                 disabled={!isEditing}
               />
             </div>
-            <div className="w-1/2">
+            <div className="w-full lg:w-1/2">
               <label className="text-gray-600 font-semibold" htmlFor="lastName">
                 Last Name
               </label>
@@ -121,40 +123,36 @@ const UserProfile = () => {
               />
             </div>
           </div>
-          <div className="flex space-x-4">
-            <div className="w-full">
-              <label className="text-gray-600 font-semibold" htmlFor="dob">
-                Date of Birth
-              </label>
-              <input
-                id="dob"
-                type="text"
-                name="dob"
-                value={profileInfo.dob}
-                onChange={handleInputChange}
-                className="w-full p-2 border rounded"
-                disabled={!isEditing}
-              />
-            </div>
+          <div className="w-full">
+            <label className="text-gray-600 font-semibold" htmlFor="dob">
+              Date of Birth
+            </label>
+            <input
+              id="dob"
+              type="text"
+              name="dob"
+              value={profileInfo.dob}
+              onChange={handleInputChange}
+              className="w-full p-2 border rounded"
+              disabled={!isEditing}
+            />
           </div>
-          <div className="flex space-x-4">
-            <div className="w-full">
-              <label className="text-gray-600 font-semibold" htmlFor="address">
-                Address
-              </label>
-              <input
-                id="address"
-                type="text"
-                name="address"
-                value={profileInfo.address}
-                onChange={handleInputChange}
-                className="w-full p-2 border rounded"
-                disabled={!isEditing}
-              />
-            </div>
+          <div className="w-full">
+            <label className="text-gray-600 font-semibold" htmlFor="address">
+              Address
+            </label>
+            <input
+              id="address"
+              type="text"
+              name="address"
+              value={profileInfo.address}
+              onChange={handleInputChange}
+              className="w-full p-2 border rounded"
+              disabled={!isEditing}
+            />
           </div>
-          <div className="flex space-x-4">
-            <div className="w-1/2">
+          <div className="flex flex-col lg:flex-row lg:space-x-4">
+            <div className="w-full lg:w-1/2">
               <label className="text-gray-600 font-semibold" htmlFor="email">
                 Email Address
               </label>
@@ -171,11 +169,8 @@ const UserProfile = () => {
                 />
               </div>
             </div>
-            <div className="w-1/2">
-              <label
-                className="text-gray-600 font-semibold"
-                htmlFor="phoneNumber"
-              >
+            <div className="w-full lg:w-1/2">
+              <label className="text-gray-600 font-semibold" htmlFor="phoneNumber">
                 Phone Number
               </label>
               <div className="flex items-center border rounded p-2">
@@ -192,25 +187,23 @@ const UserProfile = () => {
               </div>
             </div>
           </div>
-          <div className="flex space-x-4">
-            <div className="w-1/2">
-              <label className="text-gray-600 font-semibold" htmlFor="gender">
-                Gender
-              </label>
-              <input
-                id="gender"
-                type="text"
-                name="gender"
-                value={profileInfo.gender}
-                onChange={handleInputChange}
-                className="w-full p-2 border rounded"
-                disabled={!isEditing}
-              />
-            </div>
+          <div className="w-full">
+            <label className="text-gray-600 font-semibold" htmlFor="gender">
+              Gender
+            </label>
+            <input
+              id="gender"
+              type="text"
+              name="gender"
+              value={profileInfo.gender}
+              onChange={handleInputChange}
+              className="w-full p-2 border rounded"
+              disabled={!isEditing}
+            />
           </div>
         </div>
 
-        <div className="mt-6 flex justify-end space-x-4">
+        <div className="mt-6 flex flex-col lg:flex-row justify-end space-y-4 lg:space-y-0 lg:space-x-4">
           {isEditing && (
             <>
               <button
@@ -236,9 +229,6 @@ const UserProfile = () => {
             </button>
           )}
         </div>
-
-        
-        
       </div>
       <ToastContainer />
     </div>

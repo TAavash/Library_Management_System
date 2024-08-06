@@ -42,9 +42,11 @@ const Password = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="password-section bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Change Password</h2>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+      <div className="password-section bg-white p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center">
+          Change Password
+        </h2>
         <div className="space-y-6">
           <div>
             <label className="text-gray-600 font-semibold" htmlFor="currentPassword">
@@ -98,22 +100,22 @@ const Password = () => {
             </div>
           </div>
         </div>
-        <div className="mt-6 flex justify-between">
+        <div className="mt-6 flex flex-col sm:flex-row justify-between space-y-4 sm:space-y-0 sm:space-x-4">
           <button
-            className="px-4 py-2 border border-gray-500 text-gray-500 rounded-lg hover:bg-gray-200 font-semibold transition duration-200"
+            className="px-4 py-2 border border-gray-500 text-gray-500 rounded-lg hover:bg-gray-200 font-semibold transition duration-200 w-full sm:w-auto"
             onClick={() => navigate(-1)} // Navigates to the previous page
           >
             Back
           </button>
           <button
-            className="px-4 py-2 border border-gray-500 text-gray-500 rounded-lg hover:bg-gray-200 font-semibold transition duration-200"
+            className="px-4 py-2 border border-gray-500 text-gray-500 rounded-lg hover:bg-gray-200 font-semibold transition duration-200 w-full sm:w-auto"
             onClick={() => setIsEditing(!isEditing)}
           >
             {isEditing ? 'Cancel' : 'Edit'}
           </button>
           {isEditing && (
             <button
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none text-sm font-semibold transition duration-200"
+              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none text-sm font-semibold transition duration-200 w-full sm:w-auto"
               onClick={handleSaveClick}
             >
               Save

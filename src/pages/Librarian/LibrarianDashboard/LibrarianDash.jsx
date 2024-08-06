@@ -4,6 +4,7 @@ import NavNew from "../../../components/NavNew";
 import Banner1 from "../../../assets/banner/1.png";
 import Banner2 from "../../../assets/banner/2.png";
 import Banner3 from "../../../assets/banner/3.png";
+import Graph from "../../../components/Graph";
 
 const LibrarianDash = () => {
   return (
@@ -20,14 +21,18 @@ const LibrarianDash = () => {
           >
             Total Books : 3000
           </button>
-          <button className="w-[200px] h-[120px] rounded-2xl text-white bg-green-400 shadow-slate-500 shadow-md mt-[100px]" style={{
+          <button
+            className="w-[200px] h-[120px] rounded-2xl text-white bg-green-400 shadow-slate-500 shadow-md mt-[100px]"
+            style={{
               backgroundImage: `url(${Banner2})`,
               backgroundSize: "cover",
             }}
           >
             Total Users : 3000
           </button>
-          <button className="w-[200px] h-[120px] rounded-2xl text-white bg-yellow-400 shadow-slate-500 shadow-md mt-[100px]" style={{
+          <button
+            className="w-[200px] h-[120px] rounded-2xl text-white bg-yellow-400 shadow-slate-500 shadow-md mt-[100px]"
+            style={{
               backgroundImage: `url(${Banner3})`,
               backgroundSize: "cover",
             }}
@@ -55,7 +60,9 @@ const LibrarianDash = () => {
               </div>
               <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-white rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
                 <div className=" flex flex-col gap-[30px] my-2">
-                  <div>Manage: Books Issued / Returned</div>
+                  <div>
+                    <Graph />
+                  </div>
                 </div>
               </div>
             </div>

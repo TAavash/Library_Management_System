@@ -5,12 +5,13 @@ import "react-calendar/dist/Calendar.css";
 import { IoBookSharp } from "react-icons/io5";
 import { MdBookmarkAdded, MdLocalLibrary } from "react-icons/md";
 import { HiDocumentText } from "react-icons/hi";
+import { BsCalendar } from "react-icons/bs";
 import Bannerimage from "../../assets/finaldashbanner.png";
 import bookcover from "../../assets/images.jpeg";
 import bookcover1 from "../../assets/36236124._SX300_.jpg";
 import SearchBar from "../../pages/User/comp/SearchBar";
 import Usernav from "../User/comp/Usernav";
-import Calcss from "../../../src/pages/User/comp/Cal.css"
+import Calcss from "../../../src/pages/User/comp/Cal.css";
 
 function Userdash() {
   const navigate = useNavigate();
@@ -48,12 +49,14 @@ function Userdash() {
       title: "Kafka on the Shore",
       rdate: "5/22/2024",
       edate: "6/22/2024",
+      daysLeft: 5,
     },
     {
       cover: bookcover,
       title: "Kafka on the Shore",
       rdate: "5/22/2024",
       edate: "6/22/2024",
+      daysLeft: 3,
     },
   ];
 
@@ -63,33 +66,33 @@ function Userdash() {
         <Usernav />
       </header>
 
-      <main className="pt-[100px]">
+      <main className="pt-[100px] px-4 sm:px-6 lg:px-8">
         <img src={Bannerimage} alt="Banner" className="w-full" />
 
-        <div className="mt-4 flex space-x-4">
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div
-            className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
+            className="p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
             onClick={() => navigate("/user/home")}
           >
             <MdLocalLibrary className="text-4xl mx-auto mb-2" />
             <p>Dashboard</p>
           </div>
           <div
-            className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
+            className="p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
             onClick={() => navigate("/user/discover")}
           >
             <IoBookSharp className="text-4xl mx-auto mb-2" />
             <p>Discover</p>
           </div>
           <div
-            className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
+            className="p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
             onClick={() => navigate("/user/reservations")}
           >
             <MdBookmarkAdded className="text-4xl mx-auto mb-2" />
             <p>Reservation</p>
           </div>
           <div
-            className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
+            className="p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
             onClick={() => navigate("/user/e-books")}
           >
             <HiDocumentText className="text-4xl mx-auto mb-2" />
@@ -98,8 +101,8 @@ function Userdash() {
         </div>
 
         {/* Upcoming Deadline Section Start */}
-        <div className="flex">
-          <div className="m-5 shadow-gray-400 shadow-md  hover:shadow-lg ">
+        <div className="flex flex-col lg:flex-row">
+          <div className="m-5 ">
             <Calendar />
           </div>
 
@@ -110,11 +113,11 @@ function Userdash() {
                 View All
               </button>
             </div>
-            <div className="flex space-x-4 mt-4">
+            <div className="flex flex-wrap gap-4 mt-4">
               {upcomingBooks.map((book, index) => (
                 <div
                   key={index}
-                  className="flex p-4 border border-gray-300 rounded-lg transition-transform transform hover:scale-105 cursor-pointer"
+                  className="flex p-4 border border-red-500 bg-red-100 rounded-lg transition-transform transform hover:scale-105 cursor-pointer relative"
                   onClick={() =>
                     navigate("/upcoming-deadline", { state: { book } })
                   }
@@ -126,8 +129,19 @@ function Userdash() {
                   />
                   <div className="ml-4">
                     <p className="font-bold text-lg">{book.title}</p>
-                    <p className="text-gray-500">Borrowed Date: {book.rdate}</p>
-                    <p className="text-gray-500">Expire Date: {book.edate}</p>
+                    <div className="flex items-center text-gray-500 text-sm mt-2 ">
+                      <BsCalendar className="mr-1" />
+                      <span className="mr-2">Borrowed Date:</span>
+                      <span className="font-semibold">{book.rdate}</span>
+                    </div>
+                    <div className="flex items-center text-gray-500 text-sm mt-2">
+                      <BsCalendar className="mr-1" />
+                      <span className="mr-2">Expire Date:</span>
+                      <span className="font-semibold">{book.edate}</span>
+                    </div>
+                  </div>
+                  <div className="absolute bottom-2 right-2 bg-red-500 text-white rounded-full px-2 py-1 shadow-md text-sm">
+                    {book.daysLeft} days left
                   </div>
                 </div>
               ))}
@@ -137,7 +151,7 @@ function Userdash() {
         {/* Upcoming Deadline Section End */}
 
         <div id="my-books" className="m-5">
-          <div className="flex flex-col gap-[50px] mb-[10px]">
+          <div className="flex flex-col gap-4 mb-4">
             <h2 className="text-3xl font-bold text-brown-700">My Books</h2>
             <SearchBar />
           </div>
@@ -152,7 +166,7 @@ function Userdash() {
               View All
             </button>
           </div>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {books.map((book, index) => (
               <div
                 key={index}
