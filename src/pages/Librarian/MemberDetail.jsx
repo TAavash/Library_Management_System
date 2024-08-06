@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { IoArrowBackCircle } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -21,7 +21,11 @@ const MemberDetail = () => {
     role_name: "",
   });
 
-  const [selectedFile, setSelectedFile] = useState(null); // For file input
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadStatus, setUploadStatus] = useState(''); // 'pending', 'success', or 'error'
+  
+  const fileInputRef = useRef(null); // Ref to the file input
+  const navigate = useNavigate(); // Initialize navigate
 
   const location = useLocation();
   const member_id = location.state?.member_id;
@@ -44,6 +48,7 @@ const MemberDetail = () => {
             mobile: data.mobile || "",
             profile_pic: data.profile_pic || "",
             role_name: data.role_name || "",
+            status: data.status || "",
           });
         } else {
           console.error("No user data found");
@@ -81,6 +86,7 @@ const MemberDetail = () => {
   const handleFileChange = (e) => {
     console.log("File selected:", e.target.files[0]);
     setSelectedFile(e.target.files[0]);
+    setUploadStatus('pending');
   };
 
   const handleUploadClick = async () => {
@@ -96,20 +102,30 @@ const MemberDetail = () => {
       const response = await uploadProfilePic(profileInfo.member_id, formData);
       console.log(response);
 
+      // Assuming the response contains the updated profile picture URL
+      setProfileInfo({
+        ...profileInfo,
+        profile_pic: URL.createObjectURL(selectedFile),
+      });
+      setUploadStatus('success');
       toast.success("Profile picture updated successfully");
     } catch (error) {
       console.error("Error uploading profile picture:", error);
+      setUploadStatus('error');
       toast.error("Error uploading profile picture");
     }
   };
 
-  const navigate = useNavigate();
   const handleBackClick = () => {
     navigate(-1); // Go back to the previous page
   };
 
   const handleEditClick = () => {
     setIsEditing(true);
+  };
+
+  const handleUploadButtonClick = () => {
+    fileInputRef.current.click(); // Trigger file input click
   };
 
   return (
@@ -126,12 +142,22 @@ const MemberDetail = () => {
           <div className='flex flex-col items-center'>
             <div className='relative'>
               <img src={profileInfo.profile_pic || ProfileImage} alt="Profile" className='w-40 h-40 object-cover rounded-full shadow-md' />
+              <div className={`absolute bottom-0 right-0 w-4 h-4 rounded-full ${uploadStatus === 'success' ? 'bg-green-500' : uploadStatus === 'error' ? 'bg-red-500' : 'bg-gray-500'}`}></div>
               {isEditing && (
                 <>
-                  <input type="file" accept="image/*" onChange={handleFileChange} className='hidden' id="fileInput" />
-                  <label htmlFor="fileInput" className="absolute bottom-0 right-0 bg-gray-200 p-2 rounded-full cursor-pointer">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    className='hidden'
+                    ref={fileInputRef}
+                  />
+                  <button
+                    onClick={handleUploadButtonClick}
+                    className="absolute bottom-0 right-0 bg-gray-200 p-2 rounded-full cursor-pointer"
+                  >
                     <i className="fas fa-camera"></i>
-                  </label>
+                  </button>
                 </>
               )}
             </div>
@@ -140,6 +166,7 @@ const MemberDetail = () => {
             )}
             <h2 className='text-xl font-semibold mt-2'>{profileInfo.first_name} {profileInfo.last_name}</h2>
             <p className='text-gray-500 p-1'>{profileInfo.email}</p>
+            <div className='flex items-center w-auto bg-green-500 rounded-md p-1'>{profileInfo.status}</div>
           </div>
           <div className="mt-4">
             <h3 className="text-lg font-semibold">Personal Information</h3>
@@ -216,7 +243,32 @@ const MemberDetail = () => {
               />
             </div>
             <div className="flex flex-col mt-3 gap-2 w-full">
-              <label htmlFor="rollNumber">Username</label>
+              <label htmlFor="status">Status</label>
+              {isEditing ? (
+                <select
+                  id="status"
+                  name="status"
+                  value={profileInfo.status}
+                  onChange={handleInputChange}
+                  className='pl-3 py-1 text-black border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md'
+                >
+                  <option value="">Select Status</option>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
+              ) : (
+                <input
+                  type="text"
+                  id="status"
+                  name="status"
+                  value={profileInfo.status}
+                  className='border-2 pl-3 py-1 rounded-md text-black'
+                  readOnly
+                />
+              )}
+            </div>
+            <div className="flex flex-col mt-3 gap-2 w-full">
+              <label htmlFor="username">Username</label>
               <input
                 type="text"
                 id="username"
@@ -238,10 +290,10 @@ const MemberDetail = () => {
                   className='pl-3 py-1 text-black border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md'
                 >
                   <option value="">Select Role</option>
-                  <option value="student">Student</option>
-                  <option value="faculty">Faculty Members</option>
-                  <option value="assistant">Library Assistant</option>
-                  <option value="coordinator">Program Coordinator</option>
+                  <option value="Student">Student</option>
+                  <option value="Faculty Members">Faculty Members</option>
+                  <option value="Library Assistant">Library Assistant</option>
+                  <option value="Program Coordinator">Program Coordinator</option>
                 </select>
               ) : (
                 <input
@@ -261,7 +313,7 @@ const MemberDetail = () => {
           </div>
         </div>
         <div className="flex flex-col w-3/4 p-4">
-          <div className="flex flex-col w-full p-4 bg-white rounded-lg shadow-lg">
+          <div className="flex flex-col w-full p-4 bg-white text-black rounded-lg shadow-lg">
             <h3 className="text-lg font-semibold">Book Information</h3>
             {/* Add your book information display logic here */}
           </div>
