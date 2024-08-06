@@ -15,7 +15,7 @@ import LibrarianFines from "../pages/Librarian/LibrarianFines/LibrarianFines";
 import LibrarianOthers from "../pages/Librarian/LibrarianOthers/LibrarianOthers";
 import Patrons from "../pages/Librarian/LibrarianDashboard";
 import LibrarianDashboard from "../pages/Librarian/LibrarianDashboard";
-import { MemberDetail } from "../pages/Librarian/MemberDetail";
+import MemberDetail from "../pages/Librarian/MemberDetail";
 import BookRegistration from "../pages/Librarian/BookRegistration";
 import MemberRegistration from "../pages/Librarian/MemberRegistration";
 import LibraryRequestPage from "../pages/Librarian/Patrons/Request/LibraryRequestPage";
