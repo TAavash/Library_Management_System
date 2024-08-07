@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Profile from "../../assets/User.jpg"; // Default profile image
 import { IoArrowBackCircle } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import axiosInstance from "../../utils/axois";
 
-import { memberRegister } from "../../utils/Api";
+import { memberRegister, getUserById, updateStatus } from "../../utils/Api"; // Import the new function
 
 export default function MemberRegistration() {
   const [roleList, setRoleList] = useState([]);
+  const { user_idS } = useParams();
 
   const [profile, setProfile] = useState({
     username: "",
@@ -45,27 +47,32 @@ export default function MemberRegistration() {
     }
   };
 
-  const validateFields = () => {
-    const requiredFields = [
-      "username",
-      "password",
-      "first_name",
-      "dob",
-      "gender",
-      "address",
-      "email",
-      "mobile",
-    ];
-
-    for (const field of requiredFields) {
-      if (!profile[field]) {
-        toast.error(`Please fill in the ${field.replace("_", " ")} field.`);
-        return false;
-      }
-    }
-
-    return true;
-  };
+  
+  // const handleImageUpload = async (event) => {
+  //   event.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append('profile_pic', event.target.files[0]);
+  
+  //   try {
+  //     console.log('Attempting to upload image...');
+  //     const response = await axiosInstance.post('/member/profile_pic', formData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data'
+  //       }
+  //     });
+  //     console.log('Response:', response);
+  //     if (response.status === 200) {
+  //       console.log('Image uploaded successfully');
+  //       // Handle success case
+  //     } else {
+  //       console.log('Failed to upload image, status:', response.status);
+  //       // Handle other status codes
+  //     }
+  //   } catch (error) {
+  //     console.error('Error uploading image:', error);
+  //     // Handle error
+  //   }
+  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,30 +87,60 @@ export default function MemberRegistration() {
         if (response.ok) {
           setRoleList(data.roles);
         } else {
-        console.log(data.message);
+          console.error("Error:", data.message);
+          toast.error("Failed to fetch roles. Please try again later.");
         }
       } catch (error) {
         console.error("An error occurred:", error);
+        toast.error(
+          "An error occurred while fetching roles. Please try again later."
+        );
       }
     };
 
     fetchData();
   }, []);
 
-  roleList.map((role) => {
-    if (role.role_name === profile.role_id) {
-      profile.role_id = role.role_idS;
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userData = await getUserById(user_idS);
+        console.log(userData[0]);
+        if (userData) {
+          setProfile({
+            username: userData[0].username || "",
+            password: userData[0].password || "", // You may want to handle passwords differently
+            first_name: userData[0].first_name || "",
+            last_name: userData[0].last_name || "",
+            dob: userData[0].dob || "",
+            gender: userData[0].gender || "",
+            address: userData[0].address || "",
+            email: userData[0].email || "",
+            mobile: userData[0].mobile || "",
+            role_id: userData[0].role_id || "",
+          });
+        } else {
+          console.error("No user data found");
+          toast.error("No user data found. Please try again later.");
+        }
+      } catch (error) {
+        console.error("An error occurred while fetching user data:", error);
+        toast.error(
+          "An error occurred while fetching user data. Please try again later."
+        );
+      }
+    };
+
+    if (user_idS) {
+      fetchUserData();
     }
-    return null;
-  });
+  }, [user_idS]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateFields()) return;
-
     try {
-      let register = memberRegister(
+      let register = await memberRegister(
         profile.username,
         profile.password,
         profile.first_name,
@@ -118,9 +155,10 @@ export default function MemberRegistration() {
 
       if (register) {
         toast.success("Register successful!");
-        setTimeout(() => navigate(`/LibraryRequestPage`), 2000); // Redirect after 2 seconds
+        await updateStatus(user_idS);
+        setTimeout(() => navigate("/LibraryRequestPage"), 2000); // Redirect after 2 seconds
       } else {
-        toast.error("Register failed. Please check your credentials.");
+        toast.error("Register failed. Username or email already exists.");
       }
     } catch (error) {
       console.error("An error occurred:", error); // Log the error for debugging
@@ -154,6 +192,7 @@ export default function MemberRegistration() {
                 onChange={handleInputChange}
                 placeholder="Sudarshan"
                 className="border-2 w-2/3 pl-3 py-1 rounded-md"
+                required
               />
             </div>
             <div className="flex flex-col mt-3 gap-2">
@@ -175,6 +214,7 @@ export default function MemberRegistration() {
                 value={profile.dob}
                 onChange={handleInputChange}
                 className="border-2 w-2/3 pl-3 py-1 rounded-md"
+                required
               />
             </div>
             <div className="flex flex-col mt-3 gap-2">
@@ -184,6 +224,7 @@ export default function MemberRegistration() {
                 className="w-2/3 pl-3 py-1 text-base border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md"
                 value={profile.gender}
                 onChange={handleInputChange}
+                required
               >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
@@ -200,6 +241,7 @@ export default function MemberRegistration() {
                 onChange={handleInputChange}
                 placeholder="Kupandole"
                 className="border-2 w-2/3 pl-3 py-1 rounded-md"
+                required
               />
             </div>
             <div className="flex flex-col mt-3 gap-2">
@@ -211,17 +253,20 @@ export default function MemberRegistration() {
                 onChange={handleInputChange}
                 placeholder="0000000000"
                 className="border-2 w-2/3 pl-3 py-1 rounded-md"
+                required
               />
             </div>
             <div className="flex flex-col mt-3 gap-2">
               <label>Email</label>
               <input
-                type="text"
+                type="email"
                 name="email"
                 value={profile.email}
                 onChange={handleInputChange}
-                placeholder="email@gmail.com"
+                placeholder="email@patancollege.edu.np"
+                pattern="[a-zA-Z0-9._%+-]+@patancollege\.edu\.np"
                 className="border-2 w-2/3 pl-3 py-1 rounded-md"
+                required
               />
             </div>
             <div className="flex flex-col mt-3 gap-2">
@@ -233,6 +278,7 @@ export default function MemberRegistration() {
                 onChange={handleInputChange}
                 placeholder="@qwerty"
                 className="border-2 w-2/3 pl-3 py-1 rounded-md"
+                required
               />
             </div>
             <div className="flex flex-col mt-3 gap-2">
@@ -244,6 +290,7 @@ export default function MemberRegistration() {
                 onChange={handleInputChange}
                 placeholder="Password"
                 className="border-2 w-2/3 pl-3 py-1 rounded-md"
+                required
               />
             </div>
             <div className="flex flex-col mt-3 gap-2">
@@ -253,6 +300,7 @@ export default function MemberRegistration() {
                 value={profile.role_id}
                 onChange={handleInputChange}
                 className="w-2/3 pl-3 py-1 text-base border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md"
+                required
               >
                 <option value="" disabled>
                   Select role

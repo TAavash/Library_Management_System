@@ -6,7 +6,8 @@ import NavNew from "../components/NavNew";
 const Settings = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem("access_token");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
     navigate(`/`);
   };
   const handleSignin = () => {

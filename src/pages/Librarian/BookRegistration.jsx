@@ -81,7 +81,11 @@ export default function BookRegistration() {
 
       if (response.status === 200) {
         toast.success("Register successful!");
+<<<<<<< HEAD
         setTimeout(() => navigate(`/librarian-books`), 2000); // Redirect after 2 seconds
+=======
+        setTimeout(() => navigate("/librarian-books"), 2000); 
+>>>>>>> aavash
       } else {
         toast.error(
           response.data.message || "Register failed. Please check your credentials."

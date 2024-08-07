@@ -1,9 +1,14 @@
 import { useState } from "react";
 import ProfilePic from "../assets/gojo.jpg";
 import LightDarkToggle from "./LightDarkToggle";
-// import { IoIosArrowDown } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const Avatar = () => {
+  const navigate = useNavigate();
+  const handleLibraryProfile = () => {
+    navigate(`/libraian/profile`);
+  };
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -19,7 +24,7 @@ const Avatar = () => {
         <span className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           <div className="flex gap-2 border-2 border-slate-600 rounded-r-full rounded-l-full p-[2px]">
             <img
-              className="h-10 w-10 rounded-full"
+              className="h-8 w-8 rounded-full"
               src={ProfilePic}
               alt="gojo"
             />
@@ -52,36 +57,16 @@ const Avatar = () => {
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-0"
+              onClick={handleLibraryProfile}
             >
               My Profile
             </div>
             <div
-              className="flex justify-between block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              className="flex justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-2"
             >
               <LightDarkToggle /> : Mode
-            </div>
-            <div
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-              id="options-menu-item-3"
-            >
-              Settings
-            </div>
-            <div
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-              id="options-menu-item-4"
-            >
-              Notification
-            </div>
-            <div
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-              id="options-menu-item-5"
-            >
-              Help
             </div>
           </div>
         </div>

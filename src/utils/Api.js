@@ -38,7 +38,8 @@ export const memberRegister = async (
   address,
   email,
   mobile,
-  role_idS
+  role_idS,
+  profile_pic,
 ) => {
   try {
     const response = await axiosInstance.post("/member", {
@@ -52,6 +53,7 @@ export const memberRegister = async (
       email,
       mobile,
       role_idS,
+      profile_pic,
     });
     return response;
   } catch (error) {
@@ -60,25 +62,22 @@ export const memberRegister = async (
   }
 };
 
-export const login = async (username, password) => {
-  const response = await axiosInstance.post("/login", {
-    username,
-    password,
-  });
-  localStorage.setItem("access_token", response.data.token);
-
-  return response;
+export const sendcontact = async (
+  subject,
+  message,
+  member_idS,
+) => {
+  try {
+    const response = await axiosInstance.post("/contact", {
+      subject,
+      message,
+      member_idS,
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
 };
-
-export const logout = () => {
-  localStorage.removeItem("access_token");
-};
-
-export const userList = async () => {
-  const response = await axiosInstance.get('/user/all')
-  return response.data.users
-
-}
 
 export const bookRegister = async (
   class_number,
@@ -127,6 +126,116 @@ export const bookRegister = async (
     return response;
   } catch (error) {
     console.error("Book Registration failed", error.response);
+    throw error;
+  }
+};
+
+export const login = async (username, password) => {
+  const response = await axiosInstance.post("/login", {
+    username,
+    password,
+  });
+  localStorage.setItem("access_token", response.data.token);
+  localStorage.setItem("user_id", response.data.user_id);
+
+  return response;
+};
+
+export const logout = () => {
+  localStorage.removeItem("access_token");
+};
+
+export const userList = async () => {
+  const response = await axiosInstance.get("/user/all");
+  return response.data.users;
+};
+
+export const getAllMember = async () => {
+  try {
+    const response = await axiosInstance.get("/member/all");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching member data:", error);
+    throw error;
+  }
+};
+
+export const getAllStudents = async () => {
+  try {
+    const response = await axiosInstance.get("/member/students");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching member data:", error);
+    throw error;
+  }
+};
+
+export const getAllFacultyMembers = async () => {
+  try {
+    const response = await axiosInstance.get("/member/faculty_members");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching member data:", error);
+    throw error;
+  }
+};
+
+export const getAllProgramCoordinators = async () => {
+  try {
+    const response = await axiosInstance.get("/member/program_coordinators");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching member data:", error);
+    throw error;
+  }
+};
+
+export const getLibraryAssistants = async () => {
+  try {
+    const response = await axiosInstance.get("/member/library_assistants");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching member data:", error);
+    throw error;
+  }
+};
+
+export const getMemberById = async (user_id) => {
+  try {
+    const response = await axiosInstance.get(`/member/${user_id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
+
+export const getUserById = async (user_idS) => {
+  try {
+    const response = await axiosInstance.get(`/users/${user_idS}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
+
+export const updateStatus = async (user_idS) => {
+  try {
+    const response = await axiosInstance.put(`/user/${user_idS}/status`);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating user status :", error);
+    throw error;
+  }
+};
+
+export const getAllContact = async () => {
+  try {
+    const response = await axiosInstance.get("/contact/all");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching contact data:", error);
     throw error;
   }
 };

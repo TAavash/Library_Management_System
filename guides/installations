@@ -71,6 +71,15 @@ require('tailwind-scrollbar'),
 
 npm install react-toastify
 
-9. calsnder
+9. Calendar
 
- npm install react-calendar
+npm install react-calendar
+
+10. Big calendar
+
+npm i react-big-calendar
+npm install react-big-calendar moment react-icons
+
+11. Wizard
+
+npm install react-form-wizard-component

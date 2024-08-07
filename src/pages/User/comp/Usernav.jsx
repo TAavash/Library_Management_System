@@ -6,6 +6,11 @@ import { useNavigate } from "react-router-dom";
 
 const Usernav = () => {
   const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    navigate(`/`);
+  };
+
   const [isOpen, setIsOpen] = useState(false);
 
   const togglePanel = () => {
@@ -66,12 +71,18 @@ const Usernav = () => {
               <button className="w-8 h-8 rounded-full bg-orange-500"></button>
               <button className="w-8 h-8 rounded-full bg-red-500"></button>
             </div>
-            <div className="flex justify-center mt-4">
+            <div className="flex flex-col gap-5 justify-center mt-4">
               <button
                 className="p-2 border-2 border-black rounded w-full"
                 onClick={() => navigate("/user/profile")}
               >
                 View Profile
+              </button>
+              <button
+                className="p-2 border-2 border-black rounded w-full"
+                onClick={handleLogout}
+              >
+                Logout
               </button>
             </div>
           </div>

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { MdModeEditOutline } from "react-icons/md";
 import { AiOutlineMail, AiOutlinePhone, AiOutlineLock } from "react-icons/ai";
 import abhinab from "../../assets/abhinab.jpg";
+import NavNew from "../../components/NavNew";
 import { ToastContainer, toast } from "react-toastify";
 import { getMemberById } from "../../utils/Api";
 
-const UserProfile = () => {
+const LibrarianProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [profileInfo, setProfileInfo] = useState({
     username: "",
@@ -82,6 +83,7 @@ const UserProfile = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gray-100 w-screen">
+      <NavNew />
       <div className="flex-grow w-full bg-white shadow-lg rounded-lg mt-10 overflow-hidden flex flex-col p-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-6">User Profile</h2>
         <div className="flex items-center mb-6">
@@ -293,4 +295,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default LibrarianProfile;

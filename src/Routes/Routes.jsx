@@ -23,7 +23,7 @@ import AllUsers from "../pages/Librarian/Patrons/Users/AllUsers";
 import { FacultyMembers } from "../pages/Librarian/Patrons/Users/FacultyMembers";
 import { LibraryAssistant } from "../pages/Librarian/Patrons/Users/LibraryAssistant";
 import { Students } from "../pages/Librarian/Patrons/Users/Students";
-import ProgramCoordinators from "../pages/Librarian/Patrons/Users/ProgramCoordinators";
+import {ProgramCoordinators} from "../pages/Librarian/Patrons/Users/ProgramCoordinators";
 import Membership from "../pages/Librarian/Membership";
 // import User from "../pages/Userdash";
 // import Discover from "../pages/User/Discover";
@@ -38,16 +38,18 @@ import Userdash from '../pages/User/Userdash';
 import BookDetail from "../pages/User/BookDetail"
 import MyLearning from '../pages/User/MyLearning';
 import UserProfile from '../pages/User/UserProfile';
+import LibrarianProfile from '../pages/Librarian/LibrarianProfile';
 // import UserRoute from "./UserRoute";
 import ForgetPassword from "../pages/ForgetPassword";
 import Otp from "../pages/Otp";
+import Wizard from "../pages/Librarian/Wizard";
 
 export default function RoutesNav() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register/" element={<Register />} />
         <Route path="/forgetPassword" element={<ForgetPassword />} />
         <Route path="/otp" element={<Otp />} />
         <Route path="/librarian-dashboard" element={<LibrarianDash />} />
@@ -75,7 +77,10 @@ export default function RoutesNav() {
         <Route path="/LibraryDash" element={<LibrarianDashboard />} />
         <Route path="/MemberDetail" element={<MemberDetail />} />
         <Route path="/BookRegistration" element={<BookRegistration />} />
+
         <Route path="/MemberRegistration" element={<MemberRegistration />} />
+        <Route path="/MemberRegistration/:user_idS" element={<MemberRegistration />} />
+
         <Route path="/LibraryRequestPage" element={<LibraryRequestPage />} />
         <Route path="/AllUsers" element={<AllUsers />} />
         <Route path="/FacultyMembers" element={<FacultyMembers />} />
@@ -90,6 +95,8 @@ export default function RoutesNav() {
         <Route path="/user/book-detail" element={<BookDetail />} />
         <Route path="/user/my-learning" element={<MyLearning />} />
         <Route path="/user/profile" element={<UserProfile />} />
+        <Route path="/libraian/profile" element={<LibrarianProfile />} />
+        <Route path="/wizard" element={<Wizard />} />
       </Routes>
     </>
   );

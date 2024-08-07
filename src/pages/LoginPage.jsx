@@ -24,6 +24,10 @@ const LoginPage = () => {
     navigate(`/register`);
   };
 
+  const handleForgetPassword = () => {
+    navigate(`/forgetPassword`);
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -32,14 +36,25 @@ const LoginPage = () => {
       if (response) {
         if (response.data.role_name === "Student") {
           toast.success("Login successful!");
-          navigate(`/user/home`);
-        }
-        else if (response.data.role_name === 'Librarian') {
+          setTimeout(() => navigate(`/user/home`), 1000);
+        } else if (response.data.role_name === "Faculty Member") {
           toast.success("Login successful!");
-          navigate(`/librarian-dashboard`);
+          setTimeout(() => navigate(`/user/home`), 1000);
+        } else if (response.data.role_name === "Program Coordinator") {
+          toast.success("Login successful!");
+          setTimeout(() => navigate(`/librarian-dashboard`), 1000);
+        } else if (response.data.role_name === "Library Assistant") {
+          toast.success("Login successful!");
+          setTimeout(() => navigate(`/librarian-dashboard`), 1000);
+        } else if (response.data.role_name === "Librarian") {
+          toast.success("Login successful!");
+          setTimeout(() => navigate(`/librarian-dashboard`), 1000);
         }
       } else {
-        toast.error(response.data.message || "Login failed. Please check your credentials.");
+        toast.error(
+          response.data.message ||
+            "Login failed. Please check your credentials."
+        );
       }
     } catch (error) {
       toast.error("Login failed. Please check your credentials.");
@@ -47,7 +62,6 @@ const LoginPage = () => {
       setIsLoading(false);
     }
   };
-
 
   return (
     <div
@@ -121,7 +135,10 @@ const LoginPage = () => {
               </button>
             </div>
           </form>
-          <div className="mt-[5px] text-end md:mb-[20px] text-[14px] underline cursor-pointer">
+          <div
+            className="mt-[5px] text-end md:mb-[20px] text-[14px] underline cursor-pointer"
+            onClick={handleForgetPassword}
+          >
             Forgot Password ?
           </div>
         </div>
