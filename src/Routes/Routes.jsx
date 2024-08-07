@@ -39,6 +39,7 @@ import BookDetail from "../pages/User/BookDetail"
 import MyLearning from '../pages/User/MyLearning';
 import UserProfile from '../pages/User/UserProfile';
 import UserHelp from '../pages/User/UserHelp';
+import RequestBookForm from "../pages/User/comp/RequestBookForm";
 import LibrarianProfile from '../pages/Librarian/LibrarianProfile';
 
 import UserNotification from '../../src/pages/User/comp/UserNotification'
@@ -47,6 +48,7 @@ import UpcomingDeadline from "../../src/pages/User/comp/UpcomingDeadline";
 import ForgetPassword from "../pages/ForgetPassword";
 import Otp from "../pages/Otp";
 import Wizard from "../pages/Librarian/Wizard";
+import Password from "../../src/pages/User/Password";
 
 export default function RoutesNav() {
   return (
@@ -103,6 +105,7 @@ export default function RoutesNav() {
         <Route path="/upcoming-deadline" element={<UpcomingDeadline />} />
         <Route path="/user/password" element={<Password />} />
         <Route path="/user/userhelp" element={<UserHelp />} />
+        <Route path="/user/requestbookform" element={<RequestBookForm />} />
         <Route path="/libraian/profile" element={<LibrarianProfile />} />
         <Route path="/wizard" element={<Wizard />} />
       </Routes>

@@ -6,10 +6,6 @@ import NavNew from "../../components/NavNew";
 import { ToastContainer, toast } from "react-toastify";
 import { getMemberById } from "../../utils/Api";
 import { CgProfile } from "react-icons/cg";
-import defaultProfilePic from "../../assets/User.jpg"; // Add a default profile picture
-import NavNew from "../../components/NavNew";
-import { ToastContainer, toast } from "react-toastify";
-import { getMemberById, uploadProfilePic } from "../../utils/Api"; // Ensure you have an API utility for uploading profile pictures
 
 const LibrarianProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -25,8 +21,8 @@ const LibrarianProfile = () => {
     mobile: "",
     role_name: "",
   });
-  
-  const [selectedFile, setSelectedFile] = useState(null); // For file input
+
+  const [profilePhoto, setProfilePhoto] = useState(abhinab);
 
   const user_id = localStorage.getItem("user_id");
 
@@ -46,7 +42,6 @@ const LibrarianProfile = () => {
             address: data.address || "",
             email: data.email || "",
             mobile: data.mobile || "",
-            profile_pic: data.profile_pic || "", // Set profile_pic
             role_name: data.role_name || "",
           });
         } else {
@@ -103,39 +98,6 @@ const LibrarianProfile = () => {
     setProfilePhoto(null);
   };
 
-  const handleFileChange = (e) => {
-    console.log("File selected:", e.target.files[0]); // Add console log
-    setSelectedFile(e.target.files[0]);
-  };
-
-  const handleUploadClick = async () => {
-    if (!selectedFile) {
-      toast.error("Please select a file first");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("profile_pic", selectedFile);
-    formData.append("member_id", user_id); // Ensure you send the member_id
-
-    try {
-      console.log("Uploading file..."); // Add console log
-      const response = await uploadProfilePic(formData);
-      if (response.status === 200) {
-        toast.success("Profile picture uploaded successfully");
-        setProfileInfo((prevState) => ({
-          ...prevState,
-          profile_pic: response.data.profile_pic, // Update profile_pic
-        }));
-      } else {
-        toast.error("Failed to upload profile picture");
-      }
-    } catch (error) {
-      console.error("An error occurred while uploading the profile picture:", error);
-      toast.error("An error occurred while uploading the profile picture. Please try again later.");
-    }
-  };
-
   return (
     <div className="min-h-screen flex flex-col items-center bg-gray-100 w-screen">
       <NavNew />
@@ -154,11 +116,6 @@ const LibrarianProfile = () => {
                 <CgProfile />
               </div>
             )}
-            <img
-              className="w-full h-full object-cover"
-              src={profileInfo.profile_pic ? `/storage/${profileInfo.profile_pic}` : defaultProfilePic} // Display user's profile picture if available
-              alt="User Profile"
-            />
           </div>
           <div className="ml-6 flex flex-col justify-center">
             <h3 className="text-xl font-semibold text-gray-800">{`${profileInfo.first_name} ${profileInfo.last_name}`}</h3>
@@ -186,29 +143,6 @@ const LibrarianProfile = () => {
               </button>
             </div>
           )}
-          <div className="ml-auto flex flex-col items-center space-y-2">
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              className="hidden"
-              id="profile_pic_input"
-            />
-            <label htmlFor="profile_pic_input">
-              <button className="w-40 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm font-semibold">
-                Upload New Photo
-              </button>
-            </label>
-            <button
-              onClick={handleUploadClick}
-              className="w-40 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none text-sm font-semibold"
-            >
-              Save Photo
-            </button>
-            <button className="w-40 px-4 py-2 border border-gray-500 text-gray-500 rounded-lg hover:bg-gray-200 focus:outline-none text-sm font-semibold">
-              Delete
-            </button>
-          </div>
         </div>
 
         <div className="flex flex-col space-y-4">
@@ -381,7 +315,7 @@ const LibrarianProfile = () => {
           )}
           {!isEditing && (
             <MdModeEditOutline
-              className="text-2xl cursor-pointer rounded-lg hover:bg-gray-200"
+              className="text-2xl cursor-pointer rounded-lg hover:bg-gray-200 "
               onClick={handleEditClick}
             />
           )}

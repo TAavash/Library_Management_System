@@ -67,7 +67,12 @@ function Userdash() {
       </header>
 
       <main className="pt-[100px] px-4 sm:px-6 lg:px-8">
-        <img src={Bannerimage} alt="Banner" className="w-full" />
+        <img
+          src={Bannerimage}
+          alt="Banner"
+          className="w-full "
+
+        />
 
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div
@@ -102,7 +107,7 @@ function Userdash() {
 
         {/* Upcoming Deadline Section Start */}
         <div className="flex flex-col lg:flex-row">
-          <div className="m-5 ">
+          <div className="m-auto mt-5">
             <Calendar />
           </div>
 

@@ -6,40 +6,62 @@ import { MdModeEditOutline } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CgProfile } from "react-icons/cg";
+import { getMemberById } from "../../utils/Api";
+
 
 const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [profileInfo, setProfileInfo] = useState({
-    firstName: "",
-    lastName: "",
+    username: "",
+    password: "",
+    first_name: "",
+    last_name: "",
     dob: "",
     gender: "",
     address: "",
     email: "",
-    phoneNumber: "",
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
+    mobile: "",
+    role_name: "",
   });
 
   const [profilePhoto, setProfilePhoto] = useState(abhi);
 
+  const user_id = localStorage.getItem("user_id");
+
   useEffect(() => {
-    const fetchData = async () => {
-      const data = {
-        firstName: "Abhinab",
-        lastName: "Prajapati",
-        dob: "2004-02-10",
-        gender: "Male",
-        address: "Patan",
-        email: "abhi@patancollege.edu.np",
-        phoneNumber: "+977 49652845732",
-      };
-      setProfileInfo(data);
+    const fetchMemberData = async () => {
+      try {
+        const memberData = await getMemberById(user_id);
+        let data = memberData.data;
+        if (memberData) {
+          setProfileInfo({
+            username: data.username || "",
+            password: data.password || "",
+            first_name: data.first_name || "",
+            last_name: data.last_name || "",
+            dob: data.dob || "",
+            gender: data.gender || "",
+            address: data.address || "",
+            email: data.email || "",
+            mobile: data.mobile || "",
+            role_name: data.role_name || "",
+          });
+        } else {
+          console.error("No user data found");
+          toast.error("No user data found. Please try again later.");
+        }
+      } catch (error) {
+        console.error("An error occurred while fetching user data:", error);
+        toast.error(
+          "An error occurred while fetching user data. Please try again later."
+        );
+      }
     };
 
-    fetchData();
-  }, []);
+    if (user_id) {
+      fetchMemberData();
+    }
+  }, [user_id]);
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
@@ -56,7 +78,7 @@ const UserProfile = () => {
   const handleSaveClick = async () => {
     const saveData = async () => {
       console.log("Saving data...", profileInfo);
-      toast.success("Profile updated successfully!");
+      // Add your save logic here
     };
 
     await saveData();
@@ -145,7 +167,7 @@ const UserProfile = () => {
                 id="firstName"
                 type="text"
                 name="firstName"
-                value={profileInfo.firstName}
+                value={profileInfo.first_name}
                 onChange={handleInputChange}
                 className="w-full p-2 border rounded"
                 disabled={!isEditing}
@@ -159,7 +181,7 @@ const UserProfile = () => {
                 id="lastName"
                 type="text"
                 name="lastName"
-                value={profileInfo.lastName}
+                value={profileInfo.last_name}
                 onChange={handleInputChange}
                 className="w-full p-2 border rounded"
                 disabled={!isEditing}
