@@ -229,7 +229,7 @@ const MemberDetail = () => {
                 value={profileInfo.username}
                 onChange={handleInputChange}
                 className="border-2 pl-3 py-1 rounded-md text-black"
-                readOnly={!isEditing}
+                readOnly
               />
             </div>
             <div className="flex flex-col mt-3 gap-2 w-full">
