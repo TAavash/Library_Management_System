@@ -119,7 +119,6 @@ export default function BookRegistration() {
     }
   };
 
-
   const handleBackIconClick = () => {
     navigate("/librarian-books");
   };
@@ -147,8 +146,8 @@ export default function BookRegistration() {
   };
 
   return (
-    <div className="flex w-full p-3 gap-2">
-      <div className="w-2/3 flex flex-col">
+    <div className="flex flex-col lg:flex-row w-full p-3 gap-2">
+      <div className="lg:w-2/3 w-full flex flex-col">
         <div className="flex justify-around">
           <div>
             <IoArrowBackCircle
@@ -156,12 +155,12 @@ export default function BookRegistration() {
               onClick={handleBackIconClick}
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col text-center lg:text-left">
             <h2 className="text-3xl font-bold">Add Book</h2>
             <p className="text-slate-500">Book Registration Form</p>
           </div>
         </div>
-        <div className="ml-36 mt-10">
+        <div className="lg:ml-36 mt-10">
           <form onSubmit={handleSubmit}>
             <h3 className="text-slate-400 mt-6">TITLE</h3>
             <hr />
@@ -262,26 +261,32 @@ export default function BookRegistration() {
             <hr />
             {authors.map((author, index) => (
               <div key={author.id} className="flex flex-col mt-3 gap-2">
-                <label htmlFor={`author_${author.id}`}>Author {index + 1}</label>
+                <label htmlFor={`author_${author.id}`}>
+                  Author {index + 1}
+                </label>
                 <input
                   type="text"
                   name={`author_${author.id}`}
                   id={`author_${author.id}`}
-                  placeholder="Author Name"
+                  placeholder="John Doe"
                   value={author.name}
-                  onChange={(e) => handleAuthorInputChange(author.id, e.target.value)}
+                  onChange={(e) =>
+                    handleAuthorInputChange(author.id, e.target.value)
+                  }
                   className="px-4 py-2 border border-slate-200 rounded-md"
                 />
               </div>
             ))}
-            <button
-              type="button"
-              onClick={addAuthorField}
-              className="flex items-center gap-2 mt-3 text-blue-600"
-            >
-              <IoPersonAdd />
-              Add Author
-            </button>
+            <div className="flex mt-5 justify-end">
+              <button
+                type="button"
+                onClick={addAuthorField}
+                className="text-blue-500 flex items-center"
+              >
+                <IoPersonAdd className="w-6 h-6" />
+                <span>Add Author</span>
+              </button>
+            </div>
 
             <h3 className="text-slate-400 mt-6">PUBLICATION</h3>
             <hr />
@@ -302,7 +307,7 @@ export default function BookRegistration() {
                 type="text"
                 name="edition"
                 id="edition"
-                placeholder="First"
+                placeholder="1st Edition"
                 value={book.edition}
                 onChange={handleInputChange}
                 className="px-4 py-2 border border-slate-200 rounded-md"
@@ -314,7 +319,7 @@ export default function BookRegistration() {
                 type="text"
                 name="publication_name"
                 id="publication_name"
-                placeholder="HarperCollins"
+                placeholder="Oxford"
                 value={book.publication_name}
                 onChange={handleInputChange}
                 className="px-4 py-2 border border-slate-200 rounded-md"
@@ -326,7 +331,7 @@ export default function BookRegistration() {
                 type="text"
                 name="name_of_publisher"
                 id="name_of_publisher"
-                placeholder="John Doe"
+                placeholder="Oxford Publishers"
                 value={book.name_of_publisher}
                 onChange={handleInputChange}
                 className="px-4 py-2 border border-slate-200 rounded-md"
@@ -345,7 +350,7 @@ export default function BookRegistration() {
               />
             </div>
 
-            <h3 className="text-slate-400 mt-6">ISBN</h3>
+            <h3 className="text-slate-400 mt-6">BOOK IDENTIFIER</h3>
             <hr />
             <div className="flex flex-col mt-3 gap-2">
               <label htmlFor="isbn_number">ISBN Number</label>
@@ -353,7 +358,7 @@ export default function BookRegistration() {
                 type="text"
                 name="isbn_number"
                 id="isbn_number"
-                placeholder="123-4567890123"
+                placeholder="978-3-16-148410-0"
                 value={book.isbn_number}
                 onChange={handleInputChange}
                 className="px-4 py-2 border border-slate-200 rounded-md"
@@ -365,7 +370,7 @@ export default function BookRegistration() {
                 type="text"
                 name="classification_number"
                 id="classification_number"
-                placeholder="QA76.73.J38"
+                placeholder="123.45"
                 value={book.classification_number}
                 onChange={handleInputChange}
                 className="px-4 py-2 border border-slate-200 rounded-md"
@@ -377,14 +382,14 @@ export default function BookRegistration() {
                 type="text"
                 name="book_number"
                 id="book_number"
-                placeholder="10"
+                placeholder="67890"
                 value={book.book_number}
                 onChange={handleInputChange}
                 className="px-4 py-2 border border-slate-200 rounded-md"
               />
             </div>
 
-            <h3 className="text-slate-400 mt-6">SCANNER</h3>
+            <h3 className="text-slate-400 mt-6">BARCODE</h3>
             <hr />
             <div className="flex flex-col mt-3 gap-2">
               <label htmlFor="scanner_type">Scanner Type</label>
@@ -396,9 +401,9 @@ export default function BookRegistration() {
                 className="px-4 py-2 border border-slate-200 rounded-md"
               >
                 <option value="">Select Scanner Type</option>
-                <option value="Type1">Type1</option>
-                <option value="Type2">Type2</option>
-                <option value="Type3">Type3</option>
+                <option value="Handheld">Handheld</option>
+                <option value="Fixed">Fixed</option>
+                <option value="Mobile">Mobile</option>
               </select>
             </div>
             <div className="flex flex-col mt-3 gap-2">
@@ -407,7 +412,7 @@ export default function BookRegistration() {
                 type="text"
                 name="barcode_number"
                 id="barcode_number"
-                placeholder="1234567890123"
+                placeholder="123456789012"
                 value={book.barcode_number}
                 onChange={handleInputChange}
                 className="px-4 py-2 border border-slate-200 rounded-md"
@@ -422,7 +427,7 @@ export default function BookRegistration() {
                 type="text"
                 name="book_location"
                 id="book_location"
-                placeholder="Shelf 5"
+                placeholder="Library"
                 value={book.book_location}
                 onChange={handleInputChange}
                 className="px-4 py-2 border border-slate-200 rounded-md"
@@ -431,16 +436,26 @@ export default function BookRegistration() {
 
             <button
               type="submit"
-              className="mt-5 px-4 py-2 bg-blue-600 text-white rounded-md"
+              className="mt-6 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
             >
-              Register Book
+              Register
             </button>
           </form>
         </div>
       </div>
-      <div className="w-1/3 flex flex-col items-center mt-20">
-        <img src={bookCover} alt="Book Cover" className="w-48 object-cover rounded-md" />
-        <input type="file" accept="image/*" onChange={handleImageUpload} className="mt-4 cursor-pointer" />
+      <div className="lg:w-1/3 w-full flex flex-col items-center mt-10 lg:mt-20">
+
+        <img
+          src={bookCover}
+          alt="Book Cover"
+          className="w-48 object-cover rounded-md"
+        />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          className="px-4 py-2 cursor-pointer"
+        />
       </div>
       <ToastContainer />
     </div>

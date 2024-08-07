@@ -5,21 +5,20 @@ import { FiSearch } from "react-icons/fi";
 const ElectronicLocation = ({onCardClick}) => {
   return (
     <div className="w-full h-full ">
-     <div className="w-[100%] h-[20%] flex justify-between bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
-        <div className=" h-full flex-col">
-          <div className="w-full h-[70%] text-3xl">
+     <div className="w-full h-[20%] flex flex-col md:flex-row justify-between bg-[#F5F5F5] px-6 md:px-12 py-4 md:py-6 rounded-tr-2xl">
+        <div className="h-full flex-col">
+          <div className="w-full h-[70%] text-2xl md:text-3xl">
             Electronic Location
           </div>
-          <div className="w-full h-[30%] text-[-2xl] text-[#525252]">
-            Manage all the electronic location
+          <div className="w-full h-[30%] text-lg md:text-2xl text-[#525252]">
+            Manage all the elctronic location
           </div>
         </div>
 
         <div className='flex justify-center m-2'>
-          <div className="flex w-[500px] items-center gap-1">
+          <div className="flex w-full md:w-[500px] items-center gap-1">
             <FiSearch className="h-5 w-5 ml-1" />
-            <input type="text" placeholder='Search' className='p-1 w-[500px]  border-hidden focus:outline-none'
-            />
+            <input type="text" placeholder='Search' className='p-1 w-full border-hidden focus:outline-none' />
           </div>
         </div>
 

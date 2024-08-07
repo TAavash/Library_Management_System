@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Profile from "../../assets/User.jpg"; // Default profile image
 import { IoArrowBackCircle } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { memberRegister } from "../../utils/Api";
+import { memberRegister, getUserById, updateStatus } from "../../utils/Api"; // Import the new function
 
 export default function MemberRegistration() {
   const [roleList, setRoleList] = useState([]);
+  const { user_idS } = useParams();
 
   const [profile, setProfile] = useState({
     username: "",
@@ -63,12 +64,49 @@ export default function MemberRegistration() {
         }
       } catch (error) {
         console.error("An error occurred:", error);
-        toast.error("An error occurred while fetching roles. Please try again later.");
+        toast.error(
+          "An error occurred while fetching roles. Please try again later."
+        );
       }
     };
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userData = await getUserById(user_idS);
+        console.log(userData[0]);
+        if (userData) {
+          setProfile({
+            username: userData[0].username || "",
+            password: userData[0].password || "", // You may want to handle passwords differently
+            first_name: userData[0].first_name || "",
+            last_name: userData[0].last_name || "",
+            dob: userData[0].dob || "",
+            gender: userData[0].gender || "",
+            address: userData[0].address || "",
+            email: userData[0].email || "",
+            mobile: userData[0].mobile || "",
+            role_id: userData[0].role_id || "",
+          });
+        } else {
+          console.error("No user data found");
+          toast.error("No user data found. Please try again later.");
+        }
+      } catch (error) {
+        console.error("An error occurred while fetching user data:", error);
+        toast.error(
+          "An error occurred while fetching user data. Please try again later."
+        );
+      }
+    };
+
+    if (user_idS) {
+      fetchUserData();
+    }
+  }, [user_idS]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -89,7 +127,8 @@ export default function MemberRegistration() {
 
       if (register) {
         toast.success("Register successful!");
-        setTimeout(() => navigate(`/LibraryRequestPage`), 2000); // Redirect after 2 seconds
+        await updateStatus(user_idS);
+        setTimeout(() => navigate("/LibraryRequestPage"), 2000); // Redirect after 2 seconds
       } else {
         toast.error("Register failed. Username or email already exists.");
       }

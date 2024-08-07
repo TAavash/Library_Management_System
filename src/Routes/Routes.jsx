@@ -13,17 +13,17 @@ import Settings from "../pages/Settings";
 import Message from "../pages/Message";
 import LibrarianFines from "../pages/Librarian/LibrarianFines/LibrarianFines";
 import LibrarianOthers from "../pages/Librarian/LibrarianOthers/LibrarianOthers";
-import Patrons from "../pages/Librarian/LibrarianDashboard";
-import LibrarianDashboard from "../pages/Librarian/LibrarianDashboard";
+import Patrons from "../pages/Librarian/PatronDashboard";
+import LibrarianDashboard from "../pages/Librarian/PatronDashboard";
 import { MemberDetail } from "../pages/Librarian/MemberDetail";
 import BookRegistration from "../pages/Librarian/BookRegistration";
 import MemberRegistration from "../pages/Librarian/MemberRegistration";
 import LibraryRequestPage from "../pages/Librarian/Patrons/Request/LibraryRequestPage";
-import AllUsers from "../pages/Librarian/Patrons/Users/AllUsers";
-import { FacultyMembers } from "../pages/Librarian/Patrons/Users/FacultyMembers";
-import { LibraryAssistant } from "../pages/Librarian/Patrons/Users/LibraryAssistant";
-import { Students } from "../pages/Librarian/Patrons/Users/Students";
-import ProgramCoordinators from "../pages/Librarian/Patrons/Users/ProgramCoordinators";
+import AllUsers from "../pages/Librarian/Patrons/PatronUsers/AllUsers";
+import { FacultyMembers } from "../pages/Librarian/Patrons/PatronUsers/FacultyMembers";
+import { LibraryAssistant } from "../pages/Librarian/Patrons/PatronUsers/LibraryAssistant";
+import { Students } from "../pages/Librarian/Patrons/PatronUsers/Students";
+import {ProgramCoordinators} from "../pages/Librarian/Patrons/PatronUsers/ProgramCoordinators";
 import Membership from "../pages/Librarian/Membership";
 // import User from "../pages/Userdash";
 // import Discover from "../pages/User/Discover";
@@ -41,6 +41,7 @@ import UserProfile from '../pages/User/UserProfile';
 
 import UserNotification from '../../src/pages/User/comp/UserNotification'
 import UpcomingDeadline from "../../src/pages/User/comp/UpcomingDeadline";
+import LibrarianProfile from '../pages/Librarian/LibrarianProfile';
 // import UserRoute from "./UserRoute";
 import ForgetPassword from "../pages/ForgetPassword";
 import Otp from "../pages/Otp";
@@ -50,7 +51,7 @@ export default function RoutesNav() {
     <>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register/" element={<Register />} />
         <Route path="/forgetPassword" element={<ForgetPassword />} />
         <Route path="/otp" element={<Otp />} />
         <Route path="/librarian-dashboard" element={<LibrarianDash />} />
@@ -74,11 +75,13 @@ export default function RoutesNav() {
         <Route path="/librarian-fines" element={<LibrarianFines />} />
         <Route path="/librarian-others" element={<LibrarianOthers />} />
         <Route path="/patrons" element={<Patrons />} />
-        <Route path="/patrons" element={<LibrarianDashboard />} />
         <Route path="/LibraryDash" element={<LibrarianDashboard />} />
         <Route path="/MemberDetail" element={<MemberDetail />} />
         <Route path="/BookRegistration" element={<BookRegistration />} />
+
         <Route path="/MemberRegistration" element={<MemberRegistration />} />
+        <Route path="/MemberRegistration/:user_idS" element={<MemberRegistration />} />
+
         <Route path="/LibraryRequestPage" element={<LibraryRequestPage />} />
         <Route path="/AllUsers" element={<AllUsers />} />
         <Route path="/FacultyMembers" element={<FacultyMembers />} />
@@ -95,6 +98,7 @@ export default function RoutesNav() {
         <Route path="/user/profile" element={<UserProfile />} />
         <Route path="/user/notification" element={<UserNotification />} />
         <Route path="/upcoming-deadline" element={<UpcomingDeadline />} />
+        <Route path="/libraian/profile" element={<LibrarianProfile />} />
       </Routes>
     </>
   );

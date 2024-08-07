@@ -1,8 +1,93 @@
 import React from 'react'
-import FlipCard from "../../../../../components/FlipCard";
-import { FiSearch,  } from "react-icons/fi";
+import { FiSearch } from "react-icons/fi";
+import BookCover from '../../../../../assets/OIP.jpeg';
 
-const All = ({ onCardClick }) => {
+
+const checkOut = [
+  {
+    title: "Kafka on the Shore",
+    author: "Murakami",
+    cover: BookCover,
+    checkOutDate: "2 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "Rich Dad Poor Dad",
+    author: "Robert T. Kiyosaki",
+    cover: BookCover,
+    checkOutDate: "3 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "How to Talk to Anyone",
+    author: "Leil Lowndes",
+    cover: BookCover,
+    checkOutDate: "4 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "Kafka on the Shore",
+    author: "Murakami",
+    cover: BookCover,
+    checkOutDate: "2 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "Rich Dad Poor Dad",
+    author: "Robert T. Kiyosaki",
+    cover: BookCover,
+    checkOutDate: "3 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "How to Talk to Anyone",
+    author: "Leil Lowndes",
+    cover: BookCover,
+    checkOutDate: "4 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "Kafka on the Shore",
+    author: "Murakami",
+    cover: BookCover,
+    checkOutDate: "2 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "Rich Dad Poor Dad",
+    author: "Robert T. Kiyosaki",
+    cover: BookCover,
+    checkOutDate: "3 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  },
+  {
+    title: "How to Talk to Anyone",
+    author: "Leil Lowndes",
+    cover: BookCover,
+    checkOutDate: "4 June, 2025",
+    name: "Sudarshan Bam",
+    role: "Student"
+
+  }
+];
+
+const All = () => {
   return (
     <div className="w-full h-full ">
       <div className="w-[100%] h-[20%] flex justify-between bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
@@ -11,7 +96,7 @@ const All = ({ onCardClick }) => {
             All Check-Out
           </div>
           <div className="w-full h-[30%] text-[-2xl] text-[#525252]">
-            Manage all the check out
+            Manage all the check-out
           </div>
         </div>
 
@@ -24,44 +109,26 @@ const All = ({ onCardClick }) => {
         </div>
 
       </div>
-      <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-blue-600 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
+      <div className="flex-col h-[80%] bg-white p-[30px] gap-[30px] rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
+
+
+          {checkOut.map((check, index) => (
+            <div
+              key={index}
+              className="group relative bg-white rounded-lg shadow-md w-56 overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl"
+            >
+              <div className="p-3">
+                <h3 className="text-lg font-bold"> {check.name}</h3>
+                <p className="text-sm text-gray-600">{check.role}</p>
+              </div>
+              <img src={check.cover} alt={check.title} className="w-full h-72 object-cover" />
+              <div className="p-4">
+                <h3 className="text-lg font-bold">{check.title}</h3>
+                <p className="text-sm text-gray-600">{check.author}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div></div>
   )
