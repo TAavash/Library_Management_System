@@ -63,12 +63,21 @@ export const memberRegister = async (
 };
 
 
-export const uploadProfilePic = (formData) => {
-  return axiosInstance.post('/member/profile_pic', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+export const uploadProfilePic = async (userId, file) => {
+  const formData = new FormData();
+  formData.append('profile_pic', file);
+
+  try {
+    const response = await axiosInstance.post(`/member/${userId}/profile_pic`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Failed to upload profile picture", error);
+    throw error;
+  }
 };
 
 export const sendcontact = async (

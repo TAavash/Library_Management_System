@@ -10,6 +10,10 @@ const Usernav = () => {
     localStorage.removeItem("access_token");
     navigate(`/`);
   };
+  
+  const handleHome = () => {
+    navigate(`/user/home`);
+  };
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -20,7 +24,7 @@ const Usernav = () => {
   return (
     <nav className="bg-white shadow-md py-4 fixed w-full top-0 left-0 z-50">
       <div className="container px-4 mx-auto flex justify-between items-center">
-        <img src={Logo} className="h-[60px]" alt="logo" />
+        <img src={Logo} className="h-[60px] cursor-pointer" alt="logo" onClick={handleHome}/>
 
         <div className="flex items-center space-x-6">
           <button
