@@ -39,7 +39,7 @@ export const memberRegister = async (
   email,
   mobile,
   role_idS,
-  profile_pic,
+  // profile_pic,
 ) => {
   try {
     const response = await axiosInstance.post("/member", {
@@ -53,13 +53,22 @@ export const memberRegister = async (
       email,
       mobile,
       role_idS,
-      profile_pic,
+      // profile_pic,
     });
     return response;
   } catch (error) {
     console.error("Registration failed:", error.response);
     throw error;
   }
+};
+
+
+export const uploadProfilePic = (formData) => {
+  return axiosInstance.post('/member/profile_pic', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 };
 
 export const sendcontact = async (
