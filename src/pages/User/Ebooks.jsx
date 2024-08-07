@@ -1,16 +1,6 @@
 import React from "react";
-import { FaSearch } from "react-icons/fa";
-import logo from "../../assets/pcpslogo.png";
 import bookcover1 from "../../assets/images.jpeg";
-import { GrFilter, GrFormAdd } from "react-icons/gr";
-import {
-  FaBookDead,
-  FaRocket,
-  FaMagic,
-  FaSearchDollar,
-  FaHeart,
-} from "react-icons/fa";
-import { FaBookOpen } from "react-icons/fa6";
+import { GrFormAdd } from "react-icons/gr";
 import { IoBookSharp } from "react-icons/io5";
 import { MdBookmarkAdded, MdLocalLibrary } from "react-icons/md";
 import { HiDocumentText } from "react-icons/hi";

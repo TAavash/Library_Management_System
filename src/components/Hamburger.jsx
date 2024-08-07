@@ -1,9 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LightDarkToggle from "./LightDarkToggle";
 import { GiHamburgerMenu } from "react-icons/gi";
-import ProfilePic from "../assets/gojo.jpg";
 
 const Hamburger = () => {
   const navigate = useNavigate();
@@ -67,25 +65,11 @@ const Hamburger = () => {
           <div className="py-1" role="none">
             <div
               onClick={handleLibraryProfile}
-              className=" flex justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-0"
             >
-              <div className="flex w-fit gap-2 border-2 border-slate-600 rounded-r-full rounded-l-full p-[2px]">
-                <img
-                  className="h-10 w-10 rounded-full"
-                  src={ProfilePic}
-                  alt="gojo"
-                />
-              </div>
               My Profile
-            </div>
-            <div
-              className="flex justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-              id="options-menu-item-2"
-            >
-              <LightDarkToggle /> : Mode
             </div>
             <div
               onClick={handleLibraryDash}

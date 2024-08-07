@@ -3,7 +3,7 @@ import { IoArrowBackCircle } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getMemberById } from "../../utils/Api";
-import ProfileImage from "../../assets/gojo.jpg";
+import DefaultProfile from "../../assets/User.jpg";
 
 const MemberDetail = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -103,7 +103,7 @@ const MemberDetail = () => {
           <div className="flex flex-col items-center">
             <div className="relative">
               <img
-                src={profileInfo.profile_pic || ProfileImage}
+                src={profileInfo.profile_pic || DefaultProfile}
                 alt="Profile"
                 className="w-40 h-40 object-cover rounded-full shadow-md"
               />

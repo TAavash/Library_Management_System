@@ -1,15 +1,36 @@
-import { useState } from "react";
-import ProfilePic from "../assets/gojo.jpg";
-import LightDarkToggle from "./LightDarkToggle";
+import React, { useState, useEffect } from "react";
+import DefaultProfile from "../assets/User.jpg";
 import { useNavigate } from "react-router-dom";
+import { getMemberById } from "../utils/Api"; // Ensure this import is correct
 
 const Avatar = () => {
   const navigate = useNavigate();
+  const [profilePic, setProfilePic] = useState(DefaultProfile);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const user_id = localStorage.getItem('user_id'); // Get the user ID from localStorage
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (user_id) {
+        try {
+          const memberData = await getMemberById(user_id);
+          console.log("Fetched user data:", memberData); // Log the API response
+          if (memberData && memberData.data && memberData.data.profile_pic) {
+            setProfilePic(memberData.data.profile_pic);
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [user_id]);
+
   const handleLibraryProfile = () => {
     navigate(`/libraian/profile`);
   };
-
-  const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -22,11 +43,11 @@ const Avatar = () => {
         className="cursor-pointer inline-flex w-fit rounded-md shadow-sm"
       >
         <span className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-          <div className="flex gap-2 border-2 border-slate-600 rounded-r-full rounded-l-full p-[2px]">
+          <div className="flex gap-2 border-1 border-slate-600 rounded-r-full rounded-l-full p-[1px]">
             <img
-              className="h-8 w-8 rounded-full"
-              src={ProfilePic}
-              alt="gojo"
+              className="h-9 w-9 rounded-full"
+              src={profilePic}
+              alt="Profile"
             />
           </div>
           <svg
@@ -60,13 +81,6 @@ const Avatar = () => {
               onClick={handleLibraryProfile}
             >
               My Profile
-            </div>
-            <div
-              className="flex justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-              id="options-menu-item-2"
-            >
-              <LightDarkToggle /> : Mode
             </div>
           </div>
         </div>
