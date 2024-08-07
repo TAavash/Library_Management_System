@@ -60,6 +60,8 @@ export const memberRegister = async (
     throw error;
   }
 };
+
+
 export const uploadProfilePic = (formData) => {
   return axiosInstance.post('/member/profile_pic', formData, {
     headers: {
@@ -67,6 +69,7 @@ export const uploadProfilePic = (formData) => {
     },
   });
 };
+
 export const sendcontact = async (
   subject,
   message,

@@ -3,7 +3,7 @@ import BookCover from "../../assets/th (1).jpeg";
 import { IoArrowBackCircle, IoPersonAdd } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { bookRegister } from "../../utils/Api"; // Make sure to import the API function
 
 export default function BookRegistration() {
@@ -81,10 +81,11 @@ export default function BookRegistration() {
 
       if (response.status === 200) {
         toast.success("Register successful!");
-        setTimeout(() => navigate("/librarian-books"), 2000); 
+        setTimeout(() => navigate("/librarian-books"), 2000);
       } else {
         toast.error(
-          response.data.message || "Register failed. Please check your credentials."
+          response.data.message ||
+            "Register failed. Please check your credentials."
         );
       }
     } catch (error) {
@@ -191,9 +192,9 @@ export default function BookRegistration() {
                 onChange={handleInputChange}
               >
                 <option value="">Select Genre</option>
-                <option value="BSc">BSc</option>
-                <option value="BBA">BBA</option>
-                <option value="ACCA">ACCA</option>
+                <option value="General Collection">General Collection</option>
+                <option value="Textbook">Textbook</option>
+                <option value="Reference">Reference</option>
               </select>
             </div>
             <div className="flex flex-col mt-3 gap-2">
@@ -333,7 +334,9 @@ export default function BookRegistration() {
               />
             </div>
             <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="classification_number">Classification Number</label>
+              <label htmlFor="classification_number">
+                Classification Number
+              </label>
               <input
                 type="text"
                 name="classification_number"

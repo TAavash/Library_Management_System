@@ -15,7 +15,7 @@ import LibrarianFines from "../pages/Librarian/LibrarianFines/LibrarianFines";
 import LibrarianOthers from "../pages/Librarian/LibrarianOthers/LibrarianOthers";
 import Patrons from "../pages/Librarian/LibrarianDashboard";
 import LibrarianDashboard from "../pages/Librarian/LibrarianDashboard";
-import { MemberDetail } from "../pages/Librarian/MemberDetail";
+import MemberDetail from "../pages/Librarian/MemberDetail";
 import BookRegistration from "../pages/Librarian/BookRegistration";
 import MemberRegistration from "../pages/Librarian/MemberRegistration";
 import LibraryRequestPage from "../pages/Librarian/Patrons/Request/LibraryRequestPage";
@@ -46,7 +46,7 @@ import UpcomingDeadline from "../../src/pages/User/comp/UpcomingDeadline";
 // import UserRoute from "./UserRoute";
 import ForgetPassword from "../pages/ForgetPassword";
 import Otp from "../pages/Otp";
-import Password from "../../src/pages/User/Password";
+import Wizard from "../pages/Librarian/Wizard";
 
 export default function RoutesNav() {
   return (
@@ -104,6 +104,7 @@ export default function RoutesNav() {
         <Route path="/user/password" element={<Password />} />
         <Route path="/user/userhelp" element={<UserHelp />} />
         <Route path="/libraian/profile" element={<LibrarianProfile />} />
+        <Route path="/wizard" element={<Wizard />} />
       </Routes>
     </>
   );
