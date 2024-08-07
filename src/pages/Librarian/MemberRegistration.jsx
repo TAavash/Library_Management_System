@@ -33,7 +33,7 @@ export default function MemberRegistration() {
   const navigate = useNavigate();
 
   const handleBackIconClick = () => {
-    navigate("/LibraryDash");
+    navigate(-1);
   };
 
   const handleImageUpload = (event) => {

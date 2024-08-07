@@ -41,10 +41,6 @@ const LibrarianBooks = () => {
     setActive("all");
     setSelectedCard(null);
   };
-  const handleAddBookActive = () => {
-    setActive("add");
-    setSelectedCard(null);
-  };
   const handleStockActive = () => {
     setActive("stock");
     setSelectedCard(null);

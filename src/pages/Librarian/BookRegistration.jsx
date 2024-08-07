@@ -98,7 +98,7 @@ export default function BookRegistration() {
   const [bookCover, setBookCover] = useState(BookCover);
 
   const handleBackIconClick = () => {
-    navigate("/librarian-books");
+    navigate(-1);
   };
 
   const handleImageUpload = (event) => {

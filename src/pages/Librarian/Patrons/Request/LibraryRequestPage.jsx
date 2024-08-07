@@ -11,12 +11,20 @@ import UserAccountRequest from "./UserAccountRequest";
 export default function LibraryRequestPage() {
   const navigate = useNavigate();
 
-  const handleAddIconClick = () => {
-    navigate("/MemberRegistration/");
+  const handleMemberRegistration = () => {
+    navigate("/MemberRegistration");
   };
 
-  const handleUserClick = () => {
-    navigate("/");
+  const handlePatrons = () => {
+    navigate("/LibraryDash");
+  };
+
+  const handleRequestClick = () => {
+    navigate("/LibraryRequestPage");
+  };
+
+  const handleMembershipClick = () => {
+    navigate("/MembershipPage");
   };
 
   const [active, setActive] = useState("User Account Request");
@@ -47,21 +55,27 @@ export default function LibraryRequestPage() {
       <div className="min-h-screen h-auto bg-gray-200 py-[10px]">
         <div className="flex justify-evenly gap-[20px] mx-[3%]">
           <button
-            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
-            onClick={handleUserClick}
+            className="w-[150px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md mt-[100px]"
+            onClick={handlePatrons}
           >
             Users
           </button>
           <button
-            className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]"
-            onClick={handleAddIconClick}
+            className="w-[150px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md mt-[100px]"
+            onClick={handleMemberRegistration}
           >
             Add Member
           </button>
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]">
+          <button
+            className="w-[150px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md mt-[100px]"
+            onClick={handleMembershipClick}
+          >
             Membership
           </button>
-          <button className="w-[150px] h-[120px] rounded-2xl bg-white hover:bg-red-600 shadow-slate-500 shadow-md mt-[100px]">
+          <button
+            className="w-[150px] h-[120px] rounded-2xl bg-[#14273D] text-white shadow-slate-500 shadow-md mt-[100px]"
+            onClick={handleRequestClick}
+          >
             Request
           </button>
         </div>
