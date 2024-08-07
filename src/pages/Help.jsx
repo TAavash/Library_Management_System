@@ -43,8 +43,8 @@ const Help = () => {
               <div className="flex gap-[10px] justify-center items-center h-[20%] p-[20px] border-b-4 border-[#A3A3A3]">
                 <IoIosHelpCircle className=" fill-[#A3A3A3] text-3xl" />
               </div>
-              <div className="text-[#737373] flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-[50px]">
-                <button className="h-[40px] hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
+              <div className="flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-[50px]">
+                <button className="h-[40px] text-white rounded-xl text-2xl p-[2px] px-[3px]">
                   FAQ's
                 </button>
               </div>
@@ -117,8 +117,8 @@ const Help = () => {
               <div className="flex gap-[10px] justify-center items-center h-[20%] p-[20px] border-b-4 border-[#A3A3A3]">
                 <IoMail className=" fill-[#A3A3A3]  text-3xl" />
               </div>
-              <div className="text-[#737373] flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-[50px]">
-                <button className="h-[40px] hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]">
+              <div className="flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-[50px]">
+                <button className="h-[40px] text-white rounded-xl text-2xl p-[2px] px-[3px]">
                   Contact Administrator
                 </button>
               </div>

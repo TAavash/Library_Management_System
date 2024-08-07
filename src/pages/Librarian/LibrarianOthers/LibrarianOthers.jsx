@@ -56,40 +56,40 @@ const LibrarianOthers = () => {
               <div className="text-[#737373] flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-[50px]">
                 <button
                   onClick={handleReportActive}
-                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
                   {active === "report" ? (
-                    <div className="text-red-600">Report & Analytics</div>
+                    <div className="text-white">Report & Analytics</div>
                   ) : (
                     <div>Report & Analytics</div>
                   )}
                 </button>
                 <button
                   onClick={handleReviewActive}
-                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
                   {active === "review" ? (
-                    <div className="text-red-600">Review & Ratings</div>
+                    <div className="text-white">Review & Ratings</div>
                   ) : (
                     <div>Review & Ratings</div>
                   )}
                 </button>
                 <button
                   onClick={handleCalendarActive}
-                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
                   {active === "calendar" ? (
-                    <div className="text-red-600">Calendar</div>
+                    <div className="text-white">Calendar</div>
                   ) : (
                     <div>Calendar</div>
                   )}
                 </button>
                 <button
                   onClick={handleHistoryActive}
-                  className="h-auto hover:bg-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                 >
                   {active === "history" ? (
-                    <div className="text-red-600">History</div>
+                    <div className="text-white">History</div>
                   ) : (
                     <div>History</div>
                   )}
