@@ -7,7 +7,6 @@ import All from "./SidebarComp/All Books/All";
 import Stock from "./SidebarComp/All Books/Stock";
 import Categories from "./SidebarComp/All Books/Categories";
 import ElectronicLocation from "./SidebarComp/All Books/ElectronicLocation";
-import Requested from "./SidebarComp/All Books/Requested";
 import EBooks from "./SidebarComp/All Books/EBooks";
 
 const LibrarianBooks = () => {
@@ -53,10 +52,6 @@ const LibrarianBooks = () => {
     setActive("electronic-location");
     setSelectedCard(null);
   };
-  const handleRequestedActive = () => {
-    setActive("requested");
-    setSelectedCard(null);
-  };
   const handleEBooksActive = () => {
     setActive("e-books");
     setSelectedCard(null);
@@ -76,15 +71,12 @@ const LibrarianBooks = () => {
         return <Categories onCardClick={handleCardClick} />;
       case "electronic-location":
         return <ElectronicLocation onCardClick={handleCardClick} />;
-      case "requested":
-        return <Requested onCardClick={handleCardClick} />;
       case "e-books":
         return <EBooks onCardClick={handleCardClick} />;
       default:
         return <All onCardClick={handleCardClick} />;
     }
   };
-
 
   const [key, setKey] = useState(0);
 
@@ -184,16 +176,6 @@ const LibrarianBooks = () => {
                 </button>
                 <button
                   className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
-                  onClick={handleRequestedActive}
-                >
-                  {active === "requested" ? (
-                    <div className="text-white">Requested</div>
-                  ) : (
-                    <div>Requested</div>
-                  )}
-                </button>
-                <button
-                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                   onClick={handleEBooksActive}
                 >
                   {active === "e-books" ? (
@@ -206,17 +188,23 @@ const LibrarianBooks = () => {
             </div>
             <div className="flex w-full h-full bg-[#F5F5F5] rounded-r-2xl">
               <div
-                className={`h-full rounded-2xl ${selectedCard ? "w-2/3" : "w-full"
-                  }`}
+                className={`h-full rounded-2xl ${
+                  selectedCard ? "w-2/3" : "w-full"
+                }`}
               >
                 {renderActiveComponent()}
               </div>
               {selectedCard && (
-                <div key={key} className=" relative w-1/3 flex flex-col bg-[#011222] text-white p-2 mt-3 mx-7 rounded-xl justify-center items-center slide-in">
+                <div
+                  key={key}
+                  className=" relative w-1/3 flex flex-col bg-[#011222] text-white p-2 mt-3 mx-7 rounded-xl justify-center items-center slide-in"
+                >
                   {selectedCard}
                   <div className="absolute top-[1%] right-[5%] ">
-                    <RxCross2 className="h-8 w-8 cursor-pointer " 
-                    onClick={handleCrossIcon}/>
+                    <RxCross2
+                      className="h-8 w-8 cursor-pointer "
+                      onClick={handleCrossIcon}
+                    />
                   </div>
                 </div>
               )}
