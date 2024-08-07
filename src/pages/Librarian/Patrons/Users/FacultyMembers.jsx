@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getAllFacultyMembers } from "../../../../utils/Api";
 
 export const FacultyMembers = () => {
-  const [facultyMembers, setFacultyMembers] = useState([]);
+  const [allFacultyMembers, setAllFacultyMembers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
 
@@ -15,13 +15,13 @@ export const FacultyMembers = () => {
         console.log("Fetched response:", response);
 
         let list = response;
-        if (response.Student) {
+        if (response.Faculty_Member) {
           // Adjust this line based on your actual API response structure
-          list = response.Student;
+          list = response.Faculty_Member;
         }
 
         if (Array.isArray(list)) {
-          setFacultyMembers(list); // Set the original list of students
+          setAllFacultyMembers(list); // Set the original list of FacultyMembers
           setFilteredData(list); // Also set it as the initial filtered data
         } else {
           console.error("Expected an array but got:", JSON.stringify(list));
@@ -45,7 +45,7 @@ export const FacultyMembers = () => {
     const query = event.target.value;
     setSearchQuery(query);
 
-    const filtered = facultyMembers.filter((person) =>
+    const filtered = allFacultyMembers.filter((person) =>
       `${person.first_name} ${person.last_name}`
         .toLowerCase()
         .includes(query.toLowerCase())
@@ -61,7 +61,7 @@ export const FacultyMembers = () => {
             <div className="w-full h-auto text-start text-3xl p-1">Faculty Members</div>
 
             <div className="w-full h-auto text-start text-2xl text-gray-600 p-1">
-              Manage all faculty members
+              Manage all Faculty Members
             </div>
           </div>
         </div>

@@ -61,12 +61,12 @@ const AllUsers = () => {
             </div>
 
             <div className="w-full h-auto text-start text-2xl text-gray-600 p-1">
-              Manage all users
+              Manage all Users
             </div>
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-full h-[80%] bg-white">
+      <div className="flex flex-col w-full h-[80%] bg-white rounded-br-2xl">
         <div className="flex justify-center m-2">
           <div className="flex w-[500px] items-center gap-1 border rounded">
             <FiSearch className="h-5 w-5 ml-1" />
@@ -79,10 +79,10 @@ const AllUsers = () => {
             />
           </div>
         </div>
-        <div className="overflow-scroll h-full">
+        <div className="flex-col h-full gap-[30px] bg-white rounded-br-2xl overflow-scroll scroll-smooth scrollbar-thin">
           <table className="w-full h-full border border-collapse bg-white">
             <thead>
-              <tr>
+              <tr className="sticky top-0 bg-white">
                 <th className="py-3 px-5 text-start">ID</th>
                 <th className="p-3 text-start">First Name</th>
                 <th className="p-3 text-start">Last Name</th>
@@ -99,7 +99,7 @@ const AllUsers = () => {
                   onClick={() => handleRowClick(person)}
                   className="cursor-pointer hover:bg-gray-200"
                 >
-                  <td className="py-3 px-5">{person.member_idS}</td>
+                  <td className="p-3">{person.member_idS}</td>
                   <td className="p-3">{person.first_name}</td>
                   <td className="p-3">{person.last_name}</td>
                   <td className="p-3">{person.email}</td>

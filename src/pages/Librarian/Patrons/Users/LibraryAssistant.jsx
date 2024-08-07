@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getLibraryAssistants } from "../../../../utils/Api";
 
 export const LibraryAssistant = () => {
-  const [allLibraryAssistants, setAllLibraryAssistants] = useState([]);
+  const [allLibraryAssistant, setAllLibraryAssistant] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
 
@@ -15,13 +15,13 @@ export const LibraryAssistant = () => {
         console.log("Fetched response:", response);
 
         let list = response;
-        if (response.Student) {
+        if (response.Library_Assistant) {
           // Adjust this line based on your actual API response structure
-          list = response.Student;
+          list = response.Library_Assistant;
         }
 
         if (Array.isArray(list)) {
-          setAllLibraryAssistants(list); // Set the original list of students
+          setAllLibraryAssistant(list); // Set the original list of students
           setFilteredData(list); // Also set it as the initial filtered data
         } else {
           console.error("Expected an array but got:", JSON.stringify(list));
@@ -45,7 +45,7 @@ export const LibraryAssistant = () => {
     const query = event.target.value;
     setSearchQuery(query);
 
-    const filtered = allLibraryAssistants.filter((person) =>
+    const filtered = allLibraryAssistant.filter((person) =>
       `${person.first_name} ${person.last_name}`
         .toLowerCase()
         .includes(query.toLowerCase())
@@ -61,7 +61,7 @@ export const LibraryAssistant = () => {
             <div className="w-full h-auto text-start text-3xl p-1">Library Assistant</div>
 
             <div className="w-full h-auto text-start text-2xl text-gray-600 p-1">
-              Manage all library assistants
+              Manage all Library Assistant
             </div>
           </div>
         </div>

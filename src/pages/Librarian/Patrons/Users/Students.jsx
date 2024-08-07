@@ -61,7 +61,7 @@ export const Students = () => {
             <div className="w-full h-auto text-start text-3xl p-1">Students</div>
 
             <div className="w-full h-auto text-start text-2xl text-gray-600 p-1">
-              Manage all students
+              Manage all Students
             </div>
           </div>
         </div>

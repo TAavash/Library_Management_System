@@ -15,13 +15,13 @@ export const ProgramCoordinators = () => {
         console.log("Fetched response:", response);
 
         let list = response;
-        if (response.Student) {
+        if (response.Program_Coordinator) {
           // Adjust this line based on your actual API response structure
-          list = response.Student;
+          list = response.Program_Coordinator;
         }
 
         if (Array.isArray(list)) {
-          setAllProgramCoordinators(list); // Set the original list of students
+          setAllProgramCoordinators(list); // Set the original list of ProgramCoordinators
           setFilteredData(list); // Also set it as the initial filtered data
         } else {
           console.error("Expected an array but got:", JSON.stringify(list));
@@ -58,10 +58,10 @@ export const ProgramCoordinators = () => {
       <div className="w-[100%] h-[20%] bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
         <div className="w-full h-full flex justify-evenly p-[10px] gap-[5px]">
           <div className="w-[100%] h-full flex-col">
-            <div className="w-full h-auto text-start text-3xl p-1">Program Coordinator</div>
+            <div className="w-full h-auto text-start text-3xl p-1">Program Coordinators</div>
 
             <div className="w-full h-auto text-start text-2xl text-gray-600 p-1">
-              Manage all program coordinators
+              Manage all Program Coordinators
             </div>
           </div>
         </div>
