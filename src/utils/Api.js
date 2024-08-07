@@ -1,5 +1,4 @@
 import axiosInstance from "./axois";
-
 export const userregister = async (
   username,
   password,
@@ -38,7 +37,8 @@ export const memberRegister = async (
   address,
   email,
   mobile,
-  role_idS
+  role_idS,
+  // profile_pic,
 ) => {
   try {
     const response = await axiosInstance.post("/member", {
@@ -52,6 +52,7 @@ export const memberRegister = async (
       email,
       mobile,
       role_idS,
+      // profile_pic,
     });
     return response;
   } catch (error) {
@@ -59,7 +60,13 @@ export const memberRegister = async (
     throw error;
   }
 };
-
+export const uploadProfilePic = (formData) => {
+  return axiosInstance.post('/member/profile_pic', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};
 export const sendcontact = async (
   subject,
   message,
@@ -76,7 +83,6 @@ export const sendcontact = async (
     throw error;
   }
 };
-
 export const bookRegister = async (
   class_number,
   book_number,
@@ -127,7 +133,6 @@ export const bookRegister = async (
     throw error;
   }
 };
-
 export const login = async (username, password) => {
   const response = await axiosInstance.post("/login", {
     username,
@@ -135,19 +140,15 @@ export const login = async (username, password) => {
   });
   localStorage.setItem("access_token", response.data.token);
   localStorage.setItem("user_id", response.data.user_id);
-
   return response;
 };
-
 export const logout = () => {
   localStorage.removeItem("access_token");
 };
-
 export const userList = async () => {
   const response = await axiosInstance.get("/user/all");
   return response.data.users;
 };
-
 export const getAllMember = async () => {
   try {
     const response = await axiosInstance.get("/member/all");
@@ -157,7 +158,6 @@ export const getAllMember = async () => {
     throw error;
   }
 };
-
 export const getAllStudents = async () => {
   try {
     const response = await axiosInstance.get("/member/students");
@@ -167,7 +167,6 @@ export const getAllStudents = async () => {
     throw error;
   }
 };
-
 export const getAllFacultyMembers = async () => {
   try {
     const response = await axiosInstance.get("/member/faculty_members");
@@ -177,7 +176,6 @@ export const getAllFacultyMembers = async () => {
     throw error;
   }
 };
-
 export const getAllProgramCoordinators = async () => {
   try {
     const response = await axiosInstance.get("/member/program_coordinators");
@@ -187,7 +185,6 @@ export const getAllProgramCoordinators = async () => {
     throw error;
   }
 };
-
 export const getLibraryAssistants = async () => {
   try {
     const response = await axiosInstance.get("/member/library_assistants");
@@ -197,7 +194,6 @@ export const getLibraryAssistants = async () => {
     throw error;
   }
 };
-
 export const getMemberById = async (user_id) => {
   try {
     const response = await axiosInstance.get(`/member/${user_id}`);
@@ -207,7 +203,6 @@ export const getMemberById = async (user_id) => {
     throw error;
   }
 };
-
 export const getUserById = async (user_idS) => {
   try {
     const response = await axiosInstance.get(`/users/${user_idS}`);
@@ -217,7 +212,6 @@ export const getUserById = async (user_idS) => {
     throw error;
   }
 };
-
 export const updateStatus = async (user_idS) => {
   try {
     const response = await axiosInstance.put(`/user/${user_idS}/status`);
@@ -227,7 +221,6 @@ export const updateStatus = async (user_idS) => {
     throw error;
   }
 };
-
 export const getAllContact = async () => {
   try {
     const response = await axiosInstance.get("/contact/all");

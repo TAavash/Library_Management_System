@@ -55,7 +55,7 @@ const Discover = () => {
       <header className="fixed w-full z-50">
         <Usernav />
       </header>
-      <main className="pt-[100px]">
+      <main className="pt-[100px] px-4 sm:px-6 lg:px-8">
         {/* <div
         className="p-4 bg-cover bg-center relative"
         style={{ backgroundImage: `url(${backgroundImage})` }}

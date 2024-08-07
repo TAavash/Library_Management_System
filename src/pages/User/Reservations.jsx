@@ -39,16 +39,16 @@ const Reservations = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen">
       <header className="fixed w-full z-50 bg-white shadow-md">
         <Usernav />
       </header>
 
       <main className="pt-[100px] px-4 sm:px-6 lg:px-8">
         <img
-          src={Bannerimage}
+          src={Bannerimage} 
           alt="Banner"
-          className="w-full object-cover h-[200px] sm:h-[300px] lg:h-[400px] rounded-lg"
+          className="w-full"
         />
 
         <div className="mt-4 flex flex-wrap justify-center gap-4">

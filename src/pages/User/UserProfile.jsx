@@ -4,7 +4,8 @@ import abhi from "../../assets/abhi.JPG";
 import { AiOutlineMail, AiOutlinePhone } from "react-icons/ai";
 import { MdModeEditOutline } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import { CgProfile } from "react-icons/cg";
 
 const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -20,6 +21,8 @@ const UserProfile = () => {
     newPassword: "",
     confirmPassword: "",
   });
+
+  const [profilePhoto, setProfilePhoto] = useState(abhi);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,6 +63,21 @@ const UserProfile = () => {
     setIsEditing(false);
   };
 
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfilePhoto(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDeletePhoto = () => {
+    setProfilePhoto(null);
+  };
+
   return (
     <div className="container mx-auto px-4">
       <div className="w-full bg-white shadow-lg rounded-lg mt-10 overflow-hidden flex flex-col p-8">
@@ -69,11 +87,17 @@ const UserProfile = () => {
 
         <div className="flex flex-col lg:flex-row items-center mb-6">
           <div className="w-32 h-32 lg:w-40 lg:h-40 rounded-full overflow-hidden border-4 border-white relative">
-            <img
-              className="w-full h-full object-cover"
-              src={abhi}
-              alt="Profile"
-            />
+            {profilePhoto ? (
+              <img
+                className="w-full h-full object-cover"
+                src={profilePhoto}
+                alt="Profile"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500 text-9xl">
+                <CgProfile />
+              </div>
+            )}
           </div>
           <div className="mt-4 lg:mt-0 lg:ml-6 flex flex-col items-center lg:items-start">
             <h3 className="text-xl lg:text-2xl font-semibold text-gray-800">
@@ -82,12 +106,28 @@ const UserProfile = () => {
             <p className="text-gray-600">Student</p>
           </div>
           <div className="mt-4 lg:mt-0 lg:ml-auto flex flex-col items-center space-y-2 lg:space-y-0 lg:space-x-2 lg:flex-row">
-            <button className="w-full lg:w-auto px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm font-semibold">
-              Upload New Photo
-            </button>
-            <button className="w-full lg:w-auto px-4 py-2 border border-gray-500 text-gray-500 rounded-lg hover:bg-gray-200 focus:outline-none text-sm font-semibold">
-              Delete
-            </button>
+            {isEditing && (
+              <>
+                <input
+                  type="file"
+                  id="upload-photo"
+                  className="hidden"
+                  onChange={handlePhotoUpload}
+                />
+                <label
+                  htmlFor="upload-photo"
+                  className="w-full lg:w-auto px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm font-semibold cursor-pointer"
+                >
+                  Upload New Photo
+                </label>
+                <button
+                  className="w-full lg:w-auto px-4 py-2 border border-gray-500 text-gray-500 rounded-lg hover:bg-gray-200 focus:outline-none text-sm font-semibold"
+                  onClick={handleDeletePhoto}
+                >
+                  Delete
+                </button>
+              </>
+            )}
           </div>
         </div>
 
@@ -95,7 +135,10 @@ const UserProfile = () => {
         <div className="profile-section flex flex-col space-y-4">
           <div className="flex flex-col lg:flex-row lg:space-x-4">
             <div className="w-full lg:w-1/2">
-              <label className="text-gray-600 font-semibold" htmlFor="firstName">
+              <label
+                className="text-gray-600 font-semibold"
+                htmlFor="firstName"
+              >
                 First Name
               </label>
               <input
@@ -170,7 +213,10 @@ const UserProfile = () => {
               </div>
             </div>
             <div className="w-full lg:w-1/2">
-              <label className="text-gray-600 font-semibold" htmlFor="phoneNumber">
+              <label
+                className="text-gray-600 font-semibold"
+                htmlFor="phoneNumber"
+              >
                 Phone Number
               </label>
               <div className="flex items-center border rounded p-2">

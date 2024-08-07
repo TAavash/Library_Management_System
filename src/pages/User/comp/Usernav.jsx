@@ -80,43 +80,33 @@ const Usernav = () => {
               />
             </svg>
           </button>
-          <h3 className="text-lg font-semibold">Material UI Configurator</h3>
-          <p className="text-sm text-gray-500">See our dashboard options.</p>
-          <div className="mt-4">
-            <p className="font-medium">Navigation Colors</p>
-            <div className="flex space-x-2 mt-2">
-              <button className="w-8 h-8 rounded-full bg-pink-500"></button>
-              <button className="w-8 h-8 rounded-full bg-black"></button>
-              <button className="w-8 h-8 rounded-full bg-blue-500"></button>
-              <button className="w-8 h-8 rounded-full bg-green-500"></button>
-              <button className="w-8 h-8 rounded-full bg-orange-500"></button>
-              <button className="w-8 h-8 rounded-full bg-red-500"></button>
-            </div>
-            <div className="flex flex-col gap-5 justify-center mt-4">
+
+          <div className="mt-6 space-y-4">
+            <div className="flex flex-col gap-5 justify-center">
               <button
-                className="flex items-center justify-center p-2 border-2 border-black rounded w-full"
+                className="flex items-center justify-center p-3 border-2 border-gray-300 rounded-lg shadow-sm bg-white hover:bg-gray-100 transition duration-300 w-full"
                 onClick={() => navigate("/user/profile")}
               >
-                <CgProfile className="mr-2" />
-                View Profile
+                <CgProfile className="mr-2 text-xl" />
+                <span className="font-medium text-lg">View Profile</span>
               </button>
             </div>
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center">
               <button
-                className="flex items-center justify-center p-2 border-2 border-black rounded w-full"
+                className="flex items-center justify-center p-3 border-2 border-gray-300 rounded-lg shadow-sm bg-white hover:bg-gray-100 transition duration-300 w-full"
                 onClick={() => navigate("/user/password")}
               >
-                <MdSecurity className="mr-2" />
-                Password & Security
+                <MdSecurity className="mr-2 text-xl" />
+                <span className="font-medium text-lg">Password & Security</span>
               </button>
             </div>
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center">
               <button
-                className="flex items-center justify-center p-2 border-2 border-black rounded w-full"
+                className="flex items-center justify-center p-3 border-2 border-gray-300 rounded-lg shadow-sm bg-white hover:bg-red-100 transition duration-300 w-full"
                 onClick={handleLogout}
               >
-                <MdLogout className="mr-2" />
-                Logout
+                <MdLogout className="mr-2 text-xl text-red-500" />
+                <span className="font-medium text-lg text-red-500">Logout</span>
               </button>
             </div>
           </div>

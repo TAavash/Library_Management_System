@@ -56,7 +56,7 @@ const Ebooks = () => {
       <header className="fixed w-full z-50">
         <Usernav />
       </header>
-      <main className="pt-[100px]">
+      <main className="pt-[100px] px-4 sm:px-6 lg:px-8">
         <img src={Bannerimage} alt="Banner" className="w-full" />
         <div className="mt-4 flex flex-wrap space-x-4">
           <div

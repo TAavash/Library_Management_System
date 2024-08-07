@@ -5,6 +5,7 @@ import abhinab from "../../assets/drake.jpeg";
 import NavNew from "../../components/NavNew";
 import { ToastContainer, toast } from "react-toastify";
 import { getMemberById } from "../../utils/Api";
+import { CgProfile } from "react-icons/cg";
 
 const LibrarianProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -18,9 +19,10 @@ const LibrarianProfile = () => {
     address: "",
     email: "",
     mobile: "",
-    // role_id: "",
     role_name: "",
   });
+
+  const [profilePhoto, setProfilePhoto] = useState(abhinab);
 
   const user_id = localStorage.getItem("user_id");
 
@@ -40,7 +42,6 @@ const LibrarianProfile = () => {
             address: data.address || "",
             email: data.email || "",
             mobile: data.mobile || "",
-            // role_id: data.role_id || "",
             role_name: data.role_name || "",
           });
         } else {
@@ -75,10 +76,26 @@ const LibrarianProfile = () => {
   const handleSaveClick = async () => {
     const saveData = async () => {
       console.log("Saving data...", profileInfo);
+      // Add your save logic here
     };
 
     await saveData();
     setIsEditing(false);
+  };
+
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfilePhoto(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDeletePhoto = () => {
+    setProfilePhoto(null);
   };
 
   return (
@@ -88,33 +105,50 @@ const LibrarianProfile = () => {
         <h2 className="text-3xl font-bold text-gray-800 mb-6">User Profile</h2>
         <div className="flex items-center mb-6">
           <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white relative">
-            <img
-              className="w-full h-full object-cover"
-              src={abhinab}
-              alt="User Profile"
-            />
+            {profilePhoto ? (
+              <img
+                className="w-full h-full object-cover"
+                src={profilePhoto}
+                alt="User Profile"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500 text-9xl">
+                <CgProfile />
+              </div>
+            )}
           </div>
           <div className="ml-6 flex flex-col justify-center">
             <h3 className="text-xl font-semibold text-gray-800">{`${profileInfo.first_name} ${profileInfo.last_name}`}</h3>
             <p className="text-gray-600">{`${profileInfo.role_name}`}</p>
           </div>
-          <div className="ml-auto flex flex-col items-center space-y-2">
-            <button className="w-40 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm font-semibold">
-              Upload New Photo
-            </button>
-            <button className="w-40 px-4 py-2 border border-gray-500 text-gray-500 rounded-lg hover:bg-gray-200 focus:outline-none text-sm font-semibold">
-              Delete
-            </button>
-          </div>
+          {isEditing && (
+            <div className="ml-auto flex flex-col items-center space-y-2">
+              <input
+                type="file"
+                id="upload-photo"
+                className="hidden"
+                onChange={handlePhotoUpload}
+              />
+              <label
+                htmlFor="upload-photo"
+                className="w-40 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm font-semibold cursor-pointer"
+              >
+                Upload New Photo
+              </label>
+              <button
+                className="w-40 px-4 py-2 border border-gray-500 text-gray-500 rounded-lg hover:bg-gray-200 focus:outline-none text-sm font-semibold"
+                onClick={handleDeletePhoto}
+              >
+                Delete
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col space-y-4">
           <div className="flex space-x-4">
             <div className="w-1/2">
-              <label
-                className="text-gray-600 font-semibold"
-                htmlFor="first_name"
-              >
+              <label className="text-gray-600 font-semibold" htmlFor="first_name">
                 First Name
               </label>
               <input
@@ -128,10 +162,7 @@ const LibrarianProfile = () => {
               />
             </div>
             <div className="w-1/2">
-              <label
-                className="text-gray-600 font-semibold"
-                htmlFor="last_name"
-              >
+              <label className="text-gray-600 font-semibold" htmlFor="last_name">
                 Last Name
               </label>
               <input
@@ -231,7 +262,7 @@ const LibrarianProfile = () => {
           </div>
           <div className="flex space-x-4">
             <div className="w-1/2">
-              <label className="text-gray-600 font-semibold" htmlFor="gender">
+              <label className="text-gray-600 font-semibold" htmlFor="username">
                 Username
               </label>
               <input
