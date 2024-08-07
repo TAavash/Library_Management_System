@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FaBell } from "react-icons/fa";
-import { IoSettingsSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { userList } from "../../../../utils/Api";
 

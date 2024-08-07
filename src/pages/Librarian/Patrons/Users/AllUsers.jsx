@@ -22,6 +22,7 @@ const AllUsers = () => {
 
         if (Array.isArray(list)) {
           setFilteredData(list);
+          setAllPatrons(list);
         } else {
           console.error("Expected an array but got:", JSON.stringify(list));
         }

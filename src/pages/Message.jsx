@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { IoMail } from "react-icons/io5";
-import { FaBell } from "react-icons/fa";
-import { IoSettingsSharp } from "react-icons/io5";
 import NavNew from "../components/NavNew";
 import { getAllContact } from "../utils/Api";
 
