@@ -81,11 +81,11 @@ export default function BookRegistration() {
 
       if (response.status === 200) {
         toast.success("Register successful!");
-        setTimeout(() => navigate("/librarian-books"), 2000);
+        setTimeout(() => navigate(`/librarian-books`), 2000); // Redirect after 2 seconds
       } else {
         toast.error(
           response.data.message ||
-            "Register failed. Please check your credentials."
+          "Register failed. Please check your credentials."
         );
       }
     } catch (error) {
