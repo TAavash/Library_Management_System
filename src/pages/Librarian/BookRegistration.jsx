@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BookCover from "../../assets/th (1).jpeg";
-import { IoArrowBackCircle, IoPersonAdd } from "react-icons/io5";
+import { IoPersonAdd } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,6 +8,7 @@ import {
   bookRegister,
   publicationRegister,
   barcodeRegister,
+  uploadCoverPic,
 } from "../../utils/Api";
 import FormWizard from "react-form-wizard-component";
 import "react-form-wizard-component/dist/style.css";
@@ -18,6 +19,7 @@ function BookRegistration() {
   const [isbarkcodeRegistered, setbarcodeRegistered] = useState(false);
   const handleComplete = () => {
     console.log("Form completed!");
+    handleCoverPicUpload();
   };
   const tabChanged = ({ prevIndex, nextIndex }) => {
     // console.log("", prevIndex, nextIndex)
@@ -167,14 +169,30 @@ function BookRegistration() {
 
   const navigate = useNavigate();
   const [bookCover, setBookCover] = useState(BookCover);
+  const [newcoverPic, setNewCoverPic] = useState(null);
 
+  const handleCoverPicUpload = async () => {
+    try {
+
+      // Save the profile picture if a new one is uploaded
+      if (newcoverPic && books_idS) {
+        await uploadCoverPic(books_idS, newcoverPic);
+        setBookCover(book.cover_pic || BookCover);
+      }
+      toast.success("Profile updated successfully!");
+    } catch (error) {
+      console.error("An error occurred while saving profile data:", error);
+      toast.error("An error occurred while saving profile data. Please try again.");
+    }
+  };
+  
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => {
-        setBookCover(e.target.result);
-        setBook({ ...book, cover_pic: file });
+      reader.onloadend = () => {
+        setBookCover(reader.result);
+        setNewCoverPic(file); // Store the file for uploading later
       };
       reader.readAsDataURL(file);
     }
@@ -524,7 +542,7 @@ function BookRegistration() {
           </form>
         </FormWizard.TabContent>
         <FormWizard.TabContent title="Cover Image" icon="ti-check">
-          <form onSubmit={""}>
+          <form onSubmit={(e) => e.preventDefault()}>
             <div className="flex justify-center items-center p-10">
               <div className="bg-slate-50 shadow-md flex flex-col items-center p-8 rounded-lg border">
                 <img
@@ -534,7 +552,7 @@ function BookRegistration() {
                 />
                 <input
                   type="file"
-                  accept="image/*"
+                  accept=".jpeg,.png,.jpg,.gif,.svg"
                   onChange={handleImageUpload}
                   className="border rounded p-2"
                 />

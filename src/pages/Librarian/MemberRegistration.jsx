@@ -4,8 +4,7 @@ import { IoArrowBackCircle } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import axiosInstance from "../../utils/axois";
-
+import BackComp from "../../components/BackComp";
 import { memberRegister, getUserById, updateStatus } from "../../utils/Api"; // Import the new function
 
 export default function MemberRegistration() {
@@ -46,33 +45,6 @@ export default function MemberRegistration() {
       reader.readAsDataURL(file);
     }
   };
-
-  
-  // const handleImageUpload = async (event) => {
-  //   event.preventDefault();
-  //   const formData = new FormData();
-  //   formData.append('profile_pic', event.target.files[0]);
-  
-  //   try {
-  //     console.log('Attempting to upload image...');
-  //     const response = await axiosInstance.post('/member/profile_pic', formData, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data'
-  //       }
-  //     });
-  //     console.log('Response:', response);
-  //     if (response.status === 200) {
-  //       console.log('Image uploaded successfully');
-  //       // Handle success case
-  //     } else {
-  //       console.log('Failed to upload image, status:', response.status);
-  //       // Handle other status codes
-  //     }
-  //   } catch (error) {
-  //     console.error('Error uploading image:', error);
-  //     // Handle error
-  //   }
-  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -170,12 +142,7 @@ export default function MemberRegistration() {
     <div className="flex w-full p-3 gap-2">
       <div className="w-2/3 flex flex-col">
         <div className="flex justify-around">
-          <div>
-            <IoArrowBackCircle
-              className="h-14 w-14 cursor-pointer"
-              onClick={handleBackIconClick}
-            />
-          </div>
+          <BackComp />
           <div className="flex flex-col">
             <h2 className="text-3xl font-bold">Create Membership</h2>
             <p className="text-slate-500">Registration Form</p>

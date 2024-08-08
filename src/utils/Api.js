@@ -85,7 +85,7 @@ export const uploadCoverPic = async (bookId, coverPicFile) => {
   formData.append('cover_pic', coverPicFile);
 
   try {
-      const response = await axiosInstance.post(`/api/books/${bookId}/upload-pic`, formData, {
+      const response = await axiosInstance.post(`/book/${bookId}/cover_pic`, formData, {
           headers: {
               'Content-Type': 'multipart/form-data',
           },
