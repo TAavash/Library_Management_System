@@ -38,8 +38,7 @@ export const memberRegister = async (
   address,
   email,
   mobile,
-  role_idS,
-
+  role_idS
 ) => {
   try {
     const response = await axiosInstance.post("/member", {
@@ -62,17 +61,20 @@ export const memberRegister = async (
   }
 };
 
-
 export const uploadProfilePic = async (userId, file) => {
   const formData = new FormData();
-  formData.append('profile_pic', file);
+  formData.append("profile_pic", file);
 
   try {
-    const response = await axiosInstance.post(`/member/${userId}/profile_pic`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const response = await axiosInstance.post(
+      `/member/${userId}/profile_pic`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Failed to upload profile picture", error);
@@ -82,25 +84,25 @@ export const uploadProfilePic = async (userId, file) => {
 
 export const uploadCoverPic = async (bookId, coverPicFile) => {
   const formData = new FormData();
-  formData.append('cover_pic', coverPicFile);
+  formData.append("cover_pic", coverPicFile);
 
   try {
-      const response = await axiosInstance.post(`/book/${bookId}/cover_pic`, formData, {
-          headers: {
-              'Content-Type': 'multipart/form-data',
-          },
-      });
-      console.log('Cover picture uploaded successfully:', response.data);
+    const response = await axiosInstance.post(
+      `/book/${bookId}/cover_pic`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log("Cover picture uploaded successfully:", response.data);
   } catch (error) {
-      console.error('Error uploading cover picture:', error.response.data);
+    console.error("Error uploading cover picture:", error.response.data);
   }
 };
 
-export const sendcontact = async (
-  subject,
-  message,
-  member_idS,
-) => {
+export const sendcontact = async (subject, message, member_idS) => {
   try {
     const response = await axiosInstance.post("/contact", {
       subject,
@@ -114,11 +116,10 @@ export const sendcontact = async (
 };
 
 export const publicationRegister = async (
-
   published_year,
   publication_name,
   name_of_publisher,
-  place_of_publication,
+  place_of_publication
 ) => {
   try {
     const response = await axiosInstance.post("/publications", {
@@ -146,7 +147,6 @@ export const bookRegister = async (
   description,
   name,
   publications_idS
-
 ) => {
   try {
     const response = await axiosInstance.post("/book", {
@@ -161,7 +161,7 @@ export const bookRegister = async (
       num_of_page: num_of_page,
       language: language,
       name: name,
-      publications_idS: publications_idS
+      publications_idS: publications_idS,
     });
     return response;
   } catch (error) {
@@ -182,7 +182,7 @@ export const barcodeRegister = async (
       identifier_value: identifier_value,
       isbn_number: isbn_number,
       status: status,
-      books_idS: books_idS
+      books_idS: books_idS,
     });
     return response;
   } catch (error) {
@@ -191,9 +191,7 @@ export const barcodeRegister = async (
   }
 };
 
-export const imageRegister = async (
-  cover_pic,
-) => {
+export const imageRegister = async (cover_pic) => {
   try {
     const response = await axiosInstance.post("", {
       cover_pic: cover_pic,
@@ -204,8 +202,6 @@ export const imageRegister = async (
     throw error;
   }
 };
-
-
 
 export const login = async (username, password) => {
   const response = await axiosInstance.post("/login", {
@@ -222,6 +218,19 @@ export const userList = async () => {
   const response = await axiosInstance.get("/user/all");
   return response.data.users;
 };
+
+export const getAllBooks = async () => {
+  try {
+    const response = await axiosInstance.get("/book/lists");
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching book data:", error);
+    throw error;
+  }
+};
+
+getAllBooks();
 
 export const getAllMember = async () => {
   try {
