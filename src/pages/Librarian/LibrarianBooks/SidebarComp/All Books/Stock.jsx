@@ -1,8 +1,65 @@
 import React from 'react'
-import FlipCard from "../../../../../components/FlipCard";
+import BookCover from '../../../../../assets/OIP.jpeg';
 import { FiSearch } from "react-icons/fi";
 
-const Stock = ({ onCardClick }) => {
+const SBook = [
+  {
+    title: "Kafka on the Shore",
+    author: "Murakami",
+    cover: BookCover,
+
+  },
+  {
+    title: "Rich Dad Poor Dad",
+    author: "Robert T. Kiyosaki",
+    cover: BookCover,
+
+  },
+  {
+    title: "How to Talk to Anyone",
+    author: "Leil Lowndes",
+    cover: BookCover,
+
+  },
+  {
+    title: "Kafka on the Shore",
+    author: "Murakami",
+    cover: BookCover,
+
+  },
+  {
+    title: "Rich Dad Poor Dad",
+    author: "Robert T. Kiyosaki",
+    cover: BookCover,
+
+  },
+  {
+    title: "How to Talk to Anyone",
+    author: "Leil Lowndes",
+    cover: BookCover,
+
+  },
+  {
+    title: "Kafka on the Shore",
+    author: "Murakami",
+    cover: BookCover,
+
+  },
+  {
+    title: "Rich Dad Poor Dad",
+    author: "Robert T. Kiyosaki",
+    cover: BookCover,
+
+  },
+  {
+    title: "How to Talk to Anyone",
+    author: "Leil Lowndes",
+    cover: BookCover,
+
+  }
+];
+
+const Stock = () => {
   return (
     <div className="w-full h-full ">
       <div className="w-full h-[20%] flex flex-col md:flex-row justify-between bg-[#F5F5F5] px-6 md:px-12 py-4 md:py-6 rounded-tr-2xl">
@@ -23,44 +80,21 @@ const Stock = ({ onCardClick }) => {
         </div>
 
       </div>
-      <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-black rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
+      <div className="flex flex-col h-[80%] bg-white p-6 md:p-12 gap-6 md:gap-12 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
-          <div onClick={() => onCardClick(<FlipCard />)}>
-            <FlipCard />
-          </div>
+
+          {SBook.map((book, index) => (
+            <div
+              key={index}
+              className="group relative bg-white rounded-lg shadow-md w-full md:w-56 overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl"
+            >
+              <img src={book.cover} alt={book.title} className="w-full h-72 object-cover" />
+              <div className="p-4">
+                <h3 className="text-lg font-bold">{book.title}</h3>
+                <p className="text-sm text-gray-600">{book.author}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div></div>
   )

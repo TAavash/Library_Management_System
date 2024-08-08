@@ -9,6 +9,11 @@ const Avatar = () => {
     navigate(`/libraian/profile`);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    navigate(`/`);
+  };
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -54,7 +59,7 @@ const Avatar = () => {
         >
           <div className="py-1" role="none">
             <div
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-0"
               onClick={handleLibraryProfile}
@@ -62,12 +67,18 @@ const Avatar = () => {
               My Profile
             </div>
             <div
-              className="flex justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              className="flex justify-between items-center px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-2"
             >
-              <LightDarkToggle /> : Mode
+              <LightDarkToggle /> Mode
             </div>
+            <button
+              onClick={handleLogout}
+              className="w-full px-4 py-2 text-end font-semibold text-red-600 hover:bg-gray-100 "
+            >
+              Logout
+            </button>
           </div>
         </div>
       )}

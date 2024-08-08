@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { FaBook } from "react-icons/fa";
-import { RxCross2 } from "react-icons/rx";
+import { FaBook, FaThList, FaThLarge } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import NavNew from "../../../components/NavNew";
 import All from "./SidebarComp/All Books/All";
@@ -12,93 +11,43 @@ import EBooks from "./SidebarComp/All Books/EBooks";
 
 const LibrarianBooks = () => {
   const navigate = useNavigate();
-  const handleOpenLibrary = () => {
-    navigate(`/librarian-books`);
-  };
-  const handleCheckIn = () => {
-    navigate(`/librarian-books-check-in`);
-  };
-  const handleCheckOut = () => {
-    navigate(`/librarian-books-check-out`);
-  };
-  const handleReservations = () => {
-    navigate(`/librarian-books-reservation`);
-  };
-  const handleAddBooks = () => {
-    navigate(`/BookRegistration`);
-  };
-
   const [active, setActive] = useState("all");
-  const [selectedCard, setSelectedCard] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const handleCrossIcon = () => {
-    setSelectedCard(null);
-  };
+  const [viewMode, setViewMode] = useState("grid"); // Add state to manage view mode
 
   const location = useLocation();
 
-  const handleAllActive = () => {
-    setActive("all");
-    setSelectedCard(null);
-  };
-  const handleAddBookActive = () => {
-    setActive("add");
-    setSelectedCard(null);
-  };
-  const handleStockActive = () => {
-    setActive("stock");
-    setSelectedCard(null);
-  };
-  const handleCategoriesActive = () => {
-    setActive("categories");
-    setSelectedCard(null);
-  };
-  const handleElectronicLocationActive = () => {
-    setActive("electronic-location");
-    setSelectedCard(null);
-  };
-  const handleRequestedActive = () => {
-    setActive("requested");
-    setSelectedCard(null);
-  };
-  const handleEBooksActive = () => {
-    setActive("e-books");
-    setSelectedCard(null);
-  };
+  const handleAllActive = () => setActive("all");
+  const handleAddBooks = () => navigate(`/BookRegistration`);
+  const handleStockActive = () => setActive("stock");
+  const handleCategoriesActive = () => setActive("categories");
+  const handleElectronicLocationActive = () => setActive("electronic-location");
+  const handleRequestedActive = () => setActive("requested");
+  const handleEBooksActive = () => setActive("e-books");
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
-  console.log(location);
-
-  const handleCardClick = (card) => {
-    setSelectedCard(card);
+  const toggleViewMode = () => {
+    setViewMode(viewMode === "grid" ? "list" : "grid");
   };
 
   const renderActiveComponent = () => {
+    const commonProps = { viewMode };
     switch (active) {
       case "stock":
-        return <Stock onCardClick={handleCardClick} />;
+        return <Stock {...commonProps} />;
       case "categories":
-        return <Categories onCardClick={handleCardClick} />;
+        return <Categories {...commonProps} />;
       case "electronic-location":
-        return <ElectronicLocation onCardClick={handleCardClick} />;
+        return <ElectronicLocation {...commonProps} />;
       case "requested":
-        return <Requested onCardClick={handleCardClick} />;
+        return <Requested {...commonProps} />;
       case "e-books":
-        return <EBooks onCardClick={handleCardClick} />;
+        return <EBooks {...commonProps} />;
       default:
-        return <All onCardClick={handleCardClick} />;
+        return <All {...commonProps} />;
     }
   };
-
-  const [key, setKey] = useState(0);
-
-  React.useEffect(() => {
-    setKey((prevKey) => prevKey + 1);
-  }, [selectedCard]);
 
   return (
     <div>
@@ -106,25 +55,25 @@ const LibrarianBooks = () => {
       <div className="min-h-screen h-auto bg-gray-200 py-[10px]">
         <div className="flex flex-wrap justify-evenly gap-[20px] mx-[3%]">
           <button
-            onClick={handleOpenLibrary}
+            onClick={() => setActive("all")}
             className="w-full md:w-[150px] h-14 md:h-[120px] rounded-2xl bg-[#14273D] text-white shadow-slate-500 shadow-md mt-11 md:mt-[100px]"
           >
             All Books
           </button>
           <button
-            onClick={handleCheckIn}
+            onClick={() => navigate(`/librarian-books-check-in`)}
             className="w-full md:w-[150px] h-14 md:h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white shadow-slate-500 shadow-md md:mt-[100px]"
           >
             Check-In
           </button>
           <button
-            onClick={handleCheckOut}
+            onClick={() => navigate(`/librarian-books-check-out`)}
             className="w-full md:w-[150px] h-14 md:h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white shadow-slate-500 shadow-md md:mt-[100px]"
           >
             Check-Out
           </button>
           <button
-            onClick={handleReservations}
+            onClick={() => navigate(`/librarian-books-reservation`)}
             className="w-full md:w-[150px] h-14 md:h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white shadow-slate-500 shadow-md md:mt-[100px]"
           >
             Reservations
@@ -146,7 +95,6 @@ const LibrarianBooks = () => {
                 >
                   Menu
                 </button>
-
                 {dropdownOpen && (
                   <div className="text-[#737373] flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px] pt-3">
                     <button
@@ -222,11 +170,7 @@ const LibrarianBooks = () => {
                   </div>
                 )}
               </div>
-
               <div className="hidden text-[#737373] lg:flex flex-col gap-[30px] justify-top items-center h-[80%] p-[20px]">
-
-
-
                 <button
                   className="hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                   onClick={handleAllActive}
@@ -297,22 +241,20 @@ const LibrarianBooks = () => {
                     <div>E-Books</div>
                   )}
                 </button>
-
-
               </div>
             </div>
-            <div className="flex flex-col lg:flex-row w-full h-full bg-[#F5F5F5] rounded-r-2xl">
-              <div className={`h-full rounded-2xl ${selectedCard ? "lg:w-2/3 w-full" : "w-full"}`}>
-                {renderActiveComponent()}
+            <div className="relative flex flex-col lg:flex-row w-full h-full bg-[#F5F5F5] rounded-r-2xl">
+              {renderActiveComponent()}
+              <div
+                className="absolute right-10 top-56 cursor-pointer"
+                onClick={toggleViewMode}
+              >
+                {viewMode === "grid" ? (
+                  <FaThList className="h-7 w-7 text-gray-500" />
+                ) : (
+                  <FaThLarge className="h-7 w-7 text-gray-500" />
+                )}
               </div>
-              {selectedCard && (
-                <div key={key} className="relative lg:w-1/3 w-full flex flex-col bg-[#011222] text-white p-2 mt-3 mx-7 rounded-xl justify-center items-center slide-in">
-                  {selectedCard}
-                  <div className="absolute top-[1%] right-[5%] ">
-                    <RxCross2 className="h-8 w-8 cursor-pointer " onClick={handleCrossIcon} />
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>
