@@ -10,12 +10,12 @@ import LibrarianBooksResearvation from "../pages/Librarian/LibrarianBooks/Librar
 import Help from "../pages/Help";
 import Notification from "../pages/Notification";
 import Settings from "../pages/Settings";
-import Message from "../pages/Message";
+import Message from "../pages/Librarian/LibrarianMessage/Message";
 import LibrarianFines from "../pages/Librarian/LibrarianFines/LibrarianFines";
 import LibrarianOthers from "../pages/Librarian/LibrarianOthers/LibrarianOthers";
-import Patrons from "../pages/Librarian/PatronDashboard";
-import LibrarianDashboard from "../pages/Librarian/PatronDashboard";
-import { MemberDetail } from "../pages/Librarian/MemberDetail";
+import Patrons from "../pages/Librarian/LibrarianDashboard";
+import LibrarianDashboard from "../pages/Librarian/LibrarianDashboard";
+import MemberDetail from "../pages/Librarian/MemberDetail";
 import BookRegistration from "../pages/Librarian/BookRegistration";
 import MemberRegistration from "../pages/Librarian/MemberRegistration";
 import LibraryRequestPage from "../pages/Librarian/Patrons/Request/LibraryRequestPage";

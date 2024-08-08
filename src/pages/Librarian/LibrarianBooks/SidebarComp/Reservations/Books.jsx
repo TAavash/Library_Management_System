@@ -2,7 +2,7 @@ import React from "react";
 import FlipCard from "../../../../../components/FlipCard";
 import { FiSearch,  } from "react-icons/fi";
 
-const Books = ({onCardClick}) => {
+const Books = ({ onCardClick }) => {
   return (
     <div className="w-full h-full ">
       <div className="w-[100%] h-[20%] flex justify-between bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
@@ -24,8 +24,8 @@ const Books = ({onCardClick}) => {
         </div>
 
       </div>
-      <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-green-600 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
+      <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-white rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
           <div onClick={() => onCardClick(<FlipCard />)}>
             <FlipCard />
           </div>

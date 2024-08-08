@@ -4,6 +4,7 @@ import { IoArrowBackCircle } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import axiosInstance from "../../utils/axois";
 
 import { memberRegister, getUserById, updateStatus } from "../../utils/Api"; // Import the new function
 
@@ -32,7 +33,7 @@ export default function MemberRegistration() {
   const navigate = useNavigate();
 
   const handleBackIconClick = () => {
-    navigate("/LibraryDash");
+    navigate(-1);
   };
 
   const handleImageUpload = (event) => {
@@ -45,6 +46,33 @@ export default function MemberRegistration() {
       reader.readAsDataURL(file);
     }
   };
+
+  
+  // const handleImageUpload = async (event) => {
+  //   event.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append('profile_pic', event.target.files[0]);
+  
+  //   try {
+  //     console.log('Attempting to upload image...');
+  //     const response = await axiosInstance.post('/member/profile_pic', formData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data'
+  //       }
+  //     });
+  //     console.log('Response:', response);
+  //     if (response.status === 200) {
+  //       console.log('Image uploaded successfully');
+  //       // Handle success case
+  //     } else {
+  //       console.log('Failed to upload image, status:', response.status);
+  //       // Handle other status codes
+  //     }
+  //   } catch (error) {
+  //     console.error('Error uploading image:', error);
+  //     // Handle error
+  //   }
+  // };
 
   useEffect(() => {
     const fetchData = async () => {

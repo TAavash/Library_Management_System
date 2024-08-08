@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { userList } from "../../../../utils/Api";
 
@@ -31,14 +30,16 @@ export default function UserAccountRequest() {
   return (
     <>
       <div className="w-full h-full rounded-2xl">
-        <div className="w-[100%] h-[20%] flex justify-between bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
-          <div className=" h-full flex-col">
-            <div className="w-full h-[70%] text-3xl">
-              New Account Request
-            </div>
-            <div className="w-full h-[30%] text-[-2xl] text-[#525252]">
+        <div className="w-[100%] h-[20%] bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
+          <div className="w-full h-full flex justify-evenly p-[10px] gap-[5px]">
+            <div className="w-[100%] h-full flex-col">
+              <div className="w-full h-auto text-start text-3xl p-1">
+                New Account Request
+              </div>
 
-              Manage all the account requests from users.
+              <div className="w-full h-auto text-start text-2xl text-gray-600 p-1">
+              Manage all the account requests from users
+              </div>
             </div>
           </div>
 

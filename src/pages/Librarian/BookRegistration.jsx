@@ -3,11 +3,32 @@ import BookCover from "../../assets/th (1).jpeg";
 import { IoArrowBackCircle, IoPersonAdd } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import { bookRegister, publicationRegister, barcodeRegister } from "../../utils/Api";
+import FormWizard from "react-form-wizard-component";
+import "react-form-wizard-component/dist/style.css";
 
-export default function BookRegistration() {
-  const navigate = useNavigate();
-
+function BookRegistration() {
+  const [isPublicationRegistered, setIsPublicationRegistered] = useState(false);
+  const [isbookRegistered, setbookRegistered] = useState(false);
+  const [isbarkcodeRegistered, setbarcodeRegistered] = useState(false);
+  const handleComplete = () => {
+    console.log("Form completed!");
+  };
+  const tabChanged = ({ prevIndex, nextIndex }) => {
+    console.log("", prevIndex, nextIndex)
+    if (prevIndex === 1 && !isPublicationRegistered) {
+      handlepublicationregister();
+    }
+    else if (prevIndex === 2 && !isbookRegistered) {
+      handlebookregister();
+    }
+    else if (prevIndex === 3 && !isbarkcodeRegistered) {
+      handlebarcoderegister();
+    }
+  };
+  const [publications_idS, setpublications_idS] = useState()
+  const [books_idS, setbooks_idS] = useState()
   const [book, setBook] = useState({
     title: "",
     sub_title: "",
@@ -27,9 +48,10 @@ export default function BookRegistration() {
     scanner_type: "",
     barcode_number: "",
     book_location: "",
+    add_author: "",
   });
 
-  const [bookCover, setBookCover] = useState(BookCover);
+  // const [bookCover, setBookCover] = useState(BookCover);
   const [authors, setAuthors] = useState([{ id: 1, name: "" }]);
 
   const handleInputChange = (e) => {
@@ -53,75 +75,100 @@ export default function BookRegistration() {
     return true;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!validateFields()) return;
+  const handlebookregister = async (e) => {
 
     try {
-      const authorResponses = await Promise.all(
-        authors.map((author) =>
-          fetch("http://127.0.0.1:8000/api/Author/", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ name: author.name }),
-          }).then((res) => res.json())
-        )
+      const response = await bookRegister(
+        book.classification_number,
+        book.book_number,
+        book.title,
+        book.sub_title,
+        book.edition,
+        book.number_of_pages,
+        book.language,
+        book.genre,
+        book.book_location,
+        book.description,
+        book.add_author,
+        publications_idS
       );
 
-      const publicationResponse = await fetch("http://127.0.0.1:8000/api/publications/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          published_year: book.publication_date,
-
-          publication_name: book.publication_name,
-          name_of_publisher: book.name_of_publisher,
-          place_of_publication: book.place_of_publication,
-        }),
-      }).then((res) => res.json());
-
-      const isbnResponse = await fetch("http://127.0.0.1:8000/api/ISBN/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ isbn_number: book.isbn_number }),
-      }).then((res) => res.json());
-
-      const bookResponse = await fetch("http://127.0.0.1:8000/api/book/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...book,
-          authors_idS: authorResponses.map((author) => author.id),
-          publications_idS: publicationResponse.id,
-          isbn_idS: isbnResponse.id,
-        }),
-      }).then((res) => res.json());
-
-      if (bookResponse.id) {
-        toast.success("Register successful!");
-        setTimeout(() => navigate(`/LibraryRequestPage`), 2000); // Redirect after 2 seconds
+      if (response) {
+        console.log(response.data.books_id)
+        toast.success("Book Registration successful!");
+        setbooks_idS(response.data.books_id)
+        setbookRegistered(true)
+        // setTimeout(() => navigate("/librarian-books"), 2000);
       } else {
-        toast.error(bookResponse.message || "Register failed. Please check your credentials.");
-        console.log(bookResponse.message);
+        toast.error(
+          response.data.message ||
+          "Register failed. Please check your credentials."
+        );
       }
     } catch (error) {
-      console.error("An error occurred:", error); // Log the error for debugging
+      console.error("An error occurred:", error);
       toast.error("An error occurred. Please try again later.");
     }
   };
 
-  const handleBackIconClick = () => {
-    navigate("/librarian-books");
+  const handlepublicationregister = async (e) => {
+    // if (!validateFields()) return;
+
+    try {
+      const response = await publicationRegister(
+        book.publication_date,
+        book.publication_name,
+        book.name_of_publisher,
+        book.place_of_publication,
+
+      );
+      if (response.status === 201) {
+        toast.success("Publication Registration successful!");
+        setpublications_idS(response.data.publications.publications_idS);
+        setIsPublicationRegistered(true);
+        // setTimeout(() => navigate("/librarian-books"), 2000);
+      } else {
+        toast.error(
+          response.data.message ||
+          "Register failed. Please check your credentials."
+        );
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      toast.error("An error occurred. Please try again later.");
+    }
   };
+  let status = "Active"
+
+  const handlebarcoderegister = async (e) => {
+    try {
+      const response = await barcodeRegister(
+        book.scanner_type,
+        book.barcode_number,
+        book.isbn_number,
+        status,
+        books_idS
+      );
+      console.log(books_idS)
+
+      if (response) {
+        toast.success("Barcode Registration successful!");
+        setbarcodeRegistered(true)
+        // setTimeout(() => navigate("/librarian-books"), 2000);
+      } else {
+        toast.error(
+          response.data.message ||
+          "Register failed. Please check your credentials."
+        );
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      toast.error("An error occurred. Please try again later.");
+    }
+  };
+
+  const navigate = useNavigate();
+  const [bookCover, setBookCover] = useState(BookCover);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -129,6 +176,7 @@ export default function BookRegistration() {
       const reader = new FileReader();
       reader.onload = (e) => {
         setBookCover(e.target.result);
+        setBook({ ...book, cover_pic: file });
       };
       reader.readAsDataURL(file);
     }
@@ -143,321 +191,320 @@ export default function BookRegistration() {
       author.id === id ? { ...author, name: value } : author
     );
     setAuthors(updatedAuthors);
+    const firstAuthorName = updatedAuthors[0]?.name || "";
+    setBook({ ...book, add_author: firstAuthorName });
   };
 
   return (
-    <div className="flex flex-col lg:flex-row w-full p-3 gap-2">
-      <div className="lg:w-2/3 w-full flex flex-col">
-        <div className="flex justify-around">
-          <div>
-            <IoArrowBackCircle
-              className="h-14 w-14 cursor-pointer"
-              onClick={handleBackIconClick}
-            />
-          </div>
-          <div className="flex flex-col text-center lg:text-left">
-            <h2 className="text-3xl font-bold">Add Book</h2>
-            <p className="text-slate-500">Book Registration Form</p>
-          </div>
-        </div>
-        <div className="lg:ml-36 mt-10">
-          <form onSubmit={handleSubmit}>
-            <h3 className="text-slate-400 mt-6">TITLE</h3>
-            <hr />
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="title">Title</label>
-              <input
-                type="text"
-                name="title"
-                id="title"
-                placeholder="After Dark"
-                value={book.title}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              />
-            </div>
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="sub_title">Sub Title</label>
-              <input
-                type="text"
-                name="sub_title"
-                id="sub_title"
-                placeholder="Arise Dawn"
-                value={book.sub_title}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              />
-            </div>
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="description">Description</label>
-              <textarea
-                name="description"
-                id="description"
-                placeholder="Description"
-                value={book.description}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              />
-            </div>
-
-            <h3 className="text-slate-400 mt-6">TYPE</h3>
-            <hr />
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="genre">Genre</label>
-              <select
-                name="genre"
-                id="genre"
-                value={book.genre}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              >
-                <option value="">Select Genere</option>
-                <option value="BSc">BSc</option>
-                <option value="BBA">BBA</option>
-                <option value="ACCA">ACCA</option>
-              </select>
-            </div>
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="status">Status</label>
-              <select
-                name="status"
-                id="status"
-                value={book.status}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              >
-                <option value="">Select Status</option>
-                <option value="New">New</option>
-                <option value="Old">Old</option>
-                <option value="Used">Used</option>
-              </select>
-            </div>
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="number_of_pages">Number of Pages</label>
-              <input
-                type="text"
-                name="number_of_pages"
-                id="number_of_pages"
-                placeholder="1001"
-                value={book.number_of_pages}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              />
-            </div>
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="language">Language</label>
-              <input
-                type="text"
-                name="language"
-                id="language"
-                placeholder="English"
-                value={book.language}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              />
-            </div>
-
-            <h3 className="text-slate-400 mt-6">AUTHOR</h3>
-            <hr />
-            {authors.map((author, index) => (
-              <div key={author.id} className="flex flex-col mt-3 gap-2">
-                <label htmlFor={`author_${author.id}`}>
-                  Author {index + 1}
-                </label>
+    <>
+      <FormWizard
+        shape="circle"
+        color="#14273D"
+        onComplete={handleComplete}
+        onTabChange={tabChanged}
+      >
+        <FormWizard.TabContent title="Publication" icon="ti-user">
+          <form onSubmit={handlepublicationregister} className="space-y-6">
+            <div className="text-start w-[80%] m-auto">
+              <h3 className=" text-slate-400 text-lg font-semibold mt-6">PUBLICATION</h3>
+              <hr />
+              <div className="flex flex-col gap-3 mt-3">
+                <label className="font-medium" htmlFor="publication_date">Publication Date</label>
                 <input
                   type="text"
-                  name={`author_${author.id}`}
-                  id={`author_${author.id}`}
-                  placeholder="John Doe"
-                  value={author.name}
-                  onChange={(e) =>
-                    handleAuthorInputChange(author.id, e.target.value)
-                  }
-                  className="px-4 py-2 border border-slate-200 rounded-md"
+                  name="publication_date"
+                  placeholder="1998"
+                  className="border-2 p-2 rounded-md"
+                  value={book.publication_date}
+                  onChange={handleInputChange}
                 />
               </div>
-            ))}
-            <div className="flex mt-5 justify-end">
-              <button
-                type="button"
-                onClick={addAuthorField}
-                className="text-blue-500 flex items-center"
-              >
-                <IoPersonAdd className="w-6 h-6" />
-                <span>Add Author</span>
-              </button>
+              <div className="flex flex-col gap-3 mt-3">
+                <label className="font-medium" htmlFor="edition">Edition</label>
+                <input
+                  type="text"
+                  name="edition"
+                  placeholder="First"
+                  className="border-2 p-2 rounded-md"
+                  value={book.edition}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex flex-col gap-3 mt-3">
+                <label className="font-medium" htmlFor="publication_name">Publication Name</label>
+                <input
+                  type="text"
+                  name="publication_name"
+                  placeholder="Wiley"
+                  className="border-2 p-2 rounded-md"
+                  value={book.publication_name}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex flex-col gap-3 mt-3">
+                <label className="font-medium" htmlFor="name_of_publisher">Name of Publisher</label>
+                <input
+                  type="text"
+                  name="name_of_publisher"
+                  placeholder="Hamlyn"
+                  className="border-2 p-2 rounded-md"
+                  value={book.name_of_publisher}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex flex-col gap-3 mt-3">
+                <label className="font-medium" htmlFor="place_of_publication">Place of Publication</label>
+                <input
+                  type="text"
+                  name="place_of_publication"
+                  placeholder="USA"
+                  className="border-2 p-2 rounded-md"
+                  value={book.place_of_publication}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
-
-            <h3 className="text-slate-400 mt-6">PUBLICATION</h3>
-            <hr />
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="publication_date">Publication Date</label>
-              <input
-                type="date"
-                name="publication_date"
-                id="publication_date"
-                value={book.publication_date}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              />
-            </div>
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="edition">Edition</label>
-              <input
-                type="text"
-                name="edition"
-                id="edition"
-                placeholder="1st Edition"
-                value={book.edition}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              />
-            </div>
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="publication_name">Publication Name</label>
-              <input
-                type="text"
-                name="publication_name"
-                id="publication_name"
-                placeholder="Oxford"
-                value={book.publication_name}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              />
-            </div>
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="name_of_publisher">Name of Publisher</label>
-              <input
-                type="text"
-                name="name_of_publisher"
-                id="name_of_publisher"
-                placeholder="Oxford Publishers"
-                value={book.name_of_publisher}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              />
-            </div>
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="place_of_publication">Place of Publication</label>
-              <input
-                type="text"
-                name="place_of_publication"
-                id="place_of_publication"
-                placeholder="New York"
-                value={book.place_of_publication}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              />
-            </div>
-
-            <h3 className="text-slate-400 mt-6">BOOK IDENTIFIER</h3>
-            <hr />
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="isbn_number">ISBN Number</label>
-              <input
-                type="text"
-                name="isbn_number"
-                id="isbn_number"
-                placeholder="978-3-16-148410-0"
-                value={book.isbn_number}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              />
-            </div>
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="classification_number">Classification Number</label>
-              <input
-                type="text"
-                name="classification_number"
-                id="classification_number"
-                placeholder="123.45"
-                value={book.classification_number}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              />
-            </div>
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="book_number">Book Number</label>
-              <input
-                type="text"
-                name="book_number"
-                id="book_number"
-                placeholder="67890"
-                value={book.book_number}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              />
-            </div>
-
-            <h3 className="text-slate-400 mt-6">BARCODE</h3>
-            <hr />
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="scanner_type">Scanner Type</label>
-              <select
-                name="scanner_type"
-                id="scanner_type"
-                value={book.scanner_type}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              >
-                <option value="">Select Scanner Type</option>
-                <option value="Handheld">Handheld</option>
-                <option value="Fixed">Fixed</option>
-                <option value="Mobile">Mobile</option>
-              </select>
-            </div>
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="barcode_number">Barcode Number</label>
-              <input
-                type="text"
-                name="barcode_number"
-                id="barcode_number"
-                placeholder="123456789012"
-                value={book.barcode_number}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              />
-            </div>
-
-            <h3 className="text-slate-400 mt-6">LOCATION</h3>
-            <hr />
-            <div className="flex flex-col mt-3 gap-2">
-              <label htmlFor="book_location">Book Location</label>
-              <input
-                type="text"
-                name="book_location"
-                id="book_location"
-                placeholder="Library"
-                value={book.book_location}
-                onChange={handleInputChange}
-                className="px-4 py-2 border border-slate-200 rounded-md"
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="mt-6 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-            >
-              Register
-            </button>
           </form>
-        </div>
-      </div>
-      <div className="lg:w-1/3 w-full flex flex-col items-center mt-10 lg:mt-20">
 
-        <img
-          src={bookCover}
-          alt="Book Cover"
-          className="w-48 object-cover rounded-md"
-        />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          className="px-4 py-2 cursor-pointer"
-        />
-      </div>
+        </FormWizard.TabContent>
+        <FormWizard.TabContent title="Book" icon="ti-settings">
+          <form onSubmit={handlebookregister} className="space-y-6">
+            <div className="text-start w-[80%] m-auto">
+              <h3 className="text-slate-400 text-lg font-semibold">TITLE</h3>
+              <hr />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
+                  <label className="font-medium" htmlFor="title">Title</label>
+                  <input
+                    type="text"
+                    name="title"
+                    placeholder="After Dark"
+                    className="border-2 p-2 rounded-md"
+                    value={book.title}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="font-medium" htmlFor="sub_title">Sub Title</label>
+                  <input
+                    type="text"
+                    name="sub_title"
+                    placeholder="Arise Dawn"
+                    className="border-2 p-2 rounded-md"
+                    value={book.sub_title}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="font-medium" htmlFor="description">Description</label>
+                <textarea
+                  name="description"
+                  placeholder="Description here"
+                  className="border-2 p-2 rounded-md"
+                  value={book.description}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <h3 className="text-slate-400 text-lg font-semibold mt-6">AUTHOR</h3>
+              <hr />
+              <div className="flex flex-col gap-3 mt-3">
+                <label className="font-medium">Author</label>
+                {authors.map((author, index) => (
+                  <div
+                    key={author.id}
+                    className="flex flex-col md:flex-row gap-3 items-center"
+                  >
+                    <input
+                      type="text"
+                      placeholder={`Author ${index + 1}`}
+                      className="border-2 p-2 rounded-md w-full md:w-2/3"
+                      value={author.name}
+                      onChange={(e) =>
+                        handleAuthorInputChange(author.id, e.target.value)
+                      }
+                    />
+                    {index === authors.length - 1 && (
+                      <IoPersonAdd
+                        className="cursor-pointer text-xl mt-2 md:mt-0"
+                        onClick={addAuthorField}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <h3 className="text-slate-400 text-lg font-semibold mt-6">TYPE</h3>
+              <hr />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
+                  <label className="font-medium" htmlFor="genre">Genre</label>
+                  <select
+                    id="genre"
+                    name="genre"
+                    className="border-2 p-2 rounded-md mb-4"
+                    value={book.genre}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">Select Genre</option>
+                    <option value="General Collection">General Collection</option>
+                    <option value="Textbook">Textbook</option>
+                    <option value="Reference">Reference</option>
+                  </select>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="font-medium" htmlFor="status">Status</label>
+                  <select
+                    id="status"
+                    name="status"
+                    className="border-2 p-2 rounded-md mb-4"
+                    value={book.status}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">Select Status</option>
+                    <option value="New">New</option>
+                    <option value="Old">Old</option>
+                    <option value="Used">Used</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
+                  <label className="font-medium" htmlFor="number_of_pages">Number of Pages</label>
+                  <input
+                    type="text"
+                    name="number_of_pages"
+                    placeholder="1001"
+                    className="border-2 p-2 rounded-md mb-4"
+                    value={book.number_of_pages}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="font-medium" htmlFor="language">Language</label>
+                  <input
+                    type="text"
+                    name="language"
+                    placeholder="English"
+                    className="border-2 p-2 rounded-md mb-4"
+                    value={book.language}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
+                  <label className="font-medium" htmlFor="classification_number">
+                    Classification Number
+                  </label>
+                  <input
+                    type="text"
+                    name="classification_number"
+                    placeholder="12345"
+                    className="border-2 p-2 rounded-md mb-4"
+                    value={book.classification_number}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="font-medium" htmlFor="book_number">Book Number</label>
+                  <input
+                    type="text"
+                    name="book_number"
+                    placeholder="101"
+                    className="border-2 p-2 rounded-md mb-4"
+                    value={book.book_number}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="font-medium" htmlFor="book_location">Book Location</label>
+                <input
+                  type="text"
+                  name="book_location"
+                  placeholder="USA"
+                  className="border-2 p-2 rounded-md mb-4"
+                  value={book.book_location}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+
+          </form>
+        </FormWizard.TabContent>
+        <FormWizard.TabContent title="Barcode Info" icon="ti-settings">
+          <form onSubmit={handlebarcoderegister} className="space-y-6">
+            <div className="text-start w-[80%] m-auto">
+              <h3 className="text-slate-400 text-lg font-semibold mt-6">BARCODE</h3>
+              <hr />
+              <div className="flex flex-col gap-3 mt-3">
+                <label className="font-medium" htmlFor="isbn_number">ISBN Number</label>
+                <input
+                  type="text"
+                  name="isbn_number"
+                  placeholder="12345"
+                  className="border-2 p-2 rounded-md"
+                  value={book.isbn_number}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex flex-col gap-3 mt-3">
+                <label className="font-medium" htmlFor="scanner_type">Scanner Type</label>
+                <input
+                  type="text"
+                  name="scanner_type"
+                  placeholder="Bar Code"
+                  className="border-2 p-2 rounded-md"
+                  value={book.scanner_type}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex flex-col gap-3 mt-3">
+                <label className="font-medium" htmlFor="barcode_number">Barcode Number</label>
+                <input
+                  type="text"
+                  name="barcode_number"
+                  placeholder="4512432"
+                  className="border-2 p-2 rounded-md"
+                  value={book.barcode_number}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+
+          </form>
+        </FormWizard.TabContent>
+        <FormWizard.TabContent title="Cover Image" icon="ti-check">
+          <form onSubmit={""}>
+            <div className="flex justify-center items-center p-10">
+              <div className="bg-slate-50 shadow-md flex flex-col items-center p-8 rounded-lg border">
+                <img
+                  className="w-full md:w-64 lg:w-80 object-cover object-center rounded-lg mb-4 shadow-md"
+                  src={bookCover}
+                  alt="Book Cover"
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="border rounded p-2"
+                />
+              </div>
+            </div>
+          </form>
+        </FormWizard.TabContent>
+      </FormWizard>
       <ToastContainer />
-    </div>
+      <style>{`
+        @import url("https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css");
+      `}</style>
+    </>
   );
 }
+
+export default BookRegistration;

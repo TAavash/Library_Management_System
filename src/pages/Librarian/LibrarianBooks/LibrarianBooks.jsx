@@ -6,7 +6,6 @@ import All from "./SidebarComp/All Books/All";
 import Stock from "./SidebarComp/All Books/Stock";
 import Categories from "./SidebarComp/All Books/Categories";
 import ElectronicLocation from "./SidebarComp/All Books/ElectronicLocation";
-import Requested from "./SidebarComp/All Books/Requested";
 import EBooks from "./SidebarComp/All Books/EBooks";
 
 const LibrarianBooks = () => {
@@ -222,17 +221,7 @@ const LibrarianBooks = () => {
                   )}
                 </button>
                 <button
-                  className="hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
-                  onClick={handleRequestedActive}
-                >
-                  {active === "requested" ? (
-                    <div className="text-white">Requested</div>
-                  ) : (
-                    <div>Requested</div>
-                  )}
-                </button>
-                <button
-                  className="hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
+                  className="h-auto hover:text-white rounded-xl text-2xl p-[2px] px-[3px]"
                   onClick={handleEBooksActive}
                 >
                   {active === "e-books" ? (

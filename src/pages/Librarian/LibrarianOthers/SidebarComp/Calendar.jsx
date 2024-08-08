@@ -1,16 +1,28 @@
 import React from "react";
-import { FiSearch } from "react-icons/fi";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
-const Calendar = () => {
+// Ensure that myEventsList is defined or imported correctly
+const myEventsList = [
+  // Your events here
+];
+
+const MyCalendar = (props) => {
+  const localizer = momentLocalizer(moment);
+
   return (
     <div className="w-full h-full ">
-      <div className="w-[100%] h-[20%] flex justify-between bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
-        <div className=" h-full flex-col">
-          <div className="w-full h-[70%] text-3xl">
-            Calendar
-          </div>
-          <div className="w-full h-[30%] text-[-2xl] text-[#525252]">
-            View Calendra
+      <div className="w-[100%] h-[20%] bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
+        <div className="w-full h-full flex justify-evenly p-[10px] gap-[5px]">
+        <div className="w-[100%] h-full flex-col">
+            <div className="w-full h-auto text-start text-3xl p-1">
+              Calendar
+            </div>
+
+            <div className="w-full h-auto text-start text-2xl text-gray-600 p-1">
+              View calendar
+            </div>
           </div>
         </div>
 
@@ -23,12 +35,18 @@ const Calendar = () => {
         </div>
 
       </div>
-      <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-green-600 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
+      <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-white rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
         <div className=" grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2"></div>
-        Calendar
+        <Calendar
+          localizer={localizer}
+          events={myEventsList}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: 500 }}
+        />
       </div>
     </div>
   );
 };
 
-export default Calendar;
+export default MyCalendar;

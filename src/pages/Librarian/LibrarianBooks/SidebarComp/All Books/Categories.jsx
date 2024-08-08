@@ -1,10 +1,8 @@
 import React from "react";
 import { FiSearch } from "react-icons/fi";
 import { GiBookshelf } from "react-icons/gi";
-import { FaPencilAlt, FaGlobe, FaLightbulb, FaRegHeart, FaPuzzlePiece, FaClock } from "react-icons/fa";
+import { FaPencilAlt, FaGlobe } from "react-icons/fa";
 import { LuLampDesk } from "react-icons/lu";
-import { FaWandMagicSparkles } from "react-icons/fa6";
-import { RiQuillPenFill } from "react-icons/ri";
 
 const Categories = () => {
   return (
@@ -54,47 +52,6 @@ const Categories = () => {
                 <div className="text-[20px]">Other options</div>
                 <div className="text-[50px]">
                   <LuLampDesk />
-                </div>
-              </button>
-            </div>
-          </div>
-          <div>
-            <div className="text-[30px]">Genre : </div>
-            <div className=" grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
-              <button className=" flex flex-col gap-3 p-[10px] items-center w-[200px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md">
-                <div className="text-[20px]">Fiction</div>
-                <div className="text-[50px]">
-                  <RiQuillPenFill />
-                </div>
-              </button>
-              <button className=" flex flex-col gap-3 p-[10px] items-center w-[200px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md">
-                <div className="text-[20px]">Non Fiction</div>
-                <div className="text-[50px]">
-                  <FaLightbulb />
-                </div>
-              </button>
-              <button className=" flex flex-col gap-3 p-[10px] items-center w-[200px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md">
-                <div className="text-[20px]">Romance</div>
-                <div className="text-[50px]">
-                  <FaRegHeart />
-                </div>
-              </button>
-              <button className=" flex flex-col gap-3 p-[10px] items-center w-[200px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md">
-                <div className="text-[20px]">Mystery</div>
-                <div className="text-[50px]">
-                  <FaPuzzlePiece />
-                </div>
-              </button>
-              <button className=" flex flex-col gap-3 p-[10px] items-center w-[200px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md">
-                <div className="text-[20px]">Fantasy</div>
-                <div className="text-[50px]">
-                  <FaWandMagicSparkles />
-                </div>
-              </button>
-              <button className=" flex flex-col gap-3 p-[10px] items-center w-[200px] h-[120px] rounded-2xl hover:bg-[#A3A3A3] bg-white  shadow-slate-500 shadow-md">
-                <div className="text-[20px]">History</div>
-                <div className="text-[50px]">
-                  <FaClock />
                 </div>
               </button>
             </div>

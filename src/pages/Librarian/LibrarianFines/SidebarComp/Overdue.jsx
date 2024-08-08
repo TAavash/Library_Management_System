@@ -31,4 +31,5 @@ const Overdue = () => {
   )
 }
 
-export default Overdue
+
+export default Overdue;

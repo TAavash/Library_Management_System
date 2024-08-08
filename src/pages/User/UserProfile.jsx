@@ -1,132 +1,336 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import Profile from "../../assets/profilepicture.jpeg";
-import Background from "../../assets/profilebg.png";
-import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
-import { BiSolidMessageAltAdd } from "react-icons/bi";
-import { MdUnsubscribe } from "react-icons/md";
-import { MdOutlineModeEditOutline } from "react-icons/md";
-import { CiLogout } from "react-icons/ci";
-
+import React, { useState, useEffect } from "react";
+import { MdModeEditOutline } from "react-icons/md";
+import { AiOutlineMail, AiOutlinePhone, AiOutlineLock } from "react-icons/ai";
+import defaultProfile from "../../assets/User.jpg";
+import Usernav from "../../pages/User/comp/Usernav";
+import { ToastContainer, toast } from "react-toastify";
+import { getMemberById, uploadProfilePic } from "../../utils/Api";
+import { CgProfile } from "react-icons/cg";
 
 const UserProfile = () => {
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    navigate(`/`);
-  };
-  return (
-    <div className="relative">
-      {/* Background Image */}
-      <div
-        className="h-[300px] bg-cover bg-center"
-        style={{ backgroundImage: `url(${Background})` }}
-      ></div>
+  const [isEditing, setIsEditing] = useState(false);
+  const [profileInfo, setProfileInfo] = useState({
+    username: "",
+    password: "",
+    first_name: "",
+    last_name: "",
+    dob: "",
+    gender: "",
+    address: "",
+    email: "",
+    mobile: "",
+    role_name: "",
+  });
+  const [profilePhoto, setProfilePhoto] = useState(defaultProfile);
+  const [newProfilePhoto, setNewProfilePhoto] = useState(null); // Temporary state for new photo
+  const user_id = localStorage.getItem("user_id");
 
-      {/* Container with Profile and Info */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 bg-white shadow-gray-600 shadow-xl rounded-lg p-6 pb-3 w-full max-w-4xl flex gap-8">
-        {/* Profile Section */}
-        <div className="flex-1">
-          <div className="bg-slate-600 p-4 flex items-center rounded-lg mb-6">
-            <img
-              src={Profile}
-              className="w-24 h-24 object-cover rounded-full border-4 border-white mr-4"
-              alt="profile"
-            />
-            <div className="text-white">
-              <h2 className="text-2xl font-semibold">Abhinab Prajapati</h2>
-              <p className="text-lg">Student</p>
-              <div className="flex justify-start items-center">
-              
-              <button
-                  onClick={handleLogout}
-                  className="flex gap-1 items-center h-fit w-[75px] rounded-md text-black bg-white hover:bg-slate-300 active:bg-black text-sm font-medium p-[2px] px-[3px]"
-                >
-                  <CiLogout />
-                  Logout
-                </button>
+  useEffect(() => {
+    const fetchMemberData = async () => {
+      try {
+        const memberData = await getMemberById(user_id);
+        let data = memberData.data;
+        if (memberData) {
+          setProfileInfo({
+            username: data.username || "",
+            password: data.password || "",
+            first_name: data.first_name || "",
+            last_name: data.last_name || "",
+            dob: data.dob || "",
+            gender: data.gender || "",
+            address: data.address || "",
+            email: data.email || "",
+            mobile: data.mobile || "",
+            role_name: data.role_name || "",
+          });
+          setProfilePhoto(data.profile_pic || defaultProfile); // Set the initial profile photo
+        } else {
+          console.error("No user data found");
+          toast.error("No user data found. Please try again later.");
+        }
+      } catch (error) {
+        console.error("An error occurred while fetching user data:", error);
+        toast.error("An error occurred while fetching user data. Please try again later.");
+      }
+    };
+    if (user_id) {
+      fetchMemberData();
+    }
+  }, [user_id]);
+
+  const handleEditClick = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProfileInfo({
+      ...profileInfo,
+      [name]: value,
+    });
+  };
+
+  const handleSaveClick = async () => {
+    try {
+      console.log("Saving data...", profileInfo);
+      // Add your save logic here
+
+      // Save the profile picture if a new one is uploaded
+      if (newProfilePhoto) {
+        await uploadProfilePic(user_id, newProfilePhoto);
+        // Update profile photo state to reflect the new photo
+        const updatedProfileData = await getMemberById(user_id);
+        setProfilePhoto(updatedProfileData.data.profile_pic || defaultProfile);
+      }
+
+      setIsEditing(false);
+      toast.success("Profile updated successfully!");
+    } catch (error) {
+      console.error("An error occurred while saving profile data:", error);
+      toast.error("An error occurred while saving profile data. Please try again.");
+    }
+  };
+
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfilePhoto(reader.result);
+        setNewProfilePhoto(file); // Store the file for uploading later
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDeletePhoto = () => {
+    setProfilePhoto(defaultProfile); // Reset to default profile photo
+    setNewProfilePhoto(null); // Clear new photo
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col items-center bg-gray-100 w-screen">
+      <Usernav />
+      <div className="flex-grow w-full bg-white shadow-lg rounded-lg mt-20 overflow-hidden flex flex-col p-8">
+        <h2 className="text-3xl font-bold text-gray-800 mb-6">User Profile</h2>
+        <div className="flex items-center mb-6">
+          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white relative">
+            {profilePhoto ? (
+              <img
+                className="w-full h-full object-cover"
+                src={profilePhoto}
+                alt="User Profile"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500 text-9xl">
+                <CgProfile />
               </div>
-              
+            )}
+          </div>
+          <div className="ml-6 flex flex-col justify-center">
+            <h3 className="text-xl font-semibold text-gray-800">{`${profileInfo.first_name} ${profileInfo.last_name}`}</h3>
+            <p className="text-gray-600">{`${profileInfo.role_name}`}</p>
+          </div>
+          {isEditing && (
+            <div className="ml-auto flex flex-col items-center space-y-2">
+              <input
+                type="file"
+                id="upload-photo"
+                className="hidden"
+                onChange={handlePhotoUpload}
+              />
+              <label
+                htmlFor="upload-photo"
+                className="w-40 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm font-semibold cursor-pointer"
+              >
+                Upload New Photo
+              </label>
+              <button
+                className="w-40 px-4 py-2 border border-gray-500 text-gray-500 rounded-lg hover:bg-gray-200 focus:outline-none text-sm font-semibold"
+                onClick={handleDeletePhoto}
+              >
+                Delete
+              </button>
+            </div>
+          )}
+        </div>
+        <div className="flex flex-col space-y-4">
+          <div className="flex space-x-4">
+            <div className="w-1/2">
+              <label className="text-gray-600 font-semibold" htmlFor="first_name">
+                First Name
+              </label>
+              <input
+                id="first_name"
+                type="text"
+                name="first_name"
+                value={profileInfo.first_name}
+                onChange={handleInputChange}
+                className="w-full p-2 border rounded"
+                disabled={!isEditing}
+              />
+            </div>
+            <div className="w-1/2">
+              <label className="text-gray-600 font-semibold" htmlFor="last_name">
+                Last Name
+              </label>
+              <input
+                id="last_name"
+                type="text"
+                name="last_name"
+                value={profileInfo.last_name}
+                onChange={handleInputChange}
+                className="w-full p-2 border rounded"
+                disabled={!isEditing}
+              />
             </div>
           </div>
-
-          {/* Profile Information */}
-          <div className="flex justify-around">
-            <div className="flex-col">
-              <div className="flex items-center mb-4">
-                <h3 className="text-xl font-semibold mr-2">
-                  Profile Information
-                </h3>
-                <button>
-                  <MdOutlineModeEditOutline className="text-xl text-gray-600 hover:text-gray-800" />
-                </button>
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="text-gray-700 text-sm">
-                  <strong>First Name:</strong> Abhinab
-                </div>
-                <div className="text-gray-700 text-sm">
-                  <strong>Last Name:</strong> Prajapati
-                </div>
-                <div className="text-gray-700 text-sm">
-                  <strong>Gender:</strong> Male
-                </div>
-                <div className="text-gray-700 text-sm">
-                  <strong>Address:</strong> Patan
-                </div>
-                <div className="text-gray-700 text-sm">
-                  <strong>Email:</strong> abhinabsuii@mail.com
-                </div>
-                <div className="text-gray-700 text-sm">
-                  <strong>Mobile:</strong> 977-9812121212
-                </div>
-                <div className="text-gray-700 text-sm">
-                  <strong>Library Card Number:</strong> 2214618
-                </div>
-              </div>
-              <div className="flex gap-3 justify-center mt-4">
-                <a
-                  href="#"
-                  className="text-blue-600 hover:text-blue-800 text-xl"
-                >
-                  <FaFacebook />
-                </a>
-                <a
-                  href="#"
-                  className="text-blue-400 hover:text-blue-600 text-xl"
-                >
-                  <FaTwitter />
-                </a>
-                <a
-                  href="#"
-                  className="text-pink-600 hover:text-pink-800 text-xl"
-                >
-                  <FaInstagram />
-                </a>
+          <div className="flex space-x-4">
+            <div className="w-full">
+              <label className="text-gray-600 font-semibold" htmlFor="dob">
+                Date of Birth
+              </label>
+              <input
+                id="dob"
+                type="text"
+                name="dob"
+                value={profileInfo.dob}
+                onChange={handleInputChange}
+                className="w-full p-2 border rounded"
+                disabled={!isEditing}
+              />
+            </div>
+          </div>
+          <div className="flex space-x-4">
+            <div className="w-full">
+              <label className="text-gray-600 font-semibold" htmlFor="address">
+                Address
+              </label>
+              <input
+                id="address"
+                type="text"
+                name="address"
+                value={profileInfo.address}
+                onChange={handleInputChange}
+                className="w-full p-2 border rounded"
+                disabled={!isEditing}
+              />
+            </div>
+          </div>
+          <div className="flex space-x-4">
+            <div className="w-1/2">
+              <label className="text-gray-600 font-semibold" htmlFor="email">
+                Email Address
+              </label>
+              <div className="flex items-center border rounded p-2">
+                <AiOutlineMail className="text-gray-500 mr-2" />
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  value={profileInfo.email}
+                  onChange={handleInputChange}
+                  className="w-full focus:outline-none"
+                  disabled={!isEditing}
+                />
               </div>
             </div>
-            {/* Cards Section */}
-            <div className="flex-none w-1/3 flex flex-col gap-4">
-              <div className="bg-blue-100 p-4 rounded-lg shadow-md flex flex-col items-center">
-                <BiSolidMessageAltAdd className="text-3xl mb-3 text-blue-500" />
-                <h4 className="text-lg font-semibold mb-1">Request Books</h4>
-                <p className="text-gray-700 text-xs text-center">
-                  Request for the books you want to borrow.
-                </p>
+            <div className="w-1/2">
+              <label className="text-gray-600 font-semibold" htmlFor="mobile">
+                Phone Number
+              </label>
+              <div className="flex items-center border rounded p-2">
+                <AiOutlinePhone className="text-gray-500 mr-2" />
+                <input
+                  id="mobile"
+                  type="text"
+                  name="mobile"
+                  value={profileInfo.mobile}
+                  onChange={handleInputChange}
+                  className="w-full focus:outline-none"
+                  disabled={!isEditing}
+                />
               </div>
-              <div className="bg-green-100 p-4 rounded-lg shadow-md flex flex-col items-center">
-                <MdUnsubscribe className="text-3xl mb-3 text-green-500" />
-                <h4 className="text-lg font-semibold mb-1">
-                  Subscribe to Our Newsletter
-                </h4>
-                <p className="text-gray-700 text-xs text-center">
-                  Stay updated with the latest news and updates.
-                </p>
+            </div>
+          </div>
+          <div className="flex space-x-4">
+            <div className="w-1/2">
+              <label className="text-gray-600 font-semibold" htmlFor="gender">
+                Gender
+              </label>
+              <input
+                id="gender"
+                type="text"
+                name="gender"
+                value={profileInfo.gender}
+                onChange={handleInputChange}
+                className="w-full p-2 border rounded"
+                disabled={!isEditing}
+              />
+            </div>
+          </div>
+          <div className="flex space-x-4">
+            <div className="w-1/2">
+              <label className="text-gray-600 font-semibold" htmlFor="username">
+                Username
+              </label>
+              <input
+                id="username"
+                type="text"
+                name="username"
+                value={profileInfo.username}
+                onChange={handleInputChange}
+                className="w-full p-2 border rounded"
+                disabled={!isEditing}
+              />
+            </div>
+          </div>
+          <div className="flex space-x-4">
+            <div className="w-1/2">
+              <label className="text-gray-600 font-semibold" htmlFor="password">
+                Current Password
+              </label>
+              <div className="flex items-center border rounded p-2">
+                <AiOutlineLock className="text-gray-500 mr-2" />
+                <input
+                  id="password"
+                  type="password"
+                  name="password"
+                  value={profileInfo.password}
+                  onChange={handleInputChange}
+                  className="w-full focus:outline-none"
+                  disabled={!isEditing}
+                />
               </div>
             </div>
           </div>
         </div>
+        <div className="mt-6 flex justify-end space-x-4">
+          {isEditing && (
+            <>
+              <button
+                className="px-4 py-2 border border-gray-500 text-gray-500 rounded-lg hover:bg-gray-200 font-semibold"
+                onClick={handleEditClick}
+              >
+                Cancel
+              </button>
+              <button
+                className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 font-semibold"
+                onClick={handleSaveClick}
+              >
+                Save Changes
+              </button>
+            </>
+          )}
+          {!isEditing && (
+            <MdModeEditOutline
+              className="text-2xl cursor-pointer rounded-lg hover:bg-gray-200 "
+              onClick={handleEditClick}
+            />
+          )}
+        </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

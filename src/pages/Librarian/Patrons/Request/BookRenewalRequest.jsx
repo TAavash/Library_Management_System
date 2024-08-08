@@ -3,7 +3,6 @@ import BookCover from '../../../../assets/th.jpeg'
 import { FiSearch } from "react-icons/fi";
 
 export default function BookRenewalRequest() {
-
   const BookRenewalRequests = [
     {
       Book: "Don't talk to anyone",
@@ -71,13 +70,16 @@ export default function BookRenewalRequest() {
           </div>
 
         </div>
-        <div className='h-[80%] overflow-scroll'>
-
+        <div className="h-[80%] overflow-scroll">
           {BookRenewalRequests.map((item, index) => (
             <div className="flex border-2 mx-12 my-9 justify-evenly items-center">
               <div className="flex items-center w-2/4 p-4 gap-4">
-                <img src={item.cover} alt={item.Book} className="w-[70px] h-[110px] object-cover " />
-                <div className='mr-4'>
+                <img
+                  src={item.cover}
+                  alt={item.Book}
+                  className="w-[70px] h-[110px] object-cover "
+                />
+                <div className="mr-4">
                   <div className="text-lg font-medium text-gray-900">
                     {item.Book}
                   </div>
@@ -101,7 +103,6 @@ export default function BookRenewalRequest() {
           ))}
         </div>
       </div>
-
     </>
-  )
+  );
 }

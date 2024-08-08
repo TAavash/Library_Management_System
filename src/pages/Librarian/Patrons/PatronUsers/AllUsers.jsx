@@ -22,6 +22,7 @@ const AllUsers = () => {
 
         if (Array.isArray(list)) {
           setFilteredData(list);
+          setAllPatrons(list);
         } else {
           console.error("Expected an array but got:", JSON.stringify(list));
         }
@@ -36,7 +37,7 @@ const AllUsers = () => {
   const navigate = useNavigate();
 
   const handleRowClick = (person) => {
-    navigate("/MemberDetail");
+    navigate("/MemberDetail", { state: { member_id: person.member_idS } });
     console.log(person);
   };
 
@@ -53,17 +54,19 @@ const AllUsers = () => {
   return (
     <div className="w-full h-full rounded-2xl">
       <div className="w-[100%] h-[20%] bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
-        <div className="w-full h-full flex flex-col justify-evenly p-[10px] gap-[5px]">
+        <div className="w-full h-full flex justify-evenly p-[10px] gap-[5px]">
+          <div className="w-[100%] h-full flex-col">
+            <div className="w-full h-auto text-start text-3xl p-1">
+              All Users
+            </div>
 
-          <div className="w-full h-[70%] text-start text-3xl">
-            All Users
-          </div>
-          <div className="w-full h-[30%] text-start text-[-2xl] text-[#525252]">
-            Manage all the user list.
+            <div className="w-full h-auto text-start text-2xl text-gray-600 p-1">
+              Manage all Users
+            </div>
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-full h-[80%] bg-white">
+      <div className="flex flex-col w-full h-[80%] bg-white rounded-br-2xl">
         <div className="flex justify-center m-2">
           <div className="flex w-[500px] items-center gap-1 border rounded">
             <FiSearch className="h-5 w-5 ml-1" />
@@ -76,10 +79,10 @@ const AllUsers = () => {
             />
           </div>
         </div>
-        <div className="overflow-scroll h-full">
+        <div className="flex-col h-full gap-[30px] bg-white rounded-br-2xl overflow-scroll scroll-smooth scrollbar-thin">
           <table className="w-full h-full border border-collapse bg-white">
             <thead>
-              <tr>
+              <tr className="sticky top-0 bg-white">
                 <th className="py-3 px-5 text-start">ID</th>
                 <th className="p-3 text-start">First Name</th>
                 <th className="p-3 text-start">Last Name</th>
@@ -96,7 +99,7 @@ const AllUsers = () => {
                   onClick={() => handleRowClick(person)}
                   className="cursor-pointer hover:bg-gray-200"
                 >
-                  <td className="py-3 px-5">{person.member_idS}</td>
+                  <td className="p-3">{person.member_idS}</td>
                   <td className="p-3">{person.first_name}</td>
                   <td className="p-3">{person.last_name}</td>
                   <td className="p-3">{person.email}</td>

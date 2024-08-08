@@ -1,12 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LightDarkToggle from "./LightDarkToggle";
 import { GiHamburgerMenu } from "react-icons/gi";
-import ProfilePic from "../assets/gojo.jpg";
 
 const Hamburger = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleLibraryDash = () => {
     navigate(`/librarian-dashboard`);
   };
@@ -34,6 +32,9 @@ const Hamburger = () => {
   const handleLibrarianOthers = () => {
     navigate(`/librarian-others`);
   };
+  const handleLibraryProfile = () => {
+    navigate(`/libraian/profile`);
+  };
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -49,7 +50,7 @@ const Hamburger = () => {
       >
         <span className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           <div className="flex gap-2 p-[2px]">
-            <GiHamburgerMenu />
+            <GiHamburgerMenu className="text-xl" />
           </div>
         </span>
       </div>
@@ -63,83 +64,79 @@ const Hamburger = () => {
         >
           <div className="py-1" role="none">
             <div
-              className="block flex justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              onClick={handleLibraryProfile}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-0"
             >
-              <div className="flex w-fit gap-2 border-2 border-slate-600 rounded-r-full rounded-l-full p-[2px]">
-                <img
-                  className="h-10 w-10 rounded-full"
-                  src={ProfilePic}
-                  alt="gojo"
-                />
-              </div>
               My Profile
             </div>
             <div
-              className="flex justify-between block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-              id="options-menu-item-2"
-            >
-              <LightDarkToggle /> : Mode
-            </div>
-            <div onClick={handleLibraryDash}
+              onClick={handleLibraryDash}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-3"
             >
               Home
             </div>
-            <div onClick={handleLibraryBooks}
+            <div
+              onClick={handleLibraryBooks}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-3"
             >
               Books
             </div>
-            <div onClick={handlePatrons}
+            <div
+              onClick={handlePatrons}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-3"
             >
               Patrons
             </div>
-            <div onClick={handleMessage}
+            <div
+              onClick={handleMessage}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-3"
             >
               Message
             </div>
-            <div onClick={handleLibrarianFines}
+            <div
+              onClick={handleLibrarianFines}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-3"
             >
               Fines
             </div>
-            <div onClick={handleLibrarianOthers}
+            <div
+              onClick={handleLibrarianOthers}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-3"
             >
               Others
             </div>
-            <div onClick={handleSettings}
+            <div
+              onClick={handleSettings}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-3"
             >
               Settings
             </div>
-            <div onClick={handleNotification}
+            <div
+              onClick={handleNotification}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-4"
             >
               Notification
             </div>
-            <div onClick={handleHelp}
+            <div
+              onClick={handleHelp}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               id="options-menu-item-5"

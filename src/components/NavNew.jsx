@@ -60,7 +60,10 @@ const NavNew = () => {
           >
             Books
           </button>
-          <button onClick={handlePatrons} className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:text-red-400 text-black">
+          <button
+            onClick={handlePatrons}
+            className="w-[80px] h-[40px] rounded-r-full rounded-l-full hover:text-red-400 text-black"
+          >
             Patrons
           </button>
           <button
@@ -88,15 +91,15 @@ const NavNew = () => {
         <div className="hidden md:flex items-center gap-4">
           <VscBellDot
             onClick={handleNotification}
-            className="text-2xl hover:fill-red-600 cursor-pointer"
+            className="text-xl hover:fill-red-600 cursor-pointer"
           />
           <IoIosHelpCircleOutline
             onClick={handleHelp}
-            className="text-2xl hover:fill-red-600 cursor-pointer"
+            className="text-xl hover:fill-red-600 cursor-pointer"
           />
           <IoSettingsSharp
             onClick={handleSettings}
-            className="text-2xl hover:fill-red-600 cursor-pointer"
+            className="text-xl hover:fill-red-600 cursor-pointer"
           />
           <div className="md:hidden">
             <span

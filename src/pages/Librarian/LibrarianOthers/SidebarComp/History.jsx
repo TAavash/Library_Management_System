@@ -23,12 +23,14 @@ const History = () => {
         </div>
 
       </div>
-    <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-red-600 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
-    <div className=" grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
-      History
+      <div className="flex-col h-[80%] p-[30px] gap-[30px] bg-red-600 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
+        <div className=" grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
+          History
+        </div>
+      </div>
     </div>
-  </div></div>
   )
 }
 
-export default History
+
+export default History;

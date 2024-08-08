@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 import FlipCard from "../../../../../components/FlipCard";
 import { FiSearch,  } from "react-icons/fi";
 
-const Books = ({onCardClick}) => {
+const Books = ({ onCardClick }) => {
   return (
     <div className="w-full h-full ">
       <div className="w-[100%] h-[20%] flex justify-between bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
@@ -63,8 +63,9 @@ const Books = ({onCardClick}) => {
             <FlipCard />
           </div>
         </div>
-  </div></div>
-  )
-}
+      </div>
+    </div>
+  );
+};
 
-export default Books
+export default Books;

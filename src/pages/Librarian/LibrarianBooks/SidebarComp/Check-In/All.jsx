@@ -130,8 +130,9 @@ const All = () => {
             </div>
           ))}
         </div>
-      </div></div>
-  )
-}
+      </div>
+    </div>
+  );
+};
 
-export default All
+export default All;

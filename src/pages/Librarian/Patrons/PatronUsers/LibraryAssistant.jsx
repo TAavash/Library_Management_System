@@ -22,7 +22,7 @@ const tableData = [{
 }];
 
 export const LibraryAssistant = () => {
-  const [allLibraryAssistants, setAllLibraryAssistants] = useState([]);
+  const [allLibraryAssistant, setAllLibraryAssistant] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
 
@@ -33,13 +33,13 @@ export const LibraryAssistant = () => {
         console.log("Fetched response:", response);
 
         let list = response;
-        if (response.Student) {
+        if (response.Library_Assistant) {
           // Adjust this line based on your actual API response structure
-          list = response.Student;
+          list = response.Library_Assistant;
         }
 
         if (Array.isArray(list)) {
-          setAllLibraryAssistants(list); // Set the original list of students
+          setAllLibraryAssistant(list); // Set the original list of students
           setFilteredData(list); // Also set it as the initial filtered data
         } else {
           console.error("Expected an array but got:", JSON.stringify(list));
@@ -55,7 +55,7 @@ export const LibraryAssistant = () => {
   const navigate = useNavigate();
 
   const handleRowClick = (person) => {
-    navigate("/MemberDetail");
+    navigate("/MemberDetail", { state: { member_id: person.member_idS } });
     console.log(person);
   };
 
@@ -63,8 +63,10 @@ export const LibraryAssistant = () => {
     const query = event.target.value;
     setSearchQuery(query);
 
-    const filtered = allLibraryAssistants.filter((person) =>
-      `${person.first_name} ${person.last_name}`.toLowerCase().includes(query.toLowerCase())
+    const filtered = allLibraryAssistant.filter((person) =>
+      `${person.first_name} ${person.last_name}`
+        .toLowerCase()
+        .includes(query.toLowerCase())
     );
     setFilteredData(filtered);
   };
@@ -72,15 +74,14 @@ export const LibraryAssistant = () => {
   return (
     <div className="w-full h-full rounded-2xl">
       <div className="w-[100%] h-[20%] bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
-        <div className="w-full h-full flex flex-col justify-evenly p-[10px] gap-[5px]">
-          
-            <div className="w-full h-[70%] text-start text-3xl">
-              Library Assistant
+        <div className="w-full h-full flex justify-evenly p-[10px] gap-[5px]">
+          <div className="w-[100%] h-full flex-col">
+            <div className="w-full h-auto text-start text-3xl p-1">Library Assistant</div>
+
+            <div className="w-full h-auto text-start text-2xl text-gray-600 p-1">
+              Manage all Library Assistant
             </div>
-            <div className="w-full h-[30%] text-start text-[-2xl] text-[#525252]">
-              Manage all the user list.
-            </div>
-      
+          </div>
         </div>
       </div>
       <div className="flex flex-col w-full h-[80%] bg-white">

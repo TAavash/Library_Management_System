@@ -37,7 +37,7 @@ export const Students = () => {
   const navigate = useNavigate();
 
   const handleRowClick = (person) => {
-    navigate("/MemberDetail");
+    navigate("/MemberDetail", { state: { member_id: person.member_idS } });
     console.log(person);
   };
 
@@ -46,7 +46,9 @@ export const Students = () => {
     setSearchQuery(query);
 
     const filtered = allStudents.filter((person) =>
-      `${person.first_name} ${person.last_name}`.toLowerCase().includes(query.toLowerCase())
+      `${person.first_name} ${person.last_name}`
+        .toLowerCase()
+        .includes(query.toLowerCase())
     );
     setFilteredData(filtered);
   };
@@ -54,13 +56,13 @@ export const Students = () => {
   return (
     <div className="w-full h-full rounded-2xl">
       <div className="w-[100%] h-[20%] bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
-        <div className="w-full h-full flex flex-col justify-evenly p-[10px] gap-[5px]">
+        <div className="w-full h-full flex justify-evenly p-[10px] gap-[5px]">
+          <div className="w-[100%] h-full flex-col">
+            <div className="w-full h-auto text-start text-3xl p-1">Students</div>
 
-          <div className="w-full h-[70%] text-start text-3xl">
-            Students
-          </div>
-          <div className="w-full h-[30%] text-start text-[-2xl] text-[#525252]">
-            Manage Students list.
+            <div className="w-full h-auto text-start text-2xl text-gray-600 p-1">
+              Manage all Students
+            </div>
           </div>
 
 

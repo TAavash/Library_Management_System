@@ -8,8 +8,16 @@ import UserNotification from "./UserNotification";
 
 const Usernav = () => {
   const navigate = useNavigate();
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    navigate(`/`);
+  };
+  
+  const handleHome = () => {
+    navigate(`/user/home`);
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleSettingsPanel = () => {
     setIsSettingsOpen(!isSettingsOpen);
@@ -22,7 +30,7 @@ const Usernav = () => {
   return (
     <nav className="bg-white shadow-md py-4 fixed w-full top-0 left-0 z-50">
       <div className="container px-4 mx-auto flex justify-between items-center">
-        <img src={Logo} className="h-[60px]" alt="logo" />
+        <img src={Logo} className="h-[60px] cursor-pointer" alt="logo" onClick={handleHome}/>
 
         <div className="flex items-center space-x-6">
           
@@ -77,12 +85,18 @@ const Usernav = () => {
               <button className="w-8 h-8 rounded-full bg-orange-500"></button>
               <button className="w-8 h-8 rounded-full bg-red-500"></button>
             </div>
-            <div className="flex justify-center mt-4">
+            <div className="flex flex-col gap-5 justify-center mt-4">
               <button
                 className="p-2 border-2 border-black rounded w-full"
                 onClick={() => navigate("/user/profile")}
               >
                 View Profile
+              </button>
+              <button
+                className="p-2 border-2 border-black rounded w-full"
+                onClick={handleLogout}
+              >
+                Logout
               </button>
             </div>
           </div>
