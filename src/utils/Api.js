@@ -80,6 +80,22 @@ export const uploadProfilePic = async (userId, file) => {
   }
 };
 
+export const uploadCoverPic = async (bookId, coverPicFile) => {
+  const formData = new FormData();
+  formData.append('cover_pic', coverPicFile);
+
+  try {
+      const response = await axiosInstance.post(`/api/books/${bookId}/upload-pic`, formData, {
+          headers: {
+              'Content-Type': 'multipart/form-data',
+          },
+      });
+      console.log('Cover picture uploaded successfully:', response.data);
+  } catch (error) {
+      console.error('Error uploading cover picture:', error.response.data);
+  }
+};
+
 export const sendcontact = async (
   subject,
   message,
