@@ -42,7 +42,6 @@ import LibrarianProfile from '../pages/Librarian/LibrarianProfile';
 // import UserRoute from "./UserRoute";
 import ForgetPassword from "../pages/ForgetPassword";
 import Otp from "../pages/Otp";
-import Wizard from "../pages/Librarian/Wizard";
 
 export default function RoutesNav() {
   return (
@@ -96,7 +95,6 @@ export default function RoutesNav() {
         <Route path="/user/my-learning" element={<MyLearning />} />
         <Route path="/user/profile" element={<UserProfile />} />
         <Route path="/libraian/profile" element={<LibrarianProfile />} />
-        <Route path="/wizard" element={<Wizard />} />
       </Routes>
     </>
   );
