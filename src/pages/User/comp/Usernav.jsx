@@ -11,6 +11,7 @@ import { MdHelp } from "react-icons/md";
 import { FaBookOpen } from "react-icons/fa6";
 import { IoMdMailOpen } from "react-icons/io";
 import RequestBookForm from "../../../pages/User/comp/RequestBookForm";
+
 const Usernav = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -69,10 +70,9 @@ const Usernav = () => {
           isSettingsOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="p-4 relative">
+        <div className="p-4 relative flex flex-col h-full">
           <div className="flex justify-between items-center">
-            <h3 className="text-xl font-semibold text-gray-700 flex items-center">
-              <IoSettingsSharp className="mr-2 text-xl text" />
+            <h3 className="text-lg font-semibold">
               Settings
             </h3>
             <button
@@ -95,34 +95,24 @@ const Usernav = () => {
               </svg>
             </button>
           </div>
+          <p className="text-gray-600 text-sm mt-2">Your account</p>
           <hr className="border-gray-300 my-2" />
           {/* settings start */}
-          <div className="mt-4 space-y-4">
-            <div className="flex flex-col gap-4">
-              <button
-                className="flex items-center justify-center p-2 border border-gray-300 rounded-lg shadow-sm bg-white hover:bg-gray-100 transition duration-300 w-full text-base"
-                onClick={() => navigate("/user/profile")}
-              >
-                <CgProfile className="mr-2 text-xl" />
-                <span className="font-medium">View Profile</span>
-              </button>
-              <button
-                className="flex items-center justify-center p-2 border border-gray-300 rounded-lg shadow-sm bg-white hover:bg-gray-100 transition duration-300 w-full text-base"
-                onClick={() => navigate("/user/password")}
-              >
-                <MdSecurity className="mr-2 text-xl" />
-                <span className="font-medium">Password & Security</span>
-              </button>
-              <button
-                className="flex items-center justify-center p-2 border border-gray-300 rounded-lg shadow-sm bg-white hover:bg-red-100 transition duration-300 w-full text-base"
-                onClick={handleLogout}
-              >
-                <MdLogout className="mr-2 text-xl text-red-500" />
-                <span className="font-medium text-red-500">Logout</span>
-              </button>
-            </div>
-
-            {/* Cards */}
+          <div className="mt-4 space-y-4 flex flex-col flex-grow">
+            <button
+              className="flex items-center p-2 border border-gray-300 rounded-lg shadow-sm bg-white hover:bg-gray-100 transition duration-300 w-full text-base text-left"
+              onClick={() => navigate("/user/profile")}
+            >
+              <CgProfile className="mr-2 text-xl" />
+              <span className="font-medium">View Profile</span>
+            </button>
+            <button
+              className="flex items-center p-2 border border-gray-300 rounded-lg shadow-sm bg-white hover:bg-gray-100 transition duration-300 w-full text-base text-left"
+              onClick={() => navigate("/user/password")}
+            >
+              <MdSecurity className="mr-2 text-xl" />
+              <span className="font-medium">Password & Security</span>
+            </button>
             <div className="mt-6 space-y-4">
               <div
                 className="p-4 border border-gray-300 rounded-lg shadow-sm bg-white hover:bg-gray-100 transition duration-300 cursor-pointer flex flex-col items-center"
@@ -151,6 +141,14 @@ const Usernav = () => {
                 </div>
               </div>
             </div>
+            <div className="flex-grow"></div>
+            <button
+              className="flex items-center p-2 border border-gray-300 rounded-lg shadow-sm bg-white hover:bg-red-100 transition duration-300 w-full text-base text-left"
+              onClick={handleLogout}
+            >
+              <MdLogout className="mr-2 text-xl text-red-500" />
+              <span className="font-medium text-red-500">Logout</span>
+            </button>
           </div>
           {/* settings end */}
         </div>
