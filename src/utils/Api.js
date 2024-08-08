@@ -39,6 +39,7 @@ export const memberRegister = async (
   email,
   mobile,
   role_idS,
+  user_idS
 
 ) => {
   try {
@@ -53,6 +54,7 @@ export const memberRegister = async (
       email,
       mobile,
       role_idS,
+      user_idS
       // profile_pic,
     });
     return response;

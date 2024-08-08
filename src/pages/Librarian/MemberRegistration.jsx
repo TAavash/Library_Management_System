@@ -11,6 +11,7 @@ import { memberRegister, getUserById, updateStatus } from "../../utils/Api"; // 
 export default function MemberRegistration() {
   const [roleList, setRoleList] = useState([]);
   const { user_idS } = useParams();
+  const [user_id, setuser_idS] = useState();
 
   const [profile, setProfile] = useState({
     username: "",
@@ -47,12 +48,12 @@ export default function MemberRegistration() {
     }
   };
 
-  
+
   // const handleImageUpload = async (event) => {
   //   event.preventDefault();
   //   const formData = new FormData();
   //   formData.append('profile_pic', event.target.files[0]);
-  
+
   //   try {
   //     console.log('Attempting to upload image...');
   //     const response = await axiosInstance.post('/member/profile_pic', formData, {
@@ -119,6 +120,7 @@ export default function MemberRegistration() {
             mobile: userData[0].mobile || "",
             role_id: userData[0].role_id || "",
           });
+          setuser_idS(userData[0].user_idS);
         } else {
           console.error("No user data found");
           toast.error("No user data found. Please try again later.");
@@ -150,7 +152,8 @@ export default function MemberRegistration() {
         profile.address,
         profile.email,
         profile.mobile,
-        profile.role_id
+        profile.role_id,
+        user_id
       );
 
       if (register) {
