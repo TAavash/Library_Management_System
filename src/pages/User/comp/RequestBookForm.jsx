@@ -51,7 +51,7 @@ const RequestBookForm = () => {
                 name="requested_book_type"
                 value={formData.requested_book_type}
                 onChange={handleChange}
-                className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                className="md:block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
               >
                 <option value="">Select Genre</option>
                 <option value="Fiction">Fiction</option>

@@ -11,10 +11,13 @@ import bookcover from "../../assets/images.jpeg";
 import bookcover1 from "../../assets/36236124._SX300_.jpg";
 import SearchBar from "../../pages/User/comp/SearchBar";
 import Usernav from "../User/comp/Usernav";
-import Calcss from "../../../src/pages/User/comp/Cal.css";
+import MobileNavBar from "../../../src/pages/User/comp/MobileNavBar";
+import useWindowWidth from "./comp/useWindowWidth";
+import calcss from "./comp/Cal.css"
 
 function Userdash() {
   const navigate = useNavigate();
+  const windowWidth = useWindowWidth();
 
   const books = [
     {
@@ -65,64 +68,60 @@ function Userdash() {
       <header className="fixed w-full z-50">
         <Usernav />
       </header>
+      <main className="pt-[100px] pb-[70px] px-4 sm:px-6 lg:px-8">
+        <img src={Bannerimage} alt="Banner" className="w-full" />
 
-      <main className="pt-[100px] px-4 sm:px-6 lg:px-8">
-        <img
-          src={Bannerimage}
-          alt="Banner"
-          className="w-full "
-
-        />
-
-        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div
-            className="p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
-            onClick={() => navigate("/user/home")}
-          >
-            <MdLocalLibrary className="text-4xl mx-auto mb-2" />
-            <p>Dashboard</p>
+        {windowWidth >= 768 && ( // Conditionally render cards navigation based on screen width
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div
+              className="p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
+              onClick={() => navigate("/user/home")}
+            >
+              <MdLocalLibrary className="text-4xl mx-auto mb-2" />
+              <p>Dashboard</p>
+            </div>
+            <div
+              className="p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
+              onClick={() => navigate("/user/discover")}
+            >
+              <IoBookSharp className="text-4xl mx-auto mb-2" />
+              <p>Discover</p>
+            </div>
+            <div
+              className="p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
+              onClick={() => navigate("/user/reservations")}
+            >
+              <MdBookmarkAdded className="text-4xl mx-auto mb-2" />
+              <p>Reservation</p>
+            </div>
+            <div
+              className="p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
+              onClick={() => navigate("/user/e-books")}
+            >
+              <HiDocumentText className="text-4xl mx-auto mb-2" />
+              <p>E-books</p>
+            </div>
           </div>
-          <div
-            className="p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
-            onClick={() => navigate("/user/discover")}
-          >
-            <IoBookSharp className="text-4xl mx-auto mb-2" />
-            <p>Discover</p>
-          </div>
-          <div
-            className="p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
-            onClick={() => navigate("/user/reservations")}
-          >
-            <MdBookmarkAdded className="text-4xl mx-auto mb-2" />
-            <p>Reservation</p>
-          </div>
-          <div
-            className="p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
-            onClick={() => navigate("/user/e-books")}
-          >
-            <HiDocumentText className="text-4xl mx-auto mb-2" />
-            <p>E-books</p>
-          </div>
-        </div>
+        )}
 
         {/* Upcoming Deadline Section Start */}
-        <div className="flex flex-col lg:flex-row">
-          <div className="m-auto mt-5">
+        <div className="flex flex-col lg:flex-row lg:space-x-5">
+          <div className="hidden lg:block mx-auto mt-5 w-full lg:w-auto">
             <Calendar />
           </div>
 
           <div className="flex-grow m-5">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">Upcoming Deadline</h2>
               <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
                 View All
               </button>
             </div>
-            <div className="flex flex-wrap gap-4 mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4">
               {upcomingBooks.map((book, index) => (
                 <div
                   key={index}
-                  className="flex p-4 border border-red-500 bg-red-100 rounded-lg transition-transform transform hover:scale-105 cursor-pointer relative"
+                  className="flex flex-col md:flex-row p-4 border border-red-500 bg-red-100 rounded-lg transition-transform transform hover:scale-105 cursor-pointer relative"
                   onClick={() =>
                     navigate("/upcoming-deadline", { state: { book } })
                   }
@@ -130,16 +129,16 @@ function Userdash() {
                   <img
                     src={book.cover}
                     alt={book.title}
-                    className="w-[100px] object-cover rounded-lg"
+                    className="w-full md:w-[100px] object-cover rounded-lg mb-2 md:mb-0 hidden md:block"
                   />
-                  <div className="ml-4">
-                    <p className="font-bold text-lg">{book.title}</p>
-                    <div className="flex items-center text-gray-500 text-sm mt-2 ">
+                  <div className="flex flex-col">
+                    <p className="font-bold text-lg pl-4">{book.title}</p>
+                    <div className="flex items-center text-gray-500 text-sm mt-2 pl-4">
                       <BsCalendar className="mr-1" />
                       <span className="mr-2">Borrowed Date:</span>
                       <span className="font-semibold">{book.rdate}</span>
                     </div>
-                    <div className="flex items-center text-gray-500 text-sm mt-2">
+                    <div className="flex items-center text-gray-500 text-sm mt-2 pl-4">
                       <BsCalendar className="mr-1" />
                       <span className="mr-2">Expire Date:</span>
                       <span className="font-semibold">{book.edate}</span>
@@ -195,6 +194,8 @@ function Userdash() {
           </div>
         </div>
       </main>
+      {windowWidth < 768 && <MobileNavBar />}{" "}
+      {/* Conditionally render MobileNavBar */}
     </div>
   );
 }

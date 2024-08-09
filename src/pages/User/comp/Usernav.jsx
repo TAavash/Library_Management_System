@@ -10,7 +10,6 @@ import { MdLogout } from "react-icons/md";
 import { MdHelp } from "react-icons/md";
 import { FaBookOpen } from "react-icons/fa6";
 import { IoMdMailOpen } from "react-icons/io";
-import RequestBookForm from "../../../pages/User/comp/RequestBookForm";
 
 const Usernav = () => {
   const navigate = useNavigate();
@@ -113,6 +112,15 @@ const Usernav = () => {
               <MdSecurity className="mr-2 text-xl" />
               <span className="font-medium">Password & Security</span>
             </button>
+
+            <button
+              className="flex items-center p-2 border border-gray-300 rounded-lg shadow-sm bg-white hover:bg-red-100 transition duration-300 w-full text-base text-left"
+              onClick={handleLogout}
+            >
+              <MdLogout className="mr-2 text-xl text-red-500" />
+              <span className="font-medium text-red-500">Logout</span>
+            </button>
+
             <div className="mt-6 space-y-4">
               <div
                 className="p-4 border border-gray-300 rounded-lg shadow-sm bg-white hover:bg-gray-100 transition duration-300 cursor-pointer flex flex-col items-center"
@@ -141,14 +149,6 @@ const Usernav = () => {
                 </div>
               </div>
             </div>
-            <div className="flex-grow"></div>
-            <button
-              className="flex items-center p-2 border border-gray-300 rounded-lg shadow-sm bg-white hover:bg-red-100 transition duration-300 w-full text-base text-left"
-              onClick={handleLogout}
-            >
-              <MdLogout className="mr-2 text-xl text-red-500" />
-              <span className="font-medium text-red-500">Logout</span>
-            </button>
           </div>
           {/* settings end */}
         </div>
