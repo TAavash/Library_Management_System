@@ -157,9 +157,10 @@ export default function MemberRegistration() {
       );
 
       if (register) {
+        console.log(register)
         toast.success("Register successful!");
         await updateStatus(user_idS);
-        setTimeout(() => navigate("/LibraryRequestPage"), 2000); // Redirect after 2 seconds
+        navigate("/LibraryRequestPage");
       } else {
         toast.error("Register failed. Username or email already exists.");
       }
