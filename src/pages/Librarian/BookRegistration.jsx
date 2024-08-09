@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import BookCover from "../../assets/th (1).jpeg";
-import { IoArrowBackCircle, IoPersonAdd } from "react-icons/io5";
+import { IoPersonAdd } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { bookRegister, publicationRegister, barcodeRegister } from "../../utils/Api";
+import {
+  bookRegister,
+  publicationRegister,
+  barcodeRegister,
+  uploadCoverPic,
+} from "../../utils/Api";
 import FormWizard from "react-form-wizard-component";
 import "react-form-wizard-component/dist/style.css";
 
@@ -14,21 +19,20 @@ function BookRegistration() {
   const [isbarkcodeRegistered, setbarcodeRegistered] = useState(false);
   const handleComplete = () => {
     console.log("Form completed!");
+    handleCoverPicUpload();
   };
   const tabChanged = ({ prevIndex, nextIndex }) => {
-    console.log("", prevIndex, nextIndex)
+    // console.log("", prevIndex, nextIndex)
     if (prevIndex === 1 && !isPublicationRegistered) {
       handlepublicationregister();
-    }
-    else if (prevIndex === 2 && !isbookRegistered) {
+    } else if (prevIndex === 2 && !isbookRegistered) {
       handlebookregister();
-    }
-    else if (prevIndex === 3 && !isbarkcodeRegistered) {
+    } else if (prevIndex === 3 && !isbarkcodeRegistered) {
       handlebarcoderegister();
     }
   };
-  const [publications_idS, setpublications_idS] = useState()
-  const [books_idS, setbooks_idS] = useState()
+  const [publications_idS, setpublications_idS] = useState();
+  const [books_idS, setbooks_idS] = useState();
   const [book, setBook] = useState({
     title: "",
     sub_title: "",
@@ -76,7 +80,6 @@ function BookRegistration() {
   };
 
   const handlebookregister = async (e) => {
-
     try {
       const response = await bookRegister(
         book.classification_number,
@@ -94,15 +97,15 @@ function BookRegistration() {
       );
 
       if (response) {
-        console.log(response.data.books_id)
+        console.log(response.data.books_id);
         toast.success("Book Registration successful!");
-        setbooks_idS(response.data.books_id)
-        setbookRegistered(true)
+        setbooks_idS(response.data.books_id);
+        setbookRegistered(true);
         // setTimeout(() => navigate("/librarian-books"), 2000);
       } else {
         toast.error(
           response.data.message ||
-          "Register failed. Please check your credentials."
+            "Register failed. Please check your credentials."
         );
       }
     } catch (error) {
@@ -119,8 +122,7 @@ function BookRegistration() {
         book.publication_date,
         book.publication_name,
         book.name_of_publisher,
-        book.place_of_publication,
-
+        book.place_of_publication
       );
       if (response.status === 201) {
         toast.success("Publication Registration successful!");
@@ -130,7 +132,7 @@ function BookRegistration() {
       } else {
         toast.error(
           response.data.message ||
-          "Register failed. Please check your credentials."
+            "Register failed. Please check your credentials."
         );
       }
     } catch (error) {
@@ -138,7 +140,7 @@ function BookRegistration() {
       toast.error("An error occurred. Please try again later.");
     }
   };
-  let status = "Active"
+  let status = "Active";
 
   const handlebarcoderegister = async (e) => {
     try {
@@ -149,16 +151,16 @@ function BookRegistration() {
         status,
         books_idS
       );
-      console.log(books_idS)
+      console.log(books_idS);
 
       if (response) {
         toast.success("Barcode Registration successful!");
-        setbarcodeRegistered(true)
+        setbarcodeRegistered(true);
         // setTimeout(() => navigate("/librarian-books"), 2000);
       } else {
         toast.error(
           response.data.message ||
-          "Register failed. Please check your credentials."
+            "Register failed. Please check your credentials."
         );
       }
     } catch (error) {
@@ -169,14 +171,30 @@ function BookRegistration() {
 
   const navigate = useNavigate();
   const [bookCover, setBookCover] = useState(BookCover);
+  const [newcoverPic, setNewCoverPic] = useState(null);
 
+  const handleCoverPicUpload = async () => {
+    try {
+
+      // Save the profile picture if a new one is uploaded
+      if (newcoverPic && books_idS) {
+        await uploadCoverPic(books_idS, newcoverPic);
+        setBookCover(book.cover_pic || BookCover);
+      }
+      toast.success("Profile updated successfully!");
+    } catch (error) {
+      console.error("An error occurred while saving profile data:", error);
+      toast.error("An error occurred while saving profile data. Please try again.");
+    }
+  };
+  
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => {
-        setBookCover(e.target.result);
-        setBook({ ...book, cover_pic: file });
+      reader.onloadend = () => {
+        setBookCover(reader.result);
+        setNewCoverPic(file); // Store the file for uploading later
       };
       reader.readAsDataURL(file);
     }
@@ -206,10 +224,14 @@ function BookRegistration() {
         <FormWizard.TabContent title="Publication" icon="ti-user">
           <form onSubmit={handlepublicationregister} className="space-y-6">
             <div className="text-start w-[80%] m-auto">
-              <h3 className=" text-slate-400 text-lg font-semibold mt-6">PUBLICATION</h3>
+              <h3 className=" text-slate-400 text-lg font-semibold mt-6">
+                PUBLICATION
+              </h3>
               <hr />
               <div className="flex flex-col gap-3 mt-3">
-                <label className="font-medium" htmlFor="publication_date">Publication Date</label>
+                <label className="font-medium" htmlFor="publication_date">
+                  Publication Date
+                </label>
                 <input
                   type="text"
                   name="publication_date"
@@ -220,7 +242,9 @@ function BookRegistration() {
                 />
               </div>
               <div className="flex flex-col gap-3 mt-3">
-                <label className="font-medium" htmlFor="edition">Edition</label>
+                <label className="font-medium" htmlFor="edition">
+                  Edition
+                </label>
                 <input
                   type="text"
                   name="edition"
@@ -231,7 +255,9 @@ function BookRegistration() {
                 />
               </div>
               <div className="flex flex-col gap-3 mt-3">
-                <label className="font-medium" htmlFor="publication_name">Publication Name</label>
+                <label className="font-medium" htmlFor="publication_name">
+                  Publication Name
+                </label>
                 <input
                   type="text"
                   name="publication_name"
@@ -242,7 +268,9 @@ function BookRegistration() {
                 />
               </div>
               <div className="flex flex-col gap-3 mt-3">
-                <label className="font-medium" htmlFor="name_of_publisher">Name of Publisher</label>
+                <label className="font-medium" htmlFor="name_of_publisher">
+                  Name of Publisher
+                </label>
                 <input
                   type="text"
                   name="name_of_publisher"
@@ -253,7 +281,9 @@ function BookRegistration() {
                 />
               </div>
               <div className="flex flex-col gap-3 mt-3">
-                <label className="font-medium" htmlFor="place_of_publication">Place of Publication</label>
+                <label className="font-medium" htmlFor="place_of_publication">
+                  Place of Publication
+                </label>
                 <input
                   type="text"
                   name="place_of_publication"
@@ -265,7 +295,6 @@ function BookRegistration() {
               </div>
             </div>
           </form>
-
         </FormWizard.TabContent>
         <FormWizard.TabContent title="Book" icon="ti-settings">
           <form onSubmit={handlebookregister} className="space-y-6">
@@ -274,7 +303,9 @@ function BookRegistration() {
               <hr />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="font-medium" htmlFor="title">Title</label>
+                  <label className="font-medium" htmlFor="title">
+                    Title
+                  </label>
                   <input
                     type="text"
                     name="title"
@@ -285,7 +316,9 @@ function BookRegistration() {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="font-medium" htmlFor="sub_title">Sub Title</label>
+                  <label className="font-medium" htmlFor="sub_title">
+                    Sub Title
+                  </label>
                   <input
                     type="text"
                     name="sub_title"
@@ -297,7 +330,9 @@ function BookRegistration() {
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="font-medium" htmlFor="description">Description</label>
+                <label className="font-medium" htmlFor="description">
+                  Description
+                </label>
                 <textarea
                   name="description"
                   placeholder="Description here"
@@ -307,7 +342,9 @@ function BookRegistration() {
                 />
               </div>
 
-              <h3 className="text-slate-400 text-lg font-semibold mt-6">AUTHOR</h3>
+              <h3 className="text-slate-400 text-lg font-semibold mt-6">
+                AUTHOR
+              </h3>
               <hr />
               <div className="flex flex-col gap-3 mt-3">
                 <label className="font-medium">Author</label>
@@ -335,11 +372,15 @@ function BookRegistration() {
                 ))}
               </div>
 
-              <h3 className="text-slate-400 text-lg font-semibold mt-6">TYPE</h3>
+              <h3 className="text-slate-400 text-lg font-semibold mt-6">
+                TYPE
+              </h3>
               <hr />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="font-medium" htmlFor="genre">Genre</label>
+                  <label className="font-medium" htmlFor="genre">
+                    Genre
+                  </label>
                   <select
                     id="genre"
                     name="genre"
@@ -348,13 +389,17 @@ function BookRegistration() {
                     onChange={handleInputChange}
                   >
                     <option value="">Select Genre</option>
-                    <option value="General Collection">General Collection</option>
+                    <option value="General Collection">
+                      General Collection
+                    </option>
                     <option value="Textbook">Textbook</option>
                     <option value="Reference">Reference</option>
                   </select>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="font-medium" htmlFor="status">Status</label>
+                  <label className="font-medium" htmlFor="status">
+                    Status
+                  </label>
                   <select
                     id="status"
                     name="status"
@@ -372,7 +417,9 @@ function BookRegistration() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="font-medium" htmlFor="number_of_pages">Number of Pages</label>
+                  <label className="font-medium" htmlFor="number_of_pages">
+                    Number of Pages
+                  </label>
                   <input
                     type="text"
                     name="number_of_pages"
@@ -383,7 +430,9 @@ function BookRegistration() {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="font-medium" htmlFor="language">Language</label>
+                  <label className="font-medium" htmlFor="language">
+                    Language
+                  </label>
                   <input
                     type="text"
                     name="language"
@@ -397,7 +446,10 @@ function BookRegistration() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="font-medium" htmlFor="classification_number">
+                  <label
+                    className="font-medium"
+                    htmlFor="classification_number"
+                  >
                     Classification Number
                   </label>
                   <input
@@ -410,7 +462,9 @@ function BookRegistration() {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="font-medium" htmlFor="book_number">Book Number</label>
+                  <label className="font-medium" htmlFor="book_number">
+                    Book Number
+                  </label>
                   <input
                     type="text"
                     name="book_number"
@@ -423,7 +477,9 @@ function BookRegistration() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-medium" htmlFor="book_location">Book Location</label>
+                <label className="font-medium" htmlFor="book_location">
+                  Book Location
+                </label>
                 <input
                   type="text"
                   name="book_location"
@@ -434,16 +490,19 @@ function BookRegistration() {
                 />
               </div>
             </div>
-
           </form>
         </FormWizard.TabContent>
         <FormWizard.TabContent title="Barcode Info" icon="ti-settings">
           <form onSubmit={handlebarcoderegister} className="space-y-6">
             <div className="text-start w-[80%] m-auto">
-              <h3 className="text-slate-400 text-lg font-semibold mt-6">BARCODE</h3>
+              <h3 className="text-slate-400 text-lg font-semibold mt-6">
+                BARCODE
+              </h3>
               <hr />
               <div className="flex flex-col gap-3 mt-3">
-                <label className="font-medium" htmlFor="isbn_number">ISBN Number</label>
+                <label className="font-medium" htmlFor="isbn_number">
+                  ISBN Number
+                </label>
                 <input
                   type="text"
                   name="isbn_number"
@@ -454,7 +513,9 @@ function BookRegistration() {
                 />
               </div>
               <div className="flex flex-col gap-3 mt-3">
-                <label className="font-medium" htmlFor="scanner_type">Scanner Type</label>
+                <label className="font-medium" htmlFor="scanner_type">
+                  Scanner Type
+                </label>
                 <input
                   type="text"
                   name="scanner_type"
@@ -465,7 +526,9 @@ function BookRegistration() {
                 />
               </div>
               <div className="flex flex-col gap-3 mt-3">
-                <label className="font-medium" htmlFor="barcode_number">Barcode Number</label>
+                <label className="font-medium" htmlFor="barcode_number">
+                  Barcode Number
+                </label>
                 <input
                   type="text"
                   name="barcode_number"
@@ -476,11 +539,10 @@ function BookRegistration() {
                 />
               </div>
             </div>
-
           </form>
         </FormWizard.TabContent>
         <FormWizard.TabContent title="Cover Image" icon="ti-check">
-          <form onSubmit={""}>
+          <form onSubmit={(e) => e.preventDefault()}>
             <div className="flex justify-center items-center p-10">
               <div className="bg-slate-50 shadow-md flex flex-col items-center p-8 rounded-lg border">
                 <img
@@ -490,7 +552,7 @@ function BookRegistration() {
                 />
                 <input
                   type="file"
-                  accept="image/*"
+                  accept=".jpeg,.png,.jpg,.gif,.svg"
                   onChange={handleImageUpload}
                   className="border rounded p-2"
                 />

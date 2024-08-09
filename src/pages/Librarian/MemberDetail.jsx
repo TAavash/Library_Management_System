@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { IoArrowBackCircle } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { getMemberById } from "../../utils/Api";
 import DefaultProfile from "../../assets/User.jpg";
+import BackComp from "../../components/BackComp";
 
 const MemberDetail = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -20,8 +20,6 @@ const MemberDetail = () => {
     profile_pic: "",
     role_name: "",
   });
-
-  const navigate = useNavigate(); // Initialize navigate
 
   const location = useLocation();
   const member_id = location.state?.member_id;
@@ -81,10 +79,6 @@ const MemberDetail = () => {
     setIsEditing(false);
   };
 
-  const handleBackClick = () => {
-    navigate(-1); // Go back to the previous page
-  };
-
   const handleEditClick = () => {
     setIsEditing(true);
   };
@@ -94,9 +88,7 @@ const MemberDetail = () => {
       <ToastContainer />
       <div className="w-full h-16 bg-secondary flex items-center justify-center text-3xl text-black font-semibold p-4 relative">
         Member Details
-        <button className="absolute left-4 text-4xl" onClick={handleBackClick}>
-          <IoArrowBackCircle />
-        </button>
+        <BackComp/>
       </div>
       <div className="flex w-full p-4">
         <div className="bg-white text-black p-4 rounded-lg shadow-lg w-1/4">
