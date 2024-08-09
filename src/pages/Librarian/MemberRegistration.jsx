@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Profile from "../../assets/User.jpg"; // Default profile image
-import { IoArrowBackCircle } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,23 +28,19 @@ export default function MemberRegistration() {
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
 
-  const [profileImage, setProfileImage] = useState(Profile);
   const navigate = useNavigate();
 
-  const handleBackIconClick = () => {
-    navigate(-1);
-  };
-
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setProfileImage(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  // const [profileImage, setProfileImage] = useState(Profile);
+  // const handleImageUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       setProfileImage(e.target.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -295,17 +290,17 @@ export default function MemberRegistration() {
       <div className="relative w-1/3 flex flex-col items-center p-3 mt-10">
         <div className="fixed text-center">
           <img
-            src={profileImage}
+            src={Profile}
             alt="profile"
             className="w-52 h-52 rounded-xl p-1 object-cover"
           />
-          <input
+          {/* <input
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
             className="mt-2"
-          />
-          <h5 className="cursor-pointer mt-2">Upload Profile</h5>
+          /> */}
+          <h5 className="cursor-pointer mt-2">User Profile</h5>
         </div>
       </div>
       <ToastContainer />

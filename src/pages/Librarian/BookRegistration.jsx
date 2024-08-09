@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BookCover from "../../assets/th (1).jpeg";
+import BookCover from "../../assets/PCPS Book Cover.png";
 import { IoPersonAdd } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -17,10 +17,13 @@ function BookRegistration() {
   const [isPublicationRegistered, setIsPublicationRegistered] = useState(false);
   const [isbookRegistered, setbookRegistered] = useState(false);
   const [isbarkcodeRegistered, setbarcodeRegistered] = useState(false);
+  
   const handleComplete = () => {
     console.log("Form completed!");
     handleCoverPicUpload();
+    navigate(-1); // Navigates back to the previous page
   };
+  
   const tabChanged = ({ prevIndex, nextIndex }) => {
     // console.log("", prevIndex, nextIndex)
     if (prevIndex === 1 && !isPublicationRegistered) {
@@ -181,7 +184,7 @@ function BookRegistration() {
         await uploadCoverPic(books_idS, newcoverPic);
         setBookCover(book.cover_pic || BookCover);
       }
-      toast.success("Profile updated successfully!");
+      toast.success("Cover uploaded successfully!");
     } catch (error) {
       console.error("An error occurred while saving profile data:", error);
       toast.error("An error occurred while saving profile data. Please try again.");
@@ -233,7 +236,7 @@ function BookRegistration() {
                   Publication Date
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   name="publication_date"
                   placeholder="1998"
                   className="border-2 p-2 rounded-md"
@@ -246,7 +249,7 @@ function BookRegistration() {
                   Edition
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="edition"
                   placeholder="First"
                   className="border-2 p-2 rounded-md"
@@ -421,7 +424,7 @@ function BookRegistration() {
                     Number of Pages
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="number_of_pages"
                     placeholder="1001"
                     className="border-2 p-2 rounded-md mb-4"
@@ -453,7 +456,7 @@ function BookRegistration() {
                     Classification Number
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="classification_number"
                     placeholder="12345"
                     className="border-2 p-2 rounded-md mb-4"
@@ -466,7 +469,7 @@ function BookRegistration() {
                     Book Number
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="book_number"
                     placeholder="101"
                     className="border-2 p-2 rounded-md mb-4"
@@ -504,7 +507,7 @@ function BookRegistration() {
                   ISBN Number
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="isbn_number"
                   placeholder="12345"
                   className="border-2 p-2 rounded-md"

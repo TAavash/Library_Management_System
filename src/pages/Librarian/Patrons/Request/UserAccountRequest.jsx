@@ -31,27 +31,26 @@ export default function UserAccountRequest() {
   return (
     <>
       <div className="w-full h-full rounded-2xl">
-        <div className="w-[100%] h-[20%] bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
-          <div className="w-full h-full flex justify-evenly p-[10px] gap-[5px]">
-            <div className="w-[100%] h-full flex-col">
-              <div className="w-full h-auto text-start text-3xl p-1">
-                New Account Request
-              </div>
-
-              <div className="w-full h-auto text-start text-2xl text-gray-600 p-1">
-              Manage all the account requests from users
-              </div>
+        <div className="w-[100%] h-[20%] flex justify-between bg-[#F5F5F5] px-[50px] py-[30px] rounded-tr-2xl">
+          <div className=" h-full flex-col">
+            <div className="w-full h-[70%] text-3xl">
+              New Account Request
+            </div>
+            <div className="w-full h-[30%] text-[-2xl] text-[#525252]">
+              Manage all the account request from users.
             </div>
           </div>
 
-          <div className='flex justify-center m-2'>
-            <div className="flex w-[500px] items-center gap-1">
-              <FiSearch className="h-5 w-5 ml-1" />
-              <input type="text" placeholder='Search' className='p-1 w-[500px]  border-hidden focus:outline-none'
-              />
-            </div>
+          <div className="flex justify-center m-2">
+          <div className="flex w-full md:w-[500px] items-center gap-1">
+            <FiSearch className="h-5 w-5 ml-1" />
+            <input
+              type="text"
+              placeholder="Search"
+              className="p-1 w-full border-hidden focus:outline-none"
+            />
           </div>
-
+        </div>
         </div>
         <div className="h-4/5 overflow-scroll">
           {AccountRequests.length > 0 ? (

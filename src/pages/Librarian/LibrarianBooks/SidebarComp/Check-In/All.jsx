@@ -1,6 +1,6 @@
 import React from 'react'
 import { FiSearch } from "react-icons/fi";
-import BookCover from '../../../../../assets/th (1).jpeg';
+import BookCover from '../../../../../assets/PCPS Book Cover.png';
 
 
 const checkIn = [

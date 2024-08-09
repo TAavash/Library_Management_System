@@ -233,7 +233,6 @@ export const getAllBooks = async () => {
   }
 };
 
-getAllBooks();
 
 export const getAllMember = async () => {
   try {

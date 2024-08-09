@@ -3,24 +3,6 @@ import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { getLibraryAssistants } from "../../../../utils/Api";
 
-
-const tableData = [{
-  id: 2206112668,
-  fullname: "Nami Suwannn",
-  status: "active",
-  joinDate: "May 20, 2024"
-}, {
-  id: 2148338,
-  fullname: "Nami Suwannn",
-  status: "active",
-  joinDate: "May 20, 2024"
-}, {
-  id: 2148338,
-  fullname: "Nami Suwannn",
-  status: "active",
-  joinDate: "May 20, 2024"
-}];
-
 export const LibraryAssistant = () => {
   const [allLibraryAssistant, setAllLibraryAssistant] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
