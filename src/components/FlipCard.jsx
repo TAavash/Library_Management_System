@@ -1,4 +1,5 @@
 import React from "react";
+import DefaultCover from "../assets/bookCover.jpg"
 
 const FlipCard = ({ book }) => {
   return (
@@ -6,8 +7,8 @@ const FlipCard = ({ book }) => {
       <div className="relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
         <div className="absolute inset-0">
           <img
-            className="h-full w-full rounded-xl object-contain shadow-xl shadow-black/40"
-            src={book.cover_pic || "path/to/default-image.jpg"}
+            className="h-full w-full rounded-xl object-cover shadow-xl shadow-black/40"
+            src={book.cover_pic || DefaultCover}
             alt={book.title}
           />
         </div>
