@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FiSearch } from "react-icons/fi";
 import BookCover from '../../../../../assets/th (1).jpeg';
 
-const books = [
+const booksData = [
   {
     title: "Kafka on the Shore",
     author: "Murakami",
@@ -32,25 +32,20 @@ const books = [
     title: "How to Talk to Anyone",
     author: "Leil Lowndes",
     cover: BookCover,
-  },
-  {
-    title: "Kafka on the Shore",
-    author: "Murakami",
-    cover: BookCover,
-  },
-  {
-    title: "Rich Dad Poor Dad",
-    author: "Robert T. Kiyosaki",
-    cover: BookCover,
-  },
-  {
-    title: "How to Talk to Anyone",
-    author: "Leil Lowndes",
-    cover: BookCover,
-  },
+  }
 ];
 
 const All = ({ viewMode }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredBooks = booksData.filter(book =>
+    book.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="w-full h-full">
       <div className="w-full h-[20%] flex flex-col md:flex-row justify-between bg-[#F5F5F5] px-6 md:px-12 py-4 md:py-6 rounded-tr-2xl">
@@ -66,7 +61,13 @@ const All = ({ viewMode }) => {
         <div className='flex justify-center m-2'>
           <div className="flex w-full md:w-[500px] items-center gap-1">
             <FiSearch className="h-5 w-5 ml-1" />
-            <input type="text" placeholder='Search' className='p-1 w-full border-hidden focus:outline-none' />
+            <input
+              type="text"
+              placeholder='Search'
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className='p-1 w-full border-hidden focus:outline-none'
+            />
           </div>
         </div>
       </div>
@@ -74,7 +75,7 @@ const All = ({ viewMode }) => {
       <div className="flex flex-col h-[80%] bg-white p-6 md:p-12 gap-6 md:gap-12 rounded-br-2xl overflow-y-auto scroll-smooth scrollbar-thin">
         {viewMode === "grid" ? (
           <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[30px] my-2">
-            {books.map((book, index) => (
+            {filteredBooks.map((book, index) => (
               <div
                 key={index}
                 className="group relative bg-white rounded-lg shadow-md w-full md:w-56 overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl"
@@ -89,12 +90,11 @@ const All = ({ viewMode }) => {
           </div>
         ) : (
           <div className="list">
-            {books.map((book, index) => (
+            {filteredBooks.map((book, index) => (
               <div
                 key={index}
                 className="flex items-center p-4 border-b border-gray-200"
               >
-                {/* <img src={book.cover} alt={book.title} className="w-16 h-24 object-cover mr-4" /> */}
                 <div className='w-full p-4 flex justify-between'>
                   <h3 className="text-lg font-bold">{book.title}</h3>
                   <p className="text-sm text-gray-600">{book.author}</p>
