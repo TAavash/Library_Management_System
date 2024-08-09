@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Liblogo from "../../../assets/elibrary.png";
 
 const ToggleButton = () => {
   const [active, setActive] = useState("Explore");
@@ -11,10 +10,8 @@ const ToggleButton = () => {
   return (
     <div className="flex flex-col mx-4 mt-8">
       <div className="flex justify-between items-center w-full">
-        <div className="flex items-center">
-          <div className="text-2xl font-bold text-brown-700">
-            Delve into the world of E-Books
-          </div>
+        <div className="text-3xl font-bold text-brown-700">
+          Delve into the world of E-Books
         </div>
         <div className="flex">
           <button

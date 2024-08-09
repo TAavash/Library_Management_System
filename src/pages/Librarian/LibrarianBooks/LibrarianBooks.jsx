@@ -39,8 +39,6 @@ const LibrarianBooks = () => {
         return <Categories {...commonProps} />;
       case "electronic-location":
         return <ElectronicLocation {...commonProps} />;
-      case "requested":
-        return <Requested {...commonProps} />;
       case "e-books":
         return <EBooks {...commonProps} />;
       default:

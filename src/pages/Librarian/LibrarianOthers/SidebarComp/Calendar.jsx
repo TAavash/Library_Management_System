@@ -2,6 +2,7 @@ import React from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import { FiSearch } from "react-icons/fi";
 
 // Ensure that myEventsList is defined or imported correctly
 const myEventsList = [

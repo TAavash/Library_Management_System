@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DefaultProfile from "../assets/User.jpg";
 import { useNavigate } from "react-router-dom";
+import LightDarkToggle from "./LightDarkToggle";
 import { getMemberById } from "../utils/Api"; // Ensure this import is correct
 
 const Avatar = () => {
