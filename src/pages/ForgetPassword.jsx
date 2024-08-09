@@ -13,7 +13,7 @@ const ForgetPassword = () => {
     }
     const handleRegister = () => {
         navigate(`/register`);
-      };
+    };
 
     return (
         <div
@@ -33,7 +33,7 @@ const ForgetPassword = () => {
                         </div>
                     </div>
                     <div className="text-sm md:text-l mb-[10px] mt-[15px]">
-                        Enter your mobile number and we
+                        Enter your Email Address and we
                         will send you otp to get back into your account.
                     </div>
                     <form
@@ -46,17 +46,17 @@ const ForgetPassword = () => {
                                     type="text"
                                     name="Contact"
                                     className="peer min-w-[200px] md:min-w-[300px] rounded-[10px] h-[50px] pl-[50px] md:pl-[70px]"
-                                    placeholder="Phone Number"
+                                    placeholder="Email Address"
 
                                 />
                                 <div className="absolute top-1/2 text-xl md:text-2xl transform -translate-y-1/2 ml-[10px] text-gray-500">
-                                <MdPhoneIphone />
+                                    <MdPhoneIphone />
                                 </div>
                             </div>
 
                             <button
                                 className="w-full mx-auto bg-black text-white py-[6px] mb-3"
-                                onClick={ handleOtp}
+                                onClick={handleOtp}
                             >
                                 Reset Password
                             </button>

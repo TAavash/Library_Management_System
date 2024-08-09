@@ -38,7 +38,9 @@ export const memberRegister = async (
   address,
   email,
   mobile,
-  role_idS
+  role_idS,
+  user_idS
+
 ) => {
   try {
     const response = await axiosInstance.post("/member", {
@@ -52,6 +54,7 @@ export const memberRegister = async (
       email,
       mobile,
       role_idS,
+      user_idS
       // profile_pic,
     });
     return response;

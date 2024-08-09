@@ -10,6 +10,7 @@ import { memberRegister, getUserById, updateStatus } from "../../utils/Api"; // 
 export default function MemberRegistration() {
   const [roleList, setRoleList] = useState([]);
   const { user_idS } = useParams();
+  const [user_id, setuser_idS] = useState();
 
   const [profile, setProfile] = useState({
     username: "",
@@ -91,6 +92,7 @@ export default function MemberRegistration() {
             mobile: userData[0].mobile || "",
             role_id: userData[0].role_id || "",
           });
+          setuser_idS(userData[0].user_idS);
         } else {
           console.error("No user data found");
           toast.error("No user data found. Please try again later.");
@@ -122,13 +124,15 @@ export default function MemberRegistration() {
         profile.address,
         profile.email,
         profile.mobile,
-        profile.role_id
+        profile.role_id,
+        user_id
       );
 
       if (register) {
+        console.log(register)
         toast.success("Register successful!");
         await updateStatus(user_idS);
-        setTimeout(() => navigate("/LibraryRequestPage"), 2000); // Redirect after 2 seconds
+        navigate("/LibraryRequestPage");
       } else {
         toast.error("Register failed. Username or email already exists.");
       }
