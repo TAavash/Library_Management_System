@@ -22,7 +22,6 @@ import Usernav from "../User/comp/Usernav";
 import MobileNavBar from "../../../src/pages/User/comp/MobileNavBar";
 import useWindowWidth from "./comp/useWindowWidth";
 
-
 const Discover = () => {
   const navigate = useNavigate();
   const windowWidth = useWindowWidth();
@@ -162,18 +161,18 @@ const Discover = () => {
               View All
             </button>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {books.map((book, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 cursor-pointer"
+                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-2 md:p-4 transition-transform transform hover:scale-105 cursor-pointer"
                 // onClick={() => navigate(book.link)}
               >
                 <UserFilpCard />
-                <h3 className="text-lg md:text-xl font-semibold text-center mt-2">
+                <h3 className="text-sm sm:text-base md:text-lg font-semibold text-center mt-2">
                   {book.title}
                 </h3>
-                <p className="text-gray-500 text-center mt-1">{book.author}</p>
+                <p className="text-gray-500 text-center mt-1 text-xs sm:text-sm md:text-base">{book.author}</p>
               </div>
             ))}
           </div>

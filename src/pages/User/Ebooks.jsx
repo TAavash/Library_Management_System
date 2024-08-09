@@ -175,10 +175,7 @@ const Ebooks = () => {
                   <div className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
                     <GrFormAdd
                       className="text-gray-500"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigate("/user/my-learning");
-                      }}
+                      
                     />
                   </div>
                 </div>
