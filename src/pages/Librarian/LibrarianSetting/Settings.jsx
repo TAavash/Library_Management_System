@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IoSettingsSharp } from "react-icons/io5";
-import NavNew from "../components/NavNew";
+import NavNew from "../../../components/NavNew";
 
 const Settings = () => {
   const navigate = useNavigate();

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { IoIosHelpCircle } from "react-icons/io";
 import { IoMail } from "react-icons/io5";
-import NavNew from "../components/NavNew";
-import { sendcontact } from "../utils/Api";
+import NavNew from "../../../components/NavNew";
+import { sendcontact } from "../../../utils/Api";
 import { ToastContainer, toast } from "react-toastify";
 
 const Help = () => {

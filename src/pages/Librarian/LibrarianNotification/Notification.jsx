@@ -1,6 +1,6 @@
 import React from "react";
 import { FaBell } from "react-icons/fa";
-import NavNew from "../components/NavNew";
+import NavNew from "../../../components/NavNew";
 
 const Notification = () => {
   return (
