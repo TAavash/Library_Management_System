@@ -21,6 +21,9 @@ import UserFilpCard from "../../pages/User/comp/UserFlipCard";
 import Usernav from "../User/comp/Usernav";
 import MobileNavBar from "../../../src/pages/User/comp/MobileNavBar";
 import useWindowWidth from "./comp/useWindowWidth";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Discover = () => {
   const navigate = useNavigate();
@@ -53,6 +56,40 @@ const Discover = () => {
       link: bookcover1,
     },
   ];
+
+  // Slider settings
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4, // Adjust this based on the number of cards you want to show at once
+    slidesToScroll: 4, // Adjust this based on how many cards should scroll at once
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
   return (
     <div>
@@ -161,24 +198,24 @@ const Discover = () => {
               View All
             </button>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <Slider {...settings}>
             {books.map((book, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-2 md:p-4 transition-transform transform hover:scale-105 cursor-pointer"
-                // onClick={() => navigate(book.link)}
-              >
-                <UserFilpCard />
-                <h3 className="text-sm sm:text-base md:text-lg font-semibold text-center mt-2">
-                  {book.title}
-                </h3>
-                <p className="text-gray-500 text-center mt-1 text-xs sm:text-sm md:text-base">{book.author}</p>
+              <div key={index} className="px-2"> {/* Add padding between cards */}
+                <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 w-30 transition-transform transform cursor-pointer">
+                  <UserFilpCard />
+                  <h3 className="text-sm sm:text-lg font-semibold text-center mt-2 truncate max-w-[150px]">
+                    {book.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-gray-500 text-center">
+                    {book.author}
+                  </p>
+                </div>
               </div>
             ))}
-          </div>
+          </Slider>
         </div>
       </main>
-      {windowWidth < 768 && <MobileNavBar />}{" "}
+      {windowWidth < 768 && <MobileNavBar />}
     </div>
   );
 };

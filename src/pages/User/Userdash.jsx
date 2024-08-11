@@ -13,11 +13,66 @@ import SearchBar from "../../pages/User/comp/SearchBar";
 import Usernav from "../User/comp/Usernav";
 import MobileNavBar from "../../../src/pages/User/comp/MobileNavBar";
 import useWindowWidth from "./comp/useWindowWidth";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import calcss from "./comp/Cal.css"
 
 function Userdash() {
   const navigate = useNavigate();
   const windowWidth = useWindowWidth();
+
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 5, // Number of items to show at once
+    slidesToScroll: 5, // Number of items to scroll at once
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      }
+    ]
+  };
+  
+  
+
+  const upcomingBooks = [
+    {
+      cover: bookcover,
+      title: "Kafka on the Shore",
+      rdate: "5/22/2024",
+      edate: "6/22/2024",
+      daysLeft: 5,
+    },
+    {
+      cover: bookcover,
+      title: "Kafka on the Shore",
+      rdate: "5/22/2024",
+      edate: "6/22/2024",
+      daysLeft: 3,
+    },
+  ];
 
   const books = [
     {
@@ -43,23 +98,6 @@ function Userdash() {
       title: "The Great Gatsby",
       author: "F. Scott Fitzgerald",
       link: bookcover1,
-    },
-  ];
-
-  const upcomingBooks = [
-    {
-      cover: bookcover,
-      title: "Kafka on the Shore",
-      rdate: "5/22/2024",
-      edate: "6/22/2024",
-      daysLeft: 5,
-    },
-    {
-      cover: bookcover,
-      title: "Kafka on the Shore",
-      rdate: "5/22/2024",
-      edate: "6/22/2024",
-      daysLeft: 3,
     },
   ];
 
@@ -155,44 +193,45 @@ function Userdash() {
         {/* Upcoming Deadline Section End */}
 
         <div id="my-books" className="m-5">
-          <div className="flex flex-col gap-4 mb-4">
-            <h2 className="text-3xl font-bold text-brown-700">My Books</h2>
-            <SearchBar />
-          </div>
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-xl font-bold">Currently Reading</h2>
-            </div>
-            <button
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg"
-              onClick={() => navigate("/user/view-all")}
-            >
-              View All
-            </button>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {books.map((book, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 min-w-[150px] transition-transform transform hover:scale-105 cursor-pointer"
-                onClick={() => navigate("/my-learning")}
-              >
-                <div className="relative">
-                  <img
-                    src={book.cover}
-                    alt={book.title}
-                    className="w-32 h-40 object-cover mb-4 rounded-lg"
-                  />
-                  <div className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md"></div>
-                </div>
-                <h3 className="text-xl font-semibold text-center">
-                  {book.title}
-                </h3>
-                <p className="text-gray-500 text-center">{book.author}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+  <div className="flex flex-col gap-4 mb-4">
+    <h2 className="text-3xl font-bold text-brown-700">My Books</h2>
+    <SearchBar />
+  </div>
+  <div className="flex items-center justify-between mb-8">
+    <div>
+      <h2 className="text-xl font-bold">Currently Reading</h2>
+    </div>
+    <button
+      className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+      onClick={() => navigate("/user/view-all")}
+    >
+      View All
+    </button>
+  </div>
+  <Slider {...settings}>
+  {books.map((book, index) => (
+    <div key={index} className="px-2"> {/* Add padding between cards */}
+      <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 w-30 transition-transform transform cursor-pointer"> {/* Set a specific width here */}
+        <img
+          src={book.cover}
+          alt={book.title}
+          className="w-24 sm:w-32 h-32 sm:h-40 object-cover mb-4 rounded-lg"
+        />
+        <h3 className="text-sm sm:text-lg font-semibold text-center mt-2 truncate max-w-[150px]">
+  {book.title}
+</h3>
+
+        <p className="text-xs sm:text-sm text-gray-500 text-center">
+          {book.author}
+        </p>
+      </div>
+    </div>
+  ))}
+</Slider>
+
+
+</div>
+
       </main>
       {windowWidth < 768 && <MobileNavBar />}{" "}
       {/* Conditionally render MobileNavBar */}
