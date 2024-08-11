@@ -4,14 +4,18 @@ import { AiOutlineMail, AiOutlinePhone, AiOutlineLock } from "react-icons/ai";
 import defaultProfile from "../../assets/User.jpg";
 import NavNew from "../../components/NavNew";
 import { ToastContainer, toast } from "react-toastify";
-import { getMemberById, uploadProfilePic } from "../../utils/Api";
+import {
+  getMemberById,
+  uploadProfilePic,
+  updateUserById,
+} from "../../utils/Api";
 import { CgProfile } from "react-icons/cg";
 
 const LibrarianProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [profileInfo, setProfileInfo] = useState({
     username: "",
-    password: "",
+    // password: "",
     first_name: "",
     last_name: "",
     dob: "",
@@ -33,7 +37,7 @@ const LibrarianProfile = () => {
         if (memberData) {
           setProfileInfo({
             username: data.username || "",
-            password: data.password || "",
+            // password: "", // Don't prefill password field for security reasons
             first_name: data.first_name || "",
             last_name: data.last_name || "",
             dob: data.dob || "",
@@ -50,7 +54,9 @@ const LibrarianProfile = () => {
         }
       } catch (error) {
         console.error("An error occurred while fetching user data:", error);
-        toast.error("An error occurred while fetching user data. Please try again later.");
+        toast.error(
+          "An error occurred while fetching user data. Please try again later."
+        );
       }
     };
     if (user_id) {
@@ -72,8 +78,15 @@ const LibrarianProfile = () => {
 
   const handleSaveClick = async () => {
     try {
-      console.log("Saving data...", profileInfo);
-      // Add your save logic here
+      const updatedInfo = { ...profileInfo };
+
+      // Remove the password field if it's not being updated
+      if (!updatedInfo.password) {
+        delete updatedInfo.password;
+      }
+
+      // Save profile data
+      await updateUserById(user_id, updatedInfo);
 
       // Save the profile picture if a new one is uploaded
       if (newProfilePhoto) {
@@ -87,7 +100,9 @@ const LibrarianProfile = () => {
       toast.success("Profile updated successfully!");
     } catch (error) {
       console.error("An error occurred while saving profile data:", error);
-      toast.error("An error occurred while saving profile data. Please try again.");
+      toast.error(
+        "An error occurred while saving profile data. Please try again."
+      );
     }
   };
 
@@ -157,7 +172,10 @@ const LibrarianProfile = () => {
         <div className="flex flex-col space-y-4">
           <div className="flex space-x-4">
             <div className="w-1/2">
-              <label className="text-gray-600 font-semibold" htmlFor="first_name">
+              <label
+                className="text-gray-600 font-semibold"
+                htmlFor="first_name"
+              >
                 First Name
               </label>
               <input
@@ -171,7 +189,10 @@ const LibrarianProfile = () => {
               />
             </div>
             <div className="w-1/2">
-              <label className="text-gray-600 font-semibold" htmlFor="last_name">
+              <label
+                className="text-gray-600 font-semibold"
+                htmlFor="last_name"
+              >
                 Last Name
               </label>
               <input
@@ -192,7 +213,7 @@ const LibrarianProfile = () => {
               </label>
               <input
                 id="dob"
-                type="text"
+                type="date"
                 name="dob"
                 value={profileInfo.dob}
                 onChange={handleInputChange}
@@ -285,7 +306,7 @@ const LibrarianProfile = () => {
               />
             </div>
           </div>
-          <div className="flex space-x-4">
+          {/* <div className="flex space-x-4">
             <div className="w-1/2">
               <label className="text-gray-600 font-semibold" htmlFor="password">
                 Current Password
@@ -303,7 +324,7 @@ const LibrarianProfile = () => {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="mt-6 flex justify-end space-x-4">
           {isEditing && (
