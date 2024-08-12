@@ -16,6 +16,7 @@ import LibrarianOthers from "../pages/Librarian/LibrarianOthers/LibrarianOthers"
 import Patrons from "../pages/Librarian/PatronDashboard";
 import LibrarianDashboard from "../pages/Librarian/LibrarianDashboard/LibrarianDash";
 import MemberDetail from "../pages/Librarian/MemberDetail";
+import LibraryBookDetail from "../pages/Librarian/LibraryBookDetail"
 import BookRegistration from "../pages/Librarian/BookRegistration";
 import MemberRegistration from "../pages/Librarian/MemberRegistration";
 import LibraryRequestPage from "../pages/Librarian/Patrons/Request/LibraryRequestPage";
@@ -77,6 +78,7 @@ export default function RoutesNav() {
         <Route path="/patrons" element={<Patrons />} />
         <Route path="/LibraryDash" element={<LibrarianDashboard />} />
         <Route path="/MemberDetail" element={<MemberDetail />} />
+        <Route path="/LibraryBookDetail" element={<LibraryBookDetail />} />
         <Route path="/BookRegistration" element={<BookRegistration />} />
 
         <Route path="/MemberRegistration" element={<MemberRegistration />} />

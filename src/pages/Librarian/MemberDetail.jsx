@@ -292,7 +292,7 @@ const MemberDetail = () => {
         <div className="flex flex-col w-3/4 p-4">
           <div className="flex flex-col w-full p-4 bg-white text-black rounded-lg shadow-lg">
             <h3 className="text-lg font-semibold mb-2">Book Information</h3>
-            <div className="overflow-scroll md:overflow-auto border rounded-sm">
+            <div className="h-72 overflow-scroll md:overflow-auto border rounded-sm">
               {/* Book Borrowed Table */}
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
@@ -345,7 +345,7 @@ const MemberDetail = () => {
           </div>
           <div className="flex flex-col w-full p-4 bg-white text-black rounded-lg shadow-lg mt-5">
             <h3 className="text-lg font-semibold mb-2">Dues Information</h3>
-            <div className="overflow-scroll md:overflow-auto border rounded-sm">
+            <div className="h-72 overflow-scroll md:overflow-auto border rounded-sm">
               {/* Fine Table */}
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
