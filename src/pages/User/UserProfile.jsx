@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./comp/Profile.css";
 import abhi from "../../assets/abhi.JPG";
-import { AiOutlineMail, AiOutlinePhone } from "react-icons/ai";
+import { AiOutlineMail, AiOutlinePhone, AiOutlineArrowLeft } from "react-icons/ai";
 import { MdModeEditOutline } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CgProfile } from "react-icons/cg";
 import { getMemberById } from "../../utils/Api";
-
+import background from "../../assets/profilebg.png";
 
 const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -102,13 +102,25 @@ const UserProfile = () => {
 
   return (
     <div className="container mx-auto px-4">
-      <div className="w-full bg-white shadow-lg rounded-lg mt-10 overflow-hidden flex flex-col p-8">
-        <div className="header profile-banner mb-6">
-          {/* Profile Banner Section */}
-        </div>
+      {/* Back Button */}
+      <div className="flex items-center mt-4">
+        <button
+          onClick={() => window.history.back()}
+          className="flex items-center text-gray-600 hover:text-gray-800"
+        >
+          <AiOutlineArrowLeft className="text-xl mr-1" />
+        </button>
+      </div>
 
-        <div className="flex flex-col lg:flex-row items-center mb-6">
-          <div className="w-32 h-32 lg:w-40 lg:h-40 rounded-full overflow-hidden border-4 border-white relative">
+      <div className="w-full bg-white shadow-lg rounded-lg mt-4 overflow-hidden flex flex-col p-8 relative">
+        {/* Profile Banner Section */}
+        <div className="header profile-banner mb-6 relative">
+          <img
+            src={background}
+            alt="Background"
+            className="w-full h-56 object-cover"
+          />
+          <div className="absolute left-4 top-36 w-32 h-32 lg:w-40 lg:h-40 rounded-full overflow-hidden border-4 border-white">
             {profilePhoto ? (
               <img
                 className="w-full h-full object-cover"
@@ -121,11 +133,17 @@ const UserProfile = () => {
               </div>
             )}
           </div>
-          <div className="mt-4 lg:mt-0 lg:ml-6 flex flex-col items-center lg:items-start">
+          {/* Student Label Overlay */}
+          <div className="absolute left-4 bottom-0 transform translate-y-1/2 lg:left-44 lg:bottom-8 lg:translate-y-0 bg-gray-900 text-white px-3 py-1 rounded-full text-sm lg:text-base">
+            Student
+          </div>
+        </div>
+
+        <div className="flex flex-col lg:flex-row items-center mb-6 mt-16 lg:mt-0">
+          <div className="mt-4 lg:mt-0 lg:ml-40 flex flex-col items-center lg:items-start">
             <h3 className="text-xl lg:text-2xl font-semibold text-gray-800">
-              {`${profileInfo.firstName} ${profileInfo.lastName}`}
+              {profileInfo.first_name} {profileInfo.last_name}
             </h3>
-            <p className="text-gray-600">Student</p>
           </div>
           <div className="mt-4 lg:mt-0 lg:ml-auto flex flex-col items-center space-y-2 lg:space-y-0 lg:space-x-2 lg:flex-row">
             {isEditing && (
@@ -270,30 +288,30 @@ const UserProfile = () => {
             />
           </div>
         </div>
-
-        <div className="mt-6 flex flex-col lg:flex-row justify-end space-y-4 lg:space-y-0 lg:space-x-4">
-          {isEditing && (
+        {/* Button Section */}
+        <div className="mt-8 flex justify-end">
+          {isEditing ? (
             <>
               <button
-                className="px-4 py-2 border border-gray-500 text-gray-500 rounded-lg hover:bg-gray-200 font-semibold"
+                className="w-full lg:w-auto px-4 py-2 border border-gray-500 text-gray-500 rounded-lg hover:bg-gray-200 focus:outline-none text-sm font-semibold mr-2"
                 onClick={handleEditClick}
               >
                 Cancel
               </button>
               <button
-                className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 font-semibold"
+                className="w-full lg:w-auto px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm font-semibold"
                 onClick={handleSaveClick}
               >
-                Save Changes
+                Save
               </button>
             </>
-          )}
-          {!isEditing && (
+          ) : (
             <button
-              className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm font-semibold"
+              className="w-full lg:w-auto px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm font-semibold"
               onClick={handleEditClick}
             >
               Edit Profile
+              <MdModeEditOutline className="inline-block ml-2" />
             </button>
           )}
         </div>
