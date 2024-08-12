@@ -21,10 +21,30 @@ const MemberDetail = () => {
     role_name: "",
   });
 
+  const [takenBooks, settakenBooks] = useState([
+    {
+      bookName: "Griffin",
+      checkoutDate: "2024/08/22",
+      dueDate: "2024/08/30 ",
+      checkIn: "",
+    },
+  ]);
+
+  const [dues, setDues] = useState([
+    {
+      description: "",
+      amount: "",
+      paid_amount: "",
+      payment_date: ""
+    },
+  ]);
+
   const location = useLocation();
   const member_id = location.state?.member_id;
 
   useEffect(() => {
+    // settakenBooks([]);
+    setDues([]);
     const fetchMemberData = async () => {
       try {
         const memberData = await getMemberById(member_id);
@@ -88,7 +108,7 @@ const MemberDetail = () => {
       <ToastContainer />
       <div className="w-full h-16 bg-secondary flex items-center justify-center text-3xl text-black font-semibold p-4 relative">
         Member Details
-        <BackComp/>
+        <BackComp />
       </div>
       <div className="flex w-full p-4">
         <div className="bg-white text-black p-4 rounded-lg shadow-lg w-1/4">
@@ -271,9 +291,112 @@ const MemberDetail = () => {
         </div>
         <div className="flex flex-col w-3/4 p-4">
           <div className="flex flex-col w-full p-4 bg-white text-black rounded-lg shadow-lg">
-            <h3 className="text-lg font-semibold">Book Information</h3>
-            {/* Add your book information display logic here */}
+            <h3 className="text-lg font-semibold mb-2">Book Information</h3>
+            <div className="overflow-scroll md:overflow-auto border rounded-sm">
+              {/* Book Borrowed Table */}
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Book Name
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Check Out Date
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Due Date
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Check In Date
+                    </th>
+                  </tr>
+                </thead>
+                {takenBooks.length === 0 ? (
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    <tr>
+                      <td colSpan={4} className="text-center md:py-32">
+                        User have not borrowed any books
+                      </td>
+                    </tr>
+                  </tbody>
+                ) : (
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {takenBooks.map((book, index) => (
+                      <tr key={index} className="hover:bg-gray-100">
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
+                          {book.bookName}
+                        </td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                          {book.checkoutDate}
+                        </td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                          {book.dueDate}
+                        </td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                          {book.checkIn}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                )}
+              </table>
+
+            </div>
           </div>
+          <div className="flex flex-col w-full p-4 bg-white text-black rounded-lg shadow-lg mt-5">
+            <h3 className="text-lg font-semibold mb-2">Dues Information</h3>
+            <div className="overflow-scroll md:overflow-auto border rounded-sm">
+              {/* Fine Table */}
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Description
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Amount
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Paid Amount
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Paid Date
+                    </th>
+                  </tr>
+                </thead>
+                {dues.length === 0 ? (
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    <tr>
+                      <td colSpan={4} className="text-center md:py-32">
+                        User have no dues
+                      </td>
+                    </tr>
+                  </tbody>
+                ) : (
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {dues.map((due, index) => (
+                      <tr key={index} className="hover:bg-gray-100">
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
+                          {due.description}
+                        </td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                          {due.amount}
+                        </td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                          {due.paid_amount}
+                        </td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                          {due.payment_date}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                )}
+              </table>
+            </div>
+          </div>
+
+
         </div>
       </div>
     </div>

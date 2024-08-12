@@ -1,5 +1,5 @@
 import React from "react";
-import { MdPhoneIphone } from "react-icons/md";
+import { MdEmail } from "react-icons/md";
 import RegImg from "../assets/library.jpg";
 import { FaLock } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
@@ -50,7 +50,7 @@ const ForgetPassword = () => {
 
                                 />
                                 <div className="absolute top-1/2 text-xl md:text-2xl transform -translate-y-1/2 ml-[10px] text-gray-500">
-                                    <MdPhoneIphone />
+                                    <MdEmail />
                                 </div>
                             </div>
 
