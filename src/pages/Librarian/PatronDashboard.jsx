@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { FaUser } from "react-icons/fa6";
 import NavNew from "../../components/NavNew";
 import { useNavigate } from "react-router-dom";
-import  AllUsers  from "./Patrons/PatronUsers/AllUsers";
+import AllUsers from "./Patrons/PatronUsers/AllUsers";
 import { FacultyMembers } from "./Patrons/PatronUsers/FacultyMembers";
 import { LibraryAssistant } from "./Patrons/PatronUsers/LibraryAssistant";
-import {ProgramCoordinators} from "./Patrons/PatronUsers/ProgramCoordinators";
+import { ProgramCoordinators } from "./Patrons/PatronUsers/ProgramCoordinators";
 import { Students } from "./Patrons/PatronUsers/Students";
 
 export default function LibrarianDashboard() {

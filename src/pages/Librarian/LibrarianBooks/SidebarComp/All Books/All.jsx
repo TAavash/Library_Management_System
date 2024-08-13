@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import { getAllBooks } from "../../../../../utils/Api"; // Adjust the import path as needed
 import { FiSearch } from "react-icons/fi";
 import BookCover from '../../../../../assets/th (1).jpeg'; // Use a default or placeholder image if needed
+import { useNavigate } from "react-router-dom";
 
 const All = ({ viewMode }) => {
+  const navigate = useNavigate();
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+
+  const handleBookClick = () => {
+    navigate(`/LibraryBookDetail`);
+  }
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -67,6 +73,7 @@ const All = ({ viewMode }) => {
                 <div
                   key={book.id}
                   className="group relative bg-white rounded-lg shadow-md w-full md:w-56 overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl"
+                  onClick={handleBookClick}
                 >
                   <img src={book.cover || BookCover} alt={book.title} className="w-full h-72 object-cover" />
                   <div className="p-4">
@@ -86,6 +93,7 @@ const All = ({ viewMode }) => {
                 <div
                   key={book.id}
                   className="flex items-center p-4 border-b border-gray-200 cursor-pointer"
+                  onClick={handleBookClick}
                 >
 
                   <div className='w-full flex justify-between'>

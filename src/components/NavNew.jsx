@@ -39,7 +39,7 @@ const NavNew = () => {
 
   const [mobileNaavbarOpen, setMobileNaavbarOpen] = useState(false);
   return (
-    <div className="w-screen fixed z-10 bg-white ">
+    <div className="w-screen fixed top-0 z-10 bg-white shadow-lg">
       <div className="flex justify-between items-center lg:mr-10 ">
         <img
           onClick={handleLibraryDash}
