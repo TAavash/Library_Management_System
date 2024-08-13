@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import DefaultProfile from "../../assets/pcps_logo.jpg";
 import BackComp from "../../components/BackComp";
 
 const LibraryBookDetail = () => {
-    const [isEditing, setIsEditing] = useState(false);
+
+    const navigate = useNavigate();
     const [bookInfo, setBookInfo] = useState({
 
         cover_pic: "",
@@ -45,18 +46,11 @@ const LibraryBookDetail = () => {
         });
     };
 
-    const handleSaveClick = async () => {
-        const saveData = async () => {
-            console.log("Saving data...", bookInfo);
-            // Add save logic here
-        };
 
-        await saveData();
-        setIsEditing(false);
-    };
 
     const handleEditClick = () => {
-        setIsEditing(true);
+        navigate(`/BookRegistration`);
+
     };
 
     return (
@@ -99,17 +93,12 @@ const LibraryBookDetail = () => {
 
                         <div className="flex w-full gap-4">
                             <button
-                                className="border rounded-xl mt-3 bg-black text-white text-center h-10 w-1/2"
+                                className="border rounded-xl mt-3 bg-black text-white text-center h-10 w-full"
                                 onClick={handleEditClick}
                             >
                                 Edit
                             </button>
-                            <button
-                                className="border rounded-xl mt-3 bg-black text-white text-center h-10 w-1/2"
-                                onClick={handleSaveClick}
-                            >
-                                Save
-                            </button>
+
                         </div>
                     </div>
                 </div>
