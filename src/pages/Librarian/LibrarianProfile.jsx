@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MdModeEditOutline } from "react-icons/md";
-import { AiOutlineMail, AiOutlinePhone, AiOutlineLock } from "react-icons/ai";
+import { AiOutlineMail, AiOutlinePhone } from "react-icons/ai";
 import defaultProfile from "../../assets/User.jpg";
 import NavNew from "../../components/NavNew";
 import { ToastContainer, toast } from "react-toastify";
