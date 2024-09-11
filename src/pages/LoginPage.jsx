@@ -33,6 +33,7 @@ const LoginPage = () => {
     setIsLoading(true);
     try {
       const response = await login(username, password);
+      console.log(response);
       if (response) {
         if (response.data.role_name === "Student") {
           toast.success("Login successful!");

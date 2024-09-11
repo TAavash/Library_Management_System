@@ -65,8 +65,11 @@ const Register = () => {
         toast.error("Register failed. Please check your credentials.");
       }
     } catch (error) {
-      console.error("An error occurred:", error); // Log the error for debugging
-      toast.error("An error occurred. Please try again later.");
+      Object.values(error.response.data.errors).forEach((messages) => {
+        messages.forEach((message) => {
+          toast.error(message);
+        });
+      });
     }
   };
 
@@ -116,7 +119,6 @@ const Register = () => {
                   onChange={(e) => setLastName(e.target.value)}
                   value={lastName}
                 />
-                
               </div>
 
               <div className="flex flex-col mt-3 gap-2 col-span-1 md:col-span-2">
@@ -263,7 +265,7 @@ const Register = () => {
           </form>
         </div>
       </div>
-      <ToastContainer /> 
+      <ToastContainer />
     </div>
   );
 };
