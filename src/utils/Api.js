@@ -233,6 +233,16 @@ export const getAllBooks = async () => {
   }
 };
 
+export const getBooksById = async (uuid) => {
+  try {
+    const response = await axiosInstance.get(`/book/details/${uuid}`);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching book data:", error);
+    throw error;
+  }
+};
 
 export const getAllMember = async () => {
   try {

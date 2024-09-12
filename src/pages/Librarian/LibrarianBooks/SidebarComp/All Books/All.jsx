@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAllBooks } from "../../../../../utils/Api"; // Adjust the import path as needed
 import { FiSearch } from "react-icons/fi";
 import BookCover from "../../../../../assets/PCPS Book Cover.png"; // Use a default or placeholder image if needed
@@ -11,6 +12,7 @@ const All = ({ viewMode }) => {
     const fetchBooks = async () => {
       try {
         const response = await getAllBooks();
+        console.log("Fetched response:", response);
         const data = response.data;
         if (Array.isArray(data)) {
           setBooks(data);
@@ -18,12 +20,18 @@ const All = ({ viewMode }) => {
           console.error("Unexpected data format:", data);
         }
       } catch (error) {
-        console.error("Error fetching books:", error);
+        console.error("Error fetching books:", error.message);
       }
     };
 
     fetchBooks();
   }, []);
+
+  const navigate = useNavigate();
+
+  const handleRowClick = (book) => {
+    navigate(`/book/details/${book.books_idS}`); // Corrected to use uuid
+  };
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -74,7 +82,10 @@ const All = ({ viewMode }) => {
                   <div className="p-4">
                     <h3 className="text-lg font-bold">{book.title}</h3>
                     <p className="text-sm text-gray-600">{book.author}</p>
-                    <button className="mt-2 rounded-md bg-rose-600 py-1 px-2 text-sm hover:bg-neutral-900 text-white">
+                    <button
+                      className="mt-2 rounded-md bg-rose-600 py-1 px-2 text-sm hover:bg-neutral-900 text-white"
+                      onClick={() => handleRowClick(book)}
+                    >
                       Read More
                     </button>
                   </div>
@@ -90,6 +101,7 @@ const All = ({ viewMode }) => {
               filteredBooks.map((book) => (
                 <div
                   key={book.id}
+                  onClick={() => handleRowClick(book)}
                   className="flex items-center p-4 border-b border-gray-200 cursor-pointer"
                 >
                   <div className="w-full flex justify-between">

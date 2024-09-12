@@ -16,7 +16,7 @@ import LibrarianOthers from "../pages/Librarian/LibrarianOthers/LibrarianOthers"
 import Patrons from "../pages/Librarian/PatronDashboard";
 import LibrarianDashboard from "../pages/Librarian/LibrarianDashboard/LibrarianDash";
 import MemberDetail from "../pages/Librarian/MemberDetail";
-import LibraryBookDetail from "../pages/Librarian/LibraryBookDetail"
+import LibraryBookDetail from "../pages/Librarian/LibraryBookDetail";
 import BookRegistration from "../pages/Librarian/BookRegistration";
 import MemberRegistration from "../pages/Librarian/MemberRegistration";
 import LibraryRequestPage from "../pages/Librarian/Patrons/Request/LibraryRequestPage";
@@ -32,17 +32,17 @@ import Membership from "../pages/Librarian/Membership";
 // import Added from "../pages/User/Added";
 // import Wishlist from "../pages/User/Wishlist";
 // import Hero from "../pages/User/Hero";
-import Reservations from '../pages/User/Reservations';
-import Ebooks from '../pages/User/Ebooks';
-import Discover from '../pages/User/Discover';
-import Userdash from '../pages/User/Userdash';
+import Reservations from "../pages/User/Reservations";
+import Ebooks from "../pages/User/Ebooks";
+import Discover from "../pages/User/Discover";
+import Userdash from "../pages/User/Userdash";
 import BookDetail from "../pages/User/BookDetail";
-import MyLearning from '../pages/User/MyLearning';
-import UserProfile from '../pages/User/UserProfile';
+import MyLearning from "../pages/User/MyLearning";
+import UserProfile from "../pages/User/UserProfile";
 
-import UserNotification from '../../src/pages/User/comp/UserNotification'
+import UserNotification from "../../src/pages/User/comp/UserNotification";
 import UpcomingDeadline from "../../src/pages/User/comp/UpcomingDeadline";
-import LibrarianProfile from '../pages/Librarian/LibrarianProfile';
+import LibrarianProfile from "../pages/Librarian/LibrarianProfile";
 // import UserRoute from "./UserRoute";
 import ForgetPassword from "../pages/ForgetPassword";
 import Otp from "../pages/Otp";
@@ -78,11 +78,15 @@ export default function RoutesNav() {
         <Route path="/patrons" element={<Patrons />} />
         <Route path="/LibraryDash" element={<LibrarianDashboard />} />
         <Route path="/MemberDetail" element={<MemberDetail />} />
-        <Route path="/LibraryBookDetail" element={<LibraryBookDetail />} />
+        <Route path="/book/details" element={<LibraryBookDetail />} />
+        <Route path="/book/details/:uuid" element={<LibraryBookDetail />} />
         <Route path="/BookRegistration" element={<BookRegistration />} />
 
         <Route path="/MemberRegistration" element={<MemberRegistration />} />
-        <Route path="/MemberRegistration/:user_idS" element={<MemberRegistration />} />
+        <Route
+          path="/MemberRegistration/:user_idS"
+          element={<MemberRegistration />}
+        />
 
         <Route path="/LibraryRequestPage" element={<LibraryRequestPage />} />
         <Route path="/AllUsers" element={<AllUsers />} />
