@@ -6,8 +6,8 @@ import BackComp from "../../components/BackComp";
 import { getBooksById } from "../../utils/Api"; // Import your API function
 
 const LibraryBookDetail = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  //   const navigate = useNavigate();
+  //   const location = useLocation();
   const { uuid } = useParams(); // Extract uuid from location.state
 
   const [bookInfo, setBookInfo] = useState({
@@ -45,12 +45,15 @@ const LibraryBookDetail = () => {
 
   const [bookHistory, setBookHistory] = useState([]);
 
+  const [isEditing, setIsEditing] = useState(false); // State for edit mode
+
   useEffect(() => {
     const fetchBookDetails = async () => {
       if (uuid) {
         try {
           const data = await getBooksById(uuid); // Fetch book details using the uuid
-          setBookInfo(data); // Assuming the API returns the book details directly
+          setBookInfo(data.data[0]);
+          // Assuming the API returns the book details directly
           // setBookHistory(data.bookHistory || []); // If there's a separate book history
         } catch (error) {
           console.error("Error fetching book details:", error);
@@ -71,7 +74,7 @@ const LibraryBookDetail = () => {
   };
 
   const handleEditClick = () => {
-    navigate(`/BookRegistration`);
+    setIsEditing(!isEditing); // Toggle the edit mode
   };
 
   return (
@@ -83,42 +86,128 @@ const LibraryBookDetail = () => {
       </div>
       <div className="flex w-full p-4">
         <div className="bg-white text-black p-4 rounded-lg shadow-lg w-1/4">
-          <div className="mt-4">
-            <h3 className="text-lg font-semibold mb-3">Book Information</h3>
-            <div className="flex flex-col items-center">
-              <div className="relative">
-                <img
-                  src={bookInfo.cover_pic || DefaultProfile}
-                  alt="Profile"
-                  className="w-40 h-56 object-cover rounded-xl shadow-md"
-                />
+          <div className="flex flex-col items-center">
+            <div className="relative">
+              <img
+                src={bookInfo?.cover_pic || DefaultProfile}
+                alt="Cover"
+                className="w-40 h-56 object-cover rounded-xl shadow-md"
+              />
+            </div>
+            <div className="flex items-center w-auto bg-green-500 rounded-md p-1 mt-2">
+              {bookInfo?.status}
+            </div>
+            <div className="mt-5">
+              <div className="mb-4">
+                <span className="text-gray-600 font-medium">ISBN:</span>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="isbn_number"
+                    value={bookInfo?.isbn_number}
+                    onChange={handleInputChange}
+                    className="border rounded px-2"
+                  />
+                ) : (
+                  <span className="text-gray-800">{bookInfo?.isbn_number}</span>
+                )}
               </div>
-              <div className="flex items-center w-auto bg-green-500 rounded-md p-1 mt-2">
-                {bookInfo.status}
+              <div className="mb-4">
+                <span className="text-gray-600 font-medium">Title:</span>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="title"
+                    value={bookInfo?.title}
+                    onChange={handleInputChange}
+                    className="border rounded px-2"
+                  />
+                ) : (
+                  <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                    {bookInfo?.title}
+                  </h1>
+                )}
               </div>
-              <div className="mt-5">
-                <div className="mb-4">
-                  <span className="text-gray-600 font-medium">ISBN:</span>{" "}
-                  <span className="text-gray-800">{bookInfo.isbn_number}</span>
-                </div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                  {bookInfo.title}
-                </h1>
-                <p className="text-lg text-gray-700 mb-4">
-                  by: <span className="text-blue-500">{bookInfo.name}</span>
-                </p>
-                <p className="text-gray-700 mb-4 text-justify">
-                  {bookInfo.description}
-                </p>
+              <div className="mb-4">
+                <span className="text-gray-600 font-medium">Author:</span>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="name"
+                    value={bookInfo?.name}
+                    onChange={handleInputChange}
+                    className="border rounded px-2"
+                  />
+                ) : (
+                  <p className="text-lg text-gray-700 mb-4">
+                    by: <span className="text-blue-500">{bookInfo?.name}</span>
+                  </p>
+                )}
+              </div>
+              <div className="mb-4">
+                <span className="text-gray-600 font-medium">Edition:</span>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="edition_statement"
+                    value={bookInfo?.edition_statement}
+                    onChange={handleInputChange}
+                    className="border rounded px-2"
+                  />
+                ) : (
+                  <p className="text-gray-700">{bookInfo?.edition_statement}</p>
+                )}
+              </div>
+              <div className="mb-4">
+                <span className="text-gray-600 font-medium">Language:</span>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="language"
+                    value={bookInfo?.language}
+                    onChange={handleInputChange}
+                    className="border rounded px-2"
+                  />
+                ) : (
+                  <p className="text-gray-700">{bookInfo?.language}</p>
+                )}
+              </div>
+              <div className="mb-4">
+                <span className="text-gray-600 font-medium">Publication:</span>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="publication_name"
+                    value={bookInfo?.publication_name}
+                    onChange={handleInputChange}
+                    className="border rounded px-2"
+                  />
+                ) : (
+                  <p className="text-gray-700">{bookInfo?.publication_name}</p>
+                )}
+              </div>
+              <div className="mb-4">
+                <span className="text-gray-600 font-medium">Description:</span>
+                {isEditing ? (
+                  <textarea
+                    name="description"
+                    value={bookInfo?.description}
+                    onChange={handleInputChange}
+                    className="border rounded px-2"
+                  />
+                ) : (
+                  <p className="text-gray-700 mb-4 text-justify">
+                    {bookInfo?.description}
+                  </p>
+                )}
               </div>
             </div>
-
             <div className="flex w-full gap-4">
               <button
                 className="border rounded-xl mt-3 bg-black text-white text-center h-10 w-full"
                 onClick={handleEditClick}
               >
-                Edit
+                {isEditing ? "Save" : "Edit"}
               </button>
             </div>
           </div>

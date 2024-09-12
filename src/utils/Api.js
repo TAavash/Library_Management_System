@@ -40,7 +40,6 @@ export const memberRegister = async (
   mobile,
   role_idS,
   user_idS
-
 ) => {
   try {
     const response = await axiosInstance.post("/member", {
@@ -54,7 +53,7 @@ export const memberRegister = async (
       email,
       mobile,
       role_idS,
-      user_idS
+      user_idS,
       // profile_pic,
     });
     return response;
@@ -225,7 +224,6 @@ export const userList = async () => {
 export const getAllBooks = async () => {
   try {
     const response = await axiosInstance.get("/book/lists");
-    console.log(response);
     return response.data;
   } catch (error) {
     console.error("Error fetching book data:", error);
@@ -236,7 +234,6 @@ export const getAllBooks = async () => {
 export const getBooksById = async (uuid) => {
   try {
     const response = await axiosInstance.get(`/book/details/${uuid}`);
-    console.log(response);
     return response.data;
   } catch (error) {
     console.error("Error fetching book data:", error);
@@ -323,7 +320,6 @@ export const updateUserById = async (user_idS, data) => {
     throw error;
   }
 };
-
 
 export const updateStatus = async (user_idS) => {
   try {
