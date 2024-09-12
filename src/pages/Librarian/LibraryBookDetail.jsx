@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import DefaultProfile from "../../assets/pcps_logo.jpg";
 import BackComp from "../../components/BackComp";
 import { getBooksById } from "../../utils/Api"; // Import your API function

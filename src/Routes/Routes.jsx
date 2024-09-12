@@ -99,7 +99,10 @@ export default function RoutesNav() {
         <Route path="/user/discover" element={<Discover />} />
         <Route path="/user/reservations" element={<Reservations />} />
         <Route path="/user/e-books" element={<Ebooks />} />
+
         <Route path="/user/book-detail" element={<BookDetail />} />
+        <Route path="/user/book-detail/:uuid" element={<BookDetail />} />
+
         <Route path="/user/my-learning" element={<MyLearning />} />
         <Route path="/user/profile" element={<UserProfile />} />
         <Route path="/user/notification" element={<UserNotification />} />

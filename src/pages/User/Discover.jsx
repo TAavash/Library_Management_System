@@ -39,6 +39,10 @@ const Discover = () => {
     setSearchTerm(event.target.value);
   };
 
+  const handleRowClick = (book) => {
+    navigate(`/user/book-detail/${book.books_idS}`); // Corrected to use uuid
+  };
+
   const filteredBooks = books.filter((book) =>
     book.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -116,7 +120,7 @@ const Discover = () => {
                     <p className="text-sm text-gray-600">{book.author}</p>
                     <button
                       className="mt-2 rounded-md bg-rose-600 py-1 px-2 text-sm hover:bg-neutral-900 text-white"
-                      // onClick={() => handleRowClick(book)}
+                      onClick={() => handleRowClick(book)}
                     >
                       Read More
                     </button>
@@ -129,7 +133,7 @@ const Discover = () => {
           </div>
         </div>
         <div className="mx-4">
-          <div className="flex items-center justify-between mb-8 mt-8">
+          <div className="flex items-center justify-between mb-8">
             <div>
               <h2 className="text-3xl font-bold text-brown-700">
                 CAN BE INTERESTING
