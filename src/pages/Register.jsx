@@ -58,6 +58,7 @@ const Register = () => {
         email,
         contact
       );
+      console.log(register);
       if (register) {
         toast.success("Register successful!");
         setTimeout(() => navigate(`/`), 1000); // Redirect after 1 seconds

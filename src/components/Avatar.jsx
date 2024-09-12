@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DefaultProfile from "../assets/User.jpg";
 import { useNavigate } from "react-router-dom";
-import LightDarkToggle from "./LightDarkToggle";
 import { getMemberById } from "../utils/Api"; // Ensure this import is correct
 
 const Avatar = () => {
@@ -9,7 +8,7 @@ const Avatar = () => {
   const [profilePic, setProfilePic] = useState(DefaultProfile);
   // const [isOpen, setIsOpen] = useState(false);
 
-  const user_id = localStorage.getItem('user_id'); // Get the user ID from localStorage
+  const user_id = localStorage.getItem("user_id"); // Get the user ID from localStorage
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -31,6 +30,10 @@ const Avatar = () => {
 
   const handleLibraryProfile = () => {
     navigate(`/libraian/profile`);
+  };
+
+  const handleSignin = () => {
+    navigate(`/register`);
   };
 
   const handleLogout = () => {
@@ -91,11 +94,12 @@ const Avatar = () => {
               My Profile
             </div>
             <div
-              className="flex justify-between items-center px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
+              onClick={handleSignin}
               id="options-menu-item-2"
             >
-              <LightDarkToggle /> Mode
+              New Account
             </div>
             <button
               onClick={handleLogout}
@@ -103,10 +107,10 @@ const Avatar = () => {
             >
               Logout
             </button>
-          </div >
-        </div >
+          </div>
+        </div>
       )}
-    </div >
+    </div>
   );
 };
 

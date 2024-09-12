@@ -233,7 +233,6 @@ export const getAllBooks = async () => {
   }
 };
 
-getAllBooks();
 
 export const getAllMember = async () => {
   try {
@@ -304,6 +303,17 @@ export const getUserById = async (user_idS) => {
     throw error;
   }
 };
+
+export const updateUserById = async (user_idS, data) => {
+  try {
+    const response = await axiosInstance.put(`/member/${user_idS}`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating user data:", error);
+    throw error;
+  }
+};
+
 
 export const updateStatus = async (user_idS) => {
   try {

@@ -16,7 +16,7 @@ export default function LibraryRequestPage() {
   };
 
   const handlePatrons = () => {
-    navigate("/LibraryDash");
+    navigate("/patrons");
   };
 
   const handleRequestClick = () => {

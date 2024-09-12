@@ -65,7 +65,7 @@ const Hamburger = () => {
           <div className="py-1" role="none">
             <div
               onClick={handleLibraryProfile}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              className="w-full px-4 py-2 text-end font-semibold text-red-600 hover:bg-gray-100"
               role="menuitem"
               id="options-menu-item-0"
             >
