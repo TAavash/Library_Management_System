@@ -38,6 +38,7 @@ const Avatar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
+    localStorage.removeItem("user_id");
     navigate(`/`);
   };
 

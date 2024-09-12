@@ -23,8 +23,6 @@ const LibraryBookDetail = () => {
     electronic_location_and_access: "",
     description: "",
     cover_pic: "",
-    book_stock_idS: "",
-    publications_idS: "",
     created_at: "",
     updated_at: "",
     deleted_at: "",
@@ -32,15 +30,13 @@ const LibraryBookDetail = () => {
     publication_name: "",
     name_of_publisher: "",
     place_of_publication: "",
-    authors_idS: "",
     name: "",
     add_author: "",
-    isbn_idS: "",
     isbn_number: "",
     barcode__r_f_i_d_idS: "",
     identifier_type: "",
     identifier_value: "",
-    status: "Active",
+    status: "Available",
   });
 
   const [bookHistory, setBookHistory] = useState([]);

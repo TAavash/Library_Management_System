@@ -1,16 +1,6 @@
-import React, { useState } from "react";
-import { FaSearch } from "react-icons/fa";
-import logo from "../../assets/pcpslogo.png";
-import bookcover1 from "../../assets/bookCover.jpg";
-import { GrFilter } from "react-icons/gr";
-import {
-  FaBookDead,
-  FaRocket,
-  FaMagic,
-  FaSearchDollar,
-  FaHeart,
-} from "react-icons/fa";
-import { FaBookOpen } from "react-icons/fa6";
+import React, { useEffect, useState } from "react";
+import { getAllBooks } from "../../utils/Api"; // Adjust the import path as needed
+import BookCover from "../../assets/PCPS Book Cover.png";
 import { IoBookSharp } from "react-icons/io5";
 import { MdBookmarkAdded, MdLocalLibrary } from "react-icons/md";
 import { HiDocumentText } from "react-icons/hi";
@@ -23,32 +13,35 @@ import Usernav from "../User/comp/Usernav";
 const Discover = () => {
   const navigate = useNavigate();
 
-  const books = [
-    {
-      cover: bookcover1,
-      title: "The Hobbit",
-      author: "J.R.R. Tolkien",
-      link: bookcover1,
-    },
-    {
-      cover: bookcover1,
-      title: "Marvel and a Wonder",
-      author: "Joe Meno",
-      link: bookcover1,
-    },
-    {
-      cover: bookcover1,
-      title: "Beautiful Ones",
-      author: "Emily Hayse",
-      link: bookcover1,
-    },
-    {
-      cover: bookcover1,
-      title: "The Great Gatsby",
-      author: "F. Scott Fitzgerald",
-      link: bookcover1,
-    },
-  ];
+  const [books, setBooks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await getAllBooks();
+        console.log("Fetched response:", response);
+        const data = response.data;
+        if (Array.isArray(data)) {
+          setBooks(data);
+        } else {
+          console.error("Unexpected data format:", data);
+        }
+      } catch (error) {
+        console.error("Error fetching books:", error.message);
+      }
+    };
+
+    fetchBooks();
+  }, []);
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredBooks = books.filter((book) =>
+    book.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
@@ -56,19 +49,7 @@ const Discover = () => {
         <Usernav />
       </header>
       <main className="pt-[100px]">
-        {/* <div
-        className="p-4 bg-cover bg-center relative"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      >
-        <div className="text-white p-4 rounded-lg">
-          <p className="text-lg font-serif">
-            Welcome Abhinab,
-            <br />
-            Borrow the beauty, keep the knowledge!
-          </p>
-        </div>
-      </div> */}
-        <img src={Bannerimage} />
+        <img src={Bannerimage} alt="banner"/>
         <div className="mt-4 flex space-x-4">
           <div
             className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
@@ -105,6 +86,50 @@ const Discover = () => {
         </div>
         <div className="mx-4">
           <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2 className="text-3xl font-bold text-brown-700">All Books</h2>
+              <p className="text-gray-600">
+                Check this list of books and choose something new!
+              </p>
+            </div>
+            <button
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+              onClick={() => navigate("/user/view-all")}
+            >
+              View All
+            </button>
+          </div>
+          <div className="grid grid-cols-4 gap-4">
+          {filteredBooks.length > 0 ? (
+              filteredBooks.map((book) => (
+                <div
+                  key={book.id}
+                  className="group relative bg-white rounded-lg shadow-md w-full md:w-56 overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl"
+                >
+                  <img
+                    src={book.cover_pic || BookCover}
+                    alt={book.title}
+                    className="w-full h-72 object-cover"
+                  />
+                  <div className="p-4">
+                    <h3 className="text-lg font-bold">{book.title}</h3>
+                    <p className="text-sm text-gray-600">{book.author}</p>
+                    <button
+                      className="mt-2 rounded-md bg-rose-600 py-1 px-2 text-sm hover:bg-neutral-900 text-white"
+                      // onClick={() => handleRowClick(book)}
+                    >
+                      Read More
+                    </button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div>No books available</div>
+            )}
+          </div>
+        </div>
+        <div className="mx-4">
+          <div className="flex items-center justify-between mb-8 mt-8">
             <div>
               <h2 className="text-3xl font-bold text-brown-700">
                 CAN BE INTERESTING
