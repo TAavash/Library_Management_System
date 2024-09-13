@@ -5,7 +5,7 @@ import { FaStar, FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import bookcover1 from "../../assets/bookCover.jpg";
 import logo from "../../assets/pcpslogo.png";
 import { IoArrowBack } from "react-icons/io5";
-import { getBooksById } from "../../utils/Api"; // Import your API function
+import { getBooksById, reserveBook } from "../../utils/Api"; // Import your API function
 import { useNavigate } from "react-router-dom";
 
 const BookDetail = () => {
@@ -44,8 +44,6 @@ const BookDetail = () => {
         try {
           const data = await getBooksById(uuid); // Fetch book details using the uuid
           setBookInfo(data.data[0]);
-          // Assuming the API returns the book details directly
-          // setBookHistory(data.bookHistory || []); // If there's a separate book history
         } catch (error) {
           console.error("Error fetching book details:", error);
           toast.error("Failed to fetch book details.");
@@ -56,6 +54,33 @@ const BookDetail = () => {
     fetchBookDetails();
   }, [uuid]);
 
+  // const handleReserve = async () => {
+  //   const userId = localStorage.getItem("user_id");
+
+  //   try {
+  //     const response = await reserveBook({
+  //       member_idS: userId,
+  //       books_idS: uuid,
+  //     });
+  //     toast.success("Book reserved successfully!");
+  //   } catch (error) {
+  //     console.error("Error reserving book:", error);
+  //     toast.error("Failed to reserve book.");
+  //   }
+  // };
+
+  const handleReserve = async () => {
+    const userId = localStorage.getItem("user_id");
+
+    try {
+      const response = await reserveBook(userId, uuid);
+      toast.success("Book reserved successfully!");
+    } catch (error) {
+      console.error("Error reserving book:", error);
+      toast.error("Failed to reserve book.");
+    }
+  };
+  
   return (
     <div className="min-h-screen bg-white flex flex-col items-center py-10">
       <ToastContainer />
@@ -115,12 +140,18 @@ const BookDetail = () => {
               <button className="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600 transition duration-300 ease-in-out">
                 Borrow Now
               </button>
-              <button className="bg-gray-200 text-gray-700 py-2 px-4 rounded-full hover:bg-gray-300 transition duration-300 ease-in-out">
+              <button
+                className="bg-gray-200 text-gray-700 py-2 px-4 rounded-full hover:bg-gray-300 transition duration-300 ease-in-out"
+                onClick={handleReserve}
+              >
                 Reserve
               </button>
             </div>
             <div className="text-gray-600 mb-4">
-              Genre: <span className="text-gray-900">{bookInfo?.element_select || "Unavailable"}</span>
+              Genre:{" "}
+              <span className="text-gray-900">
+                {bookInfo?.element_select || "Unavailable"}
+              </span>
             </div>
             <div className="flex space-x-4 text-gray-600">
               <FaFacebook className="hover:text-blue-500 cursor-pointer transition duration-300 ease-in-out" />

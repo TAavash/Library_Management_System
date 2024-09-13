@@ -340,3 +340,29 @@ export const getAllContact = async () => {
     throw error;
   }
 };
+
+// export const reserveBook = async (queue_position, member_idS, books_idS) => {
+//   try {
+//     const response = await axiosInstance.post("/reservation", {
+//       // reservation_date and status are handled by backend defaults
+//       queue_position,
+//       member_idS,
+//       books_idS,
+//     });
+//     return response;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+
+export const reserveBook = async (member_idS, books_idS) => {
+  try {
+    const response = await axiosInstance.post("/reservation", {
+      member_idS,
+      books_idS,
+    });
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
