@@ -380,3 +380,12 @@ export const fetchReservedBooks = async (userId) => {
     throw new Error(errorMessage);
   }
 };
+
+export const getAllReservations = async () => {
+  try {
+    const response = await axiosInstance.get("/reservation/all"); // Adjust endpoint if necessary
+    return response.data.reservations; // Return the list of reservations
+  } catch (error) {
+    throw error.response || error; // Handle errors properly
+  }
+};

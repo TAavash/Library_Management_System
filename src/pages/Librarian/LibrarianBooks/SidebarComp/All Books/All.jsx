@@ -106,7 +106,7 @@ const All = ({ viewMode }) => {
                 >
                   <div className="w-full flex justify-between">
                     <h3 className="text-lg font-bold">{book.title}</h3>
-                    <p className="text-sm text-gray-600">{book.author}</p>
+                    <p className="text-sm text-gray-600">Author : {book.name}</p>
                   </div>
                 </div>
               ))

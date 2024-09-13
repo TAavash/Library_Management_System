@@ -10,6 +10,9 @@ import Member from "./SidebarComp/Reservations/Member";
 
 const LibrarianBooksReservations = () => {
   const navigate = useNavigate();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [viewMode, setViewMode] = useState("grid");
+
   const handleOpenLibrary = () => {
     navigate(`/librarian-books`);
   };
