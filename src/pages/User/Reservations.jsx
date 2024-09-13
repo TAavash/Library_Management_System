@@ -1,54 +1,37 @@
-import React, { useState } from "react";
-import { FaSearch } from "react-icons/fa";
-import logo from "../../assets/pcpslogo.png";
+import React, { useState, useEffect } from "react";
+import { fetchReservedBooks } from "../../utils/Api";
 import bookcover1 from "../../assets/images.jpeg";
-import { GrFilter } from "react-icons/gr";
-import {
-  FaBookDead,
-  FaRocket,
-  FaMagic,
-  FaSearchDollar,
-  FaHeart,
-} from "react-icons/fa";
-import { FaBookOpen } from "react-icons/fa6";
 import { IoBookSharp } from "react-icons/io5";
 import { MdBookmarkAdded, MdLocalLibrary } from "react-icons/md";
 import { HiDocumentText } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import Bannerimage from "../../assets/finaldashbanner.png";
 import SearchBar from "../../pages/User/comp/SearchBar";
-import UserFilpCard from "../../pages/User/comp/UserFlipCard";
 import Usernav from "../User/comp/Usernav";
 
 const Reservations = () => {
+  const [books, setBooks] = useState([]);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const books = [
-    {
-      cover: bookcover1,
-      title: "The Hobbit",
-      author: "J.R.R. Tolkien",
-      link: bookcover1,
-    },
-    {
-      cover: bookcover1,
-      title: "Marvel and a Wonder",
-      author: "Joe Meno",
-      link: bookcover1,
-    },
-    {
-      cover: bookcover1,
-      title: "Beautiful Ones",
-      author: "Emily Hayse",
-      link: bookcover1,
-    },
-    {
-      cover: bookcover1,
-      title: "The Great Gatsby",
-      author: "F. Scott Fitzgerald",
-      link: bookcover1,
-    },
-  ];
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        // Replace with actual user ID retrieval logic
+        const userId = localStorage.getItem("user_id");
+        const data = await fetchReservedBooks(userId);
+        setBooks(data.data); // Adjust based on your API response structure
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchBooks();
+  }, []);
+
+  const handleRowClick = (book) => {
+    navigate(`/user/book-detail/${book.books_idS}`); // Corrected to use uuid
+  };
 
   return (
     <div>
@@ -56,19 +39,7 @@ const Reservations = () => {
         <Usernav />
       </header>
       <main className="pt-[100px]">
-        {/* <div
-        className="p-4 bg-cover bg-center relative"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      >
-        <div className="text-white p-4 rounded-lg">
-          <p className="text-lg font-serif">
-            Welcome Abhinab,
-            <br />
-            Borrow the beauty, keep the knowledge!
-          </p>
-        </div>
-      </div> */}
-        <img src={Bannerimage} />
+        <img src={Bannerimage} alt="banner" />
         <div className="mt-4 flex space-x-4">
           <div
             className="flex-1 p-4 border border-gray-300 rounded-lg text-center cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
@@ -110,10 +81,6 @@ const Reservations = () => {
               <h2 className="text-3xl font-bold text-brown-700">
                 MY RESERVATIONS
               </h2>
-              {/* <p className="text-gray-600">
-                Check this list of books, picked up by the website and choose
-                something new!
-              </p> */}
             </div>
             <button
               className="px-4 py-2 bg-blue-600 text-white rounded-lg"
@@ -124,15 +91,25 @@ const Reservations = () => {
           </div>
 
           <div className="grid grid-cols-4 gap-4">
-            {books.map((book, index) => (
+            {error && (
+              <div className="col-span-full text-center text-red-500">
+                {error}
+              </div>
+            )}
+            {books.length === 0 && !error && (
+              <div className="col-span-full text-center text-gray-500">
+                No books reserved.
+              </div>
+            )}
+            {books.map((book) => (
               <div
-                key={index}
-                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4  min-w-[150px] transition-transform transform hover:scale-105 cursor-pointer"
-                onClick={() => navigate(book.link)}
+                key={book.books_idS}
+                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 min-w-[150px] transition-transform transform hover:scale-105 cursor-pointer"
+                onClick={() => handleRowClick(book)}
               >
                 <div className="relative">
                   <img
-                    src={book.cover}
+                    src={book.cover_pic || bookcover1}
                     alt={book.title}
                     className="w-32 h-40 object-cover mb-4 rounded-lg"
                   />
@@ -143,7 +120,7 @@ const Reservations = () => {
                 <h3 className="text-xl font-semibold text-center">
                   {book.title}
                 </h3>
-                <p className="text-gray-500 text-center">{book.author}</p>
+                <p className="text-gray-500 text-center">{book.description}</p>
               </div>
             ))}
           </div>

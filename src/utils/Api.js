@@ -366,3 +366,17 @@ export const reserveBook = async (member_idS, books_idS) => {
     throw error.response.data;
   }
 };
+
+export const fetchReservedBooks = async (userId) => {
+  try {
+    const response = await axiosInstance.get("/reservation/user", {
+      params: { member_idS: userId },
+    });
+    return response.data; // Adjust based on your API response structure
+  } catch (error) {
+    // Check if error response is available and format it
+    const errorMessage =
+      error.response?.data?.message || "Failed to fetch reserved books.";
+    throw new Error(errorMessage);
+  }
+};

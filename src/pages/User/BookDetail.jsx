@@ -74,13 +74,17 @@ const BookDetail = () => {
 
     try {
       const response = await reserveBook(userId, uuid);
-      toast.success("Book reserved successfully!");
+      toast.success(response.message || "Book reserved successfully!");
     } catch (error) {
       console.error("Error reserving book:", error);
-      toast.error("Failed to reserve book.");
+
+      // Use custom error message from API response
+      const errorMessage =
+        error.response?.data?.message || "Failed to reserve book.";
+      toast.error(errorMessage);
     }
   };
-  
+
   return (
     <div className="min-h-screen bg-white flex flex-col items-center py-10">
       <ToastContainer />
