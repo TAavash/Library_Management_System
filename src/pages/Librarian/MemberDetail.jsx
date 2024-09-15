@@ -301,13 +301,13 @@ const MemberDetail = () => {
                       Book Name
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Check Out Date
+                      Check In Date
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Due Date
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Check In Date
+                      Check Out Date
                     </th>
                   </tr>
                 </thead>

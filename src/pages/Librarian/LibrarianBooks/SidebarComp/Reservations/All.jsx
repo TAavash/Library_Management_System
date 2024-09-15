@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
 import BookCover from "../../../../../assets/PCPS Book Cover.png";
-import { getAllReservations } from "../../../../../utils/Api";
+import {
+  getAllReservations,
+  completeReservation,
+} from "../../../../../utils/Api";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -52,6 +55,20 @@ const All = ({ viewMode }) => {
 
     fetchReservations();
   }, []);
+
+  const reservationAccept = async (userId) => {
+    try {
+      const data = await completeReservation(userId);
+      setReservations(data);
+      toast.success("Reservation completed successfully!");
+      window.location.reload();
+    } catch (error) {
+      console.error("Reservation cannot complete:", error);
+      toast.error("Failed to complete reservations.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (loading) return <p>Loading...</p>;
 
@@ -108,8 +125,9 @@ const All = ({ viewMode }) => {
                     <div className="p-4">
                       <h3 className="text-lg font-bold">
                         Reserved by :{" "}
-                        <span className="text-blue-500 hover:text-blue-400 font-medium cursor-pointer"
-                        onClick={() => handleNameClick(reservation)}
+                        <span
+                          className="text-blue-500 hover:text-blue-400 font-medium cursor-pointer"
+                          onClick={() => handleNameClick(reservation)}
                         >
                           {reservation.first_name} {reservation.last_name}
                         </span>
@@ -137,8 +155,9 @@ const All = ({ viewMode }) => {
                       <h3 className="text-lg font-bold">{book.title}</h3>
                       <p className="text-sm text-gray-600">
                         Reserved by :{" "}
-                        <span className="text-blue-500 hover:text-blue-400 font-medium cursor-pointer"
-                        onClick={() => handleNameClick(book)}
+                        <span
+                          className="text-blue-500 hover:text-blue-400 font-medium cursor-pointer"
+                          onClick={() => handleNameClick(book)}
                         >
                           {book.first_name} {book.last_name}
                         </span>
@@ -178,24 +197,31 @@ const All = ({ viewMode }) => {
                   Reserved by : {selectedBook.first_name}{" "}
                   {selectedBook.last_name}
                 </p>
+
+                <p className="text-lg mb-2">
+                  Queue position : {selectedBook.queue_position}
+                </p>
                 <p className="text-lg mb-2">
                   Reserved date : {selectedBook.reservation_date}
                 </p>
-                <p className="text-lg mb-2"
-                // onClick={handleBookDetailClick(selectedBook)}
+                <p
+                  className="text-lg mb-2"
+                  // onClick={handleBookDetailClick(selectedBook)}
                 >
                   learn more...
                 </p>
                 <div className="text-2xl font-bold gap-[10px] flex mt-[30px]">
                   <button
                     className="bg-green-500 text-white hover:bg-green-500/80 w-fit px-[50px] p-[10px]"
-                    onClick={() => console.log("accepted")}
+                    onClick={() =>
+                      reservationAccept(selectedBook.reservations_idS)
+                    }
                   >
                     Accept
                   </button>
                   <button
                     className="bg-red-500 hover:bg-red-500/80 text-white w-fit px-[50px] p-[10px]"
-                    onClick={() => console.log("rejected")}
+                    // onClick={() => completeReservation(selectedBook.reservations_idS)}
                   >
                     Cancel
                   </button>

@@ -389,3 +389,48 @@ export const getAllReservations = async () => {
     throw error.response || error; // Handle errors properly
   }
 };
+
+export const completeReservation = async (userId) => {
+  try {
+    const response = await axiosInstance.put(`/reservation/checkin/${userId}`);
+    return response.data.reservations;
+  } catch (error) {
+    throw error.response || error;
+  }
+};
+
+export const getAllCheckin = async () => {
+  try {
+    const response = await axiosInstance.get("/reservation/checkin");
+    return response.data.reservations;
+  } catch (error) {
+    throw error.response || error;
+  }
+};
+
+export const completeCheckIn = async (userId) => {
+  try {
+    const response = await axiosInstance.put(`/reservation/checkout/${userId}`);
+    return response.data.reservations;
+  } catch (error) {
+    throw error.response || error;
+  }
+};
+
+export const getAllCheckout = async () => {
+  try {
+    const response = await axiosInstance.get("/reservation/checkout");
+    return response.data.reservations;
+  } catch (error) {
+    throw error.response || error;
+  }
+};
+
+export const completeCheckOut = async (userId) => {
+  try {
+    const response = await axiosInstance.put(`/reservation/complete/${userId}`);
+    return response.data.reservations;
+  } catch (error) {
+    throw error.response || error;
+  }
+};
