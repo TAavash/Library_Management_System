@@ -80,7 +80,9 @@ const BookDetail = () => {
 
       // Use custom error message from API response
       const errorMessage =
-        error.response?.data?.message || "Failed to reserve book.";
+        error.response?.data?.message 
+        || "Failed to reserve book."
+        ;
       toast.error(errorMessage);
     }
   };

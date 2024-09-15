@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -6,40 +6,17 @@ import { IoBookSharp } from "react-icons/io5";
 import { MdBookmarkAdded, MdLocalLibrary } from "react-icons/md";
 import { HiDocumentText } from "react-icons/hi";
 import Bannerimage from "../../assets/finaldashbanner.png";
-import bookcover from "../../assets/images.jpeg";
-import bookcover1 from "../../assets/36236124._SX300_.jpg";
+import bookcover from "../../assets/PCPS Book Cover.png";
+import bookcover1 from "../../assets/PCPS Book Cover.png";
 import SearchBar from "../../pages/User/comp/SearchBar";
 import Usernav from "../User/comp/Usernav";
+import { getCheckInById } from "../../utils/Api";
 
 function Userdash() {
   const navigate = useNavigate();
-
-  const books = [
-    {
-      cover: bookcover1,
-      title: "The Hobbit",
-      author: "J.R.R. Tolkien",
-      link: bookcover1,
-    },
-    {
-      cover: bookcover1,
-      title: "Marvel and a Wonder",
-      author: "Joe Meno",
-      link: bookcover1,
-    },
-    {
-      cover: bookcover1,
-      title: "Beautiful Ones",
-      author: "Emily Hayse",
-      link: bookcover1,
-    },
-    {
-      cover: bookcover1,
-      title: "The Great Gatsby",
-      author: "F. Scott Fitzgerald",
-      link: bookcover1,
-    },
-  ];
+  const [checkIns, setCheckIns] = useState([]);
+  const [checkInsError, setCheckInsError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const upcomingBooks = [
     {
@@ -55,6 +32,37 @@ function Userdash() {
       edate: "6/22/2024",
     },
   ];
+
+  useEffect(() => {
+    const fetchCheckIns = async () => {
+      try {
+        const memberId = localStorage.getItem("user_id");
+
+        if (!memberId) {
+          setCheckInsError("User ID not found in localStorage");
+          setLoading(false);
+          return;
+        }
+
+        const response = await getCheckInById(memberId);
+        setCheckIns(response.checkIns || []);
+      } catch (err) {
+        setCheckInsError("No books reading currently");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCheckIns();
+  }, []);
+
+  const handleRowClick = (book) => {
+    navigate(`/user/book-detail/${book.books_idS}`); // Corrected to use uuid
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -146,32 +154,36 @@ function Userdash() {
             </div>
             <button
               className="px-4 py-2 bg-blue-600 text-white rounded-lg"
-              onClick={() => navigate("/user/view-all")}
+              // onClick={() => navigate("/user/view-all")}
             >
               View All
             </button>
           </div>
           <div className="grid grid-cols-4 gap-4">
-            {books.map((book, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 min-w-[150px] transition-transform transform hover:scale-105 cursor-pointer"
-                onClick={() => navigate("/my-learning")}
-              >
-                <div className="relative">
-                  <img
-                    src={book.cover}
-                    alt={book.title}
-                    className="w-32 h-40 object-cover mb-4 rounded-lg"
-                  />
-                  <div className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md"></div>
+            {checkInsError ? (
+              <div>{checkInsError}</div>
+            ) : (
+              checkIns.map((book, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 min-w-[150px] transition-transform transform hover:scale-105 cursor-pointer"
+                  onClick={() => handleRowClick(book.books_idS)}
+                >
+                  <div className="relative">
+                    <img
+                      src={book.cover || bookcover1} // Fallback image if cover is not available
+                      alt={book.title}
+                      className="w-32 h-40 object-cover mb-4 rounded-lg"
+                    />
+                    <div className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md"></div>
+                  </div>
+                  <h3 className="text-xl font-semibold text-center">
+                    {book.title}
+                  </h3>
+                  <p className="text-gray-500 text-center">{book.author}</p>
                 </div>
-                <h3 className="text-xl font-semibold text-center">
-                  {book.title}
-                </h3>
-                <p className="text-gray-500 text-center">{book.author}</p>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </main>

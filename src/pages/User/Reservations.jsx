@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchReservedBooks } from "../../utils/Api";
+import { getUserReservationsById } from "../../utils/Api";
 import bookcover1 from "../../assets/images.jpeg";
 import { IoBookSharp } from "react-icons/io5";
 import { MdBookmarkAdded, MdLocalLibrary } from "react-icons/md";
@@ -10,28 +10,40 @@ import SearchBar from "../../pages/User/comp/SearchBar";
 import Usernav from "../User/comp/Usernav";
 
 const Reservations = () => {
-  const [books, setBooks] = useState([]);
+  const [reservations, setReservations] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true); // Loading state
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchBooks = async () => {
+    const fetchReservations = async () => {
       try {
-        // Replace with actual user ID retrieval logic
         const userId = localStorage.getItem("user_id");
-        const data = await fetchReservedBooks(userId);
-        setBooks(data.data); // Adjust based on your API response structure
+        const response = await getUserReservationsById(userId);
+        console.log("API Response:", response); // Detailed logging
+        if (response && response.data && response.data.reservations) {
+          console.log("Reservations Data:", response.data.reservations); // Check data structure
+          setReservations(response.data.reservations);
+        } else {
+          console.error("Unexpected API response structure:", response);
+          setReservations([]);
+        }
       } catch (error) {
         setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
-
-    fetchBooks();
+  
+    fetchReservations();
   }, []);
+  
 
-  const handleRowClick = (book) => {
-    navigate(`/user/book-detail/${book.books_idS}`); // Corrected to use uuid
+  const handleRowClick = (reservation) => {
+    navigate(`/user/book-detail/${reservation.books_idS}`);
   };
+
+  if (loading) return <div className="text-center">Loading...</div>;
 
   return (
     <div>
@@ -90,27 +102,27 @@ const Reservations = () => {
             </button>
           </div>
 
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {error && (
               <div className="col-span-full text-center text-red-500">
                 {error}
               </div>
             )}
-            {books.length === 0 && !error && (
+            {reservations.length === 0 && !error && (
               <div className="col-span-full text-center text-gray-500">
-                No books reserved.
+                No reservations found.
               </div>
             )}
-            {books.map((book) => (
+            {reservations.map((reservation) => (
               <div
-                key={book.books_idS}
-                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 min-w-[150px] transition-transform transform hover:scale-105 cursor-pointer"
-                onClick={() => handleRowClick(book)}
+                key={reservation.reservations_idS}
+                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 cursor-pointer"
+                onClick={() => handleRowClick(reservation)}
               >
                 <div className="relative">
                   <img
-                    src={book.cover_pic || bookcover1}
-                    alt={book.title}
+                    src={bookcover1} // Placeholder image, adjust as needed
+                    alt="Book Cover"
                     className="w-32 h-40 object-cover mb-4 rounded-lg"
                   />
                   <div className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md">
@@ -118,9 +130,11 @@ const Reservations = () => {
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold text-center">
-                  {book.title}
+                  {reservation.books_idS} {/* You might want to replace this with actual book title */}
                 </h3>
-                <p className="text-gray-500 text-center">{book.description}</p>
+                <p className="text-gray-500 text-center">
+                  Status: {reservation.status}
+                </p>
               </div>
             ))}
           </div>

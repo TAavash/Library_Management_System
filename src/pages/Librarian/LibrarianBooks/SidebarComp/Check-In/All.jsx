@@ -3,7 +3,11 @@ import { FiSearch } from "react-icons/fi";
 import BookCover from "../../../../../assets/PCPS Book Cover.png";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { getAllCheckin, completeCheckIn } from "../../../../../utils/Api";
+import {
+  getAllCheckin,
+  completeCheckIn,
+  cancelReservation,
+} from "../../../../../utils/Api";
 
 const All = ({ viewMode }) => {
   const [checkIn, setCheckIn] = useState([]);
@@ -56,6 +60,20 @@ const All = ({ viewMode }) => {
     } catch (error) {
       console.error("Check-In cannot complete:", error);
       toast.error("Failed to complete check-in.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const reservationCancel = async (checkInId) => {
+    try {
+      const data = await cancelReservation(checkInId);
+      setCheckIn(data);
+      toast.success("Check-In canceled successfully!");
+      window.location.reload(); // This will refresh the page to reflect changes
+    } catch (error) {
+      console.error("Check-In cannot be canceled:", error);
+      toast.error("Failed to cancel Check-In.");
     } finally {
       setLoading(false);
     }
@@ -151,8 +169,18 @@ const All = ({ viewMode }) => {
                       </p>
                     </div>
                     <div className="flex gap-5">
-                      <button className="w-fit p-2 bg-green-500">Accept</button>
-                      <button className="w-fit p-2 bg-red-500">Reject</button>
+                      <button
+                        className="w-fit p-2 bg-green-500"
+                        onClick={() => checkInAccept(book.id)}
+                      >
+                        Accept
+                      </button>
+                      <button
+                        className="w-fit p-2 bg-red-500"
+                        onClick={() => reservationCancel(book.id)}
+                      >
+                        Reject
+                      </button>
                     </div>
                   </div>
                 ))
@@ -165,45 +193,61 @@ const All = ({ viewMode }) => {
       </div>
       {popupOpen && selectedBook && (
         <>
-          <div className="fixed h-[100vh] w-[100vw] top-0 left-0 bg-black/30 brightness-50 z-[100]"></div>
-          <div className="fixed top-[10vh] left-[20vw] h-[80vh] w-[60vw] bg-purple-200 blur-[100px] z-[1000]"></div>
-          <div className="fixed top-[10vh] left-[20vw] h-[80vh] w-[60vw] bg-slate-200 z-[2000]">
-            <div
-              className="absolute top-[30px] right-[30px] text-3xl Z-[5000] cursor-pointer"
-              onClick={handleClosePopup}
-            >
-              &times;
-            </div>
-            <div className="p-10 flex flex-row-reverse gap-[50px] w-fit mx-auto">
-              <div>
-                <h2 className="text-4xl font-bold mb-4">
-                  {selectedBook.title}
-                </h2>
-                <p className="text-lg mb-2">
-                  Reserved by: {selectedBook.first_name}{" "}
-                  {selectedBook.last_name}
-                </p>
-                <p className="text-lg mb-2">
-                  Reserved date: {selectedBook.reservation_date}
-                </p>
-                <p className="text-lg mb-2">Learn more...</p>
-                <div className="text-2xl font-bold gap-[10px] flex mt-[30px]">
-                  <button
-                    className="bg-green-500 text-white hover:bg-green-500/80 w-fit px-[50px] p-[10px]"
-                    onClick={() => checkInAccept(selectedBook.reservations_idS)}
-                  >
-                    Check-Out
-                  </button>
-                  <button className="bg-red-500 hover:bg-red-500/80 text-white w-fit px-[50px] p-[10px]">
-                    Cancel
-                  </button>
+          {/* Overlay */}
+          <div className="fixed inset-0 bg-black/30 brightness-50 z-[100]"></div>
+
+          {/* Popup Container */}
+          <div className="fixed inset-0 flex justify-center items-center p-4 z-[2000]">
+            <div className="relative bg-slate-200 p-6 rounded-lg max-w-full max-h-full overflow-auto flex flex-col md:flex-row">
+              {/* Close Button */}
+              <div
+                className="absolute top-4 right-4 text-3xl cursor-pointer z-[5000]"
+                onClick={handleClosePopup}
+              >
+                &times;
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 flex flex-col md:flex-row gap-4">
+                <div className="flex-1">
+                  <h2 className="text-2xl md:text-4xl font-bold mb-4">
+                    {selectedBook.title}
+                  </h2>
+                  <p className="text-base md:text-lg mb-2">
+                    Reserved by: {selectedBook.first_name}{" "}
+                    {selectedBook.last_name}
+                  </p>
+                  <p className="text-base md:text-lg mb-2">
+                    Reserved date: {selectedBook.reservation_date}
+                  </p>
+                  <p className="text-base md:text-lg mb-2">Learn more...</p>
+                  <div className="flex gap-2 mt-4">
+                    <button
+                      className="bg-green-500 text-white hover:bg-green-600 px-4 py-2 rounded"
+                      onClick={() =>
+                        checkInAccept(selectedBook.reservations_idS)
+                      }
+                    >
+                      Complete
+                    </button>
+                    <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                    onClick={() =>
+                      reservationCancel(selectedBook.reservations_idS)
+                    }>
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+
+                {/* Image */}
+                <div className="flex-shrink-0">
+                  <img
+                    src={selectedBook.cover_pic}
+                    alt={selectedBook.title}
+                    className="w-full max-w-[300px] md:max-w-[400px] h-auto object-cover"
+                  />
                 </div>
               </div>
-              <img
-                src={selectedBook.cover_pic}
-                alt={selectedBook.title}
-                className="w-[40vh] xl:h-[60vh] h-[40vh] object-cover mt-4"
-              />
             </div>
           </div>
         </>

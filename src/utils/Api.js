@@ -434,3 +434,60 @@ export const completeCheckOut = async (userId) => {
     throw error.response || error;
   }
 };
+
+// export const getActiveReservations = async (books_idS) => {
+//   try {
+//     const response = await axiosInstance.get(`/api/books/${books_idS}/active-reservations`);
+//     return response.data.reservations;
+//   } catch (error) {
+//     throw error.response || error;
+//   }
+// };
+
+export const cancelReservation = async (reservationId) => {
+  try {
+    const response = await axiosInstance.put(`/api/reservations/${reservationId}/cancel`);
+    return response.data;
+  } catch (error) {
+    throw error.response || error;
+  }
+};
+
+// Function to get user reservations by user ID
+export const getUserReservationsById = async (memberId) => {
+  try {
+      const response = await axiosInstance.get('/reservations/user', {
+          params: { member_idS: memberId },
+      });
+      return response.data;
+  } catch (error) {
+      console.error('Error fetching user reservations:', error);
+      throw error; // Rethrow the error to be handled by the calling function
+  }
+};
+
+// Function to get check-ins by user ID
+export const getCheckInById = async (memberId) => {
+  try {
+      const response = await axiosInstance.get('/reservations/user/checkin', {
+          params: { member_idS: memberId },
+      });
+      return response.data;
+  } catch (error) {
+      console.error('Error fetching check-ins:', error);
+      throw error; // Rethrow the error to be handled by the calling function
+  }
+};
+
+// Function to get check-outs by user ID
+export const getCheckOutById = async (memberId) => {
+  try {
+      const response = await axiosInstance.get('/reservations/user/checkout', {
+          params: { member_idS: memberId },
+      });
+      return response.data;
+  } catch (error) {
+      console.error('Error fetching check-outs:', error);
+      throw error; // Rethrow the error to be handled by the calling function
+  }
+};
