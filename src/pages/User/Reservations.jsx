@@ -20,24 +20,17 @@ const Reservations = () => {
       try {
         const userId = localStorage.getItem("user_id");
         const response = await getUserReservationsById(userId);
-        console.log("API Response:", response); // Detailed logging
-        if (response && response.data && response.data.reservations) {
-          console.log("Reservations Data:", response.data.reservations); // Check data structure
-          setReservations(response.data.reservations);
-        } else {
-          console.error("Unexpected API response structure:", response);
-          setReservations([]);
-        }
+        console.log("API Response:", response);
+        setReservations(response.reservations);
       } catch (error) {
         setError(error.message);
       } finally {
         setLoading(false);
       }
     };
-  
+
     fetchReservations();
   }, []);
-  
 
   const handleRowClick = (reservation) => {
     navigate(`/user/book-detail/${reservation.books_idS}`);
@@ -130,7 +123,8 @@ const Reservations = () => {
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold text-center">
-                  {reservation.books_idS} {/* You might want to replace this with actual book title */}
+                  {reservation.title}{" "}
+                  {/* You might want to replace this with actual book title */}
                 </h3>
                 <p className="text-gray-500 text-center">
                   Status: {reservation.status}
